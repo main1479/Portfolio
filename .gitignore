@@ -15,6 +15,12 @@
 /build/
 .astro/
 
+# Test coverage
+/coverage
+
+# Certificates / keys
+*.pem
+
 # Env
 .env
 .env.local
