@@ -30,25 +30,25 @@ You asked for a "hook"; what fits the requirement is a slash command (user-trigg
 
 ## Decisions I'm making (override these in the comment below)
 
-| Decision | Default | Why |
-|---|---|---|
-| **Auto-merge vs confirm before merge** | **Confirm** | Merging to main is irreversible. Even on a solo project, one accidental `gh pr merge` on the wrong branch is enough to want a checkpoint. The confirmation is just "type y" so the friction is minimal |
-| **Pre-flight `/ship` gauntlet** | **Required, blocking** | If typecheck/lint/build fails, refuse to merge. Cheap safety |
-| **Merge strategy** | **Squash** | `CLAUDE.md:170` / `git-workflow.md:39` already say squash by default |
-| **Delete branch** | **Yes, local + remote** | `git-workflow.md:40`. Keeps branch list tidy |
-| **Wait for CI checks** | **Skip** | `CLAUDE.md:245` — no CI yet. Add back when CI exists |
-| **Behavior if plan/spec missing** | **Warn + ask** | Hotfixes may legitimately have no plan/spec. Don't refuse to ship over docs that were never written |
-| **Behavior on dirty working tree** | **Refuse** | Don't auto-commit unrelated changes |
-| **Behavior on `main` branch** | **Refuse** | `/finish-feature` is for feature branches; nothing to merge from main |
-| **Run sub-agents** | **No** | `/ship` already covers correctness gates; running `code-reviewer` here would be redundant with the per-commit review the workflow expects |
+| Decision                               | Default                 | Why                                                                                                                                                                                                    |
+| -------------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Auto-merge vs confirm before merge** | **Confirm**             | Merging to main is irreversible. Even on a solo project, one accidental `gh pr merge` on the wrong branch is enough to want a checkpoint. The confirmation is just "type y" so the friction is minimal |
+| **Pre-flight `/ship` gauntlet**        | **Required, blocking**  | If typecheck/lint/build fails, refuse to merge. Cheap safety                                                                                                                                           |
+| **Merge strategy**                     | **Squash**              | `CLAUDE.md:170` / `git-workflow.md:39` already say squash by default                                                                                                                                   |
+| **Delete branch**                      | **Yes, local + remote** | `git-workflow.md:40`. Keeps branch list tidy                                                                                                                                                           |
+| **Wait for CI checks**                 | **Skip**                | `CLAUDE.md:245` — no CI yet. Add back when CI exists                                                                                                                                                   |
+| **Behavior if plan/spec missing**      | **Warn + ask**          | Hotfixes may legitimately have no plan/spec. Don't refuse to ship over docs that were never written                                                                                                    |
+| **Behavior on dirty working tree**     | **Refuse**              | Don't auto-commit unrelated changes                                                                                                                                                                    |
+| **Behavior on `main` branch**          | **Refuse**              | `/finish-feature` is for feature branches; nothing to merge from main                                                                                                                                  |
+| **Run sub-agents**                     | **No**                  | `/ship` already covers correctness gates; running `code-reviewer` here would be redundant with the per-commit review the workflow expects                                                              |
 
 ## File changes
 
-| File | Action |
-|---|---|
-| `.claude/commands/finish-feature.md` | **Create** — slash command prompt (~80 lines) |
-| `CLAUDE.md` | **Edit** — add `/finish-feature` to the slash-commands list at line 206–208 |
-| `futureWorks.md` | **Append** — entry noting end-to-end verification deferred until `chore/repo-init` lands |
+| File                                 | Action                                                                                   |
+| ------------------------------------ | ---------------------------------------------------------------------------------------- |
+| `.claude/commands/finish-feature.md` | **Create** — slash command prompt (~80 lines)                                            |
+| `CLAUDE.md`                          | **Edit** — add `/finish-feature` to the slash-commands list at line 206–208              |
+| `futureWorks.md`                     | **Append** — entry noting end-to-end verification deferred until `chore/repo-init` lands |
 
 ## Slash command structure (`.claude/commands/finish-feature.md`)
 
@@ -119,10 +119,12 @@ Any step failing leaves the user on the feature branch with no merge done. Print
 ## Verification
 
 End-to-end test requires:
+
 - A real git repo (defer until `chore/repo-init`)
 - An open PR with a feature branch (defer until first real feature ships)
 
 What I can verify now:
+
 - Slash command file is valid markdown with required frontmatter
 - The command reads as a clear procedure if a fresh Claude session loaded it
 - No syntax errors in any of the embedded shell commands (`gh`, `git`, `npm` — dry-run via `bash -n` won't help here because the commands are inside a markdown prompt, not a shell script)
@@ -152,13 +154,16 @@ Low. The risky step (merge to main) is gated on explicit user confirmation. Ever
 ## Retrospective
 
 ### What the plan got right
+
 - Combining plan + spec into one note via the `CLAUDE.md:91` escape hatch was the right call — the change is one file in `.claude/commands/` and the design is self-documenting in the file's own prose.
-- The "pause before merge" gate is captured in the command file as a hard sentence Claude can't easily skip: line 81 reads `**Do not call \`gh pr merge\` until the user replies with \`y\`, \`yes\`, or equivalent.**` Bold + explicit.
+- The "pause before merge" gate is captured in the command file as a hard sentence Claude can't easily skip: line 81 reads `**Do not call \`gh pr merge\` until the user replies with \`y\`, \`yes\`, or equivalent.\*\*` Bold + explicit.
 - The decision table (auto-merge vs confirm, ship as gate, etc.) front-loaded the contentious choices so review took one read.
 
 ### What the plan got wrong
+
 - Nothing material. The command file came in at 132 lines (sketch estimated ~80) — the difference is the failure-recovery prose at the bottom, which felt worth keeping. If it bloats further on real use, prune.
 
 ### What was deferred
+
 - End-to-end test of the command. Logged to `futureWorks.md` to verify on the first real feature merge after `chore/repo-init`.
 - No CI gate on the PR merge — `CLAUDE.md` says no CI yet. Worth revisiting when CI exists.

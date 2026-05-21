@@ -38,18 +38,18 @@ This exception is documented here and called out in the retrospective. No subseq
 
 ## Decisions I'm making (override these in your approval)
 
-| Decision | Default | Why |
-|---|---|---|
-| **Default branch name** | **`main`** | CLAUDE.md, hooks, and rules all reference `main`. Consistent |
-| **Where the GitHub repo lives** | **`main1479/portfolio`** | Username inferred from the existing GitHub link in `Mainul's Portfolio/index.html` (`href="https://github.com/main1479"`). Repo name `portfolio` is the obvious slug |
-| **Visibility** | **Private at first, flip to public when launch-ready** | Lets us bootstrap without putting half-built scaffolding on display. Flipping to public is one CLI command |
-| **Description** | `"Personal portfolio — frontend dev specialising in A/B testing & experimentation"` | Mirrors the static template's `<meta name="description">` |
-| **Initial commit message** | `chore: bootstrap repo with claude code scaffold and port plan` | Imperative, lowercase, specific, per `git-workflow.md:13` |
-| **License file** | **None added in this commit** | The repo is private at first; license decision belongs to the launch step |
-| **README.md** | **None added in this commit** | Per `CLAUDE.md:246` — "No README.md filler. The README will be written when the site is launched" |
-| **Legacy template `Mainul's Portfolio/`** | **Gitignored, kept on disk as reference** | Confirmed earlier in the session. Add to `.gitignore` before the first commit so it doesn't get tracked |
-| **Tagging** | **No tag on baseline** | Portfolios don't version; skip |
-| **Remote name** | **`origin`** | Default; no reason to vary |
+| Decision                                  | Default                                                                             | Why                                                                                                                                                                  |
+| ----------------------------------------- | ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Default branch name**                   | **`main`**                                                                          | CLAUDE.md, hooks, and rules all reference `main`. Consistent                                                                                                         |
+| **Where the GitHub repo lives**           | **`main1479/portfolio`**                                                            | Username inferred from the existing GitHub link in `Mainul's Portfolio/index.html` (`href="https://github.com/main1479"`). Repo name `portfolio` is the obvious slug |
+| **Visibility**                            | **Private at first, flip to public when launch-ready**                              | Lets us bootstrap without putting half-built scaffolding on display. Flipping to public is one CLI command                                                           |
+| **Description**                           | `"Personal portfolio — frontend dev specialising in A/B testing & experimentation"` | Mirrors the static template's `<meta name="description">`                                                                                                            |
+| **Initial commit message**                | `chore: bootstrap repo with claude code scaffold and port plan`                     | Imperative, lowercase, specific, per `git-workflow.md:13`                                                                                                            |
+| **License file**                          | **None added in this commit**                                                       | The repo is private at first; license decision belongs to the launch step                                                                                            |
+| **README.md**                             | **None added in this commit**                                                       | Per `CLAUDE.md:246` — "No README.md filler. The README will be written when the site is launched"                                                                    |
+| **Legacy template `Mainul's Portfolio/`** | **Gitignored, kept on disk as reference**                                           | Confirmed earlier in the session. Add to `.gitignore` before the first commit so it doesn't get tracked                                                              |
+| **Tagging**                               | **No tag on baseline**                                                              | Portfolios don't version; skip                                                                                                                                       |
+| **Remote name**                           | **`origin`**                                                                        | Default; no reason to vary                                                                                                                                           |
 
 ## Open questions (need a direct answer in your approval)
 
@@ -98,6 +98,7 @@ git commit -m "chore: bootstrap repo with claude code scaffold and port plan"
 ```
 
 Files expected to land in this commit (rough — confirm via `git status`):
+
 - `CLAUDE.md`
 - `.claude/` (settings.json, settings.local.json, agents/, commands/, hooks/, rules/, skills/)
 - `_plans/` (claude-config-cleanup, finish-feature, repo-init — this plan, status updated to "Implemented" in the same commit)
@@ -106,6 +107,7 @@ Files expected to land in this commit (rough — confirm via `git status`):
 - `.gitignore`
 
 Files expected to be excluded (sanity-check via `git status --ignored`):
+
 - `Mainul's Portfolio/` (gitignored per Step 2)
 - `.DS_Store`
 - Anything under `.claude/settings.local.json` (gitignored per the existing `.gitignore`)
@@ -146,16 +148,16 @@ Append a `futureWorks.md` entry under "## Open":
 
 ## Verification (after Step 6)
 
-| Check | Expected |
-|---|---|
-| `git rev-parse --is-inside-work-tree` | `true` |
-| `git symbolic-ref --short HEAD` | `main` |
-| `git log --oneline \| wc -l` | `1` |
-| `git remote -v` | shows `origin` pointing at github.com/main1479/portfolio (or chosen name) |
-| `gh pr list` | empty (no PRs yet) |
-| `git status --porcelain` | empty (clean tree) |
-| The block-main hook fires correctly | Try `git commit --allow-empty -m "test"` on main → expect BLOCKED (this confirms the hook is now live since we have a real branch) |
-| `Mainul's Portfolio/` is untracked + ignored | `git status --ignored \| grep "Mainul's Portfolio"` shows it under ignored, not tracked |
+| Check                                        | Expected                                                                                                                           |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `git rev-parse --is-inside-work-tree`        | `true`                                                                                                                             |
+| `git symbolic-ref --short HEAD`              | `main`                                                                                                                             |
+| `git log --oneline \| wc -l`                 | `1`                                                                                                                                |
+| `git remote -v`                              | shows `origin` pointing at github.com/main1479/portfolio (or chosen name)                                                          |
+| `gh pr list`                                 | empty (no PRs yet)                                                                                                                 |
+| `git status --porcelain`                     | empty (clean tree)                                                                                                                 |
+| The block-main hook fires correctly          | Try `git commit --allow-empty -m "test"` on main → expect BLOCKED (this confirms the hook is now live since we have a real branch) |
+| `Mainul's Portfolio/` is untracked + ignored | `git status --ignored \| grep "Mainul's Portfolio"` shows it under ignored, not tracked                                            |
 
 ## Edge cases
 
