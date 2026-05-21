@@ -1,6 +1,120 @@
-// TODO (phase 2): port utility classes from `Mainul's Portfolio/assets/shared.css`
-//   - .container, .container--narrow
-//   - .section, .section--first
-//   - .tick-rule, decorative rules
-//   - .visually-hidden (accessibility helper)
-//   - .reveal / .is-inview state classes
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.container {
+  @include container;
+}
+
+.container--narrow {
+  @include container($narrow: true);
+}
+
+.section {
+  @include section-y;
+  position: relative;
+}
+
+.section__head {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  border-top: 1px solid var(--fg);
+  padding-top: 18px;
+  margin-bottom: clamp(40px, 6vw, 96px);
+}
+
+.section__index {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.section__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 3vw, 4.4rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin: 0;
+  line-height: 1;
+}
+
+.section__title .accent {
+  color: var(--accent);
+}
+
+// Tick rule — horizontal hairline with 21 vertical marks
+// (every 5th mark taller and darker)
+.tick-rule {
+  display: flex;
+  align-items: center;
+  height: 12px;
+  position: relative;
+}
+
+.tick-rule::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  height: 1px;
+  top: 50%;
+  background: var(--rule-strong);
+}
+
+.tick-rule__marks {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.tick-rule__marks span {
+  width: 1px;
+  height: 8px;
+  background: var(--rule-strong);
+  display: block;
+}
+
+.tick-rule__marks span:nth-child(5n + 1) {
+  height: 12px;
+  background: var(--fg);
+}
+
+// Visually hidden but readable to assistive tech
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Phone — section heads stack
+@media (max-width: 640px) {
+  .section__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding-top: 14px;
+    margin-bottom: 32px;
+  }
+  .section__title {
+    font-size: 2.8rem;
+    line-height: 1;
+  }
+  .section__index {
+    font-size: 0.95rem;
+  }
+}
+
+// Very small phones — section title tightens once more
+@media (max-width: 380px) {
+  .section__title {
+    font-size: 2.4rem;
+  }
+}

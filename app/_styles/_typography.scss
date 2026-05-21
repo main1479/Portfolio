@@ -1,7 +1,144 @@
 @use 'variables' as *;
 
-// TODO (phase 2): port typography rules from `Mainul's Portfolio/assets/shared.css`
-//   - .mono, .mono-sm (label/caption styles)
-//   - .display, .display-xl/.lg/.md/.sm/.xs (Teko-driven display scale)
-//   - .lede, p, p.large (body copy)
-//   - .outline (stroked display variant)
+// Mono caption — section labels, meta, ticks
+.mono {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.mono-sm {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+}
+
+// Display type — Teko, condensed
+.display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 0.85;
+  letter-spacing: -0.005em;
+}
+
+.display.weight-300 {
+  font-weight: 300;
+}
+
+.display.weight-600 {
+  font-weight: 600;
+}
+
+.display-xl {
+  font-size: clamp(8.4rem, 17vw, 27rem);
+}
+
+.display-lg {
+  font-size: clamp(6.4rem, 11vw, 17rem);
+}
+
+.display-md {
+  font-size: clamp(4.6rem, 7.5vw, 11rem);
+}
+
+.display-sm {
+  font-size: clamp(3.6rem, 5.2vw, 8rem);
+}
+
+.display-xs {
+  font-size: clamp(2.6rem, 3.6vw, 5.4rem);
+}
+
+// Stroked / outlined display variant
+.outline {
+  color: transparent;
+  -webkit-text-stroke: 1.2px var(--fg);
+}
+
+// Lede / large intro paragraph
+.lede {
+  font-size: clamp(1.9rem, 2.1vw, 2.8rem);
+  line-height: 1.35;
+  max-width: 58ch;
+  font-weight: 300;
+}
+
+p {
+  margin: 0 0 1.6rem;
+  max-width: 64ch;
+}
+
+p.large {
+  font-size: clamp(1.8rem, 1.9vw, 2.4rem);
+  line-height: 1.45;
+}
+
+// Laptop-portrait — pre-empt overflow in the 900–1100px band
+@media (max-width: 1100px) {
+  .display-xl {
+    font-size: clamp(5.6rem, 12vw, 14rem);
+  }
+  .display-lg {
+    font-size: clamp(4.8rem, 9.5vw, 11rem);
+  }
+  .display-md {
+    font-size: clamp(3.8rem, 7vw, 8rem);
+  }
+}
+
+// Tablets
+@media (max-width: 900px) {
+  .display-xl {
+    font-size: clamp(4.8rem, 11vw, 11rem);
+  }
+  .display-lg {
+    font-size: clamp(4.2rem, 9vw, 9rem);
+  }
+}
+
+// Phones
+@media (max-width: 640px) {
+  .lede {
+    font-size: 1.6rem;
+    line-height: 1.45;
+  }
+  p {
+    margin-bottom: 1.2rem;
+  }
+  // Only soft-wrap on overflow; never break mid-word.
+  .display {
+    overflow-wrap: break-word;
+    hyphens: manual;
+  }
+  .display-xl {
+    font-size: clamp(3.8rem, 11vw, 8rem);
+    line-height: 0.9;
+  }
+  .display-lg {
+    font-size: clamp(3.4rem, 9vw, 6.4rem);
+  }
+  .display-md {
+    font-size: clamp(2.8rem, 7.5vw, 5.2rem);
+  }
+  .display-sm {
+    font-size: clamp(2.4rem, 6.5vw, 4.4rem);
+  }
+}
+
+// Very small phones
+@media (max-width: 380px) {
+  .display-xl {
+    font-size: clamp(3rem, 10vw, 6.4rem);
+  }
+}
+
+// 320px guardrail — final floor so display-xl can never overflow on
+// first-gen iPhone SE (masterplan §9).
+@media (max-width: 320px) {
+  .display-xl {
+    font-size: clamp(2.6rem, 10vw, 5.2rem);
+  }
+}

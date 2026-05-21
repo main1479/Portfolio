@@ -1,4 +1,60 @@
-// TODO (phase 2): port design tokens from `Mainul's Portfolio/assets/shared.css`
-// Will define :root custom properties (--bg, --fg, --accent, --font-display, etc.)
-// and matching SCSS variables/maps for tokens that need to be referenced inside
-// SCSS expressions (math, color-mix, etc).
+:root {
+  // --- Colour
+  --bg: #f5f0ec;
+  --fg: #0a0908;
+  --fg-soft: rgba(10, 9, 8, 0.78);
+  --fg-muted: rgba(10, 9, 8, 0.56);
+  --rule: rgba(10, 9, 8, 0.14);
+  --rule-strong: rgba(10, 9, 8, 0.32);
+  --paper: #ece6e0;
+  --paper-deep: #e3dcd4;
+  --accent: #1f3a5f;
+  --accent-ink: #ffffff;
+
+  // --- Type families
+  // next/font sets these as CSS variables on <html> already; the fallback
+  // chain here matches the static template's declarations for safety on the
+  // first paint before next/font's preload class lands.
+  --font-display: 'Teko', 'Helvetica Neue', sans-serif;
+  --font-body: 'Josefin Sans', 'Helvetica Neue', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  // --- Layout
+  --container: 1640px;
+  --gutter: clamp(20px, 4vw, 64px);
+  --section-y: clamp(80px, 12vw, 200px);
+
+  // --- Motion
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+// Tablet — section-y shrinks
+@media (max-width: 900px) {
+  :root {
+    --section-y: clamp(60px, 10vw, 140px);
+  }
+}
+
+// Phone — gutter tightens, section-y pins
+@media (max-width: 640px) {
+  :root {
+    --gutter: 22px;
+    --section-y: 52px;
+  }
+}
+
+// Very small phone — gutter tightens further
+@media (max-width: 380px) {
+  :root {
+    --gutter: 18px;
+  }
+}
+
+// 320px guardrail — floor the gutter so content never collides with the
+// viewport edge on first-gen iPhone SE (masterplan §9).
+@media (max-width: 320px) {
+  :root {
+    --gutter: 16px;
+  }
+}
