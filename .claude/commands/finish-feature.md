@@ -58,11 +58,14 @@ If any script doesn't exist yet (the Next.js project may not be fully wired), no
 
 1. Check for an open PR from this branch: `gh pr view --json number,state,title,url`.
 2. If none, open one:
+
    ```bash
    gh pr create --base main --head <branch> --title "<title>" --body "<body>"
    ```
+
    - **Title**: read the first `#` heading from `_plans/done/<feature>-plan.md`. If it starts with "Plan — ", strip that prefix. Fall back to `feat: <feature>` if no plan exists.
    - **Body**: summary lifted from the plan's `## What` section, followed by `\n\nSpec: _specs/done/<feature>-spec.md`.
+
 3. Record the PR number and URL for the next step.
 
 ## Step 5 — PAUSE for explicit confirmation
@@ -102,11 +105,13 @@ Verify the merged commit is now on local `main`.
 Ask: "Anything outstanding from this feature to log? Paste one-liners; empty reply to skip."
 
 If the user provides entries, append them under `## Open` in `futureWorks.md`. Format per the existing convention:
+
 ```
 - [<area>] <description> — <branch> session <YYYY-MM-DD>
 ```
 
 Commit and push if anything was added:
+
 ```bash
 git add futureWorks.md
 git commit -m "chore: log <feature> outstanding items"
@@ -116,6 +121,7 @@ git push
 ## Final summary
 
 Print:
+
 - Feature merged: `<feature>`
 - PR: `#<n>` (URL)
 - Branch deleted: ✓ local + remote
@@ -125,6 +131,7 @@ Print:
 ## On any failure
 
 Leave the user on the feature branch. Print:
+
 1. Which step failed
 2. The exact command and its stderr
 3. The recovery action (e.g., "resolve conflicts and re-run", "push the branch first", "fix the build error and re-run")

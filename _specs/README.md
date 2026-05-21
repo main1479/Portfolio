@@ -1,4 +1,4 @@
-# _specs
+# \_specs
 
 Technical specifications. Each spec breaks down **how** a feature will be built: files to create or edit, components, types, edge cases, accessibility considerations.
 

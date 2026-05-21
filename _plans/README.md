@@ -1,4 +1,4 @@
-# _plans
+# \_plans
 
 Non-technical, plain-English plans. Each plan describes **what** is being built and **why**, suitable for a stakeholder to skim and approve.
 

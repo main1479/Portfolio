@@ -24,8 +24,7 @@ process.stdin.on('end', () => {
   // Amends/no-edit are excluded (they target an existing commit on the current
   // branch, which is already not main if the previous block worked).
   const isPush = /^\s*git\s+push(\s|$)/.test(cmd);
-  const isCommit =
-    /^\s*git\s+commit(\s|$)/.test(cmd) && !/(--amend|--no-edit)\b/.test(cmd);
+  const isCommit = /^\s*git\s+commit(\s|$)/.test(cmd) && !/(--amend|--no-edit)\b/.test(cmd);
 
   if (isPush || isCommit) {
     try {
@@ -53,7 +52,7 @@ process.stdin.on('end', () => {
             (isPush ? 'push' : 'commit') +
             ' on `' +
             branch +
-            '` is not allowed on this project. Switch to a feature branch.'
+            '` is not allowed on this project. Switch to a feature branch.',
         );
         process.exit(2);
       }

@@ -1,0 +1,50 @@
+@use 'variables' as *;
+@use 'typography' as *;
+
+// Minimal base styles for the scaffold phase. The full reset, base type, and
+// design-token application happen in phase 2 (porting shared.css).
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  // Match the static template's convention so 1rem = 10px once tokens are ported.
+  font-size: 62.5%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #f5f0ec; // TODO (phase 2): swap for var(--bg) once defined
+  color: #0a0908; // TODO (phase 2): swap for var(--fg) once defined
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 1.7rem;
+  line-height: 1.45;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
