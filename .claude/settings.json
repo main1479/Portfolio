@@ -1,0 +1,119 @@
+{
+  "$comment": "Project-scope Claude Code settings. Hooks AND the base permission allowlist/denylist live here (not in settings.local.json) so the policy ships with the repo. Claude Code's auto-permission recorder owns settings.local.json and rewrites it between turns — manual edits there get clobbered. Use settings.local.json only for personal per-machine overrides.",
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev)",
+      "Bash(npm run build)",
+      "Bash(npm run typecheck)",
+      "Bash(npm run lint)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run format)",
+      "Bash(npm run test)",
+      "Bash(npm run test:*)",
+      "Bash(npm ls *)",
+      "Bash(npm outdated)",
+      "Bash(npm view *)",
+      "Bash(npm install *)",
+      "Bash(npm create next-app*)",
+      "Bash(npx create-next-app*)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(npx prettier *)",
+
+      "Bash(git init)",
+      "Bash(git status)",
+      "Bash(git diff)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(git branch)",
+      "Bash(git branch *)",
+      "Bash(git checkout *)",
+      "Bash(git switch *)",
+      "Bash(git add *)",
+      "Bash(git commit -m *)",
+      "Bash(git commit -am *)",
+      "Bash(git push)",
+      "Bash(git push origin *)",
+      "Bash(git push -u origin *)",
+      "Bash(git pull)",
+      "Bash(git pull origin *)",
+      "Bash(git fetch *)",
+      "Bash(git remote *)",
+      "Bash(git rm --cached *)",
+      "Bash(git mv *)",
+
+      "Bash(gh api *)",
+      "Bash(gh pr view *)",
+      "Bash(gh pr diff *)",
+      "Bash(gh pr create *)",
+      "Bash(gh pr list)",
+      "Bash(gh pr merge *)",
+      "Bash(gh repo view *)",
+      "Bash(gh repo create *)",
+
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:registry.npmjs.org)",
+      "WebFetch(domain:nextjs.org)",
+      "WebFetch(domain:vercel.com)"
+    ],
+    "deny": [
+      "Bash(git push --force*)",
+      "Bash(git push --force-with-lease*)",
+      "Bash(git reset --hard*)",
+      "Bash(rm -rf *)",
+      "Bash(npm publish*)",
+      "Bash(npm install -g *)",
+      "Bash(curl * | sh)",
+      "Bash(curl * | bash)",
+      "Bash(wget * | sh)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/block-main.js"
+          }
+        ],
+        "description": "Block direct git commit/push on main or master — uses current branch via git symbolic-ref, not command-string regex."
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/secret-scan-write.js"
+          }
+        ],
+        "description": "Scan Write content for hardcoded secrets / dangerous patterns before save."
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/auto-format.sh"
+          }
+        ],
+        "description": "Auto-format files after Write/Edit using Prettier (silent no-op until Prettier is configured)."
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/notify.sh"
+          }
+        ],
+        "description": "Native OS notification when Claude needs attention."
+      }
+    ]
+  }
+}
