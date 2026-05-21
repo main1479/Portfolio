@@ -1,7 +1,37 @@
 @use 'variables' as *;
 
-// TODO (phase 2): port mixins from `Mainul's Portfolio/assets/shared.css`
-//   - container (max-width + horizontal gutter)
-//   - fluid-type ($min, $max, $vw-min, $vw-max)
-//   - section spacing (responsive vertical rhythm)
-//   - reveal-on-scroll keyframes/states
+// Centred max-width wrapper with horizontal gutter.
+// $narrow: true → 1100px max (FAQ on Contact, narrow case sections).
+@mixin container($narrow: false) {
+  width: 100%;
+  @if $narrow {
+    max-width: 1100px;
+  } @else {
+    max-width: var(--container);
+  }
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  position: relative;
+}
+
+// Thin clamp() wrapper for intent-at-call-site fluid type.
+//   $min : smallest font-size (used below $vw-min)
+//   $vw  : the vw-relative middle term
+//   $max : largest font-size (used above $vw-max)
+@mixin fluid-type($min, $vw, $max) {
+  font-size: clamp($min, $vw, $max);
+}
+
+// Apply the responsive section vertical rhythm without the full .section
+// class (useful when a component needs the spacing but not the wrapper).
+@mixin section-y {
+  padding-block: var(--section-y);
+}
+
+// Only apply the wrapped rules when the OS allows motion. Reach for this
+// any time you author a transition or animation in a component module.
+@mixin reduced-motion-safe {
+  @media (prefers-reduced-motion: no-preference) {
+    @content;
+  }
+}

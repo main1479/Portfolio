@@ -1,9 +1,8 @@
 @use 'variables' as *;
 @use 'typography' as *;
+@use 'utils' as *;
 
-// Minimal base styles for the scaffold phase. The full reset, base type, and
-// design-token application happen in phase 2 (porting shared.css).
-
+// Reset
 *,
 *::before,
 *::after {
@@ -11,23 +10,32 @@
 }
 
 html {
-  // Match the static template's convention so 1rem = 10px once tokens are ported.
-  font-size: 62.5%;
+  font-size: 62.5%; // 1rem = 10px
+  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
-  background: #f5f0ec; // TODO (phase 2): swap for var(--bg) once defined
-  color: #0a0908; // TODO (phase 2): swap for var(--fg) once defined
+  background: var(--bg);
+  color: var(--fg);
   font-family: var(--font-body), system-ui, sans-serif;
   font-size: 1.7rem;
   line-height: 1.45;
+  font-weight: 400;
   overflow-x: hidden;
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
 }
 
 img {
@@ -47,4 +55,181 @@ button {
   border: 0;
   padding: 0;
   cursor: pointer;
+}
+
+// Default <details> marker off — custom markers ship per component.
+details summary {
+  list-style: none;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+// Page intro block — used on Work / About / Contact / Cases
+.page-intro {
+  padding-top: calc(var(--section-y) * 0.9);
+  padding-bottom: 40px;
+  position: relative;
+}
+
+.page-intro__label {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.page-intro__label::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.page-intro__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(8.4rem, 17vw, 26rem);
+  line-height: 0.85;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: -0.01em;
+  overflow-wrap: break-word;
+}
+
+.page-intro__sub {
+  font-size: clamp(1.8rem, 1.6vw, 2.2rem);
+  max-width: 60ch;
+  margin-top: 32px;
+  color: var(--fg-soft);
+}
+
+@media (max-width: 1100px) {
+  .page-intro__title {
+    font-size: clamp(5.6rem, 13vw, 16rem);
+  }
+}
+
+@media (max-width: 900px) {
+  .page-intro__title {
+    font-size: clamp(4.8rem, 12vw, 13rem);
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 1.5rem;
+    line-height: 1.5;
+  }
+  .page-intro {
+    padding-top: 70px;
+    padding-bottom: 20px;
+  }
+  .page-intro__title {
+    font-size: clamp(3.6rem, 11vw, 8rem);
+    line-height: 0.92;
+    overflow-wrap: break-word;
+  }
+  .page-intro__sub {
+    font-size: 1.45rem;
+    margin-top: 18px;
+  }
+  .page-intro__label {
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+  }
+  .page-intro__label::before {
+    width: 24px;
+  }
+}
+
+@media (max-width: 380px) {
+  .page-intro__title {
+    font-size: clamp(3rem, 10vw, 6.4rem);
+  }
+}
+
+// 320px guardrail
+@media (max-width: 320px) {
+  .page-intro__title {
+    font-size: clamp(2.6rem, 10vw, 5.2rem);
+  }
+}
+
+// Named keyframes — declared once at the global layer so component
+// modules can `animation: rise …` without redeclaring.
+@keyframes rise {
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes nav-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.65;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-bar {
+  0% {
+    background-position: 100% 0;
+  }
+  50% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+// Reduced-motion safety net — kills the named animations and prevents
+// any reveal target from getting stuck invisible. Uses 0.001ms (not 0s)
+// so animationend listeners still fire.
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
