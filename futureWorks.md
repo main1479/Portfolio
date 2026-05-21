@@ -24,6 +24,7 @@ Examples (delete once real entries appear):
 - [deps] `npm install` reported 2 moderate vulnerabilities at scaffold time. Audit and decide whether to update transitives once the project is stable. — `chore/nextjs-scaffold` session 2026-05-21
 - [a11y] `eslint-plugin-jsx-a11y` is auto-included by `eslint-config-next/core-web-vitals` with a SUBSET of rules. To tighten beyond defaults (e.g., enable `no-static-element-interactions`, `click-events-have-key-events` as errors), add explicit `rules` entries in `eslint.config.mjs` — don't re-spread `flatConfigs.recommended` (causes plugin-redefine error). — `chore/nextjs-scaffold` session 2026-05-21
 - [scaffold] Add a real favicon — currently no `app/icon.{png,svg,ico}`. — `chore/nextjs-scaffold` session 2026-05-21
+- [tokens] Added a 320px clamp-down for `.display-xl` and `.page-intro__title` (`clamp(2.6rem, 10vw, 5.2rem)`) that does not exist in `Mainul's Portfolio/assets/shared.css` — masterplan §9 promised the 320px guardrail. Verify on a real first-gen iPhone SE viewport once the hero ships in Phase 4. — `feature/design-tokens` session 2026-05-21
 
 ## Resolved
 
