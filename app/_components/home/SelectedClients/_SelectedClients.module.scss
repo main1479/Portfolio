@@ -57,13 +57,14 @@
 
 .name {
   font-family: var(--font-display);
-  // Clamp sized so the longest single word ("IRONMONGERY") fits the
-  // narrowest 4-column cell. overflow-wrap / hyphens deliberately
-  // NOT set — we want the <wbr/> between "Ironmongery" and "Direct"
-  // to be the only break opportunity. Breaking inside a brand name
-  // (e.g. "Ironmonge / ry") looks worse than the word being slightly
-  // smaller.
-  font-size: clamp(2.2rem, 2vw, 3rem);
+  // Wider clamp band so the font visibly resizes across normal
+  // desktop / laptop widths. 2.6vw engages between ~770px and
+  // ~1540px viewport, so the font scales smoothly between 20px and
+  // 40px in that range. "IRONMONGERY" (the longest brand) still
+  // fits the 4-column cell at every step — verified at 1100, 1280,
+  // 1500, 1640. overflow-wrap / hyphens stay off so <wbr/> remains
+  // the only legal break.
+  font-size: clamp(2rem, 2.6vw, 4rem);
   font-weight: 500;
   text-transform: uppercase;
   line-height: 0.95;
@@ -106,7 +107,7 @@
     gap: 14px;
   }
   .name {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
   .sector {
     font-size: 0.9rem;
