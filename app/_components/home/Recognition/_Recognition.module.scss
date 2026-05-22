@@ -1,0 +1,148 @@
+@use 'mixins' as *;
+
+.lede {
+  margin-bottom: 56px;
+
+  strong {
+    font-weight: 500;
+  }
+}
+
+.awards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.award {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: clamp(30px, 4vw, 56px);
+  background: var(--paper);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  color: inherit;
+  height: 100%;
+
+  @include reduced-motion-safe {
+    transition: background 0.4s;
+  }
+}
+
+.award:hover {
+  background: var(--paper-deep);
+}
+
+.award:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.seal {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: var(--fg);
+  color: var(--bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  font-weight: 600;
+  line-height: 1;
+  position: relative;
+}
+
+.ring {
+  position: absolute;
+  inset: -10px;
+  border: 1px dashed var(--rule-strong);
+  border-radius: 50%;
+  display: block;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 3.6vw, 4.8rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0;
+  letter-spacing: 0.005em;
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.cta {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid var(--fg);
+  padding-bottom: 4px;
+  align-self: flex-start;
+
+  @include reduced-motion-safe {
+    transition:
+      color 0.3s,
+      border-color 0.3s;
+  }
+}
+
+.award:hover .cta {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+@media (max-width: 700px) {
+  .awards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .awards {
+    gap: 12px;
+  }
+  .award {
+    padding: 22px 20px;
+    gap: 12px;
+    border-radius: 6px;
+  }
+  .seal {
+    width: 52px;
+    height: 52px;
+    font-size: 1.8rem;
+  }
+  .ring {
+    inset: -7px;
+  }
+  .title {
+    font-size: 2.4rem;
+  }
+  .meta {
+    font-size: 0.9rem;
+  }
+  .cta {
+    font-size: 1rem;
+  }
+  .lede {
+    margin-bottom: 32px;
+  }
+}

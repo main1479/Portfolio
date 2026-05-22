@@ -4,7 +4,7 @@ import './_styles/globals.scss';
 import { Nav } from './_components/Nav/Nav';
 import { Footer } from './_components/Footer/Footer';
 import { CustomCursor } from './_components/CustomCursor/CustomCursor';
-import { RevealRoot } from './_components/RevealRoot/RevealRoot';
+import { Loader } from './_components/Loader/Loader';
 
 const teko = Teko({
   weight: ['300', '400', '500', '600', '700'],
@@ -37,10 +37,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${teko.variable} ${josefin.variable} ${mono.variable}`}>
       <body>
+        <Loader />
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
-        <RevealRoot />
         <CustomCursor />
         <Nav />
         <main id="main-content">{children}</main>

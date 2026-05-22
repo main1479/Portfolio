@@ -1,0 +1,81 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin: 0;
+  pointer-events: auto;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: clamp(6.4rem, 11vw, 14rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 0.85;
+  letter-spacing: -0.005em;
+  color: var(--fg);
+  margin: 0;
+}
+
+.dot {
+  color: var(--accent);
+}
+
+.hairline {
+  width: 240px;
+  height: 1px;
+  background: var(--rule-strong);
+}
+
+.caption {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.progressTrack {
+  width: 240px;
+  height: 1px;
+  background: rgba(10, 9, 8, 0.06);
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--accent);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.routeBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  display: none;
+  z-index: 1000;
+}
+
+@media (max-width: 640px) {
+  .loader {
+    gap: 16px;
+  }
+  .wordmark {
+    font-size: clamp(4.8rem, 16vw, 8rem);
+  }
+  .hairline,
+  .progressTrack {
+    width: 160px;
+  }
+}
