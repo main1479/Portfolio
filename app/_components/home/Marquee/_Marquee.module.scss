@@ -1,0 +1,57 @@
+.marquee {
+  overflow: hidden;
+  padding: 22px 0;
+  border-top: 1px solid var(--fg);
+  border-bottom: 1px solid var(--fg);
+  white-space: nowrap;
+}
+
+.track {
+  display: inline-flex;
+  gap: 64px;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 4vw, 5.4rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  line-height: 1;
+  will-change: transform;
+}
+
+.tokens {
+  display: inline-flex;
+  align-items: center;
+  gap: 64px;
+}
+
+.token {
+  display: inline-flex;
+  align-items: center;
+  gap: 64px;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--fg);
+  display: inline-block;
+}
+
+@media (max-width: 640px) {
+  .marquee {
+    padding: 12px 0;
+  }
+  .track {
+    font-size: 2rem;
+    gap: 24px;
+  }
+  .tokens,
+  .token {
+    gap: 24px;
+  }
+}

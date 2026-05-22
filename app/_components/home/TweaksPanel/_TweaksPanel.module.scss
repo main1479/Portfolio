@@ -1,0 +1,147 @@
+@use 'mixins' as *;
+
+.tweaks {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--fg);
+  color: var(--bg);
+  padding: 16px 18px 16px 16px;
+  border-radius: 18px;
+  z-index: 200;
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  letter-spacing: 0.06em;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  max-width: 280px;
+  margin: 0;
+}
+
+.header {
+  display: none;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.label {
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--bg) 65%, transparent);
+}
+
+.swatches {
+  display: flex;
+  gap: 8px;
+
+  button {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    padding: 0;
+    cursor: pointer;
+
+    @include reduced-motion-safe {
+      transition: border-color 0.2s;
+    }
+  }
+
+  button.isActive {
+    border-color: var(--bg);
+  }
+
+  button:focus-visible {
+    outline: 2px solid var(--bg);
+    outline-offset: 2px;
+  }
+}
+
+.toggle {
+  display: inline-flex;
+  background: rgba(245, 240, 236, 0.12);
+  border-radius: 999px;
+  padding: 3px;
+
+  button {
+    padding: 4px 10px;
+    border-radius: 999px;
+    color: color-mix(in srgb, var(--bg) 75%, transparent);
+    font-size: 1.05rem;
+    cursor: pointer;
+  }
+
+  button.isActive {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  button:focus-visible {
+    outline: 2px solid var(--bg);
+    outline-offset: 2px;
+  }
+}
+
+@media (max-width: 640px) {
+  .tweaks {
+    bottom: 14px;
+    right: 14px;
+    left: auto;
+    max-width: none;
+    padding: 0;
+    border-radius: 999px;
+    gap: 0;
+    overflow: hidden;
+
+    @include reduced-motion-safe {
+      transition:
+        border-radius 0.3s var(--ease-out),
+        padding 0.3s var(--ease-out);
+    }
+  }
+  .header {
+    display: block;
+    padding: 12px 18px;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bg);
+    cursor: pointer;
+    background: none;
+    border: 0;
+    width: 100%;
+    text-align: left;
+  }
+  .row {
+    display: none;
+    gap: 10px;
+    padding: 0 16px;
+  }
+  .isOpen {
+    border-radius: 14px;
+    padding: 6px 0 12px;
+  }
+  .isOpen .header {
+    padding: 10px 16px 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    margin-bottom: 6px;
+  }
+  .isOpen .row {
+    display: flex;
+    padding: 8px 16px;
+  }
+  .label {
+    font-size: 0.95rem;
+  }
+  .swatches button {
+    width: 20px;
+    height: 20px;
+  }
+}
