@@ -57,3 +57,5 @@ next-env.d.ts
 
 # Legacy static-HTML draft — kept on disk as reference only, never committed
 Mainul's Portfolio/
+.env.production
+.env.development

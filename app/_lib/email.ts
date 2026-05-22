@@ -1,13 +1,18 @@
 import { Resend } from 'resend';
 import type { ContactInput } from './contact-schema';
+import { notificationEmail } from './email-templates/notification';
+import { confirmationEmail } from './email-templates/confirmation';
+import { siteConfig } from './site-config';
 
-const TOPIC_LABELS: Record<ContactInput['topic'], string> = {
-  'a-b-testing': 'A/B testing',
-  'frontend-build': 'Frontend build',
-  'product-work': 'Product work',
-  'something-else': 'Something else',
-};
-
+/**
+ * Sends two emails for a single contact-form submission:
+ *
+ * 1. Notification to CONTACT_TO (Mainul) — primary. If this fails the
+ *    submission is considered failed and the route returns 502.
+ * 2. Confirmation to the sender — best-effort. If this fails we log
+ *    server-side and still return success, because the primary channel
+ *    (Mainul knowing about the message) already succeeded.
+ */
 export async function sendContactEmail(
   input: Pick<ContactInput, 'name' | 'email' | 'topic' | 'message'>,
 ): Promise<string> {
@@ -20,21 +25,15 @@ export async function sendContactEmail(
   }
 
   const resend = new Resend(apiKey);
-  const topicLabel = TOPIC_LABELS[input.topic];
 
-  const subject = `Portfolio · ${topicLabel} · from ${input.name}`;
-  const text = [
-    `From: ${input.name} <${input.email}>`,
-    `Topic: ${topicLabel}`,
-    '',
-    input.message,
-  ].join('\n');
-
+  // 1. Notification to Mainul.
+  const notification = notificationEmail(input);
   const { data, error } = await resend.emails.send({
     from,
     to,
-    subject,
-    text,
+    subject: notification.subject,
+    text: notification.text,
+    html: notification.html,
     replyTo: input.email,
   });
 
@@ -44,5 +43,28 @@ export async function sendContactEmail(
   if (!data?.id) {
     throw new Error('Resend response missing id.');
   }
+
+  // 2. Confirmation to the sender — best-effort.
+  try {
+    const confirmation = confirmationEmail({
+      ...input,
+      ownerEmail: siteConfig.email,
+      ownerName: siteConfig.ownerName,
+    });
+    const { error: confirmError } = await resend.emails.send({
+      from,
+      to: input.email,
+      subject: confirmation.subject,
+      text: confirmation.text,
+      html: confirmation.html,
+      replyTo: siteConfig.email,
+    });
+    if (confirmError) {
+      console.warn('[contact] Confirmation email failed:', confirmError.message);
+    }
+  } catch (err) {
+    console.warn('[contact] Confirmation email threw:', err);
+  }
+
   return data.id;
 }
