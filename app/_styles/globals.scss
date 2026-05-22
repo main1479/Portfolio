@@ -11,9 +11,7 @@
 }
 
 html {
-  font-size: 62.5%; // 1rem = 10px — this MUST stay the only font-size
-  // declaration on <html>; layering another rem-based one here would
-  // resolve against the spec's initial 16px and blow up all child rems.
+  font-size: 62.5%; // 1rem = 10px
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -26,16 +24,13 @@ html,
 body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
-}
-
-body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-body), system-ui, sans-serif;
   font-size: 1.7rem;
   line-height: 1.45;
   font-weight: 400;
+  overflow-x: hidden;
   text-wrap: pretty;
 }
 

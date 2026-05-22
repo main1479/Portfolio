@@ -14,7 +14,6 @@ import { SelectedClients } from './_components/home/SelectedClients/SelectedClie
 import { Recognition } from './_components/home/Recognition/Recognition';
 import { Experience } from './_components/home/Experience/Experience';
 import { EndCTA } from './_components/home/EndCTA/EndCTA';
-import { TweaksPanel } from './_components/home/TweaksPanel/TweaksPanel';
 import { homeContent } from './_lib/home-content';
 import styles from './_components/home/_homePage.module.scss';
 
@@ -124,7 +123,6 @@ export default function Home() {
       </Section>
 
       <EndCTA content={homeContent.endCta} />
-      <TweaksPanel />
     </HomeShell>
   );
 }
