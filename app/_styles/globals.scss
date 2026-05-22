@@ -113,6 +113,10 @@ details summary::-webkit-details-marker {
   overflow-wrap: break-word;
 }
 
+.page-intro__title .accent {
+  color: var(--accent);
+}
+
 .page-intro__sub {
   font-size: clamp(1.8rem, 1.6vw, 2.2rem);
   max-width: 60ch;

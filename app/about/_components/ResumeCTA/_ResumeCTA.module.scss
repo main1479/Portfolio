@@ -1,0 +1,89 @@
+.resume {
+  background: var(--fg);
+  color: var(--bg);
+  border-radius: 6px;
+  padding: clamp(40px, 5vw, 80px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.resume::after {
+  content: 'CV';
+  position: absolute;
+  right: -30px;
+  bottom: -40px;
+  font-family: var(--font-display);
+  font-size: 28rem;
+  line-height: 0.8;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--bg) 6%, transparent);
+  pointer-events: none;
+}
+
+.copy {
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(4.4rem, 7vw, 9rem);
+  line-height: 0.95;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+  overflow-wrap: break-word;
+  min-width: 0;
+
+  :global(.accent) {
+    color: var(--accent);
+  }
+}
+
+.sub {
+  font-size: 1.6rem;
+  line-height: 1.55;
+  margin: 16px 0 0;
+  color: color-mix(in srgb, var(--bg) 72%, transparent);
+  max-width: 44ch;
+}
+
+.cta {
+  position: relative;
+  z-index: 1;
+  justify-self: end;
+}
+
+@media (max-width: 900px) {
+  .resume {
+    grid-template-columns: 1fr;
+  }
+  .cta {
+    justify-self: start;
+  }
+  .resume::after {
+    font-size: 16rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .resume {
+    padding: 32px 24px;
+  }
+  .title {
+    font-size: 4.2rem;
+  }
+  .sub {
+    font-size: 1.5rem;
+  }
+  .resume::after {
+    font-size: 11rem;
+    right: -16px;
+    bottom: -20px;
+  }
+}
