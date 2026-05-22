@@ -1,20 +1,28 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useSyncExternalStore } from 'react';
 import styles from './_CustomCursor.module.scss';
 
-export function CustomCursor() {
-  const [enabled, setEnabled] = useState(false);
-  const cursorRef = useRef<HTMLDivElement | null>(null);
+const QUERY = '(hover: hover) and (pointer: fine)';
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const mql = window.matchMedia('(hover: hover) and (pointer: fine)');
-    setEnabled(mql.matches);
-    const onChange = (e: MediaQueryListEvent) => setEnabled(e.matches);
-    mql.addEventListener('change', onChange);
-    return () => mql.removeEventListener('change', onChange);
-  }, []);
+function subscribe(cb: () => void) {
+  if (typeof window === 'undefined') return () => {};
+  const mql = window.matchMedia(QUERY);
+  mql.addEventListener('change', cb);
+  return () => mql.removeEventListener('change', cb);
+}
+
+function getSnapshot() {
+  return window.matchMedia(QUERY).matches;
+}
+
+function getServerSnapshot() {
+  return false;
+}
+
+export function CustomCursor() {
+  const enabled = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const cursorRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!enabled) return;

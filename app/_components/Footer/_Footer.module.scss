@@ -1,0 +1,161 @@
+@use 'mixins' as *;
+
+.footer {
+  padding: clamp(80px, 10vw, 160px) 0 40px;
+  position: relative;
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.container {
+  color: var(--bg);
+}
+
+.mark {
+  font-family: var(--font-display);
+  font-size: clamp(12rem, 24vw, 36rem);
+  line-height: 0.82;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--bg);
+  display: block;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 60px;
+  align-items: end;
+  padding-bottom: 80px;
+  border-bottom: 1px solid rgba(245, 240, 236, 0.18);
+}
+
+.cta {
+  font-family: var(--font-display);
+  font-size: clamp(3.6rem, 5vw, 7rem);
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0;
+  letter-spacing: -0.005em;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+.cta a {
+  display: inline-block;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 4px;
+
+  @include reduced-motion-safe {
+    transition: color 0.3s;
+  }
+}
+
+.cta a:hover {
+  color: var(--accent);
+}
+
+.cta a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.meta a {
+  @include reduced-motion-safe {
+    transition: color 0.3s;
+  }
+}
+
+.meta a:hover {
+  color: var(--accent);
+}
+
+.meta a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  padding-top: 40px;
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--bg) 60%, transparent);
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .top {
+    grid-template-columns: 1fr;
+  }
+  .bottom {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    text-align: left !important;
+  }
+  .right,
+  .center {
+    text-align: left;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding: 56px 0 22px;
+  }
+  .mark {
+    font-size: clamp(5rem, 19vw, 10rem);
+    -webkit-text-stroke-width: 1px;
+    line-height: 0.86;
+  }
+  .top {
+    gap: 24px;
+    padding-bottom: 40px;
+  }
+  .cta {
+    font-size: clamp(2.6rem, 8vw, 4.2rem);
+    line-height: 1.05;
+    overflow-wrap: anywhere;
+  }
+  .cta a {
+    display: inline;
+    word-break: break-all;
+  }
+  .meta {
+    font-size: 0.95rem;
+  }
+  .bottom {
+    font-size: 0.85rem;
+    padding-top: 20px;
+  }
+}
+
+@media (max-width: 380px) {
+  .cta {
+    font-size: 2.4rem;
+  }
+}

@@ -1,0 +1,255 @@
+@use 'mixins' as *;
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 80;
+  padding: 22px 0;
+  pointer-events: none;
+
+  @include reduced-motion-safe {
+    transition: background 0.5s var(--ease-out);
+  }
+}
+
+.scrolled {
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: auto;
+}
+
+.mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  background: var(--accent);
+  display: inline-block;
+  border-radius: 50%;
+
+  @include reduced-motion-safe {
+    animation: nav-pulse 2.4s ease-in-out infinite;
+  }
+}
+
+.links {
+  display: flex;
+  gap: clamp(18px, 2.5vw, 36px);
+  align-items: center;
+}
+
+.link {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  position: relative;
+  padding: 6px 2px;
+  color: var(--fg-soft);
+
+  @include reduced-motion-safe {
+    transition: color 0.3s;
+  }
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--fg);
+  transform: scaleX(0);
+  transform-origin: left;
+
+  @include reduced-motion-safe {
+    transition: transform 0.4s var(--ease-out);
+  }
+}
+
+.link:hover,
+.isCurrent {
+  color: var(--fg);
+}
+
+.link:hover::after,
+.isCurrent::after {
+  transform: scaleX(1);
+}
+
+.num {
+  color: var(--accent);
+  margin-right: 6px;
+  font-weight: 500;
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: 0;
+  padding: 8px;
+  cursor: pointer;
+  z-index: 90;
+  pointer-events: auto;
+}
+
+.toggle span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--fg);
+  transform-origin: center;
+
+  @include reduced-motion-safe {
+    transition:
+      transform 0.35s var(--ease-out),
+      opacity 0.25s;
+  }
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.isOpen .toggle span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.isOpen .toggle span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.isOpen .toggle span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+@media (max-width: 1100px) {
+  .num {
+    display: none;
+  }
+  .links {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 900px) {
+  .nav {
+    padding: 18px 0;
+  }
+  .mark {
+    font-size: 2.2rem;
+  }
+  .links {
+    gap: 12px;
+  }
+  .link {
+    font-size: 1.05rem;
+  }
+  .num {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav {
+    padding: 14px 0;
+  }
+  .mark {
+    font-size: 1.9rem;
+  }
+  .toggle {
+    display: flex;
+  }
+  .links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 84px var(--gutter) 36px;
+    transform: translateY(-100%);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid var(--rule);
+
+    @include reduced-motion-safe {
+      transition: transform 0.5s var(--ease-out);
+    }
+  }
+  .isOpen .links {
+    transform: translateY(0);
+  }
+  .link {
+    font-family: var(--font-display);
+    font-size: 3.4rem;
+    line-height: 1.1;
+    padding: 10px 0;
+    color: var(--fg);
+    letter-spacing: 0.005em;
+    width: 100%;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .link:last-child {
+    border-bottom: 0;
+  }
+  .link::after {
+    display: none;
+  }
+  .num {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--fg-muted);
+    margin-right: 0;
+  }
+  .isCurrent {
+    color: var(--accent);
+  }
+}
+
+@media (max-width: 380px) {
+  .mark {
+    font-size: 1.6rem;
+  }
+  .link {
+    font-size: 2.8rem;
+  }
+}
