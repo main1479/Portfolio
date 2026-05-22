@@ -11,7 +11,7 @@
 }
 
 html {
-  font-size: 62.5%; // 1rem = 10px
+  font-size: 62.5%; // 1rem = 10px on desktop
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -32,6 +32,15 @@ body {
   font-weight: 400;
   overflow-x: hidden;
   text-wrap: pretty;
+}
+
+// Scale the root font-size up on tablets and phones — every rem
+// (including the clamp() floors) inflates with it, so body copy and
+// small UI text stay readable without per-element overrides.
+@media (max-width: 900px) {
+  html {
+    font-size: 90%;
+  }
 }
 
 ::selection {
