@@ -57,3 +57,7 @@ next-env.d.ts
 
 # Legacy static-HTML draft — kept on disk as reference only, never committed
 Mainul's Portfolio/
+
+# Local env files for non-Vercel use (.env.local already ignored above)
+.env.development
+.env.production

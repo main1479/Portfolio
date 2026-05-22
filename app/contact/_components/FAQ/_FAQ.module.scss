@@ -1,0 +1,100 @@
+@use 'mixins' as *;
+
+.faq {
+  border-top: 1px solid var(--fg);
+}
+
+.item {
+  border-bottom: 1px solid var(--rule-strong);
+  padding: 20px 0;
+
+  summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 2.8vw, 3.4rem);
+    text-transform: uppercase;
+    font-weight: 500;
+    line-height: 1.1;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+  }
+
+  p {
+    color: var(--fg-soft);
+    margin: 14px 0 0;
+    max-width: 70ch;
+    font-size: 1.6rem;
+    line-height: 1.55;
+  }
+}
+
+.plus {
+  width: 28px;
+  height: 28px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.plus::before,
+.plus::after {
+  content: '';
+  position: absolute;
+  background: var(--fg);
+
+  @include reduced-motion-safe {
+    transition: transform 0.4s var(--ease-out);
+  }
+}
+
+.plus::before {
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  transform: translateY(-50%);
+}
+
+.plus::after {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-50%);
+}
+
+.item[open] .plus::after {
+  transform: translateX(-50%) rotate(90deg);
+}
+
+@media (max-width: 640px) {
+  .item {
+    padding: 16px 0;
+
+    summary {
+      font-size: 2rem;
+      gap: 12px;
+      line-height: 1.15;
+    }
+
+    p {
+      font-size: 1.5rem;
+    }
+  }
+
+  .plus {
+    width: 22px;
+    height: 22px;
+  }
+}

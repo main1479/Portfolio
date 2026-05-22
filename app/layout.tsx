@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Teko, Josefin_Sans, JetBrains_Mono } from 'next/font/google';
 import './_styles/globals.scss';
 import { Nav } from './_components/Nav/Nav';
-import { Footer } from './_components/Footer/Footer';
 import { CustomCursor } from './_components/CustomCursor/CustomCursor';
 import { Loader } from './_components/Loader/Loader';
 
@@ -44,7 +43,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CustomCursor />
         <Nav />
         <main id="main-content">{children}</main>
-        <Footer />
       </body>
     </html>
   );

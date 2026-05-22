@@ -1,0 +1,125 @@
+@use 'mixins' as *;
+
+.aside {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 3.6vw, 4.8rem);
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 1;
+  margin: 0;
+
+  :global(.accent) {
+    color: var(--accent);
+  }
+}
+
+.body {
+  font-size: clamp(1.7rem, 1.6vw, 2rem);
+  line-height: 1.5;
+  color: var(--fg-soft);
+  max-width: 42ch;
+  margin: 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--fg);
+}
+
+.direct {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--rule-strong);
+  color: inherit;
+
+  @include reduced-motion-safe {
+    transition:
+      padding 0.4s var(--ease-out),
+      color 0.4s var(--ease-out);
+  }
+}
+
+.direct:hover {
+  padding-left: 12px;
+  color: var(--accent);
+}
+
+.directLabel {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.directValue {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 2.4vw, 3.2rem);
+  text-transform: uppercase;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+  margin-right: auto;
+}
+
+.directArrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--rule-strong);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  @include reduced-motion-safe {
+    transition:
+      background 0.4s,
+      color 0.4s,
+      transform 0.4s,
+      border-color 0.4s;
+  }
+}
+
+.direct:hover .directArrow {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+  transform: rotate(-45deg);
+}
+
+@media (max-width: 640px) {
+  .heading {
+    font-size: 2.8rem;
+  }
+  .body {
+    font-size: 1.5rem;
+  }
+  .direct {
+    padding: 18px 0;
+    gap: 10px;
+  }
+  .directLabel {
+    font-size: 0.95rem;
+    width: 56px;
+  }
+  .directValue {
+    font-size: 1.9rem;
+  }
+  .directArrow {
+    width: 30px;
+    height: 30px;
+  }
+}

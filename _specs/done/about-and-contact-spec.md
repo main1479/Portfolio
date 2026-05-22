@@ -1757,3 +1757,15 @@ If any other file in the "NOT touched" list needs to change during implementatio
 - Saving the portrait in multiple sizes (`me-512.jpg`, `me-1024.jpg`) — `next/image` derives responsive sizes from the single 1024×1024 source.
 - Dark mode.
 - Hero variant analytics (masterplan §849).
+
+## Retrospective
+
+Three places where the spec turned out to be inaccurate during implementation:
+
+1. **`Experience` internal imports (§10).** The spec claimed "Nothing inside the three moved files changes" because the relative imports "still resolve correctly from either old or new location." That's wrong — the new path is one folder shallower (`app/_components/Experience/` vs `app/_components/home/Experience/`), so `../../Reveal/Reveal` and `../../../_types/home` both needed one fewer `..` segment. Fixed in the move commit (`refactor: promote Experience out of home namespace`). Lesson: actually count `..` segments rather than asserting equivalence.
+
+2. **SCSS auto-import via `next.config.ts` (§4 implicit, CLAUDE.md rule 6).** The spec and CLAUDE.md both say variables/mixins are auto-imported into every component module via `next.config.ts`'s `additionalData`. In practice, under Next 16.2.6 + Turbopack the callback isn't being applied to all module files — every new contact-folder SCSS module failed the build with "Undefined mixin: reduced-motion-safe" until an explicit `@use 'mixins' as *;` was added at the top. Confirmed by inspection that every existing Phase 3 component module (`_Button.module.scss`, `_Nav.module.scss`, `_Footer.module.scss`, etc.) already includes the same explicit `@use`, contradicting CLAUDE.md. Already tracked in `futureWorks.md:14`. All new modules in this phase now follow the codebase pattern (explicit `@use`) rather than the rule.
+
+3. **Email scope expansion (§17 "Out of scope").** "HTML email template for Resend deferred (plain text only)" was the spec default. After implementation, scope expanded to add **two** styled HTML emails: a notification to `CONTACT_TO` (Mainul) and a confirmation to the sender with urgent-contact info, echoed message, and signature. Lives in `app/_lib/email-templates/{shared,notification,confirmation}.ts`. The notification is required (route returns 502 if it fails); the confirmation is best-effort (logs server-side and still returns success if it throws). `futureWorks.md:19` updated to reflect the change.
+
+Otherwise the spec held up — the route handler envelope, Zod schema, form state machine, topic-chip a11y, FAQ accordion, and the Experience promotion all matched the spec section-for-section.

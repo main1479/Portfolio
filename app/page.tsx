@@ -12,8 +12,9 @@ import { Services } from './_components/home/Services/Services';
 import { SelectedWork } from './_components/home/SelectedWork/SelectedWork';
 import { SelectedClients } from './_components/home/SelectedClients/SelectedClients';
 import { Recognition } from './_components/home/Recognition/Recognition';
-import { Experience } from './_components/home/Experience/Experience';
+import { Experience } from './_components/Experience/Experience';
 import { EndCTA } from './_components/home/EndCTA/EndCTA';
+import { Footer } from './_components/Footer/Footer';
 import { homeContent } from './_lib/home-content';
 import styles from './_components/home/_homePage.module.scss';
 
@@ -123,6 +124,7 @@ export default function Home() {
       </Section>
 
       <EndCTA content={homeContent.endCta} />
+      <Footer />
     </HomeShell>
   );
 }

@@ -1,6 +1,6 @@
-import { Reveal } from '../../Reveal/Reveal';
+import { Reveal } from '../Reveal/Reveal';
 import { XpRow } from './XpRow';
-import type { XpItem } from '../../../_types/home';
+import type { XpItem } from '../../_types/home';
 import styles from './_Experience.module.scss';
 
 type Props = { items: readonly XpItem[] };
