@@ -38,15 +38,18 @@
 
 .title {
   font-family: var(--font-display);
-  font-size: clamp(3.4rem, 4vw, 5.6rem);
+  font-size: clamp(2.6rem, 3.4vw, 4.6rem);
   font-weight: 500;
   text-transform: uppercase;
-  line-height: 0.92;
+  line-height: 0.95;
   margin: 0;
   margin-top: auto;
   letter-spacing: 0.005em;
   min-width: 0;
+  max-width: 100%;
   overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .desc {
@@ -83,6 +86,11 @@
   }
   .service {
     min-height: 0;
+    padding: 32px 28px;
+    gap: 20px;
+  }
+  .title {
+    font-size: clamp(2.4rem, 4.2vw, 3.4rem);
   }
   .desc {
     font-size: 1.45rem;
@@ -93,11 +101,12 @@
 @media (max-width: 640px) {
   .service {
     min-height: 0;
-    padding: 24px 20px;
+    padding: 22px 18px;
     gap: 14px;
   }
   .title {
-    font-size: 2.6rem;
+    font-size: 2.2rem;
+    line-height: 1;
   }
   .desc {
     font-size: 1.4rem;
@@ -105,5 +114,14 @@
   .tags span {
     font-size: 0.9rem;
     padding: 4px 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .service {
+    padding: 20px 16px;
+  }
+  .title {
+    font-size: 2rem;
   }
 }
