@@ -1,3 +1,5 @@
+@use 'mixins' as *;
+
 .resume {
   background: var(--fg);
   color: var(--bg);
