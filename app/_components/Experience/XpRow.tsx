@@ -1,4 +1,4 @@
-import type { XpItem } from '../../../_types/home';
+import type { XpItem } from '../../_types/home';
 import styles from './_Experience.module.scss';
 
 export function XpRow({ item }: { item: XpItem }) {
