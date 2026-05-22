@@ -67,10 +67,6 @@
     text-align: left;
     padding-top: 0;
   }
-  .desc {
-    font-size: 1.45rem;
-    line-height: 1.3;
-  }
 }
 
 @media (max-width: 640px) {
@@ -83,7 +79,8 @@
     line-height: 1.05;
   }
   .desc {
-    font-size: 1.4rem;
+    font-size: 1.45rem;
+    line-height: 1.3;
   }
   .year,
   .loc {
