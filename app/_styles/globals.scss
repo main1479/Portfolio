@@ -163,20 +163,8 @@ details summary::-webkit-details-marker {
   }
 }
 
-// Named keyframes — declared once at the global layer so component
-// modules can `animation: rise …` without redeclaring.
-@keyframes rise {
-  to {
-    transform: translateY(0);
-  }
-}
-
-@keyframes fade-in {
-  to {
-    opacity: 1;
-  }
-}
-
+// Continuous decorative pulse — used by Nav dot and the hero `.live` dot.
+// Kept on CSS because it's an always-on loop; GSAP buys nothing here.
 @keyframes nav-pulse {
   0%,
   100% {
@@ -189,36 +177,9 @@ details summary::-webkit-details-marker {
   }
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes scroll-bar {
-  0% {
-    background-position: 100% 0;
-  }
-  50% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: -100% 0;
-  }
-}
-
-// Reduced-motion safety net — kills the named animations and prevents
-// any reveal target from getting stuck invisible. Uses 0.001ms (not 0s)
-// so animationend listeners still fire.
+// Reduced-motion safety net — defence-in-depth backstop in case any
+// component module ships a transition/animation that isn't gated.
+// 0.001ms (not 0s) so animationend listeners still fire.
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -228,49 +189,6 @@ details summary::-webkit-details-marker {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-
-  .reveal {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-}
-
-// ===============================================================
-// Reveal-on-scroll
-// `<Reveal>` writes className="reveal" + optional data-delay.
-// `<RevealRoot>` IntersectionObserver flips .is-inview on intersect.
-// Reduced-motion users skip the transform via the safety net above.
-// ===============================================================
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-
-  @include reduced-motion-safe {
-    transition:
-      opacity 1s var(--ease-out),
-      transform 1s var(--ease-out);
-  }
-}
-
-.reveal.is-inview {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.reveal[data-delay='1'] {
-  transition-delay: 0.08s;
-}
-.reveal[data-delay='2'] {
-  transition-delay: 0.16s;
-}
-.reveal[data-delay='3'] {
-  transition-delay: 0.24s;
-}
-.reveal[data-delay='4'] {
-  transition-delay: 0.32s;
-}
-.reveal[data-delay='5'] {
-  transition-delay: 0.4s;
 }
 
 // ===============================================================
