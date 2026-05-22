@@ -57,21 +57,19 @@
 
 .name {
   font-family: var(--font-display);
-  // Tighter clamp than legacy — at full 1640px container the cell is
-  // ~378px wide so 3.4rem (34px) is plenty, but the previous 4rem
-  // ceiling let "Ironmongery" spill into the next cell once the grid
-  // dropped below ~1650px viewport. vw stepped down from 2.8 to 2.2
-  // so the floor is reached earlier as the column narrows.
-  font-size: clamp(2.4rem, 2.2vw, 3.4rem);
+  // Clamp sized so the longest single word ("IRONMONGERY") fits the
+  // narrowest 4-column cell. overflow-wrap / hyphens deliberately
+  // NOT set — we want the <wbr/> between "Ironmongery" and "Direct"
+  // to be the only break opportunity. Breaking inside a brand name
+  // (e.g. "Ironmonge / ry") looks worse than the word being slightly
+  // smaller.
+  font-size: clamp(2.2rem, 2vw, 3rem);
   font-weight: 500;
   text-transform: uppercase;
   line-height: 0.95;
   letter-spacing: 0.005em;
   margin: 0;
   min-width: 0;
-  max-width: 100%;
-  overflow-wrap: break-word;
-  hyphens: auto;
 }
 
 .foot {
