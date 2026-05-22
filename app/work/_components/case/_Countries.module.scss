@@ -1,0 +1,66 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.countries {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--rule-strong);
+  border: 1px solid var(--rule-strong);
+  list-style: none;
+  padding: 0;
+  margin: 32px 0 0;
+}
+
+.country {
+  background: var(--bg);
+  padding: clamp(20px, 2.4vw, 36px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @include reduced-motion-safe {
+    transition:
+      background 0.3s var(--ease-out),
+      transform 0.3s var(--ease-out);
+  }
+}
+
+.country:hover {
+  background: var(--paper);
+
+  @include reduced-motion-safe {
+    transform: translateY(-2px);
+  }
+}
+
+.flag {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 2.4vw, 2.8rem);
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 1;
+}
+
+@media (max-width: 900px) {
+  .countries {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .countries {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .country {
+    padding: 18px;
+  }
+}

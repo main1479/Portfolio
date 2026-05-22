@@ -1,0 +1,64 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.slot {
+  background: repeating-linear-gradient(135deg, var(--paper-deep) 0 12px, var(--paper) 12px 24px);
+  border-radius: 6px;
+  border: 1px solid var(--rule-strong);
+  width: 100%;
+}
+
+.slotImage {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid var(--rule-strong);
+}
+
+.caption {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  margin-top: 16px;
+}
+
+.single {
+  margin: 0;
+}
+
+.duo {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: clamp(20px, 3vw, 48px);
+  align-items: start;
+}
+
+.duoPrimary,
+.duoSecondary {
+  margin: 0;
+}
+
+.triple {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2.4vw, 32px);
+}
+
+.tripleItem {
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .duo {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .triple {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
