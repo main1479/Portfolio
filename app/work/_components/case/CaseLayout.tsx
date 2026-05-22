@@ -19,7 +19,6 @@ export function CaseLayout({ frontmatter, children }: Props) {
   if (process.env.NODE_ENV !== 'production') {
     const registered = getNextCase(fm.slug);
     if (registered.slug !== fm.next.slug) {
-      // eslint-disable-next-line no-console
       console.warn(
         `Case "${fm.slug}" frontmatter.next.slug (${fm.next.slug}) disagrees with case-registry (${registered.slug}).`,
       );

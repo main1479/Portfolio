@@ -1,0 +1,132 @@
+export const frontmatter = {
+  slug: 'avsb',
+  num: '01',
+  title: 'AvsB',
+  pageTitle: 'AvsB — Experimentation Platform · Mainul Islam',
+  pageDescription: 'An in-house, CLI-driven A/B testing platform — built from scratch.',
+  heroLines: [
+    { text: 'AvsB', style: 'plain', trailingAccentDot: true },
+    { text: 'Experiments,', style: 'outline' },
+    { text: 'in code.', style: 'plain' },
+  ],
+  summary:
+    'An in-house experimentation platform — similar in spirit to Optimizely, but CLI-driven and built for developers who want to write and manage experiments directly in code.',
+  meta: [
+    { label: 'Role', value: 'Sole\ndeveloper' },
+    { label: 'Type', value: 'Own\nproduct' },
+    { label: 'Year', value: '2025 –\nPresent' },
+    { label: 'Status', value: 'In progress', accentDot: true },
+  ],
+  next: { label: 'Next case · 02', title: 'Kemon Doctor', slug: 'kemon-doctor' },
+  footerHeading: 'Got something to test?',
+};
+
+<CaseBlock num="01" label="Overview" heading="What it is">
+  AvsB is a **CLI-driven experimentation platform** — similar in spirit to Optimizely, but without a visual editor. It’s built for developers who want to write and manage experiments directly in code, where they belong.
+
+  Visual A/B testing tools are powerful for marketers, but slow and limiting for engineering teams. AvsB swaps that model for something <span className="accent">code-first, version-controlled, and fast to ship.</span>
+</CaseBlock>
+
+<CaseBlock num="02" label="My role" heading="What I did">
+  **Sole developer.** I designed and built the platform itself — not just tests running on top of someone else’s tool.
+
+  - Architecture and platform design
+  - The CLI workflow and developer experience
+  - Data pipeline and event ingestion
+  - Frontend dashboard for results and analysis
+</CaseBlock>
+
+<CaseBlock num="03" label="The problem" heading="What it solves">
+  Visual A/B testing tools are slow and limiting for developers — clicks for what should be code, flaky DOM selectors, brittle rollouts, no version control.
+
+  AvsB starts from a different premise: experiments are **code, reviewed and shipped like any other code.** Fast to write, easy to read, no GUI in the way.
+</CaseBlock>
+
+<CaseVisuals
+  layout="single-plus-secondary"
+  primary={{ caption: 'CLI example · ship a test in 3 commands', aspect: '16/10' }}
+  secondary={{ caption: 'Dashboard · in-progress', aspect: '4/3' }}
+>
+  <CodeMock
+    lines={[
+      { type: 'comment', tokens: [{ kind: 'comment', value: '# Spin up a new experiment' }] },
+      {
+        type: 'prompt',
+        tokens: [
+          { kind: 'prompt', value: '$ ' },
+          { kind: 'keyword', value: 'avsb new ' },
+          { kind: 'text', value: 'checkout-cta-color' },
+        ],
+      },
+      {
+        type: 'response',
+        tokens: [{ kind: 'text', value: '  ✓ created experiments/checkout-cta-color/' }],
+      },
+      {
+        type: 'response',
+        tokens: [{ kind: 'text', value: '  ✓ scaffolded control.ts + variant-a.ts' }],
+      },
+      { type: 'empty' },
+      {
+        type: 'prompt',
+        tokens: [
+          { kind: 'prompt', value: '$ ' },
+          { kind: 'keyword', value: 'avsb ship ' },
+          { kind: 'text', value: 'checkout-cta-color ' },
+          { kind: 'value', value: '--traffic 50' },
+        ],
+      },
+      { type: 'response', tokens: [{ kind: 'text', value: '  ✓ build passed' }] },
+      { type: 'response', tokens: [{ kind: 'text', value: '  ✓ allocation written' }] },
+      {
+        type: 'response',
+        tokens: [
+          { kind: 'text', value: '  ✓ live · 50% traffic · ' },
+          { kind: 'string', value: '"https://avsb.dev/e/cta-color"' },
+        ],
+      },
+      { type: 'empty' },
+      {
+        type: 'prompt',
+        tokens: [
+          { kind: 'prompt', value: '$ ' },
+          { kind: 'keyword', value: 'avsb stats ' },
+          { kind: 'text', value: 'checkout-cta-color' },
+        ],
+      },
+      {
+        type: 'response',
+        tokens: [
+          { kind: 'text', value: '  variant-a · ' },
+          { kind: 'accent', value: '+2.4%' },
+          { kind: 'text', value: ' conv · n=14,820 · p=0.07' },
+        ],
+      },
+    ]}
+  />
+</CaseVisuals>
+
+<CaseBlock num="04" label="What I built" heading="The approach">
+  A command-line workflow for creating, shipping, and analysing experiments, backed by the data pipeline and dashboard needed to make it useful.
+
+  - **CLI-first workflow** — `avsb new / ship / stats` handles the full lifecycle.
+  - **Code as the source of truth** — every variant lives in your repo, reviewed in PRs.
+  - **Event pipeline** built on ClickHouse for fast aggregation across millions of rows.
+  - **Cloudflare R2** for low-cost asset hosting and edge delivery.
+  - **Dashboard** for non-engineers — read-only results, no buttons that can break a test.
+</CaseBlock>
+
+<CaseBlock num="05" label="Stack" heading="Tools used">
+  Chosen for speed of iteration and a hosting model that stays cheap as event volume grows.
+
+  - Next.js
+  - TypeScript
+  - ClickHouse
+  - Cloudflare R2
+  - Node.js (CLI)
+  - SCSS
+</CaseBlock>
+
+<CaseBlock num="06" label="Outcome" heading="Status">
+  Currently in active development as my main product. The platform is being dog-fooded internally on a handful of small experiments while the public API stabilises.
+</CaseBlock>
