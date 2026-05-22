@@ -77,20 +77,31 @@
   margin: 0;
 }
 
-// Display spans rise-in (legacy parity, but driven by GSAP).
-// Static styles only — animation runs from Hero.tsx useGSAP.
+// Display spans — overflow:hidden hosts the rise-in animation (the
+// inner spans translateY in from below). Animation runs from Hero.tsx
+// useGSAP. min-width:0 + overflow-wrap allow long words to wrap when
+// the viewport narrows past the clamp floor.
 .hero {
   :global(.display-xl) {
     line-height: 0.82;
     margin: 0;
     overflow: hidden;
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: break-word;
   }
+}
+
+.line {
+  min-width: 0;
 }
 
 .d1,
 .d2,
 .d3 {
   display: inline-block;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .accent {
