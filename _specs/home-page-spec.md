@@ -15,7 +15,7 @@
 
 Port the legacy home page into the live Next.js app. `/` becomes the full landing page: Hero with variant toggle, Marquee, Intro, Stats, Services, SelectedWork, SelectedClients, Recognition, Experience, EndCTA, and the floating TweaksPanel. Composition uses Phase 3 primitives wherever they fit; new home-only CSS lives in component modules.
 
-No new npm dependencies. No analytics or third-party scripts. No changes to chrome (Nav, Footer, CustomCursor, RevealRoot) from Phase 3.
+> **Revision 2 (2026-05-22 evening) — see §17.** This phase now adds GSAP + ScrollTrigger as the motion system and a page loader to mask hydration. Sections 1, 3.4, 6.1, 6.7–6.8, 7, 13, 15, 16 are overridden by §17; the rest of the spec stands.
 
 ## 1. File tree
 
@@ -1259,3 +1259,528 @@ For absolute clarity:
 - `app/work/*`, `app/about/*`, `app/contact/*` — placeholders untouched.
 
 If any file in this list needs to change during implementation, that's a spec breach; stop and amend the spec rather than slip-streaming the change.
+
+---
+
+## 17. Revision 2 — GSAP, ScrollTrigger, and page loader
+
+**Date:** 2026-05-22 (evening)
+**Reason:** the original §13 verification path accepted a brief SSR→hydration flash (Stats animating from 0; persisted accent applied in `useEffect` after first paint). On review, that flash is not acceptable for a portfolio whose subject is high-craft frontend. This revision swaps the motion system to GSAP + ScrollTrigger and adds a page loader to hide the flash entirely.
+
+This section overrides specific parts of the spec above. Where the original and this revision conflict, the revision wins.
+
+### 17.1 Dependencies added
+
+Gated on `/audit-deps` approval at implementation time.
+
+| Package              | Version               | Purpose                                                                                     | Size (gzipped) |
+| -------------------- | --------------------- | ------------------------------------------------------------------------------------------- | -------------- |
+| `gsap`               | `^3.12.5` (or latest) | Core timeline + tween engine. Free for commercial use under the standard GreenSock licence. | ~25KB          |
+| `@gsap/react`        | `^2.x`                | `useGSAP()` hook — cleanup on unmount, scope to a ref, Strict-Mode-friendly.                | <1KB           |
+| `gsap/ScrollTrigger` | (in `gsap`)           | Scroll-driven plugin. Registered once.                                                      | ~12KB          |
+
+Total: ~37KB on the home route bundle. Acceptable cost for the craft signal and the unified motion system. Tracked in `futureWorks.md` only if `/audit-deps` flags anything we want to revisit later.
+
+**Note on licence:** `gsap` and `ScrollTrigger` are free for commercial use as of mid-2024 (Webflow's acquisition of GreenSock released the previously paid plugins to the free tier). `/audit-deps` re-confirms before install.
+
+### 17.2 File tree — additions, edits, and removals
+
+**Additions** (in addition to original §1):
+
+```
+app/
+├── _components/
+│   └── Loader/                                             ← NEW (lives in layout, not home/)
+│       ├── Loader.tsx                                      ← 'use client' — first-load + route-change timelines
+│       └── _Loader.module.scss
+├── _lib/
+│   └── motion.ts                                           ← NEW — registers ScrollTrigger once; re-exports gsap
+```
+
+**Edits**:
+
+- `app/layout.tsx` — remove `<RevealRoot />` import + mount; add `<Loader />` as the first child of `<body>` (above the skip-link).
+- `app/_components/Reveal/Reveal.tsx` — REWRITE: GSAP/ScrollTrigger-backed, public API unchanged.
+- `app/_styles/globals.scss` — remove `.reveal { … }`, `.reveal.is-inview { … }`, `.reveal[data-delay='n']`; remove `@keyframes rise`, `fade-in`, `marquee`, `spin`, `scroll-bar`. **Keep** `@keyframes nav-pulse` (still used directly by Nav and the hero `.live` dot — keeping it on CSS for a continuous decorative loop is simpler than a long-running GSAP timeline). **Keep** the global `@media (prefers-reduced-motion: reduce)` safety net at lines 222–236 as defence-in-depth.
+
+**Removals**:
+
+- `app/_components/RevealRoot/RevealRoot.tsx` — `git rm`. Fully replaced by ScrollTrigger inside the rebuilt `<Reveal>`.
+- `app/_lib/use-count-up.ts` — never created. The original spec §3.4 is voided.
+
+**Originally listed under "files NOT touched" (§16) that this revision now touches:**
+
+- `app/layout.tsx` — see edits above.
+- `app/_components/RevealRoot/` — deleted.
+- `app/_components/Reveal/` — rewritten.
+- `app/_styles/globals.scss` — see edits above.
+- `package.json` + `package-lock.json` — three new deps.
+
+### 17.3 Page loader (NEW)
+
+**File:** `app/_components/Loader/Loader.tsx` (client) + `_Loader.module.scss`
+**Mounted in:** `app/layout.tsx`, as the very first child of `<body>` (above the skip-link).
+**Lifetime:** mounted on every route. Visible on first paint; reappears in a thin form on each `usePathname` change.
+
+#### 17.3.1 Visual design (first load)
+
+Inspired by Awwwards / Cuberto-style intros, but compressed to fit the 400ms-minimum policy. Tasteful, single brand moment, then out.
+
+Centred composition against `var(--bg)`:
+
+```
+                    ┌────────────────────────────┐
+                    │                            │
+                    │        MAINUL.             │   ← display, accent `.`
+                    │   ────────────────         │   ← hairline
+                    │  PORTFOLIO V3 · 2026       │   ← mono caption
+                    │                            │
+                    │  ━━━━━━━━━░░░░░░░░░░░      │   ← accent progress bar
+                    │                            │     (1px tall, 240px wide)
+                    └────────────────────────────┘
+```
+
+Style map:
+
+| Element             | Style                                                                                                                                                                                                                    |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Container `.loader` | `position: fixed; inset: 0; z-index: 999; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px;`                                                        |
+| `.wordmark`         | `font-family: var(--font-display); font-size: clamp(6.4rem, 11vw, 14rem); font-weight: 500; text-transform: uppercase; line-height: 0.85;` — trailing `.` in `<span className={styles.dot}>` with `color: var(--accent)` |
+| `.hairline`         | `width: 240px; height: 1px; background: var(--rule-strong);`                                                                                                                                                             |
+| `.caption`          | `font-family: var(--font-mono); font-size: 1.15rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-muted);`                                                                                          |
+| `.progressTrack`    | `width: 240px; height: 1px; background: rgba(10,9,8,0.06); margin-top: 8px; overflow: hidden;`                                                                                                                           |
+| `.progressFill`     | `height: 100%; background: var(--accent); transform-origin: left center; transform: scaleX(0);` (SSR default) — GSAP drives the scaleX                                                                                   |
+| `.routeBar`         | `position: fixed; top: 0; left: 0; width: 100%; height: 1px; background: var(--accent); display: none;` — used on route changes only                                                                                     |
+
+Mobile (≤640px): wordmark uses `clamp(4.8rem, 16vw, 8rem)`, progress track width 160px, gap 16px. Otherwise identical.
+
+#### 17.3.2 First-load sequence (GSAP timeline)
+
+`useGSAP()` runs once after mount. Two timelines: an "enter" timeline (progress fill, paused exit) and an "exit" timeline played when both conditions hold:
+
+1. Enter timeline started (progress fill ran ≥400ms).
+2. Hydration complete (signalled by a `ready` flag flipped in a parallel `useEffect`; any effect on the loader fires after hydration, so this is essentially immediate on first mount).
+
+```ts
+'use client';
+import { useGSAP } from '@gsap/react';
+import { gsap } from '../../_lib/motion';
+
+const enterTl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+const exitTl = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } });
+
+enterTl.to(`.${styles.progressFill}`, { scaleX: 1, duration: 0.4, ease: 'power2.out' });
+enterTl.call(() => {
+  enterDone.current = true;
+  if (readyRef.current) exitTl.play();
+});
+
+exitTl.to(
+  [`.${styles.wordmark}`, `.${styles.caption}`, `.${styles.progressTrack}`, `.${styles.hairline}`],
+  {
+    opacity: 0,
+    duration: 0.15,
+  },
+);
+exitTl.to(`.${styles.loader}`, { yPercent: -100, duration: 0.45 }, '-=0.05');
+exitTl.set(`.${styles.loader}`, { display: 'none', onComplete: () => unlockBodyScroll() });
+```
+
+Total visible time: `max(400ms, hydration-time) + 600ms` exit ≈ 1.0–1.5s on fast networks; longer on slow.
+
+#### 17.3.3 Route-change sequence (lighter)
+
+`useEffect(() => { … }, [pathname])` with a `firstRender` guard so the first render doesn't double-fire. On subsequent pathname changes:
+
+```ts
+gsap.set(`.${styles.routeBar}`, { display: 'block', scaleX: 0, transformOrigin: 'left center' });
+gsap.to(`.${styles.routeBar}`, { scaleX: 1, duration: 0.3, ease: 'power2.out' });
+gsap.to(`.${styles.routeBar}`, {
+  transformOrigin: 'right center',
+  scaleX: 0,
+  duration: 0.3,
+  ease: 'power2.in',
+  delay: 0.3,
+});
+gsap.set(`.${styles.routeBar}`, { display: 'none', delay: 0.6 });
+```
+
+A 1px accent line slides in from the left, fills the viewport width, then exits to the right. Total ~600ms. No wordmark on route changes — that would be obnoxious on every navigation.
+
+Body scroll is NOT locked during route-change transitions (the bar is a thin strip at the top, doesn't visually block content).
+
+#### 17.3.4 Body scroll lock (first-load only)
+
+```ts
+useEffect(() => {
+  document.body.style.overflow = 'hidden';
+  return () => {
+    document.body.style.overflow = '';
+  };
+}, []);
+```
+
+Released by the exit timeline's `onComplete` (we manually set `document.body.style.overflow = ''` there rather than relying on the cleanup, because the cleanup only runs on unmount).
+
+#### 17.3.5 Reduced motion
+
+`gsap.matchMedia()` wrapping inside the same `useGSAP`:
+
+```ts
+const mm = gsap.matchMedia();
+
+mm.add('(prefers-reduced-motion: no-preference)', () => {
+  // Full timelines above.
+});
+
+mm.add('(prefers-reduced-motion: reduce)', () => {
+  gsap.set(`.${styles.progressFill}`, { scaleX: 1 });
+  gsap.delayedCall(0.2, () => {
+    gsap.set(`.${styles.loader}`, { display: 'none' });
+    unlockBodyScroll();
+  });
+  // Route-change bar: never rendered.
+});
+```
+
+#### 17.3.6 Accessibility
+
+- Container: `<aside aria-hidden="true">`. Screen readers skip it.
+- No focus trap. ~400–600ms is brief; trapping focus would be more disruptive than letting it slip past.
+- The page beneath is in the DOM and tabbable. If a keyboard user tabs during the loader window, focus moves into the page — acceptable, especially since visual focus rings will be partially obscured for that brief window. (The skip-link is the first focusable element on the page, so it lands there naturally.)
+- Body scroll lock prevents stray mouse-wheel scroll during the loader window.
+
+#### 17.3.7 Component shape
+
+```tsx
+'use client';
+
+import { useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
+import { useGSAP } from '@gsap/react';
+import { gsap } from '../../_lib/motion';
+import styles from './_Loader.module.scss';
+
+export function Loader() {
+  const containerRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
+  const firstRender = useRef(true);
+  const readyRef = useRef(false);
+  const enterDone = useRef(false);
+
+  // Body scroll lock for first-load
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+  }, []);
+
+  useGSAP(
+    () => {
+      /* enter + exit timelines (§17.3.2) */
+    },
+    { scope: containerRef },
+  );
+
+  // Flag ready as soon as the component has mounted (= hydration done)
+  useEffect(() => {
+    readyRef.current = true;
+    // If the 400ms minimum has already elapsed, fire exit now.
+    if (enterDone.current) {
+      /* trigger exit */
+    }
+  }, []);
+
+  // Route-change transitions (skips first render via firstRender ref)
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+    /* route-change timeline (§17.3.3) */
+  }, [pathname]);
+
+  return (
+    <aside ref={containerRef} aria-hidden="true" className={styles.loader} data-loader>
+      <div className={styles.routeBar} />
+      <div className={styles.wordmark}>
+        Mainul<span className={styles.dot}>.</span>
+      </div>
+      <div className={styles.hairline} />
+      <div className={styles.caption}>Portfolio v3 · 2026</div>
+      <div className={styles.progressTrack}>
+        <div className={styles.progressFill} />
+      </div>
+    </aside>
+  );
+}
+```
+
+No props. The loader is self-contained and configuration-free.
+
+### 17.4 `app/_lib/motion.ts` (NEW)
+
+Single source for GSAP plugin registration and re-exports. Every component that touches GSAP imports from this file (not directly from `gsap`).
+
+```ts
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+export { gsap, ScrollTrigger };
+```
+
+Why: `registerPlugin` is idempotent but it's still cleaner to call it exactly once. Importing from `_lib/motion.ts` instead of `gsap` directly also gives us a chokepoint for future plugin additions (`useGSAP` import path stays `@gsap/react`).
+
+### 17.5 `<Reveal>` — rebuilt with GSAP/ScrollTrigger
+
+`app/_components/Reveal/Reveal.tsx` is rewritten. Public API stays the same (`{ delay, as, className, children }`), so every existing call site continues to work.
+
+```tsx
+'use client';
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import { gsap, ScrollTrigger } from '../../_lib/motion';
+
+type Props = {
+  delay?: 1 | 2 | 3 | 4 | 5;
+  as?: 'div' | 'section' | 'article' | 'header' | 'li' | 'span';
+  className?: string;
+  children: React.ReactNode;
+};
+
+export function Reveal({ delay, as = 'div', className, children }: Props) {
+  const Tag = as;
+  const ref = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (!ref.current) return;
+      const el = ref.current;
+      const staggerDelay = delay ? delay * 0.08 : 0;
+
+      const mm = gsap.matchMedia();
+
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        gsap.set(el, { opacity: 0, y: 28 });
+        ScrollTrigger.create({
+          trigger: el,
+          start: 'top 88%',
+          once: true,
+          onEnter: () => {
+            gsap.to(el, {
+              opacity: 1,
+              y: 0,
+              duration: 0.9,
+              ease: 'expo.out',
+              delay: staggerDelay,
+            });
+          },
+        });
+      });
+
+      mm.add('(prefers-reduced-motion: reduce)', () => {
+        gsap.set(el, { opacity: 1, y: 0 });
+      });
+    },
+    { scope: ref },
+  );
+
+  return (
+    <Tag ref={ref as React.Ref<HTMLElement>} className={className}>
+      {children}
+    </Tag>
+  );
+}
+```
+
+Key differences from Phase 3:
+
+- No `.reveal` className on the rendered element. The element's initial state is set inline by `gsap.set`. The Phase 3 `.reveal { opacity: 0; transform: translateY(28px); }` CSS is deleted from `globals.scss`.
+- `data-delay` attribute removed; stagger applies via GSAP's `delay` parameter.
+- `once: true` matches Phase 3 (reveal fires once per element).
+- Reduced-motion handled at the matchMedia level — no separate global CSS gate needed for `.reveal` (the global `@media (prefers-reduced-motion: reduce)` safety net at lines 222–236 of globals.scss stays as a backstop).
+
+### 17.6 `Stat` — GSAP counter via ScrollTrigger
+
+Replaces §6.7 and §6.8 of the original spec. The per-Stat `IntersectionObserver` and the `useCountUp` hook are both gone.
+
+```tsx
+'use client';
+import { useRef, useState } from 'react';
+import { useGSAP } from '@gsap/react';
+import { gsap, ScrollTrigger } from '../../../_lib/motion';
+import type { StatItem } from '../../../_types/home';
+import styles from './_Stats.module.scss';
+
+export function Stat({ item }: { item: StatItem }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [value, setValue] = useState(0);
+
+  useGSAP(
+    () => {
+      if (!ref.current) return;
+      const counter = { val: 0 };
+      const mm = gsap.matchMedia();
+
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        ScrollTrigger.create({
+          trigger: ref.current,
+          start: 'top 80%',
+          once: true,
+          onEnter: () => {
+            gsap.to(counter, {
+              val: item.value,
+              duration: 1.4,
+              ease: 'power2.out',
+              onUpdate: () => setValue(Math.round(counter.val)),
+            });
+          },
+        });
+      });
+
+      mm.add('(prefers-reduced-motion: reduce)', () => {
+        setValue(item.value);
+      });
+    },
+    { scope: ref },
+  );
+
+  return (
+    <div ref={ref} className={styles.stat}>
+      <div className={styles.value}>
+        {value}
+        {item.suffix && <span className={styles.small}>{item.suffix}</span>}
+      </div>
+      <div className={styles.label}>{item.label}</div>
+    </div>
+  );
+}
+```
+
+If the `setValue` on every `onUpdate` shows hitches during profiling, fall back to writing `ref.current.querySelector('[data-counter]')!.textContent = …` directly — bypasses React for the rapidly-changing value. Default is the React-stateful version because it's cleaner; only optimise if needed.
+
+### 17.7 Hero variant restart — GSAP timeline, no `key=` remount
+
+Replaces the `key={variant}` mechanism in original §6.1. With `useGSAP({ dependencies: [variant] })`, the timeline is killed and rebuilt on every variant change — equivalent to a remount, without the DOM churn.
+
+```tsx
+'use client';
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import { gsap } from '../../../_lib/motion';
+import { useHomeState } from '../HomeShell/HomeStateContext';
+
+export function Hero({ content }: { content: HomeContent['hero'] }) {
+  const { variant, setVariant } = useHomeState();
+  const containerRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+        tl.from(`.${styles.d1}`, { yPercent: 110, duration: 1.05 }, 0.15);
+        tl.from(`.${styles.d2}`, { yPercent: 110, duration: 1.05 }, 0.27);
+        tl.from(`.${styles.d3}`, { yPercent: 110, duration: 1.05 }, 0.39);
+        tl.from(`.${styles.badge}`, { opacity: 0, scale: 0.92, duration: 0.6 }, 0.7);
+        tl.from(`.${styles.variantToggle}`, { opacity: 0, duration: 0.6 }, 1.0);
+      });
+
+      // Reduced-motion: no `gsap.set` needed; spans are already at their natural
+      // position. Skipping the timeline = no animation.
+    },
+    { scope: containerRef, dependencies: [variant] },
+  );
+
+  return (
+    <header ref={containerRef} className={styles.hero} data-screen-label="Home Hero">
+      {/* topbar, variant panel (no key= prop), bottom — see original §6.1 */}
+    </header>
+  );
+}
+```
+
+Absolute time positions (`0.15`, `0.27`, `0.39`, `0.7`, `1.0`) match the legacy CSS animation-delay values exactly, preserving the visual cadence.
+
+The variant panel uses plain conditional rendering — `{variant === 'A' ? <HeroVariantA /> : <HeroVariantB />}`. No `key={variant}`. `useGSAP`'s cleanup kills the old timeline; the variant-change effect creates a new one against whichever variant just rendered.
+
+### 17.8 Other components — GSAP migrations (summary)
+
+For each component originally specced with CSS keyframes or hover transitions, the rule is now: declare the animation inside a `useGSAP` block, gate with `gsap.matchMedia` for reduced-motion, declare the static markup styles in the SCSS module.
+
+| Component           | Originally                                     | Now (Rev 2)                                                                                                                                       |
+| ------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Hero` rise-in      | CSS `@keyframes rise` + `animation-delay`      | GSAP timeline (§17.7).                                                                                                                            |
+| `HeroBadge`         | CSS fade-in + hover rotate transition          | `useGSAP`: `gsap.from(badge, { opacity: 0, … })` for entrance; hover rotate stays CSS (`transition`-based, simpler) inside `reduced-motion-safe`. |
+| `Marquee`           | CSS `@keyframes marquee` (38s linear infinite) | GSAP: `gsap.to(track, { xPercent: -50, duration: 38, repeat: -1, ease: 'none' })` inside `mm.add('no-preference')`.                               |
+| `Stats` countup     | Hand-rolled `useCountUp` + per-Stat IO         | GSAP ScrollTrigger + tween on counter object (§17.6).                                                                                             |
+| `AwardCard` spin    | CSS `@keyframes spin` (30s linear infinite)    | GSAP: `gsap.to(seal, { rotate: 360, duration: 30, repeat: -1, ease: 'none' })` inside `mm.add('no-preference')`.                                  |
+| `WorkRow` hover     | CSS `transition: transform` + `::after` sweep  | Stays CSS (`transition`-based, gated by SCSS `@include reduced-motion-safe`). GSAP doesn't buy anything for binary hover states.                  |
+| `ServiceCard` hover | CSS `transition: background`                   | Stays CSS, same gating.                                                                                                                           |
+| `Hero .live` pulse  | CSS `@keyframes nav-pulse`                     | Stays CSS — kept in `globals.scss`, kept on the live dot. Continuous decorative loop; GSAP buys nothing.                                          |
+| `<Reveal>`          | `.reveal` className + IO in `RevealRoot`       | Rebuilt with GSAP ScrollTrigger (§17.5).                                                                                                          |
+| Loader              | (didn't exist)                                 | GSAP timeline (§17.3).                                                                                                                            |
+
+Rule of thumb: continuous decorative CSS loops stay CSS (cheap). One-shot timelines, scroll-driven reveals, and anything that needs coordination across multiple elements use GSAP.
+
+### 17.9 Animation system — replaces §7 of the original spec
+
+The original §7 says "wrap every animation/transition in `@include reduced-motion-safe`". Revised:
+
+1. **GSAP timelines:** wrap inside `gsap.matchMedia()`. The matchMedia block scopes the timeline to a media query and tears it down automatically when the media query no longer matches (e.g. the user toggles reduced motion in OS settings mid-session). Example pattern shown in §17.5–§17.7.
+2. **CSS transitions and hover effects (the few that stay CSS):** continue to use `@include reduced-motion-safe { transition: …; }` in component SCSS modules. This is short and accurate.
+3. **Defence in depth:** the global `@media (prefers-reduced-motion: reduce)` safety net at `globals.scss:222–236` stays. If any GSAP timeline misbehaves on a reduced-motion machine, the global rule forces `animation-duration: 0.001ms !important; transition-duration: 0.001ms !important;` and `.reveal` (if any stragglers) is forced visible. Belt and braces.
+
+### 17.10 Implementation order — replaces §15 of the original spec
+
+1. `/audit-deps` for `gsap` and `@gsap/react`. **Stop and ask** if anything surfaces. (License is currently free for commercial; audit re-confirms.)
+2. `npm install --save gsap @gsap/react`. Commit `package.json` + `package-lock.json` as `chore: add gsap + @gsap/react`.
+3. `app/_lib/motion.ts` — register ScrollTrigger, re-export `gsap` + `ScrollTrigger`.
+4. `app/_components/Loader/Loader.tsx` + `_Loader.module.scss`. Verify visually in `npm run dev` on the current placeholder pages. Confirm loader appears on `/`, fades out cleanly; route-change bar appears on nav to `/work`/`/about`/`/contact` and back.
+5. Edit `app/layout.tsx`: remove `<RevealRoot />`, add `<Loader />` as first child of `<body>`.
+6. `git rm` `app/_components/RevealRoot/RevealRoot.tsx`.
+7. Edit `app/_styles/globals.scss`: remove `.reveal { … }`, `.reveal.is-inview { … }`, `.reveal[data-delay='n']`; remove `@keyframes rise / fade-in / marquee / spin / scroll-bar`. Keep `nav-pulse`. Keep the global reduced-motion safety net.
+8. Rewrite `app/_components/Reveal/Reveal.tsx` (GSAP + ScrollTrigger; public API unchanged).
+9. Verify chrome still works: all four routes render with Nav + Footer + Loader; `<Reveal>` wrappers in the existing placeholders fire on scroll if present.
+10. Implementation of home sections per original §15 (types → data → leaves → containers → state → page), with the Rev 2 changes:
+    - `<Stat>` rewired (§17.6) — no `useCountUp` hook.
+    - `<Hero>` variant timeline (§17.7) — no `key=` remount.
+    - `<Marquee>` uses GSAP timeline (§17.8).
+    - `<AwardCard>` spin uses GSAP timeline (§17.8).
+    - Hover effects on `<WorkRow>`, `<ServiceCard>`, etc. stay CSS.
+11. End-to-end verification (§13 + §17.11).
+12. `futureWorks.md` updates: log the bundle-size baseline once `npm run build` reports it; note pre-hydration accent application (no flash even before the loader paints, via an inline `<script>` in `<head>`) as a future Phase 7 polish item.
+
+Each numbered step is its own commit. PR contains: plan commit + spec commit + Rev 2 spec commit + implementation commits + futureWorks updates.
+
+### 17.11 Verification additions — supplements §13
+
+In addition to the original §13 checklist:
+
+- **Loader on first paint.** Throttle DevTools network to "Slow 3G" + disable cache → loader visible across the full SSR-paint-to-hydrated window. Hero behind it never visibly flashes.
+- **Loader exit.** Slide-up animation completes; body scroll re-enabled; loader element either `display: none` or fully off-screen.
+- **Persisted accent.** Set an accent via TweaksPanel, hard-refresh → hero's accent dot, work-row sweep, and section-title period all render in the persisted colour from the first visible frame (the loader is masking the moment of application).
+- **Route-change loader.** `/` → `/work` → `/` triggers the thin accent-bar transition each time. No wordmark replay. Bar cleans up after each transition (no z-index drift, no orphan elements).
+- **Reduced motion (DevTools → Rendering → emulate `prefers-reduced-motion: reduce`):**
+  - First-load loader visible for ~200ms then instantly hides — no slide, no fade.
+  - Route-change bar never appears.
+  - No count-up, no rise-in, no spin, no marquee.
+  - Hover transforms suppressed (CSS gated by `reduced-motion-safe`).
+  - Reveal targets visible immediately (no opacity-0 staggers).
+- **Console.** No GSAP registration warnings, no plugin-not-registered errors on any route.
+- **Bundle size sanity.** `npm run build` output: home route bundle measurably larger than `/work` / `/about` / `/contact` placeholders (which still don't import home-specific GSAP timelines but DO pull `<Reveal>` and the loader). Log final sizes in the implementation commit message or in `futureWorks.md`.
+- **No `.reveal` className in the DOM.** After implementation, `document.querySelectorAll('.reveal').length === 0` on any route (the new `<Reveal>` doesn't write the className anymore).
+
+### 17.12 Voided original sections
+
+- **§3.4 `useCountUp`** — voided. The hook is never created.
+- **§6.1 Hero `key={variant}` mechanism** — voided. See §17.7.
+- **§6.5 Marquee CSS-only animation** — superseded. See §17.8.
+- **§6.7–§6.8 Stats with per-Stat IO + `useCountUp`** — voided. See §17.6.
+- **§7 Reduced-motion CSS-per-rule approach** — voided. See §17.9.
+- **§15 Implementation order** — replaced by §17.10.
+
+Everything else in the original spec stands as written.
