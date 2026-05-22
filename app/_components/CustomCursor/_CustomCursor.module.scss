@@ -1,0 +1,37 @@
+@use 'mixins' as *;
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+
+  @include reduced-motion-safe {
+    transition:
+      width 0.25s var(--ease-out),
+      height 0.25s var(--ease-out),
+      background 0.25s,
+      opacity 0.2s;
+  }
+}
+
+.isHover {
+  width: 56px;
+  height: 56px;
+  background: transparent;
+  border: 1px solid var(--fg);
+}
+
+// Belt-and-braces: hide on touch even if matchMedia gave us a false positive.
+@media (hover: none), (pointer: coarse) {
+  .cursor {
+    display: none !important;
+  }
+}

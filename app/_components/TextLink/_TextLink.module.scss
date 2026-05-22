@@ -1,0 +1,41 @@
+@use 'mixins' as *;
+
+.tlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  padding-bottom: 4px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--rule-strong);
+
+  @include reduced-motion-safe {
+    transition:
+      color 0.3s,
+      border-color 0.3s;
+  }
+}
+
+.tlink:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.arrow {
+  display: inline-flex;
+  align-items: center;
+
+  @include reduced-motion-safe {
+    transition: transform 0.4s var(--ease-out);
+  }
+}
+
+.tlink:hover .arrow {
+  transform: translateX(3px) translateY(-3px);
+}
+
+.tlink:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}

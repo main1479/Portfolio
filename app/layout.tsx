@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import { Teko, Josefin_Sans, JetBrains_Mono } from 'next/font/google';
 import './_styles/globals.scss';
+import { Nav } from './_components/Nav/Nav';
+import { Footer } from './_components/Footer/Footer';
+import { CustomCursor } from './_components/CustomCursor/CustomCursor';
+import { RevealRoot } from './_components/RevealRoot/RevealRoot';
 
 const teko = Teko({
   weight: ['300', '400', '500', '600', '700'],
@@ -32,7 +36,16 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${teko.variable} ${josefin.variable} ${mono.variable}`}>
-      <body>{children}</body>
+      <body>
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
+        <RevealRoot />
+        <CustomCursor />
+        <Nav />
+        <main id="main-content">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }
