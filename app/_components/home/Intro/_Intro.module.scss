@@ -46,6 +46,13 @@
   color: var(--accent);
 }
 
+@media (max-width: 900px) {
+  .body {
+    font-size: 1.7rem;
+    line-height: 1.45;
+  }
+}
+
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;
@@ -57,7 +64,7 @@
 
 @media (max-width: 640px) {
   .body {
-    font-size: 1.55rem;
+    font-size: 1.45rem;
     line-height: 1.5;
 
     p {
