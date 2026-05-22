@@ -82,6 +82,24 @@
   color: var(--fg-muted);
 }
 
+// 3-col between 901–1300px. With 8 brands the last row has 2 cells
+// + 1 empty slot in col 3 — acceptable; right-borders on cells 7/8
+// still draw the col 1↔2 and col 2↔3 verticals through row 3.
+@media (max-width: 1300px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .client:nth-child(4n) {
+    border-right: 1px solid var(--rule);
+  }
+  .client:nth-child(3n) {
+    border-right: 0;
+  }
+  .client:nth-child(n + 4) {
+    border-top: 1px solid var(--rule);
+  }
+}
+
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -89,7 +107,7 @@
   .client {
     min-height: 160px;
   }
-  .client:nth-child(4n) {
+  .client:nth-child(3n) {
     border-right: 1px solid var(--rule);
   }
   .client:nth-child(2n) {
