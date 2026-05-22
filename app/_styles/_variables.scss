@@ -39,7 +39,7 @@
 // Phone — gutter tightens, section-y pins
 @media (max-width: 640px) {
   :root {
-    --gutter: 22px;
+    --gutter: 16px;
     --section-y: 52px;
   }
 }
@@ -47,7 +47,7 @@
 // Very small phone — gutter tightens further
 @media (max-width: 380px) {
   :root {
-    --gutter: 18px;
+    --gutter: 14px;
   }
 }
 
@@ -55,6 +55,6 @@
 // viewport edge on first-gen iPhone SE (masterplan §9).
 @media (max-width: 320px) {
   :root {
-    --gutter: 16px;
+    --gutter: 12px;
   }
 }
