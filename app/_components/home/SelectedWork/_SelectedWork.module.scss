@@ -41,24 +41,11 @@
   }
 }
 
-// All text inside the row defaults to var(--fg) with a 1px white
-// text-stroke. The stroke is invisible against the cream page bg
-// (white halo on near-white = nothing visible) but creates a clear
-// outline when the accent ::after sweeps up behind the text — so the
-// dark fill stays readable on the dark accent during mid-slide. On
-// :hover the fill turns white and merges with the stroke for a clean
-// solid-white treatment.
-//
-// `paint-order: stroke fill` paints the stroke first and the fill on
-// top, which halves the visible stroke width and prevents it from
-// eating into the glyphs.
 .num,
 .title,
 .meta,
 .tags {
   color: var(--fg);
-  -webkit-text-stroke: 1px var(--accent-ink);
-  paint-order: stroke fill;
 
   @include reduced-motion-safe {
     transition: color 0.3s var(--ease-out);
