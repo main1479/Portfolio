@@ -43,9 +43,10 @@ export const frontmatter = {
 </CaseBlock>
 
 <CaseVisuals
-  layout="single-plus-secondary"
-  primary={{ caption: 'CLI example · ship a test in 3 commands', aspect: '16/10' }}
-  secondary={{ caption: 'Dashboard · in-progress', aspect: '4/3' }}
+  items={[
+    { caption: 'CLI example · ship a test in 3 commands', type: 'primary' },
+    { caption: 'Dashboard · in-progress', type: 'secondary' },
+  ]}
 >
   <CodeMock
     lines={[

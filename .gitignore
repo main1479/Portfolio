@@ -58,6 +58,9 @@ next-env.d.ts
 # Legacy static-HTML draft — kept on disk as reference only, never committed
 Mainul's Portfolio/
 
+# Source decks / briefs dropped in root for case-study drafting — not for publishing
+*.pdf
+
 # Local env files for non-Vercel use (.env.local already ignored above)
 .env.development
 .env.production

@@ -3,7 +3,7 @@ import type { HomeContent } from '../_types/home';
 export const homeContent = {
   hero: {
     topbarLeft: { name: 'Mainul Islam', role: 'Frontend Developer' },
-    topbarRight: { version: 'Portfolio v3', year: '2026', metric: '7 yrs · 6 countries' },
+    topbarRight: { version: 'Portfolio v3', year: '2026', metric: '7 yrs · 9+ countries' },
     sub: 'I build and run experiments that turn traffic into revenue — 4+ years across Optimizely, Kameleoon, and Qubit, plus modern frontend with Next.js and TypeScript.',
     statusLine: 'Available for new A/B testing & frontend projects',
     ctaLabel: 'Get in touch',
@@ -55,7 +55,7 @@ export const homeContent = {
   stats: [
     { value: 500, suffix: '+', label: 'A/B tests & experiments shipped' },
     { value: 7, label: 'Years building for the web' },
-    { value: 6, label: 'Countries worked with' },
+    { value: 9, suffix: '+', label: 'Countries worked with' },
   ],
   services: {
     sectionIndex: '02 / Disciplines',
@@ -142,8 +142,8 @@ export const homeContent = {
       {
         year: '2019 – Present',
         roleLines: ['Freelance Frontend', 'Developer'],
-        desc: 'Frontend development and experimentation work for startups and individual clients across the UK, India, Slovakia, Austria, Australia, and Canada.',
-        loc: 'Remote · 6 countries',
+        desc: 'Frontend development and experimentation work for startups and individual clients — across the UK, India, Slovakia, Austria, Australia, Canada, Romania, Italy, Mexico, and a handful more not listed here.',
+        loc: 'Remote · 9+ countries',
       },
     ],
   },
