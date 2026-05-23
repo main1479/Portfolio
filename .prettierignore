@@ -4,3 +4,9 @@ package-lock.json
 Mainul's Portfolio/
 _plans/done/
 _specs/done/
+
+# Prettier 3.x's markdown formatter mishandles bullet lists nested inside JSX
+# (e.g. <CaseBlock>) — strips the leading indent, then leaves the closing tag
+# indented, which the MDX parser reads as part of the last list item.
+# Format MDX by hand instead.
+*.mdx
