@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '../../_lib/motion';
 import styles from './_Loader.module.scss';
+import { siteConfig } from '@/app/_lib/site-config';
 
 export function Loader() {
   const containerRef = useRef<HTMLElement>(null);
@@ -102,7 +103,7 @@ export function Loader() {
       </div>
       <div ref={hairlineRef} className={styles.hairline} />
       <div ref={captionRef} className={styles.caption}>
-        Portfolio v3 · 2026
+        Portfolio v3 · {siteConfig.year}
       </div>
       <div ref={progressTrackRef} className={styles.progressTrack}>
         <div ref={progressFillRef} className={styles.progressFill} />
