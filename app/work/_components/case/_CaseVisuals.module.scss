@@ -8,11 +8,17 @@
   width: 100%;
 }
 
-.slotImage {
+.slotMedia {
+  position: relative;
   width: 100%;
-  height: auto;
   border-radius: 6px;
   border: 1px solid var(--rule-strong);
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.slotImage {
+  object-fit: contain;
 }
 
 .caption {

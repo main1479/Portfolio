@@ -1,6 +1,14 @@
+import Image from 'next/image';
 import styles from './_CaseVisuals.module.scss';
 
-type Slot = { caption: string; aspect?: string };
+type Slot = {
+  caption: string;
+  aspect?: string;
+  /** Path under /public, e.g. `/work/radius/share.png`. When set, renders next/image; otherwise a striped placeholder. */
+  src?: string;
+  /** Alt text for the image. Falls back to the caption. */
+  alt?: string;
+};
 
 type Props =
   | { layout: 'single'; primary: Slot }
@@ -12,11 +20,29 @@ type Props =
     }
   | { layout: 'triple'; items: readonly [Slot, Slot, Slot] };
 
+function SlotMedia({ slot, defaultAspect }: { slot: Slot; defaultAspect: string }) {
+  const aspect = slot.aspect ?? defaultAspect;
+  if (slot.src) {
+    return (
+      <div className={styles.slotMedia} style={{ aspectRatio: aspect }}>
+        <Image
+          src={slot.src}
+          alt={slot.alt ?? slot.caption}
+          fill
+          sizes="(max-width: 900px) 100vw, 50vw"
+          className={styles.slotImage}
+        />
+      </div>
+    );
+  }
+  return <div className={styles.slot} style={{ aspectRatio: aspect }} />;
+}
+
 export function CaseVisuals(props: Props) {
   if (props.layout === 'single') {
     return (
       <figure className={styles.single}>
-        <div className={styles.slot} style={{ aspectRatio: props.primary.aspect ?? '16/10' }} />
+        <SlotMedia slot={props.primary} defaultAspect="16/10" />
         <figcaption className={styles.caption}>{props.primary.caption}</figcaption>
       </figure>
     );
@@ -26,7 +52,7 @@ export function CaseVisuals(props: Props) {
       <div className={styles.triple}>
         {props.items.map((it, i) => (
           <figure key={i} className={styles.tripleItem}>
-            <div className={styles.slot} style={{ aspectRatio: it.aspect ?? '3/5' }} />
+            <SlotMedia slot={it} defaultAspect="3/5" />
             <figcaption className={styles.caption}>{it.caption}</figcaption>
           </figure>
         ))}
@@ -36,13 +62,11 @@ export function CaseVisuals(props: Props) {
   return (
     <div className={styles.duo}>
       <figure className={styles.duoPrimary}>
-        {props.children ?? (
-          <div className={styles.slot} style={{ aspectRatio: props.primary.aspect ?? '16/10' }} />
-        )}
+        {props.children ?? <SlotMedia slot={props.primary} defaultAspect="16/10" />}
         <figcaption className={styles.caption}>{props.primary.caption}</figcaption>
       </figure>
       <figure className={styles.duoSecondary}>
-        <div className={styles.slot} style={{ aspectRatio: props.secondary.aspect ?? '4/3' }} />
+        <SlotMedia slot={props.secondary} defaultAspect="4/3" />
         <figcaption className={styles.caption}>{props.secondary.caption}</figcaption>
       </figure>
     </div>
