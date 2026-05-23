@@ -19,6 +19,19 @@ export const metadata: Metadata = {
   title: 'About · Mainul Islam',
   description:
     'Frontend developer working remotely since 2019. Specialised in A/B testing and experimentation.',
+  alternates: { canonical: '/about' },
+  openGraph: {
+    type: 'profile',
+    url: '/about',
+    title: 'About · Mainul Islam',
+    description:
+      'Frontend developer working remotely since 2019. Specialised in A/B testing and experimentation.',
+  },
+  twitter: {
+    title: 'About · Mainul Islam',
+    description:
+      'Frontend developer working remotely since 2019. Specialised in A/B testing and experimentation.',
+  },
 };
 
 export default function AboutPage() {

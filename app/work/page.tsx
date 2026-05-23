@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { Container } from '../_components/Container/Container';
 import { PageIntro } from '../_components/PageIntro/PageIntro';
 import { Footer } from '../_components/Footer/Footer';
@@ -5,9 +6,20 @@ import { workProjects, workFilters } from '../_lib/work-projects';
 import { WorkIndexClient } from './_components/Filters/WorkIndexClient';
 import styles from './_workPage.module.scss';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Work · Mainul Islam',
   description: 'A mix of experimentation platforms, products, and client experiment work.',
+  alternates: { canonical: '/work' },
+  openGraph: {
+    type: 'website',
+    url: '/work',
+    title: 'Work · Mainul Islam',
+    description: 'A mix of experimentation platforms, products, and client experiment work.',
+  },
+  twitter: {
+    title: 'Work · Mainul Islam',
+    description: 'A mix of experimentation platforms, products, and client experiment work.',
+  },
 };
 
 export default function WorkPage() {
