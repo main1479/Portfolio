@@ -35,7 +35,7 @@ export default function WorkPage() {
               <span className="accent">in detail.</span>
             </>
           }
-          sub="A mix of experimentation platforms, products, and client experiment work — spanning startups and individuals across six countries."
+          sub="A mix of experimentation platforms, products, and client experiment work — spanning startups and individuals across nine-plus countries."
         />
       </Container>
       <section className={styles.indexSection}>

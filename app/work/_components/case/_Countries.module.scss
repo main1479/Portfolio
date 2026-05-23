@@ -3,7 +3,7 @@
 
 .countries {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1px;
   background: var(--rule-strong);
   border: 1px solid var(--rule-strong);
@@ -48,12 +48,6 @@
   text-transform: uppercase;
   font-weight: 500;
   line-height: 1;
-}
-
-@media (max-width: 900px) {
-  .countries {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 640px) {
