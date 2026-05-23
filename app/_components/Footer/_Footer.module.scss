@@ -26,7 +26,7 @@
 
 .top {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr);
   gap: 60px;
   align-items: end;
   padding-bottom: 80px;
@@ -94,7 +94,7 @@
   gap: 24px;
   padding-top: 40px;
   font-family: var(--font-mono);
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--bg) 60%, transparent);
@@ -166,7 +166,6 @@
     font-size: 0.95rem;
   }
   .bottom {
-    font-size: 0.85rem;
     padding-top: 20px;
   }
 }
