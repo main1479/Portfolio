@@ -8,6 +8,9 @@ export type CaseVisualSlot = {
   /** In a 2-item duo, designates which slot is the larger primary vs. the smaller secondary.
    *  Ignored when there's 1 or 3 items. If both items omit `type`, the first is primary. */
   type?: 'primary' | 'secondary';
+  /** Override the default aspect ratio (e.g., '16/9', '1500/844'). Use when the source image
+   *  isn't close to the layout default (16/10 primary, 4/3 secondary, 3/5 triple). */
+  aspect?: string;
 };
 
 type Props = {
@@ -25,14 +28,15 @@ const ASPECT = {
 
 function SlotMedia({
   slot,
-  aspect,
+  defaultAspect,
   override,
 }: {
   slot: CaseVisualSlot;
-  aspect: string;
+  defaultAspect: string;
   override?: React.ReactNode;
 }) {
   if (override) return <>{override}</>;
+  const aspect = slot.aspect ?? defaultAspect;
   if (slot.src) {
     return (
       <div className={styles.slotMedia} style={{ aspectRatio: aspect }}>
@@ -56,7 +60,7 @@ export function CaseVisuals({ items, children }: Props) {
     const [slot] = items;
     return (
       <figure className={styles.single}>
-        <SlotMedia slot={slot} aspect={ASPECT.single} override={children} />
+        <SlotMedia slot={slot} defaultAspect={ASPECT.single} override={children} />
         <figcaption className={styles.caption}>{slot.caption}</figcaption>
       </figure>
     );
@@ -71,11 +75,11 @@ export function CaseVisuals({ items, children }: Props) {
     return (
       <div className={styles.duo}>
         <figure className={styles.duoPrimary}>
-          <SlotMedia slot={primary} aspect={ASPECT.primary} override={children} />
+          <SlotMedia slot={primary} defaultAspect={ASPECT.primary} override={children} />
           <figcaption className={styles.caption}>{primary.caption}</figcaption>
         </figure>
         <figure className={styles.duoSecondary}>
-          <SlotMedia slot={secondary} aspect={ASPECT.secondary} />
+          <SlotMedia slot={secondary} defaultAspect={ASPECT.secondary} />
           <figcaption className={styles.caption}>{secondary.caption}</figcaption>
         </figure>
       </div>
@@ -86,7 +90,7 @@ export function CaseVisuals({ items, children }: Props) {
     <div className={styles.triple}>
       {items.slice(0, 3).map((slot, i) => (
         <figure key={i} className={styles.tripleItem}>
-          <SlotMedia slot={slot} aspect={ASPECT.triple} />
+          <SlotMedia slot={slot} defaultAspect={ASPECT.triple} />
           <figcaption className={styles.caption}>{slot.caption}</figcaption>
         </figure>
       ))}
