@@ -1,10 +1,7 @@
 import type { ContactContent } from '../_types/contact';
 import { siteConfig } from './site-config';
 
-// TODO Phase 7: replace this with a local '/cv.pdf' once the self-hosted PDF lands.
-const cvHref =
-  siteConfig.metaLinks.find((link) => link.label.startsWith('Resume'))?.href ??
-  'https://drive.google.com/file/d/1zp7JQLgPNyEQan9bzKnLN2i-t1Du_tgI/view';
+const cvHref = siteConfig.cvHref;
 
 export const contactContent = {
   pageIntro: {
