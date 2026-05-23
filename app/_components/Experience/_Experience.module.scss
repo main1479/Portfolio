@@ -58,6 +58,19 @@
   padding-top: 8px;
 }
 
+@media (max-width: 1300px) and (min-width: 901px) {
+  .row {
+    grid-template-columns: 130px minmax(0, 1fr) minmax(0, 1fr) 120px;
+    gap: clamp(16px, 2vw, 32px);
+  }
+  .role {
+    font-size: clamp(2.4rem, 3vw, 3.6rem);
+  }
+  .desc {
+    font-size: 1.4rem;
+  }
+}
+
 @media (max-width: 900px) {
   .row {
     grid-template-columns: 1fr;
