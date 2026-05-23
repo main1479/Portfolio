@@ -5,7 +5,8 @@ const NEXT_CASE: Record<string, NextCasePointer> = {
   avsb: { label: 'Next case · 02', title: 'Kemon Doctor', slug: 'kemon-doctor' },
   'kemon-doctor': { label: 'Next case · 03', title: 'Client Work', slug: 'client' },
   client: { label: 'Next case · 04', title: 'Cursimax', slug: 'cursimax' },
-  cursimax: { label: 'Back to · 01', title: 'AvsB', slug: 'avsb' },
+  cursimax: { label: 'Next case · 05', title: 'Flatwhite', slug: 'flatwhite' },
+  flatwhite: { label: 'Back to · 01', title: 'AvsB', slug: 'avsb' },
 };
 
 export function getNextCase(currentSlug: string): NextCasePointer {
