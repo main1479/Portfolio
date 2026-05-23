@@ -4,14 +4,14 @@ export const frontmatter = {
   title: 'Radius',
   pageTitle: 'Radius — Insights Platform · Mainul Islam',
   pageDescription:
-    'A central insights platform that makes experiments, UXR observations, and research findable across an organisation — built at Conversion.com.',
+    "Frontend for Conversion.com's central insights platform — A/B tests, UXR, and research, searchable across an organisation.",
   heroLines: [
-    { text: 'Radius.', style: 'plain', trailingAccentDot: false },
+    { text: 'Radius.', style: 'plain' },
     { text: 'Insights,', style: 'outline' },
     { text: 'findable.', style: 'accent' },
   ],
   summary:
-    'A searchable hub for A/B test results, UXR observations, and research insights — built at Conversion.com in Next.js, TypeScript, SCSS, and GSAP.',
+    "Frontend for Conversion.com's central insights platform — a searchable hub for A/B tests, UXR observations, and research. Built in Next.js, TypeScript, SCSS, and GSAP.",
   meta: [
     { label: 'Role', value: 'Frontend\ndev' },
     { label: 'Type', value: 'Agency\nproduct' },
@@ -23,27 +23,18 @@ export const frontmatter = {
 };
 
 <CaseBlock num="01" label="Overview" heading="What it is">
-  Radius centralises everything an experimentation team learns about a website and its customers — A/B test results, UXR observations, surveys, competitor analyses, research notes — into a **single, searchable hub** that everyone in the organisation can use.
+  **Conversion.com's insights platform.** A single, searchable hub for everything an experimentation team learns about a website and its customers — A/B tests, UXR observations, surveys, research notes.
 
-  Built at **Conversion.com** for their own consulting teams, it's now also opened up to <span className="accent">client stakeholders</span> so they can access their own experiment history and insights directly.
+  Built first for Conversion's own consulting teams; now also open to <span className="accent">client stakeholders</span> so they can browse their own experiment history directly.
 </CaseBlock>
 
 <CaseBlock num="02" label="My role" heading="What I did">
-  **Frontend developer on a close team collaboration.** The product strategy, taxonomies, and synthesis methodology came from the wider Conversion team — my work was the frontend that brings it to life.
+  **Frontend developer in a close team collaboration.** Product, design, and research methodology came from the wider Conversion team. The frontend is mine.
 
-  - Next.js + TypeScript application surface — pages, routing, data layer
-  - SCSS-based styling system shared across the app
-  - **GSAP-driven motion** for transitions, list reveals, and modal choreography
-  - **Streaming API integration** so large result sets render progressively rather than blocking on a full payload
-  - Cross-device QA across the typical surfaces this kind of tool gets used on — laptop, second monitor, the occasional meeting screen
-</CaseBlock>
-
-<CaseBlock num="03" label="The problem" heading="What it solves">
-  Every insight has an **impact radius** — and without easy access to it, that radius stops at whichever stakeholder meeting or shareable report introduced it.
-
-  Cornell research puts a number on the cost: people spend roughly **5 hours a week** simply searching for information trapped inside tools and documents; data and research professionals lose around **20% of their time duplicating research** that already exists somewhere in the organisation.
-
-  Conversion saw the same pattern internally — findings from one consultant rarely reached the wider org (other consultants, designers, management, sales) without manual hand-holding.
+  - Next.js + TypeScript application surface
+  - SCSS styling system, shared across the app
+  - **GSAP motion** for transitions, reveals, and modal choreography
+  - **Streaming API integration** so large result sets render progressively, not all-or-nothing
 </CaseBlock>
 
 <CaseVisuals
@@ -55,26 +46,7 @@ export const frontmatter = {
   ]}
 />
 
-<CaseBlock num="04" label="The approach" heading="Three steps">
-  The team's model for expanding the radius:
-
-  - **Organise** — capture experiment results and UXR observations against standardised taxonomies (lever, device, page type, psychological principle, components, executions, methodology) so a future search actually returns what it should.
-  - **Synthesise** — turn raw observations from surveys, user testing, heuristic reviews, and heatmaps into actionable insights, not just data dumps.
-  - **Democratise** — Radius itself: a searchable, shareable, single-source-of-truth UI anyone in the organisation can use without onboarding.
-</CaseBlock>
-
-<CaseBlock num="05" label="What I built" heading="The frontend">
-  The parts of the system I owned, end-to-end on the client:
-
-  - **Faceted search index** — filters across type (experiments / insights / observations), outcome (winner / loser / inconclusive), and master lever (trust / cost / usability / comprehension / motivation), plus free-text. The catalogue's superpower.
-  - **One-click detail surface** that pulls in the full context of a test or observation — visual, narrative, and numbers — so consumers don't have to chase down the original report.
-  - **Save-for-later** so individual users can build a working set of references they care about.
-  - **Share-to-stakeholder** via Slack, Teams, Gmail, and Outlook — the actual mechanism that grows the radius.
-  - **Streaming API responses** that render results progressively. A large catalogue shouldn't have to wait on a full payload before the first row appears.
-  - **GSAP motion** for reveals and modal choreography — the UI feels considered, not janky.
-</CaseBlock>
-
-<CaseBlock num="06" label="Stack" heading="Tools used">
+<CaseBlock num="03" label="Stack" heading="Tools used">
   - Next.js
   - TypeScript
   - SCSS (Dart Sass)
@@ -82,8 +54,6 @@ export const frontmatter = {
   - Streaming APIs
 </CaseBlock>
 
-<CaseBlock num="07" label="Outcome" heading="Live and in use">
-  Radius is live and in active use at **Conversion.com** — by internal consulting teams day-to-day, and by **client stakeholders** accessing their own experiment history and insights.
-
-  Currently in **Beta**, with continued iteration on the synthesis surfaces and the share/notify flows.
+<CaseBlock num="04" label="Outcome" heading="Live and in use">
+  Live at **Conversion.com** — used day-to-day by the internal consulting teams, and by client stakeholders accessing their own experiments and insights.
 </CaseBlock>
