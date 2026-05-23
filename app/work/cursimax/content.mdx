@@ -11,7 +11,7 @@ export const frontmatter = {
     { text: 'in Spanish.', style: 'accent' },
   ],
   summary:
-    'Full frontend build for a Spanish-language e-learning marketplace serving Latin America — 100+ courses, 500+ instructors, hand-built end-to-end in HTML, SCSS, and vanilla JavaScript from a Figma design.',
+    'Full frontend for a Spanish-language e-learning marketplace serving Latin America — built as a reusable templating system from a Figma design and a mock API, in HTML, SCSS, and vanilla JavaScript.',
   meta: [
     { label: 'Role', value: 'Full\nfrontend' },
     { label: 'Type', value: 'Client\nwork' },
@@ -23,48 +23,52 @@ export const frontmatter = {
 };
 
 <CaseBlock num="01" label="Overview" heading="What it is">
-  Cursimax is a **Spanish-language online course marketplace** serving Latin America — 100+ courses, 500+ instructors, and a flow that lets visitors browse, buy, and access courses without a heavy account barrier in the way.
+  Cursimax is a **Spanish-language online course marketplace** serving Latin America — 100+ courses, 500+ instructors, and a buy-then-access flow that keeps the account barrier light.
 
-  I built the <span className="accent">entire frontend</span> from a Figma design — landing, course discovery, testimonials, newsletter, footer, and the responsive system tying it together.
+  The brief wasn't "ship a homepage." It was a <span className="accent">scalable, reusable templating system</span> — frontend the client could keep building on, not throw away after launch.
 </CaseBlock>
 
 <CaseBlock num="02" label="My role" heading="What I did">
-  **Sole frontend developer.** The client handed over a Figma file and a backend; everything the user sees on cursimax.com is mine.
+  **Sole frontend developer.** The client handed over a Figma file and a mock API. Everything else — markup, styling, structure, and the reusable system underneath it — is mine.
 
-  - Translating the Figma comps into production HTML, SCSS, and vanilla JavaScript
+  - Designing the component model so anything appearing more than once was reusable from day one
+  - Translating Figma comps into production HTML, SCSS, and vanilla JavaScript
   - Building a mobile-first responsive layout that holds together from 320px up
-  - Wiring up the interactive bits — navigation, carousels, course cards, the newsletter form
-  - Cross-browser QA and accessibility passes before handover
+  - Wiring up interactive surfaces against the mock API — navigation, carousels, course cards, newsletter form
+  - Cross-browser QA before handover
 </CaseBlock>
 
-<CaseBlock num="03" label="The brief" heading="What it needed">
-  An e-learning marketplace lives or dies on **trust and clarity**. Visitors arrive cold, comparing teachers, prices, and credentials. The frontend had to make the value proposition land in the first scroll.
+<CaseBlock num="03" label="The brief" heading="What they wanted">
+  The client didn't want a static page handover. They wanted a **templating system they could keep building on** — new course types, new sections, new layouts — without paying for a frontend rebuild every time scope shifted.
 
-  The brief leaned hard on three pillars — quality of instruction, accessible pricing, and round-the-clock support — and the build had to surface those without burying the catalogue.
+  So the work wasn't really "build the homepage." It was <span className="accent">build the system this homepage is the first instance of.</span>
 </CaseBlock>
 
 <CaseBlock num="04" label="What I built" heading="The approach">
-  No framework. No build complexity that didn't earn its place. Hand-written HTML and SCSS that the client could maintain long after I shipped it.
+  The rule I gave myself: **anything that appears twice gets extracted.** Card, section header, breadcrumb, testimonial, course tile — if the second copy was about to be a copy-paste, it became a partial first.
 
+  - **SCSS 7-1 architecture** — `abstracts`, `base`, `components`, `layout`, `pages`, `themes`, `vendors` — structured without leaning into the dogma where it didn't earn it
+  - **Reusable components** — anything appearing 2+ times in the Figma got promoted to a partial, so future surfaces compose instead of re-building
   - **Mobile-first SCSS** with a small token system for colour, spacing, and type
-  - **Responsive layout** built on CSS grid and flexbox — no media-query soup
-  - **Vanilla JS** for the interactive surfaces — kept light and dependency-free
-  - **Figma-to-code fidelity** — pixel-checked across the breakpoints that matter
-  - **Semantic HTML** so the catalogue is crawlable and accessible by default
+  - **Vanilla JS** for interactive surfaces — light, dependency-free, easy for the client team to extend
+  - **Semantic HTML** so the catalogue stays crawlable and accessible by default
 </CaseBlock>
 
 <CaseBlock num="05" label="Stack" heading="Tools used">
-  Picked for longevity and zero ops cost. A static frontend the client can host anywhere and edit without onboarding a build pipeline.
+  Picked for longevity and zero ops cost. A static frontend the client can host anywhere and extend without onboarding a build pipeline.
 
   - HTML
-  - SCSS (Dart Sass)
+  - SCSS (Dart Sass · 7-1 architecture)
   - Vanilla JavaScript
   - Figma (handoff)
+  - Mock API (handoff)
   - Git
 </CaseBlock>
 
-<CaseBlock num="06" label="Outcome" heading="Live and shipping">
-  The site shipped end-of-2021 and is live at <a href="https://www.cursimax.com" target="_blank" rel="noreferrer noopener">cursimax.com</a>, currently serving 100+ courses across academic, creative, and professional tracks.
+<CaseBlock num="06" label="Outcome" heading="Live, and a second engagement">
+  The site is live at <a href="https://www.cursimax.com" target="_blank" rel="noreferrer noopener">cursimax.com</a>, serving 100+ courses across academic, creative, and professional tracks.
 
-  Source on <a href="https://github.com/main1479/cursimax" target="_blank" rel="noreferrer noopener">GitHub</a> — the full frontend, public.
+  The client liked the result enough to bring me back for **work on their internal systems** after the public site went live — the templating choices held up well enough that adding new surfaces didn't require a rewrite.
+
+  Source on <a href="https://github.com/main1479/cursimax" target="_blank" rel="noreferrer noopener">GitHub</a>.
 </CaseBlock>
