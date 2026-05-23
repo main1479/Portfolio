@@ -9,6 +9,9 @@ const withMDX = createMDX({
 const stylesDir = path.join(process.cwd(), 'app/_styles');
 
 const nextConfig: NextConfig = {
+  images: {
+    domains: ['cdn.mainul.info'],
+  },
   pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
   sassOptions: {
     loadPaths: [stylesDir],
