@@ -1,27 +1,38 @@
 import Image from 'next/image';
 import styles from './_CaseVisuals.module.scss';
 
-type Slot = {
-  caption: string;
-  aspect?: string;
-  /** Path under /public, e.g. `/work/radius/share.png`. When set, renders next/image; otherwise a striped placeholder. */
+export type CaseVisualSlot = {
   src?: string;
-  /** Alt text for the image. Falls back to the caption. */
   alt?: string;
+  caption: string;
+  /** In a 2-item duo, designates which slot is the larger primary vs. the smaller secondary.
+   *  Ignored when there's 1 or 3 items. If both items omit `type`, the first is primary. */
+  type?: 'primary' | 'secondary';
 };
 
-type Props =
-  | { layout: 'single'; primary: Slot }
-  | {
-      layout: 'single-plus-secondary';
-      primary: Slot;
-      secondary: Slot;
-      children?: React.ReactNode;
-    }
-  | { layout: 'triple'; items: readonly [Slot, Slot, Slot] };
+type Props = {
+  items: readonly CaseVisualSlot[];
+  /** Replaces the primary slot's media — used by AvsB to slot a CodeMock in place of an image. */
+  children?: React.ReactNode;
+};
 
-function SlotMedia({ slot, defaultAspect }: { slot: Slot; defaultAspect: string }) {
-  const aspect = slot.aspect ?? defaultAspect;
+const ASPECT = {
+  single: '16/10',
+  primary: '16/10',
+  secondary: '4/3',
+  triple: '3/5',
+} as const;
+
+function SlotMedia({
+  slot,
+  aspect,
+  override,
+}: {
+  slot: CaseVisualSlot;
+  aspect: string;
+  override?: React.ReactNode;
+}) {
+  if (override) return <>{override}</>;
   if (slot.src) {
     return (
       <div className={styles.slotMedia} style={{ aspectRatio: aspect }}>
@@ -38,37 +49,47 @@ function SlotMedia({ slot, defaultAspect }: { slot: Slot; defaultAspect: string 
   return <div className={styles.slot} style={{ aspectRatio: aspect }} />;
 }
 
-export function CaseVisuals(props: Props) {
-  if (props.layout === 'single') {
+export function CaseVisuals({ items, children }: Props) {
+  if (items.length === 0) return null;
+
+  if (items.length === 1) {
+    const [slot] = items;
     return (
       <figure className={styles.single}>
-        <SlotMedia slot={props.primary} defaultAspect="16/10" />
-        <figcaption className={styles.caption}>{props.primary.caption}</figcaption>
+        <SlotMedia slot={slot} aspect={ASPECT.single} override={children} />
+        <figcaption className={styles.caption}>{slot.caption}</figcaption>
       </figure>
     );
   }
-  if (props.layout === 'triple') {
+
+  if (items.length === 2) {
+    const explicitPrimary = items.findIndex((s) => s.type === 'primary');
+    const pIdx = explicitPrimary === -1 ? 0 : explicitPrimary;
+    const primary = items[pIdx];
+    const secondary = items[pIdx === 0 ? 1 : 0];
+
     return (
-      <div className={styles.triple}>
-        {props.items.map((it, i) => (
-          <figure key={i} className={styles.tripleItem}>
-            <SlotMedia slot={it} defaultAspect="3/5" />
-            <figcaption className={styles.caption}>{it.caption}</figcaption>
-          </figure>
-        ))}
+      <div className={styles.duo}>
+        <figure className={styles.duoPrimary}>
+          <SlotMedia slot={primary} aspect={ASPECT.primary} override={children} />
+          <figcaption className={styles.caption}>{primary.caption}</figcaption>
+        </figure>
+        <figure className={styles.duoSecondary}>
+          <SlotMedia slot={secondary} aspect={ASPECT.secondary} />
+          <figcaption className={styles.caption}>{secondary.caption}</figcaption>
+        </figure>
       </div>
     );
   }
+
   return (
-    <div className={styles.duo}>
-      <figure className={styles.duoPrimary}>
-        {props.children ?? <SlotMedia slot={props.primary} defaultAspect="16/10" />}
-        <figcaption className={styles.caption}>{props.primary.caption}</figcaption>
-      </figure>
-      <figure className={styles.duoSecondary}>
-        <SlotMedia slot={props.secondary} defaultAspect="4/3" />
-        <figcaption className={styles.caption}>{props.secondary.caption}</figcaption>
-      </figure>
+    <div className={styles.triple}>
+      {items.slice(0, 3).map((slot, i) => (
+        <figure key={i} className={styles.tripleItem}>
+          <SlotMedia slot={slot} aspect={ASPECT.triple} />
+          <figcaption className={styles.caption}>{slot.caption}</figcaption>
+        </figure>
+      ))}
     </div>
   );
 }

@@ -39,19 +39,20 @@ export const frontmatter = {
 </CaseBlock>
 
 <CaseVisuals
-  layout="single-plus-secondary"
-  primary={{
-    src: '/work/radius/share.png',
-    alt: 'Radius — share-to-stakeholder surface from the product deck',
-    caption: 'Share to stakeholders · the radius-expanding surface',
-    aspect: '1500/844',
-  }}
-  secondary={{
-    src: '/work/radius/brand.png',
-    alt: 'Radius branding slide — available to everyone in your organisation',
-    caption: 'Radius · beta release',
-    aspect: '1500/844',
-  }}
+  items={[
+    {
+      src: '/work/radius/share.png',
+      alt: 'Radius — share-to-stakeholder surface from the product deck',
+      caption: 'Share to stakeholders · the radius-expanding surface',
+      type: 'primary',
+    },
+    {
+      src: '/work/radius/brand.png',
+      alt: 'Radius branding slide — available to everyone in your organisation',
+      caption: 'Radius · beta release',
+      type: 'secondary',
+    },
+  ]}
 />
 
 <CaseBlock num="03" label="Stack" heading="Tools used">
