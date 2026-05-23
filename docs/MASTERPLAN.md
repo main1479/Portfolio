@@ -100,6 +100,8 @@ Persisted in `localStorage` under key `mn-accent-v2`. **Important:** the v2 suff
 
 **Dark mode:** out of scope for v1. If added later, use `data-theme="dark"` on `<html>` with `:root[data-theme='dark'] { … }` overrides in `globals.scss`. No system-preference auto-switch (the cream is part of the brand).
 
+> **Amendment 2026-05-23 (Phase 7):** the runtime accent switcher described above is **dropped from scope**. The `--accent` CSS variable stays fixed at `#1f3a5f` (ink navy) on every page. The 5-preset list and the `mn-accent-v2` localStorage convention are no longer planned — the accent is part of the design language, not a configurable user setting. The Variant A/B hero toggle (`§ 2 home-only`) is unaffected and stays. See `_plans/polish-and-launch-plan.md` for rationale.
+
 ### 3.2 Typography
 
 Three families, all loaded via `next/font/google` in `app/layout.tsx`. Already wired in scaffold.
@@ -946,3 +948,4 @@ To prevent scope creep, the following are **explicitly out** of v1:
 Append entries here when the masterplan is amended.
 
 - **2026-05-21** — Initial draft. Captured from the static template at `Mainul's Portfolio/` and the scaffolded Next.js project state.
+- **2026-05-23** — Phase 7 amendments: §3.1 — accent switcher dropped from scope (the Tweaks-panel accent control is no longer planned). §10 Phase 7 — CV self-hosted at `/Resume_Mainul.pdf` (not `/cv.pdf`); production domain `mainul.info`; per-case OG images added to scope.

@@ -1,0 +1,36 @@
+@use 'mixins' as *;
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 40px);
+  margin-top: clamp(40px, 5vw, 64px);
+  padding-bottom: clamp(80px, 10vw, 140px);
+  flex-wrap: wrap;
+}
+
+.homeLink {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+  border-bottom: 1px solid var(--fg-soft);
+  padding-bottom: 4px;
+
+  @include reduced-motion-safe {
+    transition:
+      color 0.3s var(--ease-out),
+      border-color 0.3s var(--ease-out);
+  }
+}
+
+.homeLink:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.homeLink:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { Container } from './_components/Container/Container';
 import { Section } from './_components/Section/Section';
 import { Reveal } from './_components/Reveal/Reveal';
@@ -17,6 +18,11 @@ import { EndCTA } from './_components/home/EndCTA/EndCTA';
 import { Footer } from './_components/Footer/Footer';
 import { homeContent } from './_lib/home-content';
 import styles from './_components/home/_homePage.module.scss';
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+  openGraph: { url: '/' },
+};
 
 export default function Home() {
   return (

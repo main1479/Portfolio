@@ -17,6 +17,19 @@ export const metadata: Metadata = {
   title: 'Contact · Mainul Islam',
   description:
     'Available for new A/B testing and frontend projects. Send a message or email directly.',
+  alternates: { canonical: '/contact' },
+  openGraph: {
+    type: 'website',
+    url: '/contact',
+    title: 'Contact · Mainul Islam',
+    description:
+      'Available for new A/B testing and frontend projects. Send a message or email directly.',
+  },
+  twitter: {
+    title: 'Contact · Mainul Islam',
+    description:
+      'Available for new A/B testing and frontend projects. Send a message or email directly.',
+  },
 };
 
 export default function ContactPage() {

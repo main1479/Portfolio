@@ -4,6 +4,7 @@ import './_styles/globals.scss';
 import { Nav } from './_components/Nav/Nav';
 import { CustomCursor } from './_components/CustomCursor/CustomCursor';
 import { Loader } from './_components/Loader/Loader';
+import { siteConfig } from './_lib/site-config';
 
 const teko = Teko({
   weight: ['300', '400', '500', '600', '700'],
@@ -27,9 +28,50 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Mainul Islam · Frontend Developer · A/B Testing & Experimentation',
+  metadataBase: new URL(siteConfig.siteUrl),
+  title: {
+    default: `${siteConfig.ownerName} · ${siteConfig.ownerRole}`,
+    template: `%s · ${siteConfig.ownerName}`,
+  },
   description:
     'Frontend developer specialised in A/B testing and experimentation. 4+ years across Optimizely, Kameleoon, and Qubit, plus modern frontend with Next.js and TypeScript.',
+  applicationName: 'Mainul Islam — Portfolio',
+  authors: [{ name: siteConfig.ownerName, url: siteConfig.siteUrl }],
+  creator: siteConfig.ownerName,
+  publisher: siteConfig.ownerName,
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'Mainul Islam',
+    url: siteConfig.siteUrl,
+    title: `${siteConfig.ownerName} · ${siteConfig.ownerRole}`,
+    description:
+      'Frontend developer specialised in A/B testing and experimentation. 4+ years across Optimizely, Kameleoon, and Qubit, plus modern frontend with Next.js and TypeScript.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${siteConfig.ownerName} · ${siteConfig.ownerRole}`,
+    description:
+      'Frontend developer specialised in A/B testing and experimentation. Builds CLI-driven experimentation platforms and ships conversion experiments for ecommerce + SaaS clients.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
