@@ -61,10 +61,10 @@ export default function ContactPage() {
         <Container>
           <div className={styles.grid}>
             <Reveal>
-              <ContactAside content={contactContent.aside} />
+              <ContactForm content={contactContent.form} />
             </Reveal>
             <Reveal delay={1}>
-              <ContactForm content={contactContent.form} />
+              <ContactAside content={contactContent.aside} />
             </Reveal>
           </div>
         </Container>
