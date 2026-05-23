@@ -1,0 +1,56 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.mock {
+  background: #0f0e0d;
+  color: #d7d2cb;
+  border-radius: 6px;
+  padding: clamp(24px, 3vw, 40px);
+  font-family: var(--font-mono);
+  font-size: clamp(1.2rem, 1.2vw, 1.5rem);
+  line-height: 1.7;
+  overflow: auto;
+  margin: 0;
+}
+
+.mock code {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.line {
+  display: block;
+  white-space: pre;
+}
+
+.comment {
+  color: #7a756e;
+}
+
+.prompt {
+  color: var(--accent);
+}
+
+.keyword {
+  color: #9bb7d4;
+}
+
+.value {
+  color: #d4caa5;
+}
+
+.string {
+  color: #a4c490;
+}
+
+.accent {
+  color: #d4caa5;
+}
+
+.response {
+  color: #d7d2cb;
+}
+
+.text {
+  color: inherit;
+}

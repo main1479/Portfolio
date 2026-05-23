@@ -1,0 +1,68 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.meta {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 56px);
+  padding-block: clamp(48px, 6vw, 80px);
+  border-bottom: 1px solid var(--rule-strong);
+  margin: 0;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  margin-bottom: 12px;
+}
+
+.value {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 2.2vw, 2.6rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 0;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: 1px;
+
+  @include reduced-motion-safe {
+    animation: nav-pulse 1.6s ease-in-out infinite;
+  }
+}
+
+@media (max-width: 900px) {
+  .meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .value {
+    font-size: clamp(1.6rem, 4vw, 2rem);
+  }
+}
+
+@media (max-width: 380px) {
+  .meta {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+  }
+}

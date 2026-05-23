@@ -1,0 +1,14 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.indexSection {
+  padding-block: clamp(40px, 6vw, 96px) var(--section-y);
+}
+
+.confidentiality {
+  margin-top: clamp(60px, 8vw, 100px);
+  max-width: 60ch;
+  font-size: 1.5rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
+}

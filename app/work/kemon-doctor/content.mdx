@@ -1,0 +1,78 @@
+export const frontmatter = {
+  slug: 'kemon-doctor',
+  num: '02',
+  title: 'Kemon Doctor',
+  pageTitle: 'Kemon Doctor — Doctor Review Platform · Mainul Islam',
+  pageDescription:
+    'A non-profit platform helping patients in Bangladesh find trustworthy doctors.',
+  heroLines: [
+    { text: 'Kemon', style: 'plain' },
+    { text: 'Doctor.', style: 'accent' },
+    { text: 'For real trust.', style: 'outline' },
+  ],
+  summary:
+    '“Kemon Doctor” means How is the doctor? — a non-profit platform helping patients in Bangladesh find reliable doctors and surface issues like over-prescribing.',
+  meta: [
+    { label: 'Role', value: 'Solo founder\n& developer' },
+    { label: 'Type', value: 'Non-profit\nproduct' },
+    { label: 'Year', value: '2025 –\nPresent' },
+    { label: 'Status', value: 'In progress', accentDot: true },
+  ],
+  next: { label: 'Next case · 03', title: 'Client Work', slug: 'client' },
+  footerHeading: 'Working on something similar?',
+};
+
+<CaseBlock num="01" label="Overview" heading="What it is">
+  Kemon Doctor (**“How is the doctor?”** in Bangla) is a non-profit platform helping patients in Bangladesh find reliable doctors — and quietly surface issues like over-prescribing and rushed consultations.
+
+  It’s not a clinic-listing directory. It’s a <span className="accent">trust layer</span> on top of what already exists, built for the country it serves.
+</CaseBlock>
+
+<CaseBlock num="02" label="My role" heading="What I did">
+  **Solo founder and developer.** Everything from the conceptual model to the production frontend is mine.
+
+  - Architecture and data model
+  - Frontend in Next.js 15 + TypeScript
+  - Database design and migration system (Drizzle ORM)
+  - Bilingual UX system (Bangla & English) treated with equal care
+</CaseBlock>
+
+<CaseBlock num="03" label="The problem" heading="What it solves">
+  Patients in Bangladesh have **no trusted, structured way** to judge a doctor before a visit. Word of mouth is the default, and over-prescribing is widespread.
+
+  The platform gives patients a place to share what actually happened in a consultation — and to find doctors whose patterns hold up under it.
+</CaseBlock>
+
+<CaseVisuals
+  layout="triple"
+  items={[
+    { caption: 'Search · mobile', aspect: '3/5' },
+    { caption: 'Doctor profile', aspect: '3/5' },
+    { caption: 'Review flow', aspect: '3/5' },
+  ]}
+/>
+
+<CaseBlock num="04" label="What I built" heading="The approach">
+  A mobile-first platform **built for real conditions in Bangladesh** — older phones, patchy 3G, mixed-language users. Performance and clarity over polish.
+
+  - **Mobile-first UI** sized for one-handed use on the slowest devices we expect.
+  - **Bangla & English** with full type care — not afterthought translation.
+  - **Server-rendered** with Next.js for fast first paint over slow networks.
+  - **Structured reviews** — small set of strong signals rather than open-text noise.
+  - **Drizzle ORM** for type-safe migrations on the Postgres schema.
+</CaseBlock>
+
+<CaseBlock num="05" label="Stack" heading="Tools used">
+  Picked for fast iteration alone and a free-tier-friendly stack that keeps a non-profit running cheaply.
+
+  - Next.js 15
+  - TypeScript
+  - PostgreSQL
+  - Drizzle ORM
+  - Tailwind CSS
+  - Vercel
+</CaseBlock>
+
+<CaseBlock num="06" label="Outcome" heading="Status">
+  The platform is currently in build. It’s intentionally being shipped slowly — trust-driven products live or die on their first hundred reviews, so we’d rather start small and curated than open the gates early.
+</CaseBlock>
