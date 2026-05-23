@@ -1022,3 +1022,12 @@ Record the scores in the spec retrospective. If a score falls below the target, 
 - **Lighthouse fluctuation on perf.** Lighthouse perf scores fluctuate ±3 on identical runs. If a score lands at 88 ≠ 90 on the first run, re-run before declaring a regression. The verification target says "≥ 90" not "= 90" for exactly this reason.
 - **Email rendering on Outlook web.** Outlook web has notoriously inconsistent HTML email handling. If a small layout artefact appears (eg slightly broken table spacing), it's acceptable per `futureWorks.md` follow-up; if the email is unreadable, fix before merging.
 - **No CI workflow.** Phase 7 keeps the local-only policy (`CLAUDE.md`). Lighthouse, audit, and visual verification run by hand once; CI would be a separate chore phase.
+
+## Retrospective
+
+Two small divergences from the spec surfaced at build time. Both were flagged as plausible in §14 already; documenting the actual resolutions.
+
+1. **`twitter-image.tsx` `runtime` re-export.** §14 noted "if TypeScript's strict mode complains, fall back to authoring each `twitter-image.tsx` independently." TypeScript was happy, but the **Next build** rejected re-exporting `runtime` from a sibling module — Next has to statically parse route-segment config and a re-exported `const` isn't recognisable. Fix: split each `twitter-image.tsx` into a value re-export of `{ default, alt, size, contentType }` plus a local `export const runtime = 'edge'`. Two lines per file instead of one, still no real duplication.
+2. **`_not-found.module.scss` `@include reduced-motion-safe`.** §6.2 omitted the `@use 'mixins' as *;` line, relying on `next.config.ts` `additionalData` to auto-inject. But the project's existing `[build]` futureWorks entry already records that the `additionalData` callback isn't being applied under Next 16.2.6 / Turbopack, and Phase 3+ component modules have used an explicit `@use 'mixins' as *;` workaround. Added the same line to `_not-found.module.scss`. The CLAUDE.md "do not import variables/mixins in component SCSS modules" rule remains aspirational until the additionalData issue is resolved upstream.
+
+No other divergences. Eleven new files + nine modified files all landed as spec'd; OG/sitemap/robots/favicon routes all serve 200 OK under dev, and the head tags resolve absolute URLs from `siteConfig.siteUrl`.
