@@ -22,7 +22,7 @@ export const siteConfig = {
   ownerRole: 'Frontend Developer · A/B Testing & Experimentation',
   email: 'm.main2402@gmail.com',
   version: 'v3',
-  year: '2026',
+  year: new Date().getFullYear(),
   siteUrl,
   cvHref,
   navLinks: [
