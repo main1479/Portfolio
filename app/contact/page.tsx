@@ -37,23 +37,25 @@ export default function ContactPage() {
 
   return (
     <>
-      <PageIntro
-        label={contactContent.pageIntro.label}
-        titleNodes={
-          <>
-            {contactContent.pageIntro.titleLines.map((line, i) => (
-              <span
-                key={i}
-                className={i === contactContent.pageIntro.accentLineIndex ? 'accent' : undefined}
-              >
-                {line}
-                {i < contactContent.pageIntro.titleLines.length - 1 && <br />}
-              </span>
-            ))}
-          </>
-        }
-        sub={contactContent.pageIntro.sub}
-      />
+      <Container>
+        <PageIntro
+          label={contactContent.pageIntro.label}
+          titleNodes={
+            <>
+              {contactContent.pageIntro.titleLines.map((line, i) => (
+                <span
+                  key={i}
+                  className={i === contactContent.pageIntro.accentLineIndex ? 'accent' : undefined}
+                >
+                  {line}
+                  {i < contactContent.pageIntro.titleLines.length - 1 && <br />}
+                </span>
+              ))}
+            </>
+          }
+          sub={contactContent.pageIntro.sub}
+        />
+      </Container>
 
       <Section className={styles.formSection}>
         <Container>
