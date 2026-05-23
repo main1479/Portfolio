@@ -80,6 +80,24 @@
   }
 }
 
+@media (max-width: 1300px) and (min-width: 901px) {
+  .service {
+    padding: clamp(28px, 3vw, 40px) clamp(20px, 2.4vw, 28px);
+    gap: 18px;
+    min-height: 320px;
+  }
+  .title {
+    font-size: clamp(2.6rem, 3.6vw, 4.2rem);
+  }
+  .desc {
+    font-size: 1.4rem;
+  }
+  .tags span {
+    font-size: 0.95rem;
+    padding: 4px 8px;
+  }
+}
+
 @media (max-width: 900px) {
   .services {
     grid-template-columns: 1fr;
