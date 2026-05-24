@@ -2,49 +2,51 @@ export const frontmatter = {
   slug: 'avsb',
   num: '01',
   title: 'AvsB',
-  pageTitle: 'AvsB — Experimentation Platform · Mainul Islam',
-  pageDescription: 'An in-house, CLI-driven A/B testing platform — built from scratch.',
+  pageTitle: 'AvsB — A/B Testing & Feature-Flag Platform · Mainul Islam',
+  pageDescription:
+    'A full-stack A/B testing and feature-flag platform with a serious statistics engine, edge ingestion, and a full SDK family — built solo over ~10 weeks.',
   heroLines: [
     { text: 'AvsB', style: 'plain', trailingAccentDot: true },
     { text: 'Experiments,', style: 'outline' },
-    { text: 'in code.', style: 'plain' },
+    { text: 'end to end.', style: 'plain' },
   ],
   summary:
-    'An in-house experimentation platform — similar in spirit to Optimizely, but CLI-driven and built for developers who want to write and manage experiments directly in code.',
+    'A full-stack A/B testing and feature-flag platform — the kind of product companies usually license from Optimizely, LaunchDarkly, or Statsig. Built solo with a serious statistics engine, edge ingestion, and a full SDK family.',
   meta: [
     { label: 'Role', value: 'Sole\ndeveloper' },
     { label: 'Type', value: 'Own\nproduct' },
-    { label: 'Year', value: '2025 –\nPresent' },
-    { label: 'Status', value: 'In progress', accentDot: true },
+    { label: 'Year', value: '2026' },
+    { label: 'Status', value: 'Pre-launch', accentDot: true },
   ],
   next: { label: 'Next case · 02', title: 'Kemon Doctor', slug: 'kemon-doctor' },
   footerHeading: 'Got something to test?',
 };
 
 <CaseBlock num="01" label="Overview" heading="What it is">
-  AvsB is a **CLI-driven experimentation platform** — similar in spirit to Optimizely, but without a visual editor. It’s built for developers who want to write and manage experiments directly in code, where they belong.
+  AvsB is a **full-stack A/B testing and feature-flag platform** — the kind of product companies usually license from Optimizely, LaunchDarkly, GrowthBook, or Statsig.
 
-  Visual A/B testing tools are powerful for marketers, but slow and limiting for engineering teams. AvsB swaps that model for something <span className="accent">code-first, version-controlled, and fast to ship.</span>
+  It covers the full loop: build experiments in a visual or code editor, ship them through a zero-dependency snippet, ingest events at the edge into a columnar analytics store, and read results back across <span className="accent">three different inference engines</span> — frequentist, Bayesian, and sequential / always-valid.
 </CaseBlock>
 
 <CaseBlock num="02" label="My role" heading="What I did">
-  **Sole developer.** I designed and built the platform itself — not just tests running on top of someone else’s tool.
+  **Sole developer.** Designed and built the platform end to end over ~10 weeks (March–May 2026).
 
-  - Architecture and platform design
-  - The CLI workflow and developer experience
-  - Data pipeline and event ingestion
-  - Frontend dashboard for results and analysis
+  - Architecture, data model, multi-tenant org / RBAC layer
+  - The statistics engine and analytics pipeline
+  - Visual editor, code editor, feature-flag system
+  - Five Cloudflare Workers for edge ingestion, streaming, and cron
+  - The full SDK family — browser snippet, JS / Node / React, CLI, extension
 </CaseBlock>
 
 <CaseBlock num="03" label="The problem" heading="What it solves">
-  Visual A/B testing tools are slow and limiting for developers — clicks for what should be code, flaky DOM selectors, brittle rollouts, no version control.
+  Experimentation platforms have to be three things at once: a comfortable surface for the people who run tests, a fast and cheap analytics pipeline, and a statistically defensible analysis layer.
 
-  AvsB starts from a different premise: experiments are **code, reviewed and shipped like any other code.** Fast to write, easy to read, no GUI in the way.
+  Most commercial tools nail one and compromise on the others. AvsB is an attempt to take all three seriously in a single, coherent codebase — without giving up the **developer ergonomics of code-first workflows.**
 </CaseBlock>
 
 <CaseVisuals
   items={[
-    { caption: 'CLI example · ship a test in 3 commands', type: 'primary' },
+    { caption: 'CLI surface · ship a test in 3 commands', type: 'primary' },
     { caption: 'Dashboard · in-progress', type: 'secondary' },
   ]}
 >
@@ -108,26 +110,36 @@ export const frontmatter = {
 </CaseVisuals>
 
 <CaseBlock num="04" label="What I built" heading="The approach">
-  A command-line workflow for creating, shipping, and analysing experiments, backed by the data pipeline and dashboard needed to make it useful.
+  A coherent platform across six surfaces, sharing one statistics engine and one analytics backbone.
 
-  - **CLI-first workflow** — `avsb new / ship / stats` handles the full lifecycle.
-  - **Code as the source of truth** — every variant lives in your repo, reviewed in PRs.
-  - **Event pipeline** built on ClickHouse for fast aggregation across millions of rows.
-  - **Cloudflare R2** for low-cost asset hosting and edge delivery.
-  - **Dashboard** for non-engineers — read-only results, no buttons that can break a test.
+  - **Experiment builder** — six-step flow (targeting → variations → metrics → analysis → review → history) with autosave, draft history, and a real **visual editor**: confidence-tiered selector engine, viewport targeting, multi-user presence + edit-locking, persisted axe-core accessibility findings.
+  - **Feature flags** — typed flags (boolean / string / number / JSON), per-environment configurations, ordered targeting rules, and A/B-test rules that reuse the same statistics stack as web experiments.
+  - **Statistics engine** — frequentist (Welch's z), Bayesian (Beta-Binomial + Monte Carlo), and sequential / always-valid (Asymptotic Confidence Sequences) run side by side. CUPED variance reduction with an auto-gate, BCa bootstrap for quantiles, delta method for ratios, SRM detection, multiple-comparison corrections.
+  - **Edge ingestion** — five Cloudflare Workers (with Durable Objects) for ingestion, real-time pub/sub, SSE streaming, R2-backed CDN, and cron — all in front of a **ClickHouse** store with exposure-attributed queries.
+  - **SDK family** — browser snippet, JS / Node / React SDKs, a CLI, and a Chrome / Firefox / Edge extension.
+  - **Org / RBAC layer** — orgs, projects, members, 5 built-in roles + custom roles across 10 granular permissions, invitations, audit log, billing.
 </CaseBlock>
 
 <CaseBlock num="05" label="Stack" heading="Tools used">
-  Chosen for speed of iteration and a hosting model that stays cheap as event volume grows.
+  Chosen for fast iteration and a hosting model that stays cheap as event volume grows.
 
-  - Next.js
-  - TypeScript
-  - ClickHouse
-  - Cloudflare R2
-  - Node.js (CLI)
-  - SCSS
+  - Next.js 16 (App Router), React 19, TypeScript (strict)
+  - Prisma 7 + PostgreSQL (Neon)
+  - ClickHouse for analytics
+  - Redux Toolkit, Zod, NextAuth v5
+  - Cloudflare Workers + Durable Objects, R2
+  - SCSS Modules (Dart Sass)
+  - Vitest, Playwright, MSW, Testcontainers
+  - Sentry, Pino, Resend, Anthropic SDK
 </CaseBlock>
 
-<CaseBlock num="06" label="Outcome" heading="Status">
-  Currently in active development as my main product. The platform is being dog-fooded internally on a handful of small experiments while the public API stabilises.
+<CaseBlock num="06" label="Outcome" heading="By the numbers">
+  - **~370,000 lines** of TypeScript / SCSS
+  - **250 API routes** · **71 Prisma models** · 26 migrations
+  - **29 Redux slices** · ~140 documentation pages
+  - **867 test files** · **~8,000 test cases**
+  - **5 Cloudflare Workers** · **4 published SDK packages**
+  - ~2,000 commits · 215 plans + 237 specs written
+
+  Solo build, ~10 weeks (Mar–May 2026). Currently **pre-launch** — no external users yet — while the public API and pricing stabilise.
 </CaseBlock>
