@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Container } from '../_components/Container/Container';
 import { PageIntro } from '../_components/PageIntro/PageIntro';
+import { Reveal } from '../_components/Reveal/Reveal';
+import { SectionHead } from '../_components/SectionHead/SectionHead';
 import { Footer } from '../_components/Footer/Footer';
 import { workProjects } from '../_lib/work-projects';
 import { IndexRow } from './_components/IndexRow/IndexRow';
@@ -40,6 +42,16 @@ export default function WorkPage() {
       </Container>
       <section className={styles.indexSection}>
         <Container>
+          <Reveal>
+            <SectionHead
+              index="— Projects"
+              titleNodes={
+                <>
+                  In order<span className="accent">.</span>
+                </>
+              }
+            />
+          </Reveal>
           <ol className={styles.index} role="list">
             {workProjects.map((project) => (
               <IndexRow key={project.slug} project={project} />

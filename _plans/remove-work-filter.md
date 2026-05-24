@@ -70,3 +70,12 @@ The empty `Filters/` folder also goes.
 ## Workflow
 
 Branch `chore/remove-work-filter` cut from the tip of `chore/avsb-content-update` (stacked PR — the two are independent but the second is easier to apply on top of the first). One commit, no per-file splits — the deletion is a single conceptual change.
+
+## Retrospective
+
+After removing the filter strip, the page felt bare — `<PageIntro>` straight into the list with no rhythm break, inconsistent with how every other page (home, about, contact) handles section transitions. Added a SectionHead in a follow-up commit on the same branch:
+
+- `<Reveal><SectionHead index="— Projects" titleNodes={<>In order<span className="accent">.</span></>} /></Reveal>` above the `<ol>`.
+- Em-dash index style chosen to match about/contact (`— Stack & Skills`, `— FAQ`), since `/work` is a single-subsection page like those — not a multi-chapter narrative like home.
+- Title `In order.` is intentionally terse — the prose context lives in the PageIntro above. Two-word display title with the accent dot lands at a similar weight to about's "Common questions" / "What I build with".
+- Reveal adds one small client island back for the entrance fade — same as on every other section heading in the design system. Net cost is one component; the IndexRow list itself remains server-rendered.
