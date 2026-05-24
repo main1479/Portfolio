@@ -25,17 +25,11 @@ export const frontmatter = {
 <CaseBlock num="01" label="Overview" heading="What it is">
   AvsB is a **full-stack A/B testing and feature-flag platform** — the kind of product companies usually license from Optimizely, LaunchDarkly, GrowthBook, or Statsig.
 
-  It covers the full loop: build experiments in a visual or code editor, ship them through a zero-dependency snippet, ingest events at the edge into a columnar analytics store, and read results back across <span className="accent">three different inference engines</span> — frequentist, Bayesian, and sequential / always-valid.
+  It covers the full loop: build experiments in a visual or code editor, ship them through a zero-dependency snippet, ingest events at the edge, and read results back across <span className="accent">three different statistical engines</span> — frequentist, Bayesian, and sequential.
 </CaseBlock>
 
 <CaseBlock num="02" label="My role" heading="What I did">
   **Sole developer.** Started over the 2024 Christmas holiday and have been at it for 1.5+ years since. A couple of earlier versions were scrapped along the way — early architectural decisions that didn't hold up at the scale the product was growing into. The current iteration spent its full first year on foundation work, on the strength of what those false starts taught me. AI-paired with Claude Code throughout.
-
-  - Architecture, data model, multi-tenant org / RBAC layer
-  - The statistics engine and analytics pipeline
-  - Visual editor, code editor, feature-flag system
-  - Five Cloudflare Workers for edge ingestion, streaming, and cron
-  - The full SDK family — browser snippet, JS / Node / React, CLI, extension
 </CaseBlock>
 
 <CaseBlock num="03" label="The problem" heading="What it solves">
@@ -112,34 +106,29 @@ export const frontmatter = {
 <CaseBlock num="04" label="What I built" heading="The approach">
   A coherent platform across six surfaces, sharing one statistics engine and one analytics backbone.
 
-  - **Experiment builder** — six-step flow (targeting → variations → metrics → analysis → review → history) with autosave, draft history, and a real **visual editor**: confidence-tiered selector engine, viewport targeting, multi-user presence + edit-locking, persisted axe-core accessibility findings.
-  - **Feature flags** — typed flags (boolean / string / number / JSON), per-environment configurations, ordered targeting rules, and A/B-test rules that reuse the same statistics stack as web experiments.
-  - **Statistics engine** — frequentist (Welch's z), Bayesian (Beta-Binomial + Monte Carlo), and sequential / always-valid (Asymptotic Confidence Sequences) run side by side. CUPED variance reduction with an auto-gate, BCa bootstrap for quantiles, delta method for ratios, SRM detection, multiple-comparison corrections.
-  - **Edge ingestion** — five Cloudflare Workers (with Durable Objects) for ingestion, real-time pub/sub, SSE streaming, R2-backed CDN, and cron — all in front of a **ClickHouse** store with exposure-attributed queries.
-  - **SDK family** — browser snippet, JS / Node / React SDKs, a CLI, and a Chrome / Firefox / Edge extension.
-  - **Org / RBAC layer** — orgs, projects, members, 5 built-in roles + custom roles across 10 granular permissions, invitations, audit log, billing.
+  - **Experiment builder** with a real visual editor
+  - **Feature flags** with per-environment targeting and A/B-test rules
+  - **Three statistical engines** running side by side, with variance reduction and always-valid analysis
+  - **Edge ingestion** across five Cloudflare Workers, in front of a ClickHouse store
+  - **A full SDK family** — browser snippet, JS / Node / React, CLI, browser extension
+  - **The supporting layer** most experimentation tools take for granted: orgs, roles, audit log, billing
 </CaseBlock>
 
 <CaseBlock num="05" label="Stack" heading="Tools used">
   Chosen for fast iteration and a hosting model that stays cheap as event volume grows.
 
   - Next.js 16 (App Router), React 19, TypeScript (strict)
-  - Prisma 7 + PostgreSQL (Neon)
-  - ClickHouse for analytics
-  - Redux Toolkit, Zod, NextAuth v5
-  - Cloudflare Workers + Durable Objects, R2
-  - SCSS Modules (Dart Sass)
-  - Vitest, Playwright, MSW, Testcontainers
-  - Sentry, Pino, Resend, Anthropic SDK
+  - Prisma + PostgreSQL · ClickHouse for analytics
+  - Cloudflare Workers + Durable Objects · R2 for storage
+  - Redux Toolkit · NextAuth · Zod · SCSS Modules
+  - Vitest · Playwright · MSW · Testcontainers
 </CaseBlock>
 
 <CaseBlock num="06" label="Outcome" heading="By the numbers">
   - **~370,000 lines** of TypeScript / SCSS
-  - **250 API routes** · **71 Prisma models** · 26 migrations
-  - **29 Redux slices** · ~140 documentation pages
+  - **250 API routes** · **71 Prisma models**
   - **867 test files** · **~8,000 test cases**
   - **5 Cloudflare Workers** · **4 published SDK packages**
-  - ~2,000 commits · 215 plans + 237 specs written
 
   Solo build, **1.5+ years** in. Currently pre-launch — no external users yet — while the public API and pricing stabilise.
 </CaseBlock>
