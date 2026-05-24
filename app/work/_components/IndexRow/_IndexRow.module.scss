@@ -11,7 +11,7 @@
 
 .link {
   display: grid;
-  grid-template-columns: 60px minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) 110px 60px;
+  grid-template-columns: 40px minmax(0, 1.6fr) minmax(0, 1.2fr) minmax(0, 0.7fr) 80px 60px;
   align-items: center;
   gap: clamp(16px, 2.4vw, 40px);
   padding: clamp(28px, 3.4vw, 48px) 0;
@@ -40,8 +40,7 @@
 
 .num {
   font-family: var(--font-mono);
-  font-size: 1.1rem;
-  letter-spacing: 0.08em;
+  font-size: 1rem;
   color: var(--fg-muted);
 }
 
@@ -73,9 +72,7 @@
 
 .tags {
   font-family: var(--font-mono);
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-size: 1rem;
   color: var(--fg-muted);
   display: flex;
   flex-wrap: wrap;
@@ -88,9 +85,7 @@
 
 .year {
   font-family: var(--font-mono);
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-size: 1rem;
   color: var(--fg-muted);
   text-align: right;
 }
@@ -155,20 +150,20 @@
   .num,
   .tags,
   .year {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
   }
 }
 
 @media (max-width: 1500px) and (min-width: 1101px) {
   .link {
-    grid-template-columns: 52px minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 0.9fr) 96px 52px;
+    grid-template-columns: 36px minmax(0, 1.5fr) minmax(0, 1.1fr) minmax(0, 0.7fr) 72px 52px;
     gap: clamp(14px, 1.8vw, 28px);
   }
 }
 
 @media (max-width: 1100px) {
   .link {
-    grid-template-columns: 48px minmax(0, 1.4fr) minmax(0, 1fr) 100px 48px;
+    grid-template-columns: 32px minmax(0, 1.5fr) minmax(0, 1.2fr) 80px 48px;
   }
   .tags {
     display: none;
