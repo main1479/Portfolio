@@ -32,6 +32,7 @@ export const siteConfig = {
     { num: '04', label: 'Contact', href: '/contact' },
   ] satisfies readonly NavLink[],
   metaLinks: [
+    { label: 'LinkedIn ↗', href: 'https://www.linkedin.com/in/main1479/', external: true },
     { label: 'GitHub ↗', href: 'https://github.com/main1479', external: true },
     { label: 'Resume / CV ↗', href: cvHref, external: true },
     { label: 'Email ↗', href: 'mailto:m.main2402@gmail.com' },
