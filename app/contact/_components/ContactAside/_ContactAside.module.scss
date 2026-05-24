@@ -38,7 +38,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
+  gap: clamp(20px, 3vw, 32px);
   padding: 22px 0;
   border-bottom: 1px solid var(--rule-strong);
   color: inherit;
@@ -61,7 +61,7 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--fg-muted);
-  width: 80px;
+  width: 124px;
   flex-shrink: 0;
 }
 
@@ -109,7 +109,7 @@
   }
   .direct {
     padding: 18px 0;
-    gap: 10px;
+    gap: 14px;
   }
   .directLabel {
     font-size: 0.95rem;

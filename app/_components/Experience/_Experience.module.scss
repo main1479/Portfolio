@@ -38,6 +38,10 @@
 
 .at {
   color: var(--accent);
+  font-size: 0.85em;
+  letter-spacing: 0;
+  display: inline-block;
+  margin-top: 4px;
 }
 
 .desc {
@@ -56,6 +60,24 @@
   color: var(--fg-muted);
   text-align: right;
   padding-top: 8px;
+}
+
+// Desktop-only tuning — applies above the 900px tablet rule.
+@media (min-width: 901px) {
+  .row {
+    grid-template-columns: 160px minmax(0, 1.3fr) minmax(0, 1fr) 140px;
+  }
+  .role {
+    font-size: clamp(1.8rem, 3.4vw, 4.4rem);
+  }
+  .desc {
+    font-size: clamp(0.8rem, 1.4vw, 1.8rem);
+    line-height: 1.4;
+  }
+  .year,
+  .loc {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 900px) {

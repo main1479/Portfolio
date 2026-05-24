@@ -16,11 +16,11 @@ Format: `- [<area>] <description> — <branch or session ref>`
 - [assets] `public/me.jpg` (self-hosted portrait, ≥1024×1024) not yet supplied. About page falls back to the striped diagonal background until a real source is dropped in. — `feature/about-and-contact` session 2026-05-22
 - [a11y] About portrait has no JS-driven `onError` swap if `/me.jpg` 404s. `next/image` will render the broken-image alt instead; the striped diagonal background sits behind it as a visual fallback. — `feature/about-and-contact` session 2026-05-22
 - [assets] Real case-study screenshots (AvsB dashboard, Kemon Doctor mobile flows) — striped-fill placeholders in `<CaseVisuals>` ship in Phase 6; replace once real screenshots are available. — `feature/work-and-cases` session 2026-05-23
-- [content] Anchor sub-section on `/work/client` for the one remaining stub row (Pascal). Currently links to plain `/work/client` — promote to `#pascal` once the Client case copy grows sub-section anchors. — `feature/work-and-cases` session 2026-05-23
 - [content] Radius case copy needs Mainul's sign-off — wider Conversion team should also vet anything that touches NDA territory (taxonomies, client-stakeholder access, beta scope). — `feature/cursimax-and-country-count` session 2026-05-23
 - [assets] Radius case uses the deck's "Radius beta" title + share-modal slides (safe content). When Conversion can supply raw product UI screenshots with non-client demo data, swap in for richer visuals. — `feature/cursimax-and-country-count` session 2026-05-23
 - [deps] `npm audit` reports 2 moderate (`postcss <8.5.10`, transitive via `next`). Not exploitable in this build context (PostCSS only stringifies build-time author SCSS). Fix would require downgrading Next to 9.3.3 — breaking change. Tracking Next 16.3 stable for an automatic upstream fix. — `feature/polish-and-launch` session 2026-05-23
 - [deploy] DNS for `mainul.info` not configured by Phase 7 PR — Vercel domain binding + apex/CNAME records remain a manual outside-the-repo step. — `feature/polish-and-launch` session 2026-05-23
+- [responsive] Visual confirmation of the `fix/responsive-issues` SCSS tuning was not performed by Claude this session (no browser-driving tool available). Build / lint / typecheck all pass and all affected routes return 200, but the breakpoint behaviour at 320/380/640/768/900/1100/1300/1500/1640 needs a human eyeball pass on home, /work, /about, /contact, and a case page before merge. — `fix/responsive-issues` session 2026-05-24
 
 ## Resolved
 

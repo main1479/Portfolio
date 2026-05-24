@@ -14,6 +14,13 @@
   position: relative;
 }
 
+// Collapse rhythm between adjacent .section blocks. Each .section pads
+// itself top + bottom, so back-to-back sections would otherwise double
+// up. The previous section's padding-bottom owns the gap.
+.section + .section {
+  padding-top: 0;
+}
+
 .section--first {
   padding-top: 0;
 }
