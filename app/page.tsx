@@ -36,7 +36,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      <Section className={styles.statsSection}>
+      <Section>
         <Container>
           <Reveal>
             <Stats items={homeContent.stats} />

@@ -18,7 +18,7 @@
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  margin: 0;
+  margin: clamp(40px, 6vw, 80px) 0 0;
   color: transparent;
   -webkit-text-stroke: 1.5px var(--bg);
   display: block;
@@ -26,7 +26,7 @@
 
 .top {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr);
   gap: 60px;
   align-items: end;
   padding-bottom: 80px;
@@ -94,7 +94,7 @@
   gap: 24px;
   padding-top: 40px;
   font-family: var(--font-mono);
-  font-size: 1.1rem;
+  font-size: 14px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--bg) 60%, transparent);
@@ -106,6 +106,23 @@
 
 .center {
   text-align: center;
+}
+
+@media (max-width: 1300px) and (min-width: 769px) {
+  .top {
+    gap: 40px;
+    padding-bottom: 56px;
+  }
+  .cta {
+    font-size: clamp(3rem, 4.4vw, 5.2rem);
+  }
+  .meta {
+    font-size: 1.1rem;
+  }
+  .mark {
+    font-size: clamp(9rem, 22vw, 24rem);
+    margin-top: clamp(32px, 4vw, 56px);
+  }
 }
 
 @media (max-width: 768px) {
@@ -149,7 +166,6 @@
     font-size: 0.95rem;
   }
   .bottom {
-    font-size: 0.85rem;
     padding-top: 20px;
   }
 }

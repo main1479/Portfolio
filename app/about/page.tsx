@@ -39,22 +39,24 @@ export default function AboutPage() {
 
   return (
     <>
-      <PageIntro
-        label={aboutContent.pageIntro.label}
-        titleNodes={
-          <>
-            {aboutContent.pageIntro.titleLines.map((line, i) => (
-              <span
-                key={i}
-                className={i === aboutContent.pageIntro.accentLineIndex ? 'accent' : undefined}
-              >
-                {line}
-                {i < aboutContent.pageIntro.titleLines.length - 1 && <br />}
-              </span>
-            ))}
-          </>
-        }
-      />
+      <Container>
+        <PageIntro
+          label={aboutContent.pageIntro.label}
+          titleNodes={
+            <>
+              {aboutContent.pageIntro.titleLines.map((line, i) => (
+                <span
+                  key={i}
+                  className={i === aboutContent.pageIntro.accentLineIndex ? 'accent' : undefined}
+                >
+                  {line}
+                  {i < aboutContent.pageIntro.titleLines.length - 1 && <br />}
+                </span>
+              ))}
+            </>
+          }
+        />
+      </Container>
 
       <Section className={styles.bioSection}>
         <Container>
