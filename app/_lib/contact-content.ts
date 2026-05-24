@@ -57,7 +57,7 @@ export const contactContent = {
     },
     submit: {
       label: 'Send message',
-      note: '↳ I usually reply in 1–2 days',
+      note: '↳ I usually reply within 24 hours on weekdays, and within a day or two on weekends.',
     },
     reset: {
       label: 'Clear',
@@ -65,7 +65,7 @@ export const contactContent = {
     success: {
       titleLines: ['Message', 'sent.'],
       accentLineIndex: 1,
-      body: "Thanks for reaching out. I'll get back to you within a day or two. In the meantime, feel free to grab the resume or browse the work index.",
+      body: "Thanks for reaching out. I'll get back to you as soon as possible. In the meantime, feel free to grab the resume or browse the work index.",
       ctaLabel: 'See the work',
       ctaHref: '/work',
     },
