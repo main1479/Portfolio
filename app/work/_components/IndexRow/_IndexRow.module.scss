@@ -77,6 +77,13 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--fg-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+}
+
+.tag {
+  white-space: nowrap;
 }
 
 .year {

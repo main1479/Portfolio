@@ -11,7 +11,14 @@ export function IndexRow({ project }: { project: WorkProject }) {
         <span className={styles.num}>{project.num}</span>
         <h3 className={styles.title}>{project.title}</h3>
         <span className={styles.meta}>{project.metaShort}</span>
-        <span className={styles.tags}>{visibleTags.join(' · ')}</span>
+        <span className={styles.tags}>
+          {visibleTags.map((tag, i) => (
+            <span key={tag} className={styles.tag}>
+              {tag}
+              {i < visibleTags.length - 1 && <span aria-hidden="true"> ·</span>}
+            </span>
+          ))}
+        </span>
         <span className={styles.year}>{project.yearStatus ?? project.year ?? ''}</span>
         <span className={styles.arrow} aria-hidden="true">
           <Arrow size={16} strokeWidth={1.6} />
