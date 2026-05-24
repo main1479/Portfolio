@@ -5,6 +5,14 @@
   padding-block: clamp(40px, 6vw, 96px) var(--section-y);
 }
 
+.index {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 .confidentiality {
   margin-top: clamp(60px, 8vw, 100px);
   max-width: 60ch;
