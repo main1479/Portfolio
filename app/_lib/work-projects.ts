@@ -9,7 +9,6 @@ export const workProjects = [
       'A full-stack A/B testing & feature-flag platform — visual editor, statistics engine, edge ingestion, SDKs, built solo.',
     metaShort: 'Full-stack experimentation & feature-flag platform built solo.',
     tags: ['Next.js 16', 'TypeScript', 'ClickHouse', 'Cloudflare Workers', 'Statistics'],
-    categories: ['product', 'experimentation'],
     featured: true,
     order: 1,
     year: '2024 – Present',
@@ -25,7 +24,6 @@ export const workProjects = [
     summary: 'A non-profit platform helping patients in Bangladesh find trustworthy doctors.',
     metaShort: 'Non-profit doctor review platform for Bangladesh.',
     tags: ['Next.js 15', 'PostgreSQL', 'Drizzle', 'Solo'],
-    categories: ['product'],
     featured: true,
     order: 2,
     year: '2025 – Present',
@@ -42,7 +40,6 @@ export const workProjects = [
       'A central insights platform that makes experiments, UXR observations, and research findable across an organisation — built at Conversion.com.',
     metaShort: 'Central insights & experiments platform built at Conversion.com.',
     tags: ['Next.js', 'TypeScript', 'SCSS', 'GSAP', 'Streaming APIs'],
-    categories: ['product', 'experimentation'],
     featured: true,
     order: 3,
     year: '2025 – Present',
@@ -58,7 +55,6 @@ export const workProjects = [
     summary: '4+ years of A/B tests and conversion experiments for ecommerce and SaaS clients.',
     metaShort: '4+ years of A/B tests for ecommerce & SaaS clients.',
     tags: ['Optimizely', 'Kameleoon', 'Qubit'],
-    categories: ['experimentation', 'client'],
     featured: true,
     order: 4,
     year: '2019 – Present',
@@ -75,7 +71,6 @@ export const workProjects = [
       'Full frontend build for a Spanish-language online course marketplace serving Latin America.',
     metaShort: 'Full frontend for a Spanish-language e-learning marketplace.',
     tags: ['HTML', 'SCSS', 'JavaScript', 'Figma to code'],
-    categories: ['client'],
     featured: false,
     order: 5,
     year: '2021',
@@ -92,7 +87,6 @@ export const workProjects = [
       'Frontend build for a Romanian short-term rentals and property-management company in Oradea.',
     metaShort: 'Frontend build for a Romanian rentals & property-management company.',
     tags: ['HTML', 'SCSS', 'JavaScript', 'XD to code'],
-    categories: ['client'],
     featured: false,
     order: 6,
     year: '2020',
@@ -104,13 +98,3 @@ export const workProjects = [
 ] as const satisfies readonly WorkProject[];
 
 export const featuredWorkProjects = workProjects.filter((p) => p.featured);
-
-/** Filter-chip definitions for `/work`. */
-export const workFilters = [
-  { value: 'all', label: 'All' },
-  { value: 'product', label: 'Products' },
-  { value: 'experimentation', label: 'Experimentation' },
-  { value: 'client', label: 'Client work' },
-] as const;
-
-export type WorkFilterValue = (typeof workFilters)[number]['value'];

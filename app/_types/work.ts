@@ -1,5 +1,3 @@
-export type WorkCategory = 'product' | 'experimentation' | 'client';
-
 export type WorkProject = {
   slug: string;
   num: string;
@@ -9,8 +7,6 @@ export type WorkProject = {
   /** Short, punchy meta sentence — used on the /work index row. */
   metaShort: string;
   tags: readonly string[];
-  /** Categories the project belongs to; drives the index filter chips. */
-  categories: readonly WorkCategory[];
   /** Featured on the home page's SelectedWork section. */
   featured: boolean;
   order: number;

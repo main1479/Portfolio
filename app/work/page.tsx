@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import { Container } from '../_components/Container/Container';
 import { PageIntro } from '../_components/PageIntro/PageIntro';
+import { Reveal } from '../_components/Reveal/Reveal';
+import { SectionHead } from '../_components/SectionHead/SectionHead';
 import { Footer } from '../_components/Footer/Footer';
-import { workProjects, workFilters } from '../_lib/work-projects';
-import { WorkIndexClient } from './_components/Filters/WorkIndexClient';
+import { workProjects } from '../_lib/work-projects';
+import { IndexRow } from './_components/IndexRow/IndexRow';
 import styles from './_workPage.module.scss';
 
 export const metadata: Metadata = {
@@ -40,7 +42,21 @@ export default function WorkPage() {
       </Container>
       <section className={styles.indexSection}>
         <Container>
-          <WorkIndexClient projects={workProjects} filters={workFilters} />
+          <Reveal>
+            <SectionHead
+              index="— Projects"
+              titleNodes={
+                <>
+                  In order<span className="accent">.</span>
+                </>
+              }
+            />
+          </Reveal>
+          <ol className={styles.index} role="list">
+            {workProjects.map((project) => (
+              <IndexRow key={project.slug} project={project} />
+            ))}
+          </ol>
           <p className={styles.confidentiality}>
             Client names appear only with written permission. Anything not listed here stays
             confidential — that&rsquo;s how this work has to work.
