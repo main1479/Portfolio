@@ -181,3 +181,16 @@ Solo build, ~10 weeks (Mar–May 2026). Currently pre-launch — no external use
 - Real dashboard screenshots (already logged).
 - Updating the home page hero or any non-AvsB case copy.
 - Adjusting tags/categories of other projects to align styling.
+
+## Retrospective
+
+The first pass took the source doc's "Build timeframe ~10 weeks (Mar–May 2026)" at face value. The actual project history is **1.5+ years**: a couple of earlier versions were scrapped due to early architectural decisions that didn't scale, and the current iteration spent its full first year on foundation work before any of the visible platform existed. Claude Code was a co-engineer throughout — surfaced as a single light-touch phrase in Block 02.
+
+Corrections applied in a follow-up commit on the same branch:
+
+- `work-projects.ts` AvsB entry: `year` `'2026'` → `'2024 – Present'`; `yearStatus` `'2026 · Pre-launch'` → `'2024 · Pre-launch'`.
+- `content.mdx` frontmatter: `pageDescription` "~10 weeks" → "1.5+ years"; meta sidebar Year `'2026'` → `'2024 –\nPresent'`.
+- `content.mdx` Block 02: rewritten to include the 1.5+ years, scrapped-versions history, foundation-year framing, and the Claude Code mention.
+- `content.mdx` Block 06: dropped the "~10 weeks (Mar–May 2026)" line; replaced with a one-line 1.5+ years note (full narrative lives in Block 02 to avoid duplication).
+
+Lesson: when a source doc states a timeline, treat it as a number to verify with the user before publishing, not a fact to copy through. Especially for time-on-project, which is almost always undercounted by snapshot tooling.
