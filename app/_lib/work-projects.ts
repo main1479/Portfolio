@@ -100,22 +100,6 @@ export const workProjects = [
     hasCase: true,
     href: '/work/flatwhite',
   },
-  {
-    slug: 'pascal',
-    num: '07',
-    title: 'Pascal',
-    summary: 'Website for Pascal Wealth Tech, frontend build.',
-    metaShort: 'Website for Pascal Wealth Tech, frontend build.',
-    tags: ['React', 'SCSS'],
-    categories: ['client'],
-    featured: false,
-    order: 7,
-    year: '2021',
-    type: 'client',
-    yearStatus: '2021 · Canada',
-    hasCase: false,
-    href: '/work/client',
-  },
 ] as const satisfies readonly WorkProject[];
 
 export const featuredWorkProjects = workProjects.filter((p) => p.featured);
