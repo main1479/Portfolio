@@ -38,6 +38,10 @@
 
 .at {
   color: var(--accent);
+  font-size: 0.85em;
+  letter-spacing: 0;
+  display: inline-block;
+  margin-top: 4px;
 }
 
 .desc {
@@ -60,14 +64,15 @@
 
 @media (max-width: 1300px) and (min-width: 901px) {
   .row {
-    grid-template-columns: 130px minmax(0, 1fr) minmax(0, 1fr) 120px;
-    gap: clamp(16px, 2vw, 32px);
+    grid-template-columns: 110px minmax(0, 1.3fr) minmax(0, 1fr) 110px;
+    gap: clamp(16px, 2vw, 28px);
   }
   .role {
-    font-size: clamp(2.4rem, 3vw, 3.6rem);
+    font-size: clamp(2rem, 2.6vw, 3rem);
   }
   .desc {
     font-size: 1.4rem;
+    line-height: 1.4;
   }
 }
 
