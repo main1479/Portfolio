@@ -1,6 +1,6 @@
 import { Reveal } from '../../Reveal/Reveal';
 import { ClientCard } from './ClientCard';
-import { renderSegments } from '../Intro/Intro';
+import { renderSegments } from '../Segments/Segments';
 import type { HomeContent } from '../../../_types/home';
 import styles from './_SelectedClients.module.scss';
 
