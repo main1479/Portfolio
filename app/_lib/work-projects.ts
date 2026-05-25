@@ -23,7 +23,7 @@ export const workProjects = [
     title: 'Kemon Doctor',
     summary: 'A non-profit platform helping patients in Bangladesh find trustworthy doctors.',
     metaShort: 'Non-profit doctor review platform for Bangladesh.',
-    tags: ['Next.js 15', 'PostgreSQL', 'Drizzle', 'Solo'],
+    tags: ['Next.js 16', 'PostgreSQL', 'Drizzle', 'Solo'],
     featured: true,
     order: 2,
     year: '2025 – Present',
