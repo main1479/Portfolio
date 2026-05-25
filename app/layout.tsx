@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     template: `%s · ${siteConfig.ownerName}`,
   },
   description:
-    'Frontend developer specialised in A/B testing and experimentation. 4+ years across Optimizely, Kameleoon, and Qubit, plus modern frontend with Next.js and TypeScript.',
+    'Frontend developer open to full-time remote and contract roles. 4.5+ years running A/B tests on Optimizely, Kameleoon, and Qubit. Modern frontend with Next.js and TypeScript. Treats AI as a real engineering skill — Claude Code as a daily co-engineer, with the workflow discipline to actually finish what it starts.',
   applicationName: 'Mainul Islam — Portfolio',
   authors: [{ name: siteConfig.ownerName, url: siteConfig.siteUrl }],
   creator: siteConfig.ownerName,
@@ -49,13 +49,13 @@ export const metadata: Metadata = {
     url: siteConfig.siteUrl,
     title: `${siteConfig.ownerName} · ${siteConfig.ownerRole}`,
     description:
-      'Frontend developer specialised in A/B testing and experimentation. 4+ years across Optimizely, Kameleoon, and Qubit, plus modern frontend with Next.js and TypeScript.',
+      'Frontend developer open to full-time remote and contract roles. 4.5+ years running A/B tests on Optimizely, Kameleoon, and Qubit. Modern frontend with Next.js and TypeScript. Treats AI as a real engineering skill — Claude Code as a daily co-engineer, with the workflow discipline to actually finish what it starts.',
   },
   twitter: {
     card: 'summary_large_image',
     title: `${siteConfig.ownerName} · ${siteConfig.ownerRole}`,
     description:
-      'Frontend developer specialised in A/B testing and experimentation. Builds CLI-driven experimentation platforms and ships conversion experiments for ecommerce + SaaS clients.',
+      'Frontend developer · open to full-time and contract roles. Ships A/B tests and modern frontend on Optimizely, Kameleoon, Qubit, Next.js. Treats AI as a real engineering skill — Claude Code as a daily co-engineer.',
   },
   robots: {
     index: true,

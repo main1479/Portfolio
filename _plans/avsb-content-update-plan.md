@@ -18,7 +18,7 @@ Two places carry AvsB copy:
 2. **The AvsB case study page** (`/work/avsb`)
    - Hero lines + page title + page description — broaden the framing.
    - Meta sidebar (Role / Type / Year / Status) — year → 2026, status reads honestly.
-   - Body sections — rewrite to cover what's actually there: experiment builder, visual editor, feature flags, statistics engine, edge architecture, SDK family, scale of the system (370k LOC, 250 routes, 71 models, ~8k tests).
+   - Body sections — rewrite to cover what's actually there: experiment builder, visual editor, feature flags, statistics engine, edge architecture, SDK family, scale of the system (410k LOC, 250 routes, 71 models, ~8k tests).
    - The CLI code mock stays — it's a strong visual and the CLI is still a real surface — but it's reframed as "one of several developer surfaces" rather than the whole product.
    - Stack list grows: Next.js 16, React 19, TypeScript strict, Prisma 7 / Postgres, ClickHouse, Redux Toolkit, NextAuth v5, Zod, Cloudflare Workers + Durable Objects, R2.
    - Status section is replaced with a "by the numbers" + honest pre-launch note.

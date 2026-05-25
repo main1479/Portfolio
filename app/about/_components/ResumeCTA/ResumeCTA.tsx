@@ -19,10 +19,9 @@ export function ResumeCTA({ content }: { content: ResumeCtaData }) {
       </div>
       <Button
         href={content.ctaHref}
-        external
         variant="accent"
         className={styles.cta}
-        arrowGlyph={<span aria-hidden="true">↓</span>}
+        arrowGlyph={<span aria-hidden="true">→</span>}
       >
         {content.ctaLabel}
       </Button>

@@ -19,7 +19,7 @@ export const cvHref = '/Resume_Mainul.pdf';
 
 export const siteConfig = {
   ownerName: 'Mainul Islam',
-  ownerRole: 'Frontend Developer · A/B Testing & Experimentation',
+  ownerRole: 'Frontend Developer · Open to full-time & contract',
   email: 'm.main2402@gmail.com',
   version: 'v3',
   year: new Date().getFullYear(),

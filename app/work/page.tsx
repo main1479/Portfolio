@@ -66,7 +66,7 @@ export default function WorkPage() {
       <Footer
         heading={
           <>
-            Got a project? —<br />
+            Let&rsquo;s talk —<br />
             <a href="mailto:m.main2402@gmail.com">
               m.main2402
               <wbr />

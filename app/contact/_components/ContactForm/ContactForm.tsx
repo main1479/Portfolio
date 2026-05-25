@@ -194,9 +194,6 @@ export function ContactForm({ content }: Props) {
           {content.reset.label}
         </button>
       </div>
-      <p className={styles.subhead}>
-        If a form isn&rsquo;t your thing — message me directly below.
-      </p>
 
       <div className={styles.row}>
         <FieldInput

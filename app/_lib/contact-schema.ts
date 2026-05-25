@@ -1,9 +1,10 @@
 import { z } from 'zod';
 
 export const TOPIC_VALUES = [
+  'full-time-role',
+  'contract-freelance',
   'a-b-testing',
   'frontend-build',
-  'product-work',
   'something-else',
 ] as const;
 

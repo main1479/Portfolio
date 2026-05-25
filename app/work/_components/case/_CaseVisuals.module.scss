@@ -19,6 +19,7 @@
 
 .slotImage {
   object-fit: contain;
+  transform: scale(1.01);
 }
 
 .caption {
@@ -27,7 +28,8 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--fg-muted);
-  margin-top: 16px;
+  margin-top: 10px;
+  margin-bottom: 1.5rem;
 }
 
 .single {

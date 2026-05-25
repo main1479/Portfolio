@@ -19,7 +19,7 @@ export const frontmatter = {
     { label: 'Status', value: 'Pre-launch', accentDot: true },
   ],
   next: { label: 'Next case · 02', title: 'Kemon Doctor', slug: 'kemon-doctor' },
-  footerHeading: 'Got something to test?',
+  footerHeading: 'Want to talk?',
 };
 
 <CaseBlock num="01" label="Overview" heading="What it is">
@@ -29,7 +29,9 @@ export const frontmatter = {
 </CaseBlock>
 
 <CaseBlock num="02" label="My role" heading="What I did">
-  **Sole developer.** Started over the 2024 Christmas holiday and have been at it for 1.5+ years since. A couple of earlier versions were scrapped along the way — early architectural decisions that didn't hold up at the scale the product was growing into. The current iteration spent its full first year on foundation work, on the strength of what those false starts taught me. AI-paired with Claude Code throughout.
+  **Sole developer.** Started over the 2024 Christmas holiday and have been at it for 1.5+ years since. A couple of earlier versions were scrapped along the way — early architectural decisions that didn't hold up at the scale the product was growing into. The current iteration spent its full first year on foundation work, on the strength of what those false starts taught me.
+
+  Built with <span className="accent">Claude Code as a daily co-engineer</span> through the 1.5+ year build. At this scale, the skill isn't typing prompts — it's running AI well enough to actually ship: specs before code, tasks scoped tight enough that the agent can deliver, multi-file refactors and schema migrations delegated, critical paths hand-reviewed. A 410k-line solo platform is finishable when the workflow around the AI is itself a craft.
 </CaseBlock>
 
 <CaseBlock num="03" label="The problem" heading="What it solves">
@@ -40,68 +42,14 @@ export const frontmatter = {
 
 <CaseVisuals
   items={[
-    { caption: 'CLI surface · ship a test in 3 commands', type: 'primary' },
-    { caption: 'Dashboard · in-progress', type: 'secondary' },
+    {
+      caption: 'Results · three engines, side by side',
+      src: '/work/avsb/results-page.png',
+      alt: 'AvsB results page showing frequentist, Bayesian, and sequential engines side by side',
+      aspect: '2/1',
+    },
   ]}
->
-  <CodeMock
-    lines={[
-      { type: 'comment', tokens: [{ kind: 'comment', value: '# Spin up a new experiment' }] },
-      {
-        type: 'prompt',
-        tokens: [
-          { kind: 'prompt', value: '$ ' },
-          { kind: 'keyword', value: 'avsb new ' },
-          { kind: 'text', value: 'checkout-cta-color' },
-        ],
-      },
-      {
-        type: 'response',
-        tokens: [{ kind: 'text', value: '  ✓ created experiments/checkout-cta-color/' }],
-      },
-      {
-        type: 'response',
-        tokens: [{ kind: 'text', value: '  ✓ scaffolded control.ts + variant-a.ts' }],
-      },
-      { type: 'empty' },
-      {
-        type: 'prompt',
-        tokens: [
-          { kind: 'prompt', value: '$ ' },
-          { kind: 'keyword', value: 'avsb ship ' },
-          { kind: 'text', value: 'checkout-cta-color ' },
-          { kind: 'value', value: '--traffic 50' },
-        ],
-      },
-      { type: 'response', tokens: [{ kind: 'text', value: '  ✓ build passed' }] },
-      { type: 'response', tokens: [{ kind: 'text', value: '  ✓ allocation written' }] },
-      {
-        type: 'response',
-        tokens: [
-          { kind: 'text', value: '  ✓ live · 50% traffic · ' },
-          { kind: 'string', value: '"https://avsb.dev/e/cta-color"' },
-        ],
-      },
-      { type: 'empty' },
-      {
-        type: 'prompt',
-        tokens: [
-          { kind: 'prompt', value: '$ ' },
-          { kind: 'keyword', value: 'avsb stats ' },
-          { kind: 'text', value: 'checkout-cta-color' },
-        ],
-      },
-      {
-        type: 'response',
-        tokens: [
-          { kind: 'text', value: '  variant-a · ' },
-          { kind: 'accent', value: '+2.4%' },
-          { kind: 'text', value: ' conv · n=14,820 · p=0.07' },
-        ],
-      },
-    ]}
-  />
-</CaseVisuals>
+/>
 
 <CaseBlock num="04" label="What I built" heading="The approach">
   A coherent platform across six surfaces, sharing one statistics engine and one analytics backbone.
@@ -114,6 +62,29 @@ export const frontmatter = {
   - **The supporting layer** most experimentation tools take for granted: orgs, roles, audit log, billing
 </CaseBlock>
 
+<CaseVisuals
+  items={[
+    {
+      caption: 'Flag details · rules, audit, history',
+      src: '/work/avsb/flag-details.png',
+      alt: 'AvsB flag detail page with active rules, audit trail, and change history',
+      aspect: '2/1',
+    },
+    {
+      caption: 'Audience builder · rule composition',
+      src: '/work/avsb/audience-builder.png',
+      alt: 'AvsB audience builder showing rule composition with live preview of who matches',
+      aspect: '2/1',
+    },
+    {
+      caption: 'Goal creation · define what wins means',
+      src: '/work/avsb/create-goal.png',
+      alt: 'AvsB goal creation form for primary metric, guardrails, and event filters',
+      aspect: '2/1',
+    },
+  ]}
+/>
+
 <CaseBlock num="05" label="Stack" heading="Tools used">
   Chosen for fast iteration and a hosting model that stays cheap as event volume grows.
 
@@ -124,11 +95,57 @@ export const frontmatter = {
   - Vitest · Playwright · MSW · Testcontainers
 </CaseBlock>
 
+<CaseVisuals
+  items={[
+    {
+      caption: 'Audience list · who sees what',
+      src: '/work/avsb/audience-page.png',
+      alt: 'AvsB audience list view with traffic allocation per audience',
+      aspect: '2/1',
+    },
+    {
+      caption: 'Project settings · environments + SDK keys',
+      src: '/work/avsb/project-settings.png',
+      alt: 'AvsB project settings showing environments and SDK key management',
+      aspect: '2/1',
+    },
+    {
+      caption: 'Audit log · every change, timestamped',
+      src: '/work/avsb/audit-log.png',
+      alt: 'AvsB audit log showing chronological config changes with actor and diff',
+      aspect: '2/1',
+    },
+  ]}
+/>
+
 <CaseBlock num="06" label="Outcome" heading="By the numbers">
-  - **~370,000 lines** of TypeScript / SCSS
+  - **~410,000 lines** of TypeScript / SCSS
   - **250 API routes** · **71 Prisma models**
   - **867 test files** · **~8,000 test cases**
   - **5 Cloudflare Workers** · **4 published SDK packages**
 
   Solo build, **1.5+ years** in. Currently pre-launch — no external users yet — while the public API and pricing stabilise.
 </CaseBlock>
+
+<CaseVisuals
+  items={[
+    {
+      caption: 'Role management · permissions per surface',
+      src: '/work/avsb/role-management.png',
+      alt: 'AvsB role management page showing permission matrix per product surface',
+      aspect: '2/1',
+    },
+    {
+      caption: 'Member invite · seat + role in one step',
+      src: '/work/avsb/member-invite.png',
+      alt: 'AvsB member invite modal combining seat assignment and role selection',
+      aspect: '2/1',
+    },
+    {
+      caption: 'Support tickets · in-product issue triage',
+      src: '/work/avsb/support-ticket.png',
+      alt: 'AvsB support ticket view with conversation thread and context attachments',
+      aspect: '2/1',
+    },
+  ]}
+/>

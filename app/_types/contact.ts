@@ -11,7 +11,12 @@ export type ContactFormState =
   | { status: 'error'; errors: ContactFormErrors; message?: string }
   | { status: 'success'; id: string };
 
-export type TopicValue = 'a-b-testing' | 'frontend-build' | 'product-work' | 'something-else';
+export type TopicValue =
+  | 'full-time-role'
+  | 'contract-freelance'
+  | 'a-b-testing'
+  | 'frontend-build'
+  | 'something-else';
 
 export type TopicOption = {
   value: TopicValue;
