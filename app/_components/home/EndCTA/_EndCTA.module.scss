@@ -10,7 +10,7 @@
 
 .heading {
   font-family: var(--font-display);
-  font-size: clamp(8rem, 16vw, 26rem);
+  font-size: clamp(8rem, 16vw, 22rem);
   font-weight: 500;
   text-transform: uppercase;
   line-height: 0.82;
@@ -56,5 +56,12 @@
       font-size: 1.45rem;
       line-height: 1.3;
     }
+  }
+}
+
+// Ultrawide cap — match the rest of the display tier.
+@media (min-width: 1800px) {
+  .heading {
+    font-size: 16rem;
   }
 }
