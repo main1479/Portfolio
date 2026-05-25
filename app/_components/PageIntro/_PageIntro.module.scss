@@ -1,0 +1,16 @@
+.titleClip {
+  display: block;
+  overflow: hidden;
+  // Pad the clip so descenders + accent dots aren't visually clipped at rest,
+  // then cancel the visual layout impact with negative margins so the title
+  // still sits in the same place as the unanimated version.
+  padding-top: 0.05em;
+  padding-bottom: 0.12em;
+  margin-top: -0.05em;
+  margin-bottom: -0.12em;
+}
+
+.titleInner {
+  display: inline-block;
+  will-change: transform;
+}

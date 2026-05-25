@@ -56,17 +56,6 @@
   transform: scaleX(0);
 }
 
-.routeBar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: var(--accent);
-  display: none;
-  z-index: 1000;
-}
-
 @media (max-width: 640px) {
   .loader {
     gap: 16px;
