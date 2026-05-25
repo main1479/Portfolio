@@ -10,7 +10,7 @@
 
 .heading {
   font-family: var(--font-display);
-  font-size: clamp(4rem, 8vw, 14rem);
+  font-size: clamp(2.6rem, 11vw, 14rem);
   font-weight: 500;
   text-transform: uppercase;
   line-height: 0.82;
@@ -45,9 +45,8 @@
     padding: 48px 0 32px;
   }
   .heading {
-    font-size: clamp(3.4rem, 11vw, 6.4rem);
+    // line-height only; font-size is handled by the clamp above.
     line-height: 0.94;
-    overflow-wrap: break-word;
   }
   .sub {
     gap: 14px;
