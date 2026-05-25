@@ -74,7 +74,7 @@ export const aboutContent = {
         {
           kind: 'text',
           value:
-            ' finishable in 1.5 years — including a year+ on planning and architecture up front, banked on lessons from earlier versions I’d scrapped because the foundations didn’t hold.',
+            ' finishable in 1.5 years (including 2 earlier versions I scrapped, and a year+ of planning and architecture banked on what those false starts taught me).',
         },
       ],
       [
