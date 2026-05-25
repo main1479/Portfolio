@@ -1,6 +1,6 @@
 import { Reveal } from '../../Reveal/Reveal';
 import { AwardCard } from './AwardCard';
-import { renderSegments } from '../Intro/Intro';
+import { renderSegments } from '../Segments/Segments';
 import type { HomeContent } from '../../../_types/home';
 import styles from './_Recognition.module.scss';
 

@@ -52,11 +52,6 @@ export type HomeContent = {
   marquee: {
     tokens: ReadonlyArray<{ label: string; accent?: boolean }>;
   };
-  intro: {
-    label: string;
-    indexLabel: string;
-    paragraphs: ReadonlyArray<ReadonlyArray<IntroSegment>>;
-  };
   stats: readonly StatItem[];
   services: { sectionIndex: string; items: readonly ServiceItem[] };
   selectedWork: {
