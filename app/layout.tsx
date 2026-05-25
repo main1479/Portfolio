@@ -4,6 +4,7 @@ import './_styles/globals.scss';
 import { Nav } from './_components/Nav/Nav';
 import { CustomCursor } from './_components/CustomCursor/CustomCursor';
 import { Loader } from './_components/Loader/Loader';
+import { PageTransition } from './_components/PageTransition/PageTransition';
 import { siteConfig } from './_lib/site-config';
 
 const teko = Teko({
@@ -79,6 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${teko.variable} ${josefin.variable} ${mono.variable}`}>
       <body>
         <Loader />
+        <PageTransition />
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
