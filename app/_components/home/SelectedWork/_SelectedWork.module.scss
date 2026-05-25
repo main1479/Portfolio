@@ -146,9 +146,9 @@
 .row:hover .arrow {
   @include reduced-motion-safe {
     background: var(--accent);
-    border-color: var(--accent);
+    border-color: var(--accent-ink);
     color: var(--accent-ink);
-    transform: rotate(-45deg);
+    transform: rotate(-45deg) scale(0.8);
   }
 }
 

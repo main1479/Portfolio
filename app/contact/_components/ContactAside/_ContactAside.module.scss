@@ -67,7 +67,7 @@
 
 .directValue {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 2.4vw, 3.2rem);
+  font-size: clamp(1.5rem, 2.5vw, 3.2rem);
   text-transform: uppercase;
   line-height: 1;
   font-weight: 500;
@@ -101,22 +101,13 @@
 }
 
 @media (max-width: 640px) {
-  .heading {
-    font-size: 2.8rem;
-  }
-  .body {
-    font-size: 1.5rem;
-  }
   .direct {
     padding: 18px 0;
     gap: 14px;
   }
   .directLabel {
     font-size: 0.95rem;
-    width: 56px;
-  }
-  .directValue {
-    font-size: 1.9rem;
+    width: 80px;
   }
   .directArrow {
     width: 30px;
