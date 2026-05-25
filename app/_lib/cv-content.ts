@@ -13,10 +13,10 @@ export const cvContent = {
     },
   },
   about:
-    'Frontend developer specialising in A/B testing and experimentation. 4+ years on Optimizely, Kameleoon, and Qubit, alongside modern frontend with Next.js and TypeScript. I work with AI as a co-engineer — Claude Code, Cursor — to ship faster while still owning the design and the result. Open to full-time remote and contract roles.',
+    'Frontend developer specialising in A/B testing and experimentation. 4.5+ years on Optimizely, Kameleoon, and Qubit, alongside modern frontend with Next.js and TypeScript. I work with AI as a co-engineer — Claude Code, Cursor — to ship faster while still owning the design and the result. Open to full-time remote and contract roles.',
   stats: [
     { value: '7+ yrs', label: 'Frontend development' },
-    { value: '4+ yrs', label: 'A/B testing & experimentation' },
+    { value: '4.5+ yrs', label: 'A/B testing & experimentation' },
     { value: '500+', label: 'A/B tests shipped' },
     { value: '9+', label: 'Countries worked with' },
   ],

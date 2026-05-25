@@ -4,7 +4,7 @@ export const homeContent = {
   hero: {
     topbarLeft: { name: 'Mainul Islam', role: 'Frontend Developer' },
     topbarRight: { version: 'Portfolio v3', year: '2026', metric: '7 yrs · 9+ countries' },
-    sub: 'I build frontend and run A/B tests that turn traffic into revenue. 4+ years on Optimizely, Kameleoon, and Qubit. Modern stack — Next.js, TypeScript, AI-paired workflow.',
+    sub: 'I build frontend and run A/B tests that turn traffic into revenue. 4.5+ years on Optimizely, Kameleoon, and Qubit. Modern stack — Next.js, TypeScript, AI-paired workflow.',
     statusLine: 'Open to new roles — full-time or contract',
     ctaLabel: 'Get in touch',
     ctaHref: '/contact',
@@ -44,7 +44,7 @@ export const homeContent = {
       ],
       [
         { kind: 'text', value: "I've spent the last " },
-        { kind: 'strong', value: '4+ years building experiments' },
+        { kind: 'strong', value: '4.5+ years building experiments' },
         {
           kind: 'text',
           value:
