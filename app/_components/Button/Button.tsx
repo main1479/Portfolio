@@ -46,7 +46,7 @@ function inner(children: React.ReactNode, arrow: boolean, arrowGlyph?: React.Rea
       <span>{children}</span>
       {arrow && (
         <span className={styles.arrow} aria-hidden="true">
-          {arrowGlyph ?? <Arrow size={14} />}
+          {arrowGlyph ?? <Arrow size={18} strokeWidth={1.6} />}
         </span>
       )}
     </>
