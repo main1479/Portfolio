@@ -307,7 +307,9 @@
 .skillTags {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 14px;
+  column-gap: 6px;
+  row-gap: 2px;
+  line-height: 1.6;
 }
 
 .skillTag {
@@ -315,12 +317,9 @@
   font-size: 1.25rem;
   color: var(--fg);
 
-  &::before {
-    content: '+';
-    color: var(--accent);
-    margin-right: 0.35em;
-    font-family: var(--font-mono);
-    font-weight: 600;
+  &:not(:last-child)::after {
+    content: ',';
+    color: var(--fg-muted);
   }
 }
 
@@ -482,8 +481,8 @@
   .skillTag {
     font-size: 9.5pt;
   }
-  .skillTag::before {
-    color: #1f3a5f;
+  .skillTag:not(:last-child)::after {
+    color: #555;
   }
   .awards li {
     font-size: 9.5pt;
