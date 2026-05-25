@@ -56,8 +56,7 @@ export const aboutContent = {
         { kind: 'strong', value: 'frontend A/B testing developer with Conversion.com' },
         {
           kind: 'text',
-          value:
-            " for 4.5+ years, building production tests on enterprise platforms. That work continues, but at reduced volume — so I'm ",
+          value: ' for 4.5+ years, building production tests on enterprise platforms. Now ',
         },
         { kind: 'strong', value: 'actively open to new opportunities' },
         { kind: 'text', value: ', full-time remote or contract.' },

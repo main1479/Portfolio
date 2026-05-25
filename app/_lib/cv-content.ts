@@ -30,8 +30,6 @@ export const cvContent = {
         'Long-running contract — 4.5+ years and ongoing. Production A/B tests in JavaScript and SCSS on enterprise experimentation platforms (Optimizely, Kameleoon, Qubit, AB Tasty, VWO, Adobe Target, Google Optimize).',
         '500+ experiments shipped across ecommerce, SaaS, publishing, automotive, and non-profit clients — including The Times, G-Star RAW, Motorway, Unity, WaterAid, and Deel.',
         'Built Radius — Conversion.com’s internal insights & experiments platform. Frontend in Next.js + TypeScript + SCSS with GSAP motion and streaming APIs. Live, in daily use by internal teams and client stakeholders.',
-        'Direct client access and ownership of the build → review → ship loop on each test.',
-        'Conversion calls on me when they need cover or extra capacity — currently their internal team handles day-to-day delivery, so I have bandwidth for additional work.',
       ],
     },
     {
