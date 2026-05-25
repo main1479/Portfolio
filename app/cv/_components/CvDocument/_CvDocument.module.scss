@@ -101,7 +101,7 @@
   font-family: var(--font-mono);
   font-size: 2.4rem;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--accent);
   margin: 0 0 24px;
@@ -220,27 +220,42 @@
   }
 
   li::before {
-    content: '*';
+    content: '';
     position: absolute;
-    left: 0;
-    top: 0;
-    color: var(--accent);
-    font-family: var(--font-mono);
-    font-weight: 600;
+    left: 4px;
+    top: 0.7em;
+    width: 5px;
+    height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
 }
 
 .entryLink {
   margin: 10px 0 0;
-  font-family: var(--font-mono);
-  font-size: 1.15rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: 1.4rem;
   overflow-wrap: anywhere;
 
   a {
     color: var(--accent);
-    border-bottom: 1px solid var(--rule-strong);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+
+    &::after {
+      content: ' ↗';
+      display: inline-block;
+      margin-left: 2px;
+      text-decoration: none;
+    }
+
+    &:hover {
+      text-decoration-thickness: 2px;
+    }
   }
 }
 
@@ -469,7 +484,7 @@
   }
   .sectionLabel {
     font-size: 14pt;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.02em;
     color: #1f3a5f;
     border-top-color: #000;
   }
@@ -500,11 +515,18 @@
     padding-left: 14px;
   }
   .bullets li::before {
-    color: #1f3a5f;
+    background: #1f3a5f;
+    width: 4px;
+    height: 4px;
+    top: 0.6em;
   }
   .entryLink {
-    font-size: 7.5pt;
+    font-size: 8pt;
     margin-top: 6px;
+  }
+  .entryLink a {
+    color: #1f3a5f !important;
+    text-decoration: underline !important;
   }
   .clientList li {
     font-size: 9.5pt;
