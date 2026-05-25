@@ -8,15 +8,22 @@
 
 .inner {
   display: inline-block;
-  will-change: transform;
+  will-change: transform, scale;
+  transition: scale 0.2s var(--ease-out);
 }
 
 .innerBlock {
   display: block;
 }
 
+.outer:hover .inner {
+  scale: 1.04;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .inner {
     transform: none !important;
+    scale: none !important;
+    transition: none;
   }
 }

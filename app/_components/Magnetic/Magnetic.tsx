@@ -25,8 +25,8 @@ export function Magnetic({ children, strength = 0.3, block = false, className }:
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (window.matchMedia('(hover: none)').matches) return;
 
-    const qx = gsap.quickTo(inner, 'x', { duration: 0.4, ease: 'power3.out' });
-    const qy = gsap.quickTo(inner, 'y', { duration: 0.4, ease: 'power3.out' });
+    const qx = gsap.quickTo(inner, 'x', { duration: 0.2, ease: 'power3.out' });
+    const qy = gsap.quickTo(inner, 'y', { duration: 0.2, ease: 'power3.out' });
 
     const onMove = (e: MouseEvent) => {
       const rect = outer.getBoundingClientRect();
