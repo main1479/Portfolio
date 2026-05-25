@@ -37,7 +37,7 @@
 // from ~1273px viewport upward (FullHD, 1440p, ultrawide, 4K all
 // land at 140px).
 .display-xl {
-  font-size: clamp(2.6rem, 11vw, 14rem);
+  font-size: clamp(2.6rem, 15vw, 10rem);
 }
 
 // Stroked / outlined display variant
