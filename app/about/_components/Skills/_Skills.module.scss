@@ -24,7 +24,7 @@
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 14px;
+  gap: 6px 20px;
 }
 
 .tag {
@@ -33,12 +33,12 @@
   text-transform: uppercase;
   font-weight: 500;
   line-height: 1.05;
-  padding-right: 14px;
-  border-right: 1px solid var(--rule);
 
-  &:last-child {
-    border-right: 0;
-    padding-right: 0;
+  &::before {
+    content: '+';
+    color: var(--accent);
+    margin-right: 0.35em;
+    font-weight: 400;
   }
 }
 
@@ -55,10 +55,9 @@
   }
   .tag {
     font-size: 1.4rem;
-    padding-right: 10px;
   }
   .tags {
-    gap: 4px 10px;
+    gap: 4px 14px;
   }
 }
 
