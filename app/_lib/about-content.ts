@@ -15,7 +15,7 @@ export const aboutContent = {
     cards: [
       {
         label: 'Currently',
-        lines: ['Available for', 'new projects'],
+        lines: ['Open to', 'roles & projects'],
         accentLineIndex: 1,
       },
       {
@@ -30,13 +30,12 @@ export const aboutContent = {
         { kind: 'text', value: ' working remotely since 2019.' },
       ],
       [
+        { kind: 'text', value: 'My focus is ' },
+        { kind: 'accent', value: 'frontend you can measure' },
         {
           kind: 'text',
-          value:
-            'My focus is the place where good frontend meets measurable results: building reliable ',
+          value: ' — building reliable A/B tests and conversion experiments for real businesses.',
         },
-        { kind: 'accent', value: 'A/B tests and conversion experiments' },
-        { kind: 'text', value: ' for real businesses.' },
       ],
       [
         {
@@ -63,8 +62,19 @@ export const aboutContent = {
           value:
             ", building A/B tests on enterprise platforms. That work has wound down, and I'm now ",
         },
-        { kind: 'strong', value: 'actively taking on new clients' },
-        { kind: 'text', value: ' — experimentation programmes, frontend builds, or both.' },
+        { kind: 'strong', value: 'open to new roles' },
+        { kind: 'text', value: ' — full-time remote, contract, or freelance.' },
+      ],
+      [
+        { kind: 'text', value: 'I work with ' },
+        { kind: 'accent', value: 'AI as a co-engineer' },
+        {
+          kind: 'text',
+          value:
+            ', not just an autocomplete. Claude Code and Cursor handle a real share of the keyboard work — scaffolding, refactors, test coverage — while the architecture, the decisions, and the review stay mine. It is how a solo dev can ship a ',
+        },
+        { kind: 'strong', value: '370k-line platform' },
+        { kind: 'text', value: ' without losing the result.' },
       ],
       [
         {
@@ -80,6 +90,16 @@ export const aboutContent = {
     title: 'What I build with',
     groups: [
       { name: 'Core', tags: ['JavaScript', 'TypeScript', 'React', 'Next.js'] },
+      {
+        name: 'AI as co-engineer',
+        tags: [
+          'Claude Code',
+          'Cursor',
+          'AI pair programming',
+          'Spec-driven prompting',
+          'AI code review',
+        ],
+      },
       { name: 'Styling', tags: ['SCSS', 'Tailwind', 'Modern CSS'] },
       { name: 'Experimentation', tags: ['Optimizely', 'Kameleoon', 'Qubit', 'CRO'] },
       { name: 'Tooling & Testing', tags: ['Vitest', 'Playwright', 'Git', 'Turborepo'] },

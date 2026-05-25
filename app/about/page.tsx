@@ -18,19 +18,19 @@ import styles from './_aboutPage.module.scss';
 export const metadata: Metadata = {
   title: 'About · Mainul Islam',
   description:
-    'Frontend developer working remotely since 2019. Specialised in A/B testing and experimentation.',
+    'Frontend developer working remotely since 2019. Open to full-time and contract roles. A/B testing and experimentation focus. Works with AI as a co-engineer.',
   alternates: { canonical: '/about' },
   openGraph: {
     type: 'profile',
     url: '/about',
     title: 'About · Mainul Islam',
     description:
-      'Frontend developer working remotely since 2019. Specialised in A/B testing and experimentation.',
+      'Frontend developer working remotely since 2019. Open to full-time and contract roles. A/B testing and experimentation focus. Works with AI as a co-engineer.',
   },
   twitter: {
     title: 'About · Mainul Islam',
     description:
-      'Frontend developer working remotely since 2019. Specialised in A/B testing and experimentation.',
+      'Frontend developer working remotely since 2019. Open to full-time and contract roles. A/B testing and experimentation focus. Works with AI as a co-engineer.',
   },
 };
 

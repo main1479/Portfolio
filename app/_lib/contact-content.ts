@@ -8,11 +8,11 @@ export const contactContent = {
     label: '04 / Contact',
     titleLines: ["Let's work", 'together.'],
     accentLineIndex: 1,
-    sub: 'Available for new A/B testing and frontend projects. Send me a message or email me directly — I usually reply within a day or two.',
+    sub: 'Open to new frontend roles — full-time remote, contract, or freelance. Send a note or email directly — I usually reply within a day or two.',
   },
   aside: {
     heading: 'Direct lines.',
-    body: "If a form isn't your thing — here's how to reach me directly. Best for quick questions or referrals.",
+    body: "If a form isn't your thing — here's how to reach me directly. Best for quick questions, intros, or referrals.",
     direct: [
       {
         label: 'Email',
@@ -43,9 +43,10 @@ export const contactContent = {
         num: '03',
         label: "What's this about?",
         options: [
-          { value: 'a-b-testing', label: 'A/B testing' },
+          { value: 'full-time-role', label: 'Full-time role' },
+          { value: 'contract-freelance', label: 'Contract / freelance' },
+          { value: 'a-b-testing', label: 'A/B testing project' },
           { value: 'frontend-build', label: 'Frontend build' },
-          { value: 'product-work', label: 'Product work' },
           { value: 'something-else', label: 'Something else' },
         ],
       },
@@ -65,7 +66,7 @@ export const contactContent = {
     success: {
       titleLines: ['Message', 'sent.'],
       accentLineIndex: 1,
-      body: "Thanks for reaching out. I'll get back to you as soon as possible. In the meantime, feel free to grab the resume or browse the work index.",
+      body: "Thanks for reaching out. I'll get back to you within a day or two. In the meantime, feel free to grab the resume or browse the work.",
       ctaLabel: 'See the work',
       ctaHref: '/work',
     },

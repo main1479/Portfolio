@@ -4,8 +4,8 @@ export const homeContent = {
   hero: {
     topbarLeft: { name: 'Mainul Islam', role: 'Frontend Developer' },
     topbarRight: { version: 'Portfolio v3', year: '2026', metric: '7 yrs · 9+ countries' },
-    sub: 'I build and run experiments that turn traffic into revenue — 4+ years across Optimizely, Kameleoon, and Qubit, plus modern frontend with Next.js and TypeScript.',
-    statusLine: 'Available for new A/B testing & frontend projects',
+    sub: 'I build frontend and run A/B tests that turn traffic into revenue. 4+ years on Optimizely, Kameleoon, and Qubit. Modern stack — Next.js, TypeScript, AI-paired workflow.',
+    statusLine: 'Open to new roles — full-time or contract',
     ctaLabel: 'Get in touch',
     ctaHref: '/contact',
   },
@@ -18,6 +18,8 @@ export const homeContent = {
       { label: 'Qubit' },
       { label: 'Next.js' },
       { label: 'TypeScript' },
+      { label: 'Claude Code', accent: true },
+      { label: 'Cursor' },
       { label: 'Experimentation', accent: true },
     ],
   },
@@ -28,16 +30,17 @@ export const homeContent = {
       [
         { kind: 'text', value: "I'm a " },
         { kind: 'strong', value: 'frontend developer' },
-        { kind: 'text', value: ' working remotely since 2019.' },
+        { kind: 'text', value: ' working remotely since 2019, ' },
+        { kind: 'strong', value: 'open to full-time and contract roles' },
+        { kind: 'text', value: '.' },
       ],
       [
+        { kind: 'text', value: 'My focus is ' },
+        { kind: 'accent', value: 'frontend you can measure' },
         {
           kind: 'text',
-          value:
-            'My focus is the place where good frontend meets measurable results — building reliable ',
+          value: ' — building reliable A/B tests and conversion experiments for real businesses.',
         },
-        { kind: 'accent', value: 'A/B tests and conversion experiments' },
-        { kind: 'text', value: ' for real businesses.' },
       ],
       [
         { kind: 'text', value: "I've spent the last " },
@@ -45,10 +48,16 @@ export const homeContent = {
         {
           kind: 'text',
           value:
-            ' on enterprise platforms — Optimizely, Kameleoon, Qubit — alongside modern frontend work in React and Next.js. ',
+            ' on enterprise platforms — Optimizely, Kameleoon, Qubit — alongside modern frontend in React and Next.js. ',
         },
         { kind: 'strong', value: '500+ A/B tests shipped' },
-        { kind: 'text', value: ", and I'm currently taking on new clients." },
+        { kind: 'text', value: '. I work with ' },
+        { kind: 'accent', value: 'AI as a co-engineer' },
+        {
+          kind: 'text',
+          value:
+            ' — Claude Code, Cursor — to move faster while still owning the design and the result.',
+        },
       ],
     ],
   },
@@ -90,7 +99,7 @@ export const homeContent = {
       {
         kind: 'text',
         value:
-          "Through agency work, a sampling of brands I've shipped tests for — across publishing, retail, automotive, gaming, and non-profit.",
+          "Through agency work, a few brands I've shipped tests for — across publishing, retail, automotive, gaming, and non-profit.",
       },
     ],
     items: [
@@ -153,7 +162,7 @@ export const homeContent = {
       { text: 'build something', variant: 'outline' },
       { text: 'measurable.' },
     ],
-    sub: "Now taking on new clients. If you have a frontend build or an experimentation programme in mind, I'd love to hear about it.",
+    sub: "Open to new roles — full-time, contract, or freelance. If you're hiring or have a project in mind, send me a note.",
     ctaLabel: 'Start a conversation',
     ctaHref: '/contact',
   },
