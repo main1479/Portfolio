@@ -13,8 +13,9 @@ export function PageTransition() {
 
   // Intercept internal link clicks in the CAPTURE phase, before Next.js
   // Link's own bubble-phase onClick fires preventDefault + router.push.
-  // stopPropagation prevents Link from also navigating; we'll call
-  // router.push ourselves once the cover panel is fully in.
+  // stopImmediatePropagation prevents any other handler (Link's onClick,
+  // sibling listeners) from also firing nav; we navigate ourselves once
+  // the cover panel is fully in place.
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       if (e.button !== 0) return;
@@ -49,8 +50,15 @@ export function PageTransition() {
 
       e.preventDefault();
       e.stopPropagation();
+      e.stopImmediatePropagation();
 
       const dest = url.pathname + url.search + url.hash;
+
+      // Disable smooth scroll for the duration of the transition. The site
+      // sets scroll-behavior: smooth on <html>, which turns Next.js's
+      // post-navigation scrollTo(0, 0) into a visible 300–500ms scroll
+      // that can be seen peeking out from under the rising panel.
+      document.documentElement.style.scrollBehavior = 'auto';
 
       gsap.killTweensOf(panel);
       document.body.style.overflow = 'hidden';
@@ -67,8 +75,8 @@ export function PageTransition() {
       });
     };
 
-    document.addEventListener('click', handleClick, true);
-    return () => document.removeEventListener('click', handleClick, true);
+    window.addEventListener('click', handleClick, true);
+    return () => window.removeEventListener('click', handleClick, true);
   }, [router]);
 
   // After the new page mounts, slide the panel back off — but only if we
@@ -86,6 +94,7 @@ export function PageTransition() {
       onComplete: () => {
         gsap.set(panel, { display: 'none' });
         document.body.style.overflow = '';
+        document.documentElement.style.scrollBehavior = '';
         panelIsUp.current = false;
       },
     });
