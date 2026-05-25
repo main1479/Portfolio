@@ -33,7 +33,7 @@
 }
 
 .display-xl {
-  font-size: clamp(8.4rem, 17vw, 22rem);
+  font-size: clamp(4rem, 8vw, 14rem);
 }
 
 .display-lg {
@@ -144,14 +144,5 @@ p.large {
 @media (max-width: 320px) {
   .display-xl {
     font-size: clamp(2.6rem, 10vw, 5.2rem);
-  }
-}
-
-// Ultrawide cap — at 1800px+ the display tier stops growing and pins
-// to a calmer "standard" size so titles don't dominate the canvas on
-// 2560px / 3440px monitors.
-@media (min-width: 1800px) {
-  .display-xl {
-    font-size: 16rem;
   }
 }

@@ -105,7 +105,7 @@ details summary::-webkit-details-marker {
 .page-intro__title {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(8.4rem, 17vw, 22rem);
+  font-size: clamp(4rem, 8vw, 14rem);
   line-height: 0.85;
   text-transform: uppercase;
   margin: 0;
@@ -173,14 +173,6 @@ details summary::-webkit-details-marker {
 @media (max-width: 320px) {
   .page-intro__title {
     font-size: clamp(2.6rem, 10vw, 5.2rem);
-  }
-}
-
-// Ultrawide cap — pin the page-intro title at a calmer "standard" size
-// on 1800px+ canvases so it doesn't read as oversized.
-@media (min-width: 1800px) {
-  .page-intro__title {
-    font-size: 16rem;
   }
 }
 

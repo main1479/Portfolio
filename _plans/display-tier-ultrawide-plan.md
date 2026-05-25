@@ -2,47 +2,44 @@
 
 A focused SCSS-only tweak. The site's biggest display-tier headings (`.display-xl`, `.page-intro__title`, and the End-CTA heading) cap at 26–27rem (260–270px) once viewport width hits ~1500px. On a normal 1080p / 1440p desktop this looks confident; on a 2560px+ ultrawide it just looks oversized — the type sits in the middle of a much wider canvas and reads as shouting.
 
-Lowering the clamp `max` values brings the cap down across all desktops, and an additional `@media (min-width: 1800px)` override pins the display tier to ~16rem on ultrawide.
+## Approach
 
----
+One change per selector: lower the clamp `max` to `14rem` (140px) and drop the `vw` rate from `17vw`/`16vw` to `8vw`. That's it — no ultrawide `@media` override.
+
+The point of `clamp()` is to express the cap-min-rate trio in one rule. If the cap is set to what we want on ultrawide, the clamp alone handles ultrawide too. Stacking an `@media (min-width: ...)` font-size on top of a clamp is contradictory — pick one or the other.
 
 ## Files touched
 
-**Lower clamp max:**
+| File                                                 | Selector             | Old                          | New                       |
+| ---------------------------------------------------- | -------------------- | ---------------------------- | ------------------------- |
+| `app/_styles/_typography.scss:36`                    | `.display-xl`        | `clamp(8.4rem, 17vw, 27rem)` | `clamp(4rem, 8vw, 14rem)` |
+| `app/_styles/globals.scss:108`                       | `.page-intro__title` | `clamp(8.4rem, 17vw, 26rem)` | `clamp(4rem, 8vw, 14rem)` |
+| `app/_components/home/EndCTA/_EndCTA.module.scss:13` | End-CTA heading      | `clamp(8rem, 16vw, 26rem)`   | `clamp(4rem, 8vw, 14rem)` |
 
-| File                                                 | Selector             | Old                          | New                          |
-| ---------------------------------------------------- | -------------------- | ---------------------------- | ---------------------------- |
-| `app/_styles/_typography.scss:36`                    | `.display-xl`        | `clamp(8.4rem, 17vw, 27rem)` | `clamp(8.4rem, 17vw, 22rem)` |
-| `app/_styles/globals.scss:108`                       | `.page-intro__title` | `clamp(8.4rem, 17vw, 26rem)` | `clamp(8.4rem, 17vw, 22rem)` |
-| `app/_components/home/EndCTA/_EndCTA.module.scss:13` | End-CTA heading      | `clamp(8rem, 16vw, 26rem)`   | `clamp(8rem, 16vw, 22rem)`   |
+## What that gives you across viewport widths
 
-**Add ultrawide cap (`@media (min-width: 1800px)`):**
+With `clamp(4rem, 8vw, 14rem)` the heading is:
 
-- `.display-xl` → `16rem`
-- `.page-intro__title` → `16rem`
-- End-CTA heading → `16rem`
+- ≤500px viewport: `4rem` (40px, the floor)
+- 500–1750px: scales fluidly with `8vw` (40px → 140px)
+- ≥1750px: capped at `14rem` (140px) — same on FullHD, 1440p, 2560p ultrawide, 4K
 
-**Footer `.mark` left alone** — the giant `clamp(9rem, 22vw, 24rem)` value only applies inside `@media (max-width: 1300px) and (min-width: 769px)`. The base `.mark` rule (above 1300px) is already `clamp(8rem, 8vw, 10rem)` — capped at 10rem, fine on ultrawide.
-
----
+So 1080p, 1440p, 1800p, and ultrawide all show the same 140px heading — exactly what "standard size even on ultrawide" asked for.
 
 ## Scope and non-scope
 
-- **In scope:** the three selectors above. These are the only display-tier rules where the >1300px base style has a max ≥22rem.
-- **Out of scope:** `.display-lg` (17rem max), `.display-md` (11rem), `.case-hero__title` (17rem), `.loader` wordmark (14rem), `.stats` (14rem). All cap at sizes that still read as proportionate on ultrawide. Revisit only if the user flags them.
-- **No mid-range regression for the smaller display tier.** Only the very biggest tier gets the cap reduction.
-
-## Breakpoint choice
-
-`@media (min-width: 1800px)` targets 1920px+ desktops and ultrawides. The most common desktop (1920×1080) gets the new cap. Laptops at ≤1680px keep the lowered-max clamp behaviour, which is still smaller than today's 24–27rem but allowed to scale with vw.
+- **In scope:** the three selectors above.
+- **Out of scope:** all the smaller display-tier rules — `.display-lg` (17rem max), `.display-md` (11rem), `.case-hero__title` (17rem), `.loader` wordmark (14rem), `.stats` (14rem). They cap small enough to be fine on any viewport.
+- **Mobile `@media` overrides for these three are not touched** — they're tuned for specific narrow widths and don't conflict with the new desktop default.
+- **Footer `.mark` not touched** — its giant variant only applies in `@media (max-width: 1300px) and (min-width: 769px)`. The default above 1300px is already capped at 10rem.
 
 ## Risk
 
-- There's a small visual jump at exactly 1800px when resizing, since 17vw at 1800px = 306px (clamped to 22rem = 220px in the new clamp), then the ultrawide rule drops it to 16rem = 160px. Users don't typically resize across this boundary, so the jump is theoretical. If it becomes annoying, swap the hard cap for a second clamp that lerps between 22rem and 16rem over a viewport range.
+- There is a discontinuity at exactly 1100px viewport (where the existing `@media (max-width: 1100px)` rule kicks in with `clamp(5.6rem, 12vw, 14rem)` — 132px at 1100px). Above 1100px with the new default, 8vw gives only ~88px at 1101px viewport. That's a ~44px drop when resizing across 1100px. If it's visible/annoying, the 1100px `@media` for `.display-xl` and `.page-intro__title` can also be lowered to match `8vw`, or removed entirely. Deferred until flagged.
 
 ## Branch + process
 
 - Branch: `fix/display-tier-ultrawide` (off `main`).
 - One implementation commit (mechanical edits across 3 files).
 - `/ship` (typecheck + lint + build) before PR.
-- Human-eyeball pass owed on ultrawide + 1080p + 1440p + 900px (`futureWorks.md` will note it).
+- Human-eyeball pass owed on ultrawide + 1080p + 1440p + 900px.
