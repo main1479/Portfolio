@@ -60,7 +60,7 @@ export function PageTransition() {
       gsap.to(panel, {
         yPercent: 0,
         duration: 0.7,
-        ease: 'expo.inOut',
+        ease: 'power3.out',
         onComplete: () => {
           router.push(dest);
         },
