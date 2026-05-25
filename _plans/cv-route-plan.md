@@ -2,7 +2,7 @@
 
 ## Why
 
-The PDF in `public/Resume_Mainul.pdf` is ~3 years behind the site — missing AvsB, Kemon Doctor, Radius, AI mentions, the full-time positioning, and the new stack. Rather than maintain two artifacts that drift, build the CV as a route on the site so updates happen in one place: edit the content lib, browse to `/cv`, save the page as PDF.
+The PDF in `public/CV_Mainul.pdf` is ~3 years behind the site — missing AvsB, Kemon Doctor, Radius, AI mentions, the full-time positioning, and the new stack. Rather than maintain two artifacts that drift, build the CV as a route on the site so updates happen in one place: edit the content lib, browse to `/cv`, save the page as PDF.
 
 ## What it is
 
@@ -59,7 +59,7 @@ Practice GitHub projects from the old CV are intentionally dropped. The Template
 
 ## What I'm NOT doing
 
-- Not replacing the existing `Resume_Mainul.pdf` automatically — the user will save the new page to PDF themselves once they're happy with the rendering and drop it in.
+- Not replacing the existing `CV_Mainul.pdf` automatically — the user will save the new page to PDF themselves once they're happy with the rendering and drop it in.
 - Not adding a route group with a separate root layout — keeping the site's global Nav on screen at `/cv` is useful (visitors can navigate). Print CSS does the hiding work.
 - Not adding a CSS-paged-media polyfill or PDF-generation library — browser's native Save as PDF is enough.
 

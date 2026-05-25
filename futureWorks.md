@@ -22,7 +22,7 @@ Format: `- [<area>] <description> — <branch or session ref>`
 - [deploy] DNS for `mainul.info` not configured by Phase 7 PR — Vercel domain binding + apex/CNAME records remain a manual outside-the-repo step. — `feature/polish-and-launch` session 2026-05-23
 - [responsive] Visual confirmation of the `fix/responsive-issues` SCSS tuning was not performed by Claude this session (no browser-driving tool available). Build / lint / typecheck all pass and all affected routes return 200, but the breakpoint behaviour at 320/380/640/768/900/1100/1300/1500/1640 needs a human eyeball pass on home, /work, /about, /contact, and a case page before merge. — `fix/responsive-issues` session 2026-05-24
 - [styles] Unused `.subhead` rule in `app/contact/_components/ContactForm/_ContactForm.module.scss` — the `<p className={styles.subhead}>` element was removed in the copy overhaul but the SCSS class wasn't pruned. Harmless but worth cleaning. — `feature/copy-overhaul` session 2026-05-25
-- [cv] Replace `public/Resume_Mainul.pdf` with a fresh export from the new `/cv` route. Steps: `npm run dev` → open `http://localhost:3000/cv` → Cmd+P → Save as PDF (A4, default margins, background graphics off) → overwrite the file → commit. — `feature/copy-overhaul` session 2026-05-25
+- [cv] Replace `public/CV_Mainul.pdf` with a fresh export from the new `/cv` route. Steps: `npm run dev` → open `http://localhost:3000/cv` → Cmd+P → Save as PDF (A4, default margins, background graphics off) → overwrite the file → commit. — `feature/copy-overhaul` session 2026-05-25
 - [copy] LinkedIn headline still uses pre-overhaul framing. Sync to "Frontend Developer · A/B Testing & Experimentation · Open to full-time remote & contract" after the new PDF lands. — `feature/copy-overhaul` session 2026-05-25
 - [visual] Copy overhaul typecheck + lint + build all pass, but the rendered home / about / contact / case pages need a human-eyeball pass — the new five-chip topic row at narrow viewports and the new "AI as co-engineer" skills group placement are the highest-risk spots. — `feature/copy-overhaul` session 2026-05-25
 
@@ -32,7 +32,7 @@ Format: `- [<area>] <description> — <branch or session ref>`
 
 - [routes] `SelectedWork` rows on `/` link to `/work/avsb`, `/work/kemon-doctor`, `/work/client`. Resolved — all three case routes ship in Phase 6. — `feature/work-and-cases` 2026-05-23
 - [scaffold] Add a real favicon — `app/icon.svg` + `app/apple-icon.tsx` ship in Phase 7. — `feature/polish-and-launch` 2026-05-23
-- [assets] `/cv.pdf` self-hosting — shipped as `/Resume_Mainul.pdf` in Phase 7. — `feature/polish-and-launch` 2026-05-23
+- [assets] `/cv.pdf` self-hosting — shipped as `/CV_Mainul.pdf` in Phase 7. — `feature/polish-and-launch` 2026-05-23
 - [deps] `npm install` reports 2 moderate vulnerabilities — documented exception (transitive `postcss <8.5.10` via `next`; no exploit surface in this build). Tracking Next 16.3 stable. See Open entry. — `feature/polish-and-launch` 2026-05-23
 - [perf] Pre-hydration accent application — won't-fix; the accent switcher itself is dropped from scope (see masterplan §3.1 amendment). — `feature/polish-and-launch` 2026-05-23
 - [assets] Cursimax + Flatwhite case screenshots — shipped via headless-Chrome captures of the live sites in `feature/cursimax-and-country-count`. — 2026-05-23
