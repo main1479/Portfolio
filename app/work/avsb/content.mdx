@@ -40,76 +40,6 @@ export const frontmatter = {
   Most commercial tools nail one and compromise on the others. AvsB is an attempt to take all three seriously in a single, coherent codebase — without giving up the **developer ergonomics of code-first workflows.**
 </CaseBlock>
 
-<CaseVisuals
-  items={[
-    { caption: 'CLI surface · ship a test in 3 commands', type: 'primary' },
-    {
-      caption: 'Feature flags · per-environment targeting',
-      src: '/work/avsb/flag-page.png',
-      alt: 'AvsB feature flag list showing environment targeting and rollout state',
-      aspect: '2/1',
-      type: 'secondary',
-    },
-  ]}
->
-  <CodeMock
-    lines={[
-      { type: 'comment', tokens: [{ kind: 'comment', value: '# Spin up a new experiment' }] },
-      {
-        type: 'prompt',
-        tokens: [
-          { kind: 'prompt', value: '$ ' },
-          { kind: 'keyword', value: 'avsb new ' },
-          { kind: 'text', value: 'checkout-cta-color' },
-        ],
-      },
-      {
-        type: 'response',
-        tokens: [{ kind: 'text', value: '  ✓ created experiments/checkout-cta-color/' }],
-      },
-      {
-        type: 'response',
-        tokens: [{ kind: 'text', value: '  ✓ scaffolded control.ts + variant-a.ts' }],
-      },
-      { type: 'empty' },
-      {
-        type: 'prompt',
-        tokens: [
-          { kind: 'prompt', value: '$ ' },
-          { kind: 'keyword', value: 'avsb ship ' },
-          { kind: 'text', value: 'checkout-cta-color ' },
-          { kind: 'value', value: '--traffic 50' },
-        ],
-      },
-      { type: 'response', tokens: [{ kind: 'text', value: '  ✓ build passed' }] },
-      { type: 'response', tokens: [{ kind: 'text', value: '  ✓ allocation written' }] },
-      {
-        type: 'response',
-        tokens: [
-          { kind: 'text', value: '  ✓ live · 50% traffic · ' },
-          { kind: 'string', value: '"https://avsb.dev/e/cta-color"' },
-        ],
-      },
-      { type: 'empty' },
-      {
-        type: 'prompt',
-        tokens: [
-          { kind: 'prompt', value: '$ ' },
-          { kind: 'keyword', value: 'avsb stats ' },
-          { kind: 'text', value: 'checkout-cta-color' },
-        ],
-      },
-      {
-        type: 'response',
-        tokens: [
-          { kind: 'text', value: '  variant-a · ' },
-          { kind: 'accent', value: '+2.4%' },
-          { kind: 'text', value: ' conv · n=14,820 · p=0.07' },
-        ],
-      },
-    ]}
-  />
-</CaseVisuals>
 
 <CaseBlock num="04" label="What I built" heading="The approach">
   A coherent platform across six surfaces, sharing one statistics engine and one analytics backbone.
@@ -125,9 +55,9 @@ export const frontmatter = {
 <CaseVisuals
   items={[
     {
-      caption: 'Audience builder · rule composition',
-      src: '/work/avsb/audience-builder.png',
-      alt: 'AvsB audience builder showing rule composition with live preview of who matches',
+      caption: 'Results · three engines, side by side',
+      src: '/work/avsb/results-page.png',
+      alt: 'AvsB results page showing frequentist, Bayesian, and sequential engines side by side',
       aspect: '2/1',
     },
     {
@@ -137,9 +67,9 @@ export const frontmatter = {
       aspect: '2/1',
     },
     {
-      caption: 'Results · three engines, side by side',
-      src: '/work/avsb/results-page.png',
-      alt: 'AvsB results page showing frequentist, Bayesian, and sequential engines side by side',
+      caption: 'Audience builder · rule composition',
+      src: '/work/avsb/audience-builder.png',
+      alt: 'AvsB audience builder showing rule composition with live preview of who matches',
       aspect: '2/1',
     },
   ]}
@@ -158,15 +88,15 @@ export const frontmatter = {
 <CaseVisuals
   items={[
     {
-      caption: 'Audience list · who sees what',
-      src: '/work/avsb/audience-page.png',
-      alt: 'AvsB audience list view with traffic allocation per audience',
-      aspect: '2/1',
-    },
-    {
       caption: 'Goal creation · define what wins means',
       src: '/work/avsb/create-goal.png',
       alt: 'AvsB goal creation form for primary metric, guardrails, and event filters',
+      aspect: '2/1',
+    },
+    {
+      caption: 'Audience list · who sees what',
+      src: '/work/avsb/audience-page.png',
+      alt: 'AvsB audience list view with traffic allocation per audience',
       aspect: '2/1',
     },
     {
@@ -196,15 +126,15 @@ export const frontmatter = {
       aspect: '2/1',
     },
     {
-      caption: 'Member invite · seat + role in one step',
-      src: '/work/avsb/member-invite.png',
-      alt: 'AvsB member invite modal combining seat assignment and role selection',
-      aspect: '2/1',
-    },
-    {
       caption: 'Role management · permissions per surface',
       src: '/work/avsb/role-management.png',
       alt: 'AvsB role management page showing permission matrix per product surface',
+      aspect: '2/1',
+    },
+    {
+      caption: 'Member invite · seat + role in one step',
+      src: '/work/avsb/member-invite.png',
+      alt: 'AvsB member invite modal combining seat assignment and role selection',
       aspect: '2/1',
     },
   ]}
