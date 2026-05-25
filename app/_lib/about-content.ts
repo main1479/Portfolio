@@ -1,7 +1,4 @@
 import type { AboutContent } from '../_types/about';
-import { siteConfig } from './site-config';
-
-const cvHref = siteConfig.cvHref;
 
 export const aboutContent = {
   pageIntro: {
@@ -155,10 +152,10 @@ export const aboutContent = {
     body: "Outside of work I run a YouTube channel for quiet travel videos. I'm drawn to mountains and the sea — anywhere a little further from the screen.",
   },
   resume: {
-    headingLines: ['Want the', 'full CV?'],
+    headingLines: ['Ready to', 'dig in?'],
     accentLineIndex: 1,
-    sub: 'A one-page PDF with the full picture — roles, dates, tools, and references on request.',
-    ctaLabel: 'Download resume',
-    ctaHref: cvHref,
+    sub: 'The full CV — every role, the stack, and a handful of projects worth flagging. Read online, save as a PDF, or just share the link.',
+    ctaLabel: 'Open CV',
+    ctaHref: '/cv',
   },
 } as const satisfies AboutContent;
