@@ -24,13 +24,14 @@ export const cvContent = {
     {
       role: 'Frontend Developer (A/B Testing)',
       org: 'Conversion.com',
-      dates: '2022 – 2026',
+      dates: '2022 – Present',
       location: 'Remote · UK',
       bullets: [
-        'Long-running contract building production A/B tests in JavaScript and SCSS on enterprise experimentation platforms (Optimizely, Kameleoon, Qubit).',
+        'Long-running contract — 4.5+ years and ongoing. Production A/B tests in JavaScript and SCSS on enterprise experimentation platforms (Optimizely, Kameleoon, Qubit, AB Tasty, VWO, Adobe Target, Google Optimize).',
         '500+ experiments shipped across ecommerce, SaaS, publishing, automotive, and non-profit clients — including The Times, G-Star RAW, Motorway, Unity, WaterAid, and Deel.',
         'Built Radius — Conversion.com’s internal insights & experiments platform. Frontend in Next.js + TypeScript + SCSS with GSAP motion and streaming APIs. Live, in daily use by internal teams and client stakeholders.',
         'Direct client access and ownership of the build → review → ship loop on each test.',
+        'Conversion calls on me when they need cover or extra capacity — currently their internal team handles day-to-day delivery, so I have bandwidth for additional work.',
       ],
     },
     {
@@ -87,7 +88,10 @@ export const cvContent = {
     { name: 'Life Vest', year: '2020', role: 'Frontend for Helen / Helion v1' },
   ],
   skills: [
-    { name: 'Core', tags: ['JavaScript', 'TypeScript', 'React', 'Next.js'] },
+    {
+      name: 'Core',
+      tags: ['JavaScript (ES6+)', 'TypeScript', 'React', 'Next.js', 'HTML', 'CSS'],
+    },
     {
       name: 'AI as co-engineer',
       tags: [
@@ -98,15 +102,49 @@ export const cvContent = {
         'AI code review',
       ],
     },
-    { name: 'Styling', tags: ['SCSS', 'Tailwind', 'Modern CSS'] },
+    { name: 'Styling', tags: ['SCSS', 'Tailwind CSS', 'Bootstrap', 'Modern CSS'] },
     {
       name: 'Experimentation',
-      tags: ['Optimizely', 'Kameleoon', 'Qubit', 'AB Tasty', 'VWO', 'Adobe Target', 'CRO'],
+      tags: [
+        'Optimizely',
+        'Kameleoon',
+        'Qubit',
+        'AB Tasty',
+        'VWO',
+        'Adobe Target',
+        'Google Optimize',
+        'CRO',
+      ],
     },
-    { name: 'Tooling & testing', tags: ['Vitest', 'Playwright', 'Git', 'Turborepo'] },
     {
-      name: 'Also working with',
-      tags: ['PostgreSQL', 'Drizzle ORM', 'Node.js', 'Cloudflare Workers', 'ClickHouse', 'GraphQL'],
+      name: 'Backend, data & CMS',
+      tags: [
+        'Node.js',
+        'Express.js',
+        'GraphQL',
+        'PostgreSQL',
+        'Drizzle ORM',
+        'MongoDB',
+        'Firebase',
+        'ClickHouse',
+        'Cloudflare Workers',
+        'WordPress',
+        'Headless CMS',
+      ],
+    },
+    {
+      name: 'Tooling & PM',
+      tags: [
+        'Git',
+        'Vitest',
+        'Playwright',
+        'Turborepo',
+        'VS Code',
+        'Tampermonkey',
+        'Slack',
+        'JIRA',
+        'Asana',
+      ],
     },
   ],
   awards: [

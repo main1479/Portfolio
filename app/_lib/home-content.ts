@@ -142,16 +142,16 @@ export const homeContent = {
     sectionIndex: '06 / Experience',
     items: [
       {
-        year: '2022 – 2026',
+        year: '2022 – Present',
         roleLines: ['Frontend Developer', '(A/B Testing)'],
         at: '@ Conversion.com',
-        desc: 'Long-running contract — A/B tests in JS & SCSS on enterprise experimentation platforms.',
+        desc: 'Long-running contract — production A/B tests in JS & SCSS on enterprise experimentation platforms. Ongoing.',
         loc: 'Remote · UK',
       },
       {
         year: '2019 – Present',
         roleLines: ['Freelance Frontend', 'Developer'],
-        desc: 'Frontend & experimentation work for startups and individuals across 10+ countries.',
+        desc: 'Frontend & experimentation work for startups and individuals across 9+ countries.',
         loc: 'Remote · 9+ countries',
       },
     ],

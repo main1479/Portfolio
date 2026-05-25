@@ -52,18 +52,15 @@ export const aboutContent = {
         { kind: 'text', value: ' across ecommerce and SaaS.' },
       ],
       [
-        {
-          kind: 'text',
-          value: 'For the last few years, most of my time went into a long-running contract with ',
-        },
-        { kind: 'strong', value: 'Conversion.com' },
+        { kind: 'text', value: "I've been a " },
+        { kind: 'strong', value: 'frontend A/B testing developer with Conversion.com' },
         {
           kind: 'text',
           value:
-            ", building A/B tests on enterprise platforms. That work has wound down, and I'm now ",
+            " for 4.5+ years, building production tests on enterprise platforms. That work continues, but at reduced volume — so I'm ",
         },
-        { kind: 'strong', value: 'open to new roles' },
-        { kind: 'text', value: ' — full-time remote, contract, or freelance.' },
+        { kind: 'strong', value: 'actively open to new opportunities' },
+        { kind: 'text', value: ', full-time remote or contract.' },
       ],
       [
         { kind: 'text', value: 'I work with ' },
@@ -89,7 +86,10 @@ export const aboutContent = {
     sectionIndex: '— Stack & Skills',
     title: 'What I build with',
     groups: [
-      { name: 'Core', tags: ['JavaScript', 'TypeScript', 'React', 'Next.js'] },
+      {
+        name: 'Core',
+        tags: ['JavaScript (ES6+)', 'TypeScript', 'React', 'Next.js', 'HTML', 'CSS'],
+      },
       {
         name: 'AI as co-engineer',
         tags: [
@@ -100,10 +100,50 @@ export const aboutContent = {
           'AI code review',
         ],
       },
-      { name: 'Styling', tags: ['SCSS', 'Tailwind', 'Modern CSS'] },
-      { name: 'Experimentation', tags: ['Optimizely', 'Kameleoon', 'Qubit', 'CRO'] },
-      { name: 'Tooling & Testing', tags: ['Vitest', 'Playwright', 'Git', 'Turborepo'] },
-      { name: 'Also working with', tags: ['PostgreSQL', 'Drizzle ORM', 'Node.js', 'ClickHouse'] },
+      { name: 'Styling', tags: ['SCSS', 'Tailwind CSS', 'Bootstrap', 'Modern CSS'] },
+      {
+        name: 'Experimentation',
+        tags: [
+          'Optimizely',
+          'Kameleoon',
+          'Qubit',
+          'AB Tasty',
+          'VWO',
+          'Adobe Target',
+          'Google Optimize',
+          'CRO',
+        ],
+      },
+      {
+        name: 'Backend, data & CMS',
+        tags: [
+          'Node.js',
+          'Express.js',
+          'GraphQL',
+          'PostgreSQL',
+          'Drizzle ORM',
+          'MongoDB',
+          'Firebase',
+          'ClickHouse',
+          'Cloudflare Workers',
+          'WordPress',
+          'Headless CMS',
+        ],
+      },
+      {
+        name: 'Tooling & PM',
+        tags: [
+          'Git',
+          'Vitest',
+          'Playwright',
+          'Turborepo',
+          'VS Code',
+          'Tampermonkey',
+          'Slack',
+          'JIRA',
+          'Asana',
+        ],
+      },
     ],
   },
   experience: {
