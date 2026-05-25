@@ -1,4 +1,5 @@
 import { Arrow } from '../../../_components/Arrow/Arrow';
+import { Magnetic } from '../../../_components/Magnetic/Magnetic';
 import type { DirectLinkData } from '../../../_types/contact';
 import styles from './_ContactAside.module.scss';
 
@@ -13,9 +14,11 @@ export function DirectLink({ data }: { data: DirectLinkData }) {
     >
       <span className={styles.directLabel}>{data.label}</span>
       <span className={styles.directValue}>{data.value}</span>
-      <span className={styles.directArrow} aria-hidden="true">
-        <Arrow size={14} strokeWidth={1.6} />
-      </span>
+      <Magnetic>
+        <span className={styles.directArrow} aria-hidden="true">
+          <Arrow size={14} strokeWidth={1.6} />
+        </span>
+      </Magnetic>
     </a>
   );
 }

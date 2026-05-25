@@ -96,7 +96,7 @@ And a contract client landing on the same site should still see all the freelanc
 
 ## Out of scope (futureWorks candidates)
 
-- The CV / résumé PDF (`/Resume_Mainul.pdf`) — same repositioning probably belongs there too, but the PDF is a separate artifact.
+- The CV / résumé PDF (`/CV_Mainul.pdf`) — same repositioning probably belongs there too, but the PDF is a separate artifact.
 - LinkedIn headline — same. Worth syncing manually after this lands.
 - OG card text (_"Frontend · A/B Testing"_) — fine as-is, no AI signal needed in metadata.
 - Email templates (notification + confirmation) — copy is fine. Topic-label mapping updates when the chip values change, but the email body doesn't need rewriting.

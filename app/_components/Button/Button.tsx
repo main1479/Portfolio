@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Arrow } from '../Arrow/Arrow';
+import { Magnetic } from '../Magnetic/Magnetic';
 import styles from './_Button.module.scss';
 
 type Variant = 'default' | 'ghost' | 'accent';
@@ -61,26 +62,32 @@ export function Button(props: Props) {
     const isExternal = props.external || /^(https?:|mailto:)/.test(props.href);
     if (isExternal) {
       return (
-        <a
-          href={props.href}
-          className={cls}
-          target={props.href.startsWith('mailto:') ? undefined : '_blank'}
-          rel={props.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-        >
-          {body}
-        </a>
+        <Magnetic>
+          <a
+            href={props.href}
+            className={cls}
+            target={props.href.startsWith('mailto:') ? undefined : '_blank'}
+            rel={props.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+          >
+            {body}
+          </a>
+        </Magnetic>
       );
     }
     return (
-      <Link href={props.href} className={cls}>
-        {body}
-      </Link>
+      <Magnetic>
+        <Link href={props.href} className={cls}>
+          {body}
+        </Link>
+      </Magnetic>
     );
   }
 
   return (
-    <button type={props.type ?? 'button'} onClick={props.onClick} className={cls}>
-      {body}
-    </button>
+    <Magnetic>
+      <button type={props.type ?? 'button'} onClick={props.onClick} className={cls}>
+        {body}
+      </button>
+    </Magnetic>
   );
 }

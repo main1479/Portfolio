@@ -15,7 +15,7 @@ export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mainul.info
   '',
 );
 
-export const cvHref = '/Resume_Mainul.pdf';
+export const cvHref = '/CV_Mainul.pdf';
 
 export const siteConfig = {
   ownerName: 'Mainul Islam',

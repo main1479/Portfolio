@@ -4,6 +4,7 @@ import { useCallback, useRef, useState } from 'react';
 import { TopicChips } from './TopicChips';
 import { FormSuccess } from './FormSuccess';
 import { Arrow } from '../../../_components/Arrow/Arrow';
+import { Magnetic } from '../../../_components/Magnetic/Magnetic';
 import { contactSchema } from '../../../_lib/contact-schema';
 import type {
   ContactContent,
@@ -190,9 +191,11 @@ export function ContactForm({ content }: Props) {
     >
       <div className={styles.head}>
         <span className={styles.title}>{content.title}</span>
-        <button type="button" className={styles.reset} onClick={onReset}>
-          {content.reset.label}
-        </button>
+        <Magnetic>
+          <button type="button" className={styles.reset} onClick={onReset}>
+            {content.reset.label}
+          </button>
+        </Magnetic>
       </div>
 
       <div className={styles.row}>
@@ -254,12 +257,18 @@ export function ContactForm({ content }: Props) {
 
       <div className={styles.submit}>
         <span className={styles.submitNote}>{content.submit.note}</span>
-        <button type="submit" className={styles.submitBtn} disabled={state.status === 'submitting'}>
-          <span>{state.status === 'submitting' ? 'Sending…' : content.submit.label}</span>
-          <span className={styles.submitArrow} aria-hidden="true">
-            <Arrow size={14} strokeWidth={1.6} />
-          </span>
-        </button>
+        <Magnetic>
+          <button
+            type="submit"
+            className={styles.submitBtn}
+            disabled={state.status === 'submitting'}
+          >
+            <span>{state.status === 'submitting' ? 'Sending…' : content.submit.label}</span>
+            <span className={styles.submitArrow} aria-hidden="true">
+              <Arrow size={14} strokeWidth={1.6} />
+            </span>
+          </button>
+        </Magnetic>
       </div>
     </form>
   );
