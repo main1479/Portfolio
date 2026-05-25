@@ -1,0 +1,22 @@
+.outer {
+  display: inline-block;
+}
+
+.outerBlock {
+  display: block;
+}
+
+.inner {
+  display: inline-block;
+  will-change: transform;
+}
+
+.innerBlock {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inner {
+    transform: none !important;
+  }
+}
