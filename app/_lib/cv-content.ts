@@ -63,8 +63,8 @@ export const cvContent = {
       meta: 'Solo founder & developer · In progress',
       bullets: [
         'Bilingual (Bangla + English) trust layer helping patients find reliable doctors and surface over-prescribing.',
-        'Mobile-first Next.js 16 build for real conditions in Bangladesh — older phones, patchy 3G, mixed-language users.',
-        'Server-rendered for fast first paint over slow networks; Drizzle ORM for type-safe migrations on Postgres.',
+        'Mobile-first Next.js 16 build with Bangla and English wired in as equal first-class languages — same care on type, layout, and search.',
+        'Server-rendered for fast first paint and shareable doctor profiles; Drizzle ORM for type-safe migrations on Postgres.',
       ],
       href: 'mainul.info/work/kemon-doctor',
     },
