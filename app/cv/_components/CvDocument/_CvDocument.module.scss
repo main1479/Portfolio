@@ -222,10 +222,10 @@
   li::before {
     content: '';
     position: absolute;
-    left: 4px;
-    top: 0.7em;
-    width: 5px;
-    height: 5px;
+    left: 2px;
+    top: 0.6em;
+    width: 8px;
+    height: 8px;
     background: var(--accent);
     border-radius: 50%;
     print-color-adjust: exact;
@@ -516,9 +516,9 @@
   }
   .bullets li::before {
     background: #1f3a5f;
-    width: 4px;
-    height: 4px;
-    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    top: 0.55em;
   }
   .entryLink {
     font-size: 8pt;
