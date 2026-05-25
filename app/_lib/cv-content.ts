@@ -13,7 +13,7 @@ export const cvContent = {
     },
   },
   about:
-    'Frontend developer specialising in A/B testing and experimentation. 4.5+ years on Optimizely, Kameleoon, and Qubit, alongside modern frontend with Next.js and TypeScript. I work with AI as a co-engineer — Claude Code, Cursor — to ship faster while still owning the design and the result. Open to full-time remote and contract roles.',
+    'Frontend developer specialising in A/B testing and experimentation. 4.5+ years on Optimizely, Kameleoon, and Qubit, alongside modern frontend with Next.js and TypeScript. Treats AI as a real engineering skill — Claude Code as a daily co-engineer, specs before code, agentic workflows for multi-file work. AvsB (370k lines, solo, in production) is the proof at scale. Open to full-time remote and contract roles.',
   stats: [
     { value: '7+ yrs', label: 'Frontend development' },
     { value: '4.5+ yrs', label: 'A/B testing & experimentation' },
@@ -52,7 +52,7 @@ export const cvContent = {
         '370k lines of TypeScript / SCSS · 250 API routes · 71 Prisma models · 867 test files.',
         'Three statistical engines side-by-side (frequentist, Bayesian, sequential) with variance reduction.',
         'Five Cloudflare Workers for edge ingestion, ClickHouse store, four published SDK packages.',
-        'Paired daily with Claude Code as a co-engineer — test scaffolding, schema migrations, and second-eye reviews on tricky functions.',
+        'Claude Code as a daily co-engineer — specs before code, agentic multi-file refactors, schema migrations delegated, critical paths hand-reviewed.',
       ],
       href: 'mainul.info/work/avsb',
     },
@@ -93,9 +93,10 @@ export const cvContent = {
       name: 'AI as co-engineer',
       tags: [
         'Claude Code',
-        'Cursor',
-        'AI pair programming',
         'Spec-driven prompting',
+        'Context management',
+        'Agentic workflows',
+        'Multi-file refactors',
         'AI code review',
       ],
     },

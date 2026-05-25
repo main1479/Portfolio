@@ -59,15 +59,19 @@ export const aboutContent = {
         { kind: 'text', value: ', full-time remote or contract.' },
       ],
       [
-        { kind: 'text', value: 'I work with ' },
-        { kind: 'accent', value: 'AI as a co-engineer' },
         {
           kind: 'text',
           value:
-            ', not just an autocomplete. Claude Code and Cursor handle a real share of the keyboard work — scaffolding, refactors, test coverage — while the architecture, the decisions, and the review stay mine. It is how a solo dev can ship a ',
+            'Everyone uses AI now. The skill is using it well enough to actually finish what you start. I treat ',
         },
-        { kind: 'strong', value: '370k-line platform' },
-        { kind: 'text', value: ' without losing the result.' },
+        { kind: 'accent', value: 'Claude Code' },
+        {
+          kind: 'text',
+          value:
+            ' less like a smarter autocomplete and more like a junior engineer who needs the same things every junior needs — a clear spec, the right context, a tight scope, and an honest review pass. That workflow is what makes a ',
+        },
+        { kind: 'strong', value: '370k-line solo platform' },
+        { kind: 'text', value: ' finishable in 1.5 years.' },
       ],
       [
         {
@@ -90,9 +94,10 @@ export const aboutContent = {
         name: 'AI as co-engineer',
         tags: [
           'Claude Code',
-          'Cursor',
-          'AI pair programming',
           'Spec-driven prompting',
+          'Context management',
+          'Agentic workflows',
+          'Multi-file refactors',
           'AI code review',
         ],
       },
