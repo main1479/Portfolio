@@ -1,9 +1,10 @@
 import type { ContactInput } from '../contact-schema';
 
 export const TOPIC_LABELS: Record<ContactInput['topic'], string> = {
-  'a-b-testing': 'A/B testing',
+  'full-time-role': 'Full-time role',
+  'contract-freelance': 'Contract / freelance',
+  'a-b-testing': 'A/B testing project',
   'frontend-build': 'Frontend build',
-  'product-work': 'Product work',
   'something-else': 'Something else',
 };
 

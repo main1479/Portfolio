@@ -2,19 +2,19 @@ import type { FaqItem } from '../_types/contact';
 
 export const faqContent = [
   {
-    question: 'What kind of projects are you taking on?',
+    question: 'What are you looking for?',
     answer:
-      "Mostly A/B testing work on Optimizely, Kameleoon, or Qubit — and frontend builds in React / Next.js. I'm more useful in scopes where there's a clear measurable outcome.",
+      "A full-time remote frontend role — ideally one where experimentation or growth is part of the work. I'm open to contract and freelance projects too.",
   },
   {
-    question: 'Do you work with agencies or only end clients?',
+    question: 'What kinds of teams do you work best with?',
     answer:
-      "Both. I've worked with optimisation agencies and directly with product teams. Whichever sets up the cleanest workflow.",
+      "Product teams, experimentation teams, and growth teams. I've shipped through optimisation agencies and directly with product teams — whichever sets up the cleanest workflow.",
   },
   {
-    question: 'How do you charge?',
+    question: 'How do you use AI in your day-to-day work?',
     answer:
-      'Fixed-price per test or per scope is usually the cleanest. For ongoing experimentation programmes, a weekly or monthly retainer.',
+      'Daily, and as a co-engineer — not just an autocomplete. Claude Code handles a real share of the keyboard work, Cursor speeds up the inline edits, and the architecture, decisions, and review stay with me. The point is to move faster on real production work, not to ship code I have not read.',
   },
   {
     question: 'What time zone do you work in?',
