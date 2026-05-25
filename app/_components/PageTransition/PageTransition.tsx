@@ -11,11 +11,12 @@ export function PageTransition() {
   const pathname = usePathname();
   const panelIsUp = useRef(false);
 
-  // Intercept internal link clicks. Play the cover BEFORE navigation so the
-  // user never sees the new page render under a still-rising panel.
+  // Intercept internal link clicks in the CAPTURE phase, before Next.js
+  // Link's own bubble-phase onClick fires preventDefault + router.push.
+  // stopPropagation prevents Link from also navigating; we'll call
+  // router.push ourselves once the cover panel is fully in.
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
-      if (e.defaultPrevented) return;
       if (e.button !== 0) return;
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
 
@@ -47,6 +48,9 @@ export function PageTransition() {
       if (!panel) return;
 
       e.preventDefault();
+      e.stopPropagation();
+
+      const dest = url.pathname + url.search + url.hash;
 
       gsap.killTweensOf(panel);
       document.body.style.overflow = 'hidden';
@@ -58,13 +62,13 @@ export function PageTransition() {
         duration: 0.35,
         ease: 'expo.inOut',
         onComplete: () => {
-          router.push(url.pathname + url.search + url.hash);
+          router.push(dest);
         },
       });
     };
 
-    document.addEventListener('click', handleClick);
-    return () => document.removeEventListener('click', handleClick);
+    document.addEventListener('click', handleClick, true);
+    return () => document.removeEventListener('click', handleClick, true);
   }, [router]);
 
   // After the new page mounts, slide the panel back off — but only if we
