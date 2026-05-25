@@ -92,13 +92,7 @@ export const aboutContent = {
       { name: 'Core', tags: ['JavaScript', 'TypeScript', 'React', 'Next.js'] },
       {
         name: 'AI as co-engineer',
-        tags: [
-          'Claude Code',
-          'Cursor',
-          'AI pair programming',
-          'Spec-driven prompting',
-          'AI code review',
-        ],
+        tags: ['Claude Code', 'Cursor', 'AI pairing', 'Code review'],
       },
       { name: 'Styling', tags: ['SCSS', 'Tailwind', 'Modern CSS'] },
       { name: 'Experimentation', tags: ['Optimizely', 'Kameleoon', 'Qubit', 'CRO'] },
