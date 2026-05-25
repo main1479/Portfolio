@@ -59,7 +59,7 @@ export function PageTransition() {
       gsap.set(panel, { display: 'block', yPercent: 100 });
       gsap.to(panel, {
         yPercent: 0,
-        duration: 0.35,
+        duration: 0.7,
         ease: 'expo.inOut',
         onComplete: () => {
           router.push(dest);
@@ -81,7 +81,7 @@ export function PageTransition() {
     gsap.killTweensOf(panel);
     gsap.to(panel, {
       yPercent: -100,
-      duration: 0.4,
+      duration: 0.8,
       ease: 'expo.inOut',
       onComplete: () => {
         gsap.set(panel, { display: 'none' });

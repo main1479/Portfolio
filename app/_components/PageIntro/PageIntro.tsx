@@ -26,7 +26,7 @@ export function PageIntro({ label, title, titleNodes, sub, className }: Props) {
       mm.add('(prefers-reduced-motion: no-preference)', () => {
         const tl = gsap.timeline({
           defaults: { ease: 'expo.out' },
-          delay: 0.35,
+          delay: 0.7,
         });
         tl.from(labelRef.current, { opacity: 0, y: 8, duration: 0.55 }, 0);
         tl.from(titleInnerRef.current, { yPercent: 110, duration: 1.0 }, 0.1);
