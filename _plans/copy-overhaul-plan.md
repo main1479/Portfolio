@@ -40,7 +40,7 @@ Added in three places where it's genuine, not bolted on:
 
 - **Home services section** — the third "Product Building" card becomes an "AI-assisted Builds" framing — building and shipping faster _with_ AI tooling, not skipping the thinking.
 - **About skills section** — a new "AI-augmented workflow" group: Claude Code, Cursor, prompt engineering, AI pair programming. Placed near the top so it reads as a core skill, not an afterthought.
-- **AvsB case study** — the existing passing reference expands into a short paragraph: how AI tooling sped the build, what it didn't do, why the result still holds together. This is the truthful version of the AI signal — not "I used ChatGPT", but "I shipped a 370k-line platform solo by pairing with AI well".
+- **AvsB case study** — the existing passing reference expands into a short paragraph: how AI tooling sped the build, what it didn't do, why the result still holds together. This is the truthful version of the AI signal — not "I used ChatGPT", but "I shipped a 410k-line platform solo by pairing with AI well".
 - **Kemon Doctor and Radius case studies** — one-line mention where the work involved AI tooling. Honest, not inflated.
 
 ### Changes — plain language

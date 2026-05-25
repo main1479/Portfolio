@@ -58,7 +58,7 @@ export const homeContent = {
           value:
             ' as a real engineering skill — Claude Code as a daily driver, less autocomplete and more junior engineer who needs proper spec, context, and review. AvsB is the proof at scale: ',
         },
-        { kind: 'strong', value: '370k lines, solo, in production' },
+        { kind: 'strong', value: '410k lines, solo, in production' },
         { kind: 'text', value: '.' },
       ],
     ],

@@ -70,7 +70,7 @@ export const aboutContent = {
           value:
             ' less like a smarter autocomplete and more like a junior engineer who needs the same things every junior needs — a clear spec, the right context, a tight scope, and an honest review pass. That workflow is what makes a ',
         },
-        { kind: 'strong', value: '370k-line solo platform' },
+        { kind: 'strong', value: '410k-line solo platform' },
         {
           kind: 'text',
           value:

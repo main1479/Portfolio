@@ -14,7 +14,7 @@ export const faqContent = [
   {
     question: 'How do you use AI in your day-to-day work?',
     answer:
-      'Daily, and as a real engineering skill. Claude Code is my daily driver — I treat it less like a smarter autocomplete and more like a junior engineer who needs the things every junior needs: a clear spec, the right context, a tight scope, and an honest review pass. The skill is in the workflow, not the typing — knowing what to delegate, what to keep on the keyboard, and how to keep the feedback loop tight enough to ship production-quality work. Everyone uses AI now; finishing what you start with it is the part most people miss. AvsB — 370k lines, solo, in production — is the proof at scale.',
+      'Daily, and as a real engineering skill. Claude Code is my daily driver — I treat it less like a smarter autocomplete and more like a junior engineer who needs the things every junior needs: a clear spec, the right context, a tight scope, and an honest review pass. The skill is in the workflow, not the typing — knowing what to delegate, what to keep on the keyboard, and how to keep the feedback loop tight enough to ship production-quality work. Everyone uses AI now; finishing what you start with it is the part most people miss. AvsB — 410k lines, solo, in production — is the proof at scale.',
   },
   {
     question: 'What time zone do you work in?',

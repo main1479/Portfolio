@@ -143,7 +143,7 @@ Experimentation platforms have to be three things at once: a comfortable surface
 
 #### 06 · Outcome · "By the numbers"
 
-- ~370,000 lines of TypeScript / SCSS
+- ~410,000 lines of TypeScript / SCSS
 - 250 API routes · 71 Prisma models · 26 migrations
 - 29 Redux slices · ~140 documentation pages
 - 867 test files · ~8,000 test cases

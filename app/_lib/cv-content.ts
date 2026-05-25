@@ -13,7 +13,7 @@ export const cvContent = {
     },
   },
   about:
-    'Frontend developer specialising in A/B testing and experimentation. 4.5+ years on Optimizely, Kameleoon, and Qubit, alongside modern frontend with Next.js and TypeScript. Treats AI as a real engineering skill — Claude Code as a daily co-engineer, specs before code, agentic workflows for multi-file work. AvsB (370k lines, solo, in production) is the proof at scale. Open to full-time remote and contract roles.',
+    'Frontend developer specialising in A/B testing and experimentation. 4.5+ years on Optimizely, Kameleoon, and Qubit, alongside modern frontend with Next.js and TypeScript. Treats AI as a real engineering skill — Claude Code as a daily co-engineer, specs before code, agentic workflows for multi-file work. AvsB (410k lines, solo, in production) is the proof at scale. Open to full-time remote and contract roles.',
   stats: [
     { value: '7+ yrs', label: 'Frontend development' },
     { value: '4.5+ yrs', label: 'A/B testing & experimentation' },
@@ -49,7 +49,7 @@ export const cvContent = {
       dates: '2024 – Present',
       meta: 'Solo · 1.5+ years · Pre-launch',
       bullets: [
-        '370k lines of TypeScript / SCSS · 250 API routes · 71 Prisma models · 867 test files.',
+        '410k lines of TypeScript / SCSS · 250 API routes · 71 Prisma models · 867 test files.',
         'Three statistical engines side-by-side (frequentist, Bayesian, sequential) with variance reduction.',
         'Five Cloudflare Workers for edge ingestion, ClickHouse store, four published SDK packages.',
         'Claude Code as a daily co-engineer — specs before code, agentic multi-file refactors, schema migrations delegated, critical paths hand-reviewed.',

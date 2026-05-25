@@ -98,7 +98,7 @@ tags: ['Architecture', 'PostgreSQL', 'Drizzle']
 
 ```
 titleLines: ['AI-paired', 'builds']
-desc: 'Shipping faster by pairing with AI tools — Claude Code, Cursor — while still owning the design, the review, and the result. AvsB (370k lines, solo) is the proof.'
+desc: 'Shipping faster by pairing with AI tools — Claude Code, Cursor — while still owning the design, the review, and the result. AvsB (410k lines, solo) is the proof.'
 tags: ['Claude Code', 'Cursor', 'Solo product builds']
 ```
 
@@ -454,7 +454,7 @@ Four decisions refined the spec during approval:
    - The home services card #3 was **not** rewritten — _"Product Building"_ stays as it was. The signal carries from the skill section + the bio paragraph instead.
    - The Kemon Doctor _"AI-paired build"_ bullet was **not** added. AvsB's expanded paragraph carries the AI story; Kemon Doctor stays focused on the product.
    - The home-page intro paragraph 3 was rewritten to include the co-engineer phrasing: _"I work with AI as a co-engineer — Claude Code, Cursor — to move faster while still owning the design and the result."_
-   - About-bio gained a dedicated paragraph 5 specifically about the co-engineer relationship and how it enables solo 370k-line builds.
+   - About-bio gained a dedicated paragraph 5 specifically about the co-engineer relationship and how it enables solo 410k-line builds.
    - AvsB block 02 expanded to a full paragraph (as proposed), specifically using the _"co-engineer"_ phrase.
 
 3. **FAQ rewrite landed as proposed** — pricing question removed, _"What are you looking for?"_ and _"How do you use AI in your day-to-day work?"_ added. AI answer expanded to land the co-engineer framing.
