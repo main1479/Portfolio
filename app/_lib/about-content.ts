@@ -160,9 +160,9 @@ export const aboutContent = {
     body: "Outside of work I run a YouTube channel for quiet travel videos. I'm drawn to mountains and the sea — anywhere a little further from the screen.",
   },
   resume: {
-    headingLines: ['Ready to', 'dig in?'],
+    headingLines: ['Want the', 'long version?'],
     accentLineIndex: 1,
-    sub: 'The full CV — every role, the stack, and a handful of projects worth flagging. Read online, save as a PDF, or just share the link.',
+    sub: 'Every role, the stack, and a few projects worth a closer look. Read online, save as a PDF, or just share the link.',
     ctaLabel: 'Open CV',
     ctaHref: '/cv',
   },
