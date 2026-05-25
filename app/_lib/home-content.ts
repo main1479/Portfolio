@@ -23,46 +23,6 @@ export const homeContent = {
       { label: 'Experimentation', accent: true },
     ],
   },
-  intro: {
-    label: '— Introduction',
-    indexLabel: '01 / Index',
-    paragraphs: [
-      [
-        { kind: 'text', value: "I'm a " },
-        { kind: 'strong', value: 'frontend developer' },
-        { kind: 'text', value: ' working remotely since 2019, ' },
-        { kind: 'strong', value: 'open to full-time and contract roles' },
-        { kind: 'text', value: '.' },
-      ],
-      [
-        { kind: 'text', value: 'My focus is ' },
-        { kind: 'accent', value: 'frontend you can measure' },
-        {
-          kind: 'text',
-          value: ' — building reliable A/B tests and conversion experiments for real businesses.',
-        },
-      ],
-      [
-        { kind: 'text', value: "I've spent the last " },
-        { kind: 'strong', value: '4.5+ years building experiments' },
-        {
-          kind: 'text',
-          value:
-            ' on enterprise platforms — Optimizely, Kameleoon, Qubit — alongside modern frontend in React and Next.js. ',
-        },
-        { kind: 'strong', value: '500+ A/B tests shipped' },
-        { kind: 'text', value: '. I also treat ' },
-        { kind: 'accent', value: 'using AI well' },
-        {
-          kind: 'text',
-          value:
-            ' as a real engineering skill — Claude Code as a daily driver, less autocomplete and more junior engineer who needs proper spec, context, and review. AvsB is the proof at scale: ',
-        },
-        { kind: 'strong', value: '410k lines, solo, in production' },
-        { kind: 'text', value: '.' },
-      ],
-    ],
-  },
   stats: [
     { value: 500, suffix: '+', label: 'A/B tests & experiments shipped' },
     { value: 7, label: 'Years building for the web' },

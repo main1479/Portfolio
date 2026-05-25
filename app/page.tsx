@@ -7,7 +7,6 @@ import { TextLink } from './_components/TextLink/TextLink';
 import { HomeShell } from './_components/home/HomeShell/HomeShell';
 import { Hero } from './_components/home/Hero/Hero';
 import { Marquee } from './_components/home/Marquee/Marquee';
-import { Intro } from './_components/home/Intro/Intro';
 import { Stats } from './_components/home/Stats/Stats';
 import { Services } from './_components/home/Services/Services';
 import { SelectedWork } from './_components/home/SelectedWork/SelectedWork';
@@ -29,12 +28,6 @@ export default function Home() {
     <HomeShell>
       <Hero content={homeContent.hero} />
       <Marquee tokens={homeContent.marquee.tokens} />
-
-      <Section>
-        <Container>
-          <Intro content={homeContent.intro} />
-        </Container>
-      </Section>
 
       <Section>
         <Container>
