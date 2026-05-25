@@ -21,6 +21,9 @@ Format: `- [<area>] <description> — <branch or session ref>`
 - [deps] `npm audit` reports 2 moderate (`postcss <8.5.10`, transitive via `next`). Not exploitable in this build context (PostCSS only stringifies build-time author SCSS). Fix would require downgrading Next to 9.3.3 — breaking change. Tracking Next 16.3 stable for an automatic upstream fix. — `feature/polish-and-launch` session 2026-05-23
 - [deploy] DNS for `mainul.info` not configured by Phase 7 PR — Vercel domain binding + apex/CNAME records remain a manual outside-the-repo step. — `feature/polish-and-launch` session 2026-05-23
 - [responsive] Visual confirmation of the `fix/responsive-issues` SCSS tuning was not performed by Claude this session (no browser-driving tool available). Build / lint / typecheck all pass and all affected routes return 200, but the breakpoint behaviour at 320/380/640/768/900/1100/1300/1500/1640 needs a human eyeball pass on home, /work, /about, /contact, and a case page before merge. — `fix/responsive-issues` session 2026-05-24
+- [styles] Unused `.subhead` rule in `app/contact/_components/ContactForm/_ContactForm.module.scss` — the `<p className={styles.subhead}>` element was removed in the copy overhaul but the SCSS class wasn't pruned. Harmless but worth cleaning. — `feature/copy-overhaul` session 2026-05-25
+- [copy] Resume / CV PDF (`public/Resume_Mainul.pdf`) and the LinkedIn headline still use the older "specialised in A/B testing and experimentation" framing. Should be re-synced to match the site's new full-time + contract positioning. — `feature/copy-overhaul` session 2026-05-25
+- [visual] Copy overhaul typecheck + lint + build all pass, but the rendered home / about / contact / case pages need a human-eyeball pass — the new five-chip topic row at narrow viewports and the new "AI as co-engineer" skills group placement are the highest-risk spots. — `feature/copy-overhaul` session 2026-05-25
 
 ## Resolved
 

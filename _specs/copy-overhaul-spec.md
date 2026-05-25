@@ -440,3 +440,48 @@ Same four from the plan:
 4. Topic chip set — **Full-time role · Contract / freelance · A/B testing project · Something else**.
 
 After approval, implementation lands on a single branch (`feature/copy-overhaul`) with one commit per logical group (positioning / AI / FAQ / topic-enum), followed by `/ship`.
+
+---
+
+## Retrospective
+
+Four decisions refined the spec during approval:
+
+1. **Positioning landed on even billing**, not full-time-first. Hero status now reads _"Open to new roles — full-time or contract"_. End-CTA, contact-page intro, and the about-page card all weight both equally rather than leading with full-time. The about-bio paragraph 4 mirrors the same — _"open to new roles — full-time remote, contract, or freelance."_
+
+2. **AI signal placement narrowed to the skill section, with the "AI as co-engineer" framing**. Concrete changes vs. the original spec:
+   - The about skills group is named **"AI as co-engineer"** (not "AI-augmented workflow"), placed at slot 2 (after Core).
+   - The home services card #3 was **not** rewritten — _"Product Building"_ stays as it was. The signal carries from the skill section + the bio paragraph instead.
+   - The Kemon Doctor _"AI-paired build"_ bullet was **not** added. AvsB's expanded paragraph carries the AI story; Kemon Doctor stays focused on the product.
+   - The home-page intro paragraph 3 was rewritten to include the co-engineer phrasing: _"I work with AI as a co-engineer — Claude Code, Cursor — to move faster while still owning the design and the result."_
+   - About-bio gained a dedicated paragraph 5 specifically about the co-engineer relationship and how it enables solo 370k-line builds.
+   - AvsB block 02 expanded to a full paragraph (as proposed), specifically using the _"co-engineer"_ phrase.
+
+3. **FAQ rewrite landed as proposed** — pricing question removed, _"What are you looking for?"_ and _"How do you use AI in your day-to-day work?"_ added. AI answer expanded to land the co-engineer framing.
+
+4. **Topic chips went to five, not four** — _"Frontend build"_ kept alongside _Full-time role · Contract / freelance · A/B testing project · Something else_. Schema (`TOPIC_VALUES`), `TopicValue` type, and email-template `TOPIC_LABELS` map all migrated in lockstep. `product-work` was the only value dropped; `frontend-build` survived.
+
+### Verification
+
+- `npm run typecheck` — clean
+- `npm run lint` — clean
+- `npm run build` — passes, all 30 routes (15 static + 15 dynamic) generate
+- No layout, motion, or accessibility surface changed; copy-only edits.
+
+### Commits
+
+- `plan: copy overhaul — full-time positioning + AI signal + plain language`
+- `spec: copy overhaul — file-by-file before/after diffs`
+- `feat: positioning + AI signal copy changes`
+- `feat: migrate topic enum + rewrite FAQs + trim form subhead`
+- `feat: case-study MDX — neutral footer headings, AvsB AI co-engineer paragraph`
+
+### Visual check still needed
+
+Build + typecheck pass, but the **`npm run dev` golden-path check is yours to run** — I haven't loaded the rendered site in a browser. The places to spot-check:
+
+- Home hero status line wraps correctly on mobile.
+- Home intro paragraph 3 reads cleanly with the new accent spans.
+- About-page skills list shows the new "AI as co-engineer" group in slot 2 with the right Reveal stagger.
+- Contact form's topic chip row with five chips doesn't break on narrow viewports.
+- All six case studies show _"Want to talk?"_ as the footer heading.
