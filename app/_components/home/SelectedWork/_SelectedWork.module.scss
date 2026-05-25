@@ -185,27 +185,35 @@
 
 @media (max-width: 900px) {
   .row {
-    grid-template-columns: 36px 1fr;
+    grid-template-columns: 36px 1fr 56px;
+    grid-template-rows: auto auto;
     row-gap: 16px;
+    align-items: start;
   }
   .num {
+    grid-column: 1;
     grid-row: 1;
+    align-self: center;
   }
   .title {
     grid-column: 2;
-  }
-  .meta {
-    grid-column: 2;
+    grid-row: 1;
   }
   .arrow {
-    grid-column: 2;
-    justify-self: start;
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    align-self: center;
+  }
+  .meta {
+    grid-column: 2 / -1;
+    grid-row: 2;
   }
 }
 
 @media (max-width: 640px) {
   .row {
-    grid-template-columns: 26px 1fr;
+    grid-template-columns: 26px 1fr 36px;
     column-gap: 10px;
     row-gap: 10px;
     padding: 20px 0;
