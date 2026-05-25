@@ -6,14 +6,14 @@ import styles from './_Magnetic.module.scss';
 
 type Props = {
   children: React.ReactNode;
-  /** Cursor-follow multiplier 0..1. Default 0.3 (subtle). */
+  /** Cursor-follow multiplier 0..1. Default 0.15 (subtle). */
   strength?: number;
   /** Render as block instead of the default inline-block. */
   block?: boolean;
   className?: string;
 };
 
-export function Magnetic({ children, strength = 0.3, block = false, className }: Props) {
+export function Magnetic({ children, strength = 0.15, block = false, className }: Props) {
   const outerRef = useRef<HTMLSpanElement>(null);
   const innerRef = useRef<HTMLSpanElement>(null);
 

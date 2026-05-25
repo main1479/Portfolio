@@ -17,14 +17,16 @@ export function ResumeCTA({ content }: { content: ResumeCtaData }) {
         </h3>
         <p className={styles.sub}>{content.sub}</p>
       </div>
-      <Button
-        href={content.ctaHref}
-        variant="accent"
-        className={styles.cta}
-        arrowGlyph={<span aria-hidden="true">→</span>}
-      >
-        {content.ctaLabel}
-      </Button>
+      <div className={styles.ctaWrap}>
+        <Button
+          href={content.ctaHref}
+          variant="accent"
+          className={styles.cta}
+          arrowGlyph={<span aria-hidden="true">→</span>}
+        >
+          {content.ctaLabel}
+        </Button>
+      </div>
     </Reveal>
   );
 }

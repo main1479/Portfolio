@@ -39,7 +39,7 @@ body {
 // small UI text stay readable without per-element overrides.
 @media (max-width: 900px) {
   html {
-    font-size: 90%;
+    font-size: 95%;
   }
 }
 
@@ -105,7 +105,7 @@ details summary::-webkit-details-marker {
 .page-intro__title {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(8.4rem, 17vw, 26rem);
+  font-size: clamp(2.6rem, 15vw, 10rem);
   line-height: 0.85;
   text-transform: uppercase;
   margin: 0;
@@ -124,18 +124,6 @@ details summary::-webkit-details-marker {
   color: var(--fg-soft);
 }
 
-@media (max-width: 1100px) {
-  .page-intro__title {
-    font-size: clamp(5.6rem, 13vw, 16rem);
-  }
-}
-
-@media (max-width: 900px) {
-  .page-intro__title {
-    font-size: clamp(4.8rem, 12vw, 13rem);
-  }
-}
-
 @media (max-width: 640px) {
   body {
     font-size: 1.5rem;
@@ -146,9 +134,8 @@ details summary::-webkit-details-marker {
     padding-bottom: 20px;
   }
   .page-intro__title {
-    font-size: clamp(3.6rem, 11vw, 8rem);
+    // line-height only; font-size is handled by the clamp above.
     line-height: 0.92;
-    overflow-wrap: break-word;
   }
   .page-intro__sub {
     font-size: 1.45rem;
@@ -160,19 +147,6 @@ details summary::-webkit-details-marker {
   }
   .page-intro__label::before {
     width: 24px;
-  }
-}
-
-@media (max-width: 380px) {
-  .page-intro__title {
-    font-size: clamp(3rem, 10vw, 6.4rem);
-  }
-}
-
-// 320px guardrail
-@media (max-width: 320px) {
-  .page-intro__title {
-    font-size: clamp(2.6rem, 10vw, 5.2rem);
   }
 }
 

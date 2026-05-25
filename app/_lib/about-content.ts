@@ -31,14 +31,8 @@ export const aboutContent = {
         { kind: 'accent', value: 'frontend you can measure' },
         {
           kind: 'text',
-          value: ' — building reliable A/B tests and conversion experiments for real businesses.',
-        },
-      ],
-      [
-        {
-          kind: 'text',
           value:
-            'I started in freelance frontend work and moved steadily toward experimentation — the part of the job where you can ',
+            ': building reliable A/B tests and conversion experiments for real businesses. I started in freelance frontend work and moved steadily toward experimentation, the part of the job where you can ',
         },
         { kind: 'em', value: 'prove' },
         {
@@ -46,7 +40,11 @@ export const aboutContent = {
           value: ' whether a change actually worked. Over the last few years, that adds up to ',
         },
         { kind: 'strong', value: '500+ A/B tests shipped' },
-        { kind: 'text', value: ' across ecommerce and SaaS.' },
+        {
+          kind: 'text',
+          value:
+            ' across ecommerce and SaaS, working with startups and individuals across the UK, India, Slovakia, Austria, Australia, and Canada.',
+        },
       ],
       [
         { kind: 'text', value: "I've been a " },
@@ -62,26 +60,19 @@ export const aboutContent = {
         {
           kind: 'text',
           value:
-            'Everyone uses AI now. The skill is using it well enough to actually finish what you start. I treat ',
+            'On how I work: everyone uses AI now, the skill is using it well enough to actually finish what you start. I treat ',
         },
         { kind: 'accent', value: 'Claude Code' },
         {
           kind: 'text',
           value:
-            ' less like a smarter autocomplete and more like a junior engineer who needs the same things every junior needs — a clear spec, the right context, a tight scope, and an honest review pass. That workflow is what makes a ',
+            ' like a junior engineer who needs a clear spec, the right context, a tight scope, and an honest review pass. That workflow is what made a ',
         },
-        { kind: 'strong', value: '410k-line solo platform' },
+        { kind: 'strong', value: 'solo, full-stack experimentation platform' },
         {
           kind: 'text',
           value:
-            ' finishable in 1.5 years (including 2 earlier versions I scrapped, and a year+ of planning and architecture banked on what those false starts taught me).',
-        },
-      ],
-      [
-        {
-          kind: 'text',
-          value:
-            "I've worked with startups and individuals across the UK, India, Slovakia, Austria, Australia, and Canada.",
+            ' finishable in 1.5 years, including 2 earlier versions I scrapped, and a year+ of planning and architecture, banked on what those false starts taught me.',
         },
       ],
     ],
