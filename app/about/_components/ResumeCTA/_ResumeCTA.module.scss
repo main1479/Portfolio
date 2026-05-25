@@ -64,17 +64,19 @@
   justify-self: end;
 }
 
-.cta {
-  // The default .btnAccent hover slides up var(--fg), which equals the
-  // .resume card's background — the button visually disappears. Override
-  // to slide up var(--bg) (light) with var(--fg) text instead, so the
-  // hover stays visible on the dark resume card.
-  &:hover::before {
-    background: var(--bg);
-  }
-  &:hover {
-    color: var(--fg);
-  }
+// The default .btnAccent hover slides up var(--fg), which equals the
+// .resume card's background — the button visually disappears. Override
+// to slide up var(--bg) (light) with var(--fg) text instead, so the
+// hover stays visible on the dark resume card.
+//
+// Selector is .ctaWrap .cta (0-3-0) to beat .btnAccent:hover (0-2-0),
+// which lives in the Button module and would otherwise win the cascade
+// on the color rule and turn the text light.
+.ctaWrap .cta:hover::before {
+  background: var(--bg);
+}
+.ctaWrap .cta:hover {
+  color: var(--fg);
 }
 
 @media (max-width: 900px) {
