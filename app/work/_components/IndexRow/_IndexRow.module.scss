@@ -172,8 +172,11 @@
 
 @media (max-width: 900px) {
   .link {
-    grid-template-columns: 32px 1fr 40px;
-    grid-template-rows: auto auto auto auto;
+    // Col 3 is `auto` so it sizes to whichever is wider: the 40px arrow
+    // (row 1) or the longest year text (row 3). Year still lands at the
+    // right edge via justify-self: end.
+    grid-template-columns: 32px 1fr auto;
+    grid-template-rows: auto auto auto;
     row-gap: 10px;
     column-gap: 16px;
     align-items: start;
@@ -204,21 +207,26 @@
   }
   .tags {
     display: inline;
-    grid-column: 2 / -1;
+    grid-column: 2;
     grid-row: 3;
     font-size: 0.95rem;
   }
   .year {
-    grid-column: 2 / -1;
-    grid-row: 4;
-    text-align: left;
+    grid-column: 3;
+    grid-row: 3;
+    justify-self: end;
+    align-self: center;
+    text-align: right;
   }
 }
 
 @media (max-width: 640px) {
   .link {
     padding: 22px 0;
+    // Pin col 3 to the arrow width again; year drops to its own row
+    // below tags so neither needs the auto-sized right column.
     grid-template-columns: 28px 1fr 36px;
+    grid-template-rows: auto auto auto auto;
     column-gap: 10px;
   }
   .title {
@@ -227,6 +235,16 @@
   }
   .meta {
     font-size: 1.35rem;
+  }
+  .tags {
+    grid-column: 2 / -1;
+    grid-row: 3;
+  }
+  .year {
+    grid-column: 2 / -1;
+    grid-row: 4;
+    justify-self: start;
+    text-align: left;
   }
   .arrow {
     width: 36px;
