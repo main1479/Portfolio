@@ -80,10 +80,9 @@ export const cvContent = {
       year: '2020',
       role: 'Frontend for a Romanian rentals & property-management company',
     },
-    { name: 'Lenoir App', year: '2022', role: 'Browser-based iPad OS apps' },
+    { name: 'Lenoir App', year: '2021', role: 'Browser-based iPad OS apps' },
     { name: 'ScalingLab', year: '2021', role: 'Founder website for Theodore Mollinger' },
-    { name: 'Azzeroco', year: '2021', role: 'Frontend for an Italian sustainability brand' },
-    { name: 'Life Vest', year: '2020', role: 'Frontend for Helen / Helion v1' },
+    { name: 'Azzeroco', year: '2020', role: 'Frontend for an Italian sustainability brand' },
   ],
   skills: [
     {
@@ -111,7 +110,6 @@ export const cvContent = {
         'VWO',
         'Adobe Target',
         'Google Optimize',
-        'CRO',
       ],
     },
     {

@@ -107,7 +107,6 @@ export const aboutContent = {
           'VWO',
           'Adobe Target',
           'Google Optimize',
-          'CRO',
         ],
       },
       {
