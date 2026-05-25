@@ -21,6 +21,12 @@ export const contactContent = {
         external: false,
       },
       {
+        label: 'LinkedIn',
+        value: 'in/main1479',
+        href: 'https://linkedin.com/in/main1479',
+        external: true,
+      },
+      {
         label: 'GitHub',
         value: '@main1479',
         href: 'https://github.com/main1479',
