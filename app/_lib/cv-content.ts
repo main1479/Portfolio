@@ -52,7 +52,7 @@ export const cvContent = {
         '370k lines of TypeScript / SCSS · 250 API routes · 71 Prisma models · 867 test files.',
         'Three statistical engines side-by-side (frequentist, Bayesian, sequential) with variance reduction.',
         'Five Cloudflare Workers for edge ingestion, ClickHouse store, four published SDK packages.',
-        'AI-paired build with Claude Code throughout — architecture, decisions, and review stay mine.',
+        'Built with Claude Code as co-engineer — daily AI pairing from scaffolding to ship.',
       ],
       href: 'mainul.info/work/avsb',
     },
