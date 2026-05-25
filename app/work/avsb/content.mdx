@@ -43,7 +43,13 @@ export const frontmatter = {
 <CaseVisuals
   items={[
     { caption: 'CLI surface · ship a test in 3 commands', type: 'primary' },
-    { caption: 'Dashboard · in-progress', type: 'secondary' },
+    {
+      caption: 'Feature flags · per-environment targeting',
+      src: '/work/avsb/flag-page.png',
+      alt: 'AvsB feature flag list showing environment targeting and rollout state',
+      aspect: '2/1',
+      type: 'secondary',
+    },
   ]}
 >
   <CodeMock
@@ -116,6 +122,29 @@ export const frontmatter = {
   - **The supporting layer** most experimentation tools take for granted: orgs, roles, audit log, billing
 </CaseBlock>
 
+<CaseVisuals
+  items={[
+    {
+      caption: 'Audience builder · rule composition',
+      src: '/work/avsb/audience-builder.png',
+      alt: 'AvsB audience builder showing rule composition with live preview of who matches',
+      aspect: '2/1',
+    },
+    {
+      caption: 'Flag details · rules, audit, history',
+      src: '/work/avsb/flag-details.png',
+      alt: 'AvsB flag detail page with active rules, audit trail, and change history',
+      aspect: '2/1',
+    },
+    {
+      caption: 'Results · three engines, side by side',
+      src: '/work/avsb/results-page.png',
+      alt: 'AvsB results page showing frequentist, Bayesian, and sequential engines side by side',
+      aspect: '2/1',
+    },
+  ]}
+/>
+
 <CaseBlock num="05" label="Stack" heading="Tools used">
   Chosen for fast iteration and a hosting model that stays cheap as event volume grows.
 
@@ -126,6 +155,29 @@ export const frontmatter = {
   - Vitest · Playwright · MSW · Testcontainers
 </CaseBlock>
 
+<CaseVisuals
+  items={[
+    {
+      caption: 'Audience list · who sees what',
+      src: '/work/avsb/audience-page.png',
+      alt: 'AvsB audience list view with traffic allocation per audience',
+      aspect: '2/1',
+    },
+    {
+      caption: 'Goal creation · define what wins means',
+      src: '/work/avsb/create-goal.png',
+      alt: 'AvsB goal creation form for primary metric, guardrails, and event filters',
+      aspect: '2/1',
+    },
+    {
+      caption: 'Project settings · environments + SDK keys',
+      src: '/work/avsb/project-settings.png',
+      alt: 'AvsB project settings showing environments and SDK key management',
+      aspect: '2/1',
+    },
+  ]}
+/>
+
 <CaseBlock num="06" label="Outcome" heading="By the numbers">
   - **~370,000 lines** of TypeScript / SCSS
   - **250 API routes** · **71 Prisma models**
@@ -134,3 +186,37 @@ export const frontmatter = {
 
   Solo build, **1.5+ years** in. Currently pre-launch — no external users yet — while the public API and pricing stabilise.
 </CaseBlock>
+
+<CaseVisuals
+  items={[
+    {
+      caption: 'Audit log · every change, timestamped',
+      src: '/work/avsb/audit-log.png',
+      alt: 'AvsB audit log showing chronological config changes with actor and diff',
+      aspect: '2/1',
+    },
+    {
+      caption: 'Member invite · seat + role in one step',
+      src: '/work/avsb/member-invite.png',
+      alt: 'AvsB member invite modal combining seat assignment and role selection',
+      aspect: '2/1',
+    },
+    {
+      caption: 'Role management · permissions per surface',
+      src: '/work/avsb/role-management.png',
+      alt: 'AvsB role management page showing permission matrix per product surface',
+      aspect: '2/1',
+    },
+  ]}
+/>
+
+<CaseVisuals
+  items={[
+    {
+      caption: 'Support tickets · in-product issue triage',
+      src: '/work/avsb/support-ticket.png',
+      alt: 'AvsB support ticket view with conversation thread and context attachments',
+      aspect: '2/1',
+    },
+  ]}
+/>
