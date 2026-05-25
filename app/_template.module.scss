@@ -1,0 +1,24 @@
+.static {
+  // No animation. Page just appears.
+}
+
+.enter {
+  animation: page-enter 0.7s ease-out 0.35s backwards;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enter {
+    animation: none;
+  }
+}
