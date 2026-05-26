@@ -4,8 +4,9 @@ import type { CaseHeroLine } from '../../../_types/case';
 import styles from './_CaseHero.module.scss';
 
 type Props = {
-  num: string;
-  breadcrumbTitle: string;
+  /** Both optional — when both are omitted, no breadcrumb is rendered. */
+  num?: string;
+  breadcrumbTitle?: string;
   lines: readonly CaseHeroLine[];
   summary: string;
 };
@@ -14,13 +15,15 @@ export function CaseHero({ num, breadcrumbTitle, lines, summary }: Props) {
   return (
     <header className={styles.hero}>
       <Container>
-        <p className={styles.breadcrumb}>
-          <Link href="/work">Work</Link>
-          <span aria-hidden="true"> / </span>
-          <span className={styles.breadcrumbCurrent}>
-            {num} — {breadcrumbTitle}
-          </span>
-        </p>
+        {breadcrumbTitle && (
+          <p className={styles.breadcrumb}>
+            <Link href="/work">Work</Link>
+            <span aria-hidden="true"> / </span>
+            <span className={styles.breadcrumbCurrent}>
+              {num ? `${num} — ${breadcrumbTitle}` : breadcrumbTitle}
+            </span>
+          </p>
+        )}
         <h1 className={styles.title}>
           {lines.map((line, i) => {
             const classes = [
