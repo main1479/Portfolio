@@ -38,6 +38,7 @@ export type XpItem = {
   at?: string;
   desc: string;
   loc: string;
+  href?: string;
 };
 
 export type HomeContent = {
