@@ -13,7 +13,7 @@ export const cvContent = {
     },
   },
   about:
-    'Frontend developer specialising in A/B testing and experimentation. 4+ years across every major experimentation platform — Optimizely, AB Tasty, Kameleoon, VWO, Adobe Target, Qubit — alongside modern frontend with Next.js and TypeScript. Treats AI as a real engineering skill — Claude Code as a daily co-engineer, specs before code, agentic workflows for multi-file work. AvsB (410k lines, solo, in production) is the proof at scale. Open to full-time remote and contract roles.',
+    'Frontend developer specialising in A/B testing and experimentation. 4+ years shipping production tests across every major platform: Optimizely, AB Tasty, Kameleoon, VWO, Adobe Target, and Qubit, alongside modern frontend with Next.js and TypeScript. I treat AI as a real engineering skill: Claude Code as a daily co-engineer, specs before code, agentic workflows for multi-file work. AvsB, a ~410k-line experimentation platform built solo and in production, is the proof at scale. Open to full-time remote and contract roles.',
   stats: [
     { value: '7+ yrs', label: 'Frontend development' },
     { value: '4+ yrs', label: 'A/B testing & experimentation' },
@@ -58,7 +58,7 @@ export const cvContent = {
     },
     {
       title: 'Kemon Doctor',
-      tagline: 'Non-profit doctor review platform for Bangladesh',
+      tagline: 'Non-profit doctor review platform',
       dates: '2025 – Present',
       meta: 'Solo founder & developer · In progress',
       bullets: [
