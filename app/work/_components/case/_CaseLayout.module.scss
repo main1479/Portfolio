@@ -2,5 +2,5 @@
 @use 'mixins' as *;
 
 .body {
-  padding-block: clamp(60px, 8vw, 120px);
+  padding-block: 0;
 }
