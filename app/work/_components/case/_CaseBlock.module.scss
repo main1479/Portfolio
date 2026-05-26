@@ -9,6 +9,10 @@
   border-top: 1px solid var(--rule-strong);
 }
 
+.block:first-child {
+  border-top: none;
+}
+
 .side {
   position: sticky;
   top: 110px;
@@ -75,7 +79,6 @@
   font-size: clamp(1rem, 2.5vw, 2.1rem);
   line-height: 1.5;
   color: var(--fg-soft);
-  margin-bottom: 12px;
 }
 
 .content li::before {
