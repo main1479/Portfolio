@@ -13,7 +13,7 @@ import { SelectedWork } from './_components/home/SelectedWork/SelectedWork';
 import { SelectedClients } from './_components/home/SelectedClients/SelectedClients';
 import { Recognition } from './_components/home/Recognition/Recognition';
 import { Experience } from './_components/Experience/Experience';
-import { EndCTA } from './_components/home/EndCTA/EndCTA';
+import { EndCTA } from './_components/EndCTA/EndCTA';
 import { Footer } from './_components/Footer/Footer';
 import { homeContent } from './_lib/home-content';
 import styles from './_components/home/_homePage.module.scss';
@@ -78,6 +78,22 @@ export default function Home() {
         <Container>
           <Reveal>
             <SectionHead
+              index={homeContent.experience.sectionIndex}
+              titleNodes={
+                <>
+                  Experience<span className="accent">.</span>
+                </>
+              }
+            />
+          </Reveal>
+          <Experience items={homeContent.experience.items} />
+        </Container>
+      </Section>
+
+      <Section>
+        <Container>
+          <Reveal>
+            <SectionHead
               index={homeContent.selectedClients.sectionIndex}
               titleNodes={
                 <>
@@ -103,22 +119,6 @@ export default function Home() {
             />
           </Reveal>
           <Recognition content={homeContent.recognition} />
-        </Container>
-      </Section>
-
-      <Section>
-        <Container>
-          <Reveal>
-            <SectionHead
-              index={homeContent.experience.sectionIndex}
-              titleNodes={
-                <>
-                  Experience<span className="accent">.</span>
-                </>
-              }
-            />
-          </Reveal>
-          <Experience items={homeContent.experience.items} />
         </Container>
       </Section>
 

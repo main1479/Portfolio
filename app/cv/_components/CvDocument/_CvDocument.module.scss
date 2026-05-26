@@ -55,6 +55,7 @@
   row-gap: 10px;
   font-size: 0.8rem;
   min-width: 0;
+  align-items: center;
 
   li {
     display: contents;
@@ -115,7 +116,7 @@
 .about {
   margin: 0 0 24px;
   max-width: 80ch;
-  font-size: 1.7rem;
+  font-size: 1.2rem;
   line-height: 1.6;
   color: var(--fg);
 }
@@ -166,6 +167,7 @@
 .entry {
   page-break-inside: avoid;
   break-inside: avoid;
+  margin-bottom: 1rem;
 }
 
 .entryHead {
@@ -179,14 +181,12 @@
 
 .entryTitle {
   font-family: var(--font-body);
-  font-size: 1.85rem;
+  font-size: 1.5rem;
   font-weight: 600;
   margin: 0;
-  letter-spacing: 0.005em;
   color: var(--fg);
   flex: 1 1 auto;
   min-width: 0;
-  overflow-wrap: break-word;
 }
 
 .entryOrg {
@@ -196,13 +196,14 @@
 
 .entryMeta {
   font-family: var(--font-mono);
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--fg-muted);
   margin: 0;
   flex: 0 1 auto;
   min-width: 0;
+  margin-bottom: 1rem;
 }
 
 .bullets {
@@ -214,7 +215,7 @@
     position: relative;
     padding-left: 20px;
     margin: 6px 0;
-    font-size: 1.55rem;
+    font-size: 1rem;
     line-height: 1.55;
     overflow-wrap: break-word;
   }
@@ -275,7 +276,7 @@
     grid-template-columns: max-content minmax(0, 1fr) max-content;
     align-items: baseline;
     gap: 6px 14px;
-    font-size: 1.55rem;
+    font-size: 1rem;
     page-break-inside: avoid;
     overflow-wrap: break-word;
   }
@@ -284,6 +285,7 @@
 .clientName {
   font-weight: 600;
   color: var(--fg);
+  width: 150px;
 }
 
 .clientRole {
@@ -292,8 +294,7 @@
 
 .clientYear {
   font-family: var(--font-mono);
-  font-size: 1.15rem;
-  letter-spacing: 0.08em;
+  font-size: 0.8rem;
   color: var(--fg-muted);
   text-align: right;
 }
@@ -332,7 +333,7 @@
 
 .skillTag {
   font-family: var(--font-body);
-  font-size: 1.5rem;
+  font-size: 1rem;
   color: var(--fg);
 
   &:not(:last-child)::after {
@@ -353,7 +354,7 @@
   gap: 8px;
 
   li {
-    font-size: 1.55rem;
+    font-size: 1rem;
   }
 
   a {
@@ -372,8 +373,7 @@
 
 .awardDate {
   font-family: var(--font-mono);
-  font-size: 1.15rem;
-  letter-spacing: 0.06em;
+  font-size: 0.8rem;
   color: var(--fg-muted);
 }
 
@@ -520,7 +520,7 @@
     background: #1f3a5f;
     width: 6px;
     height: 6px;
-    top: 0.55em;
+    top: 0.4em;
   }
   .entryLink {
     font-size: 8pt;

@@ -15,7 +15,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
-    { url: `${base}/work/client`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${base}/work/radius`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${base}/work/cursimax`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${base}/work/flatwhite`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    {
+      url: `${base}/experience/client`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${base}/experience/gain-conversion`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
     { url: `${base}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${base}/contact`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
   ];

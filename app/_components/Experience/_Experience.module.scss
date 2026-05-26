@@ -12,6 +12,25 @@
   align-items: start;
 }
 
+.rowLink {
+  text-decoration: none;
+  color: inherit;
+  outline: 0;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: background 0.18s ease;
+  }
+
+  &:hover {
+    background: var(--paper);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+  }
+}
+
 .list > :last-child .row {
   border-bottom: 1px solid var(--rule-strong);
 }

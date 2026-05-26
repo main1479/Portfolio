@@ -1,12 +1,18 @@
-import { Container } from '../../Container/Container';
-import { Reveal } from '../../Reveal/Reveal';
-import { Button } from '../../Button/Button';
-import type { HomeContent } from '../../../_types/home';
+import { Container } from '../Container/Container';
+import { Reveal } from '../Reveal/Reveal';
+import { Button } from '../Button/Button';
 import styles from './_EndCTA.module.scss';
 
-type Props = { content: HomeContent['endCta'] };
+type HeadingLine = { text: string; variant?: 'outline' };
 
-export function EndCTA({ content }: Props) {
+export type EndCTAContent = {
+  headingLines: readonly HeadingLine[];
+  sub: string;
+  ctaLabel: string;
+  ctaHref: string;
+};
+
+export function EndCTA({ content }: { content: EndCTAContent }) {
   return (
     <section className={styles.endcta} data-screen-label="End CTA">
       <Container>

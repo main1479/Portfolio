@@ -99,15 +99,7 @@ export const aboutContent = {
       { name: 'Styling', tags: ['SCSS', 'Tailwind CSS', 'Bootstrap', 'Modern CSS'] },
       {
         name: 'Experimentation',
-        tags: [
-          'Optimizely',
-          'Kameleoon',
-          'Qubit',
-          'AB Tasty',
-          'VWO',
-          'Adobe Target',
-          'Google Optimize',
-        ],
+        tags: ['Optimizely', 'AB Tasty', 'Kameleoon', 'VWO', 'Adobe Target', 'Qubit'],
       },
       {
         name: 'Backend, data & CMS',

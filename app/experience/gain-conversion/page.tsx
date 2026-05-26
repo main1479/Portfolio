@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
 import Content, { frontmatter } from './content.mdx';
-import { CaseLayout } from '../_components/case/CaseLayout';
+import { ExperienceLayout } from '../_components/ExperienceLayout/ExperienceLayout';
 
 export const metadata: Metadata = {
   title: { absolute: frontmatter.pageTitle },
   description: frontmatter.pageDescription,
-  alternates: { canonical: `/work/${frontmatter.slug}` },
+  alternates: { canonical: `/experience/${frontmatter.slug}` },
   openGraph: {
     type: 'article',
-    url: `/work/${frontmatter.slug}`,
+    url: `/experience/${frontmatter.slug}`,
     title: frontmatter.pageTitle,
     description: frontmatter.pageDescription,
   },
@@ -18,10 +18,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ClientCasePage() {
+export default function ExperienceGainConversionPage() {
   return (
-    <CaseLayout frontmatter={frontmatter}>
+    <ExperienceLayout frontmatter={frontmatter}>
       <Content />
-    </CaseLayout>
+    </ExperienceLayout>
   );
 }
