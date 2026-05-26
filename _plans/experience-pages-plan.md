@@ -46,9 +46,7 @@ Each page reuses the existing case-study visual treatment so they feel of a piec
   3. **Clients I've shipped tests for** — the eight named agency clients from the homepage Selected Clients block (The Times, G-Star RAW, Motorway, Unity, Ironmongery Direct, WaterAid, AdBlock, Deel) plus the "many, many more" line.
   4. **My role** — frontend developer on test programs, direct client access, ownership end-to-end.
   5. **Approach** — resilient selectors, performance budget, QA across breakpoints, clean rollbacks. (Salvaged from the deleted client case study; it was good content in the wrong place.)
-  6. **Stack** — JavaScript, SCSS, the testing platforms.
-  7. **Outcomes** — specific test results stay with clients; numbers appear here only when a client signs off.
-  8. **Confidentiality note** — written-permission framing; pointer to references on request.
+  6. **Stack** — JavaScript, TypeScript, SCSS, the testing platforms.
 
 ## Design
 
