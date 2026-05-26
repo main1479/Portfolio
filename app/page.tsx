@@ -78,6 +78,22 @@ export default function Home() {
         <Container>
           <Reveal>
             <SectionHead
+              index={homeContent.experience.sectionIndex}
+              titleNodes={
+                <>
+                  Experience<span className="accent">.</span>
+                </>
+              }
+            />
+          </Reveal>
+          <Experience items={homeContent.experience.items} />
+        </Container>
+      </Section>
+
+      <Section>
+        <Container>
+          <Reveal>
+            <SectionHead
               index={homeContent.selectedClients.sectionIndex}
               titleNodes={
                 <>
@@ -103,22 +119,6 @@ export default function Home() {
             />
           </Reveal>
           <Recognition content={homeContent.recognition} />
-        </Container>
-      </Section>
-
-      <Section>
-        <Container>
-          <Reveal>
-            <SectionHead
-              index={homeContent.experience.sectionIndex}
-              titleNodes={
-                <>
-                  Experience<span className="accent">.</span>
-                </>
-              }
-            />
-          </Reveal>
-          <Experience items={homeContent.experience.items} />
         </Container>
       </Section>
 

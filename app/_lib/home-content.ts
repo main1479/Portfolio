@@ -59,7 +59,7 @@ export const homeContent = {
     indexLink: { href: '/work', label: 'View full work index' },
   },
   selectedClients: {
-    sectionIndex: '04 / Clients',
+    sectionIndex: '05 / Clients',
     intro: [
       {
         kind: 'text',
@@ -80,7 +80,7 @@ export const homeContent = {
     foot: '— and many, many more.',
   },
   recognition: {
-    sectionIndex: '05 / Recognition',
+    sectionIndex: '06 / Recognition',
     lede: [
       { kind: 'text', value: 'The previous version of this portfolio was featured as ' },
       { kind: 'strong', value: 'Site of the Day' },
@@ -104,7 +104,7 @@ export const homeContent = {
     ],
   },
   experience: {
-    sectionIndex: '06 / Experience',
+    sectionIndex: '04 / Experience',
     items: [
       {
         year: '2022 – Present',
