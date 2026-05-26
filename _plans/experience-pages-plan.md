@@ -27,13 +27,12 @@ Each page reuses the existing case-study visual treatment so they feel of a piec
 - **Title** — Freelance Frontend, since 2019
 - **Hero lines** — three-line headline in the existing case-study style.
 - **Meta** — Role · Type · Span (`2019 – Present`) · Reach (`9 countries + counting`).
-- **Sections**:
+- **Sections** (five blocks; the "couldn't-name-them-all" note lives inside section 2 as a trailing paragraph rather than its own block — it's a sentence's worth of content and a separate `CaseBlock` for it is overkill):
   1. **What it is** — freelance frontend builds for startups, founders, and small teams across nine-plus countries. Pure frontend work — no A/B testing claims here.
-  2. **Where** — the nine-country list (UK, India, Slovakia, Austria, Australia, Canada, Romania, Italy, Mexico) with the existing `Countries` component.
+  2. **Where** — the nine-country list (UK, India, Slovakia, Austria, Australia, Canada, Romania, Italy, Mexico) with the existing `Countries` component, followed by a short note that a few more aren't listed (long-finished engagements, paperwork lost, or clients who'd rather not be named).
   3. **Named projects** — Cursimax, Flatwhite, Lenoir App, ScalingLab, Azzeroco, with one-line descriptions. Links to existing case studies where they exist (`/work/cursimax`, `/work/flatwhite`).
   4. **Approach** — translating Figma/XD to production code, mobile-first, accessibility, performance-conscious.
   5. **Stack** — HTML, SCSS, JavaScript, TypeScript, React, Next.js.
-  6. **A note** — clients who'd rather not be named, paperwork lost, etc.
 
 ## Content — `/experience/gain-conversion` (Conversion.com)
 
@@ -50,7 +49,7 @@ Each page reuses the existing case-study visual treatment so they feel of a piec
 
 ## Design
 
-- Visual treatment matches the existing `/work/<slug>` case-study pages (same `CaseLayout`, `CaseBlock`, `Countries`, hero variants, meta strip).
+- Visual treatment matches the existing `/work/<slug>` case-study pages (same hero, meta strip, `CaseBlock`, `Countries`). Two intentional differences: experience pages render **no breadcrumb** at the top (there's no `/experience` index to link back to — see "What I'm NOT doing" below) and **no bottom case-chain pager** (experience pages don't chain).
 - Homepage Experience rows become whole-row anchors with the same hover/focus state used elsewhere on the site (subtle background or rule shift on hover; clear focus ring for keyboard).
 - No new components unless one specifically simplifies the work (e.g. a tiny `ExperienceClientsList` if the agency-clients block doesn't fit any existing pattern).
 

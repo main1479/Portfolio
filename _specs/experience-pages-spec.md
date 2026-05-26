@@ -4,7 +4,7 @@ Pair: `_plans/experience-pages-plan.md`.
 
 ## Overview
 
-Build two new pages under `/experience/[slug]` reusing the existing case-study primitives (`CaseHero`, `CaseMeta`, `CaseBlock`, `Countries`) under a new `ExperienceLayout` that drops the case-chain pager and case-specific breadcrumb. Delete the `/work/client` case study. Renumber remaining work entries 01–05. Make homepage Experience rows clickable.
+Build two new pages under `/experience/[slug]` reusing the existing case-study primitives (`CaseHero`, `CaseMeta`, `CaseBlock`, `Countries`) under a new `ExperienceLayout` that drops both the case-chain pager and the breadcrumb entirely. (No `/experience` index page exists by design — see plan — so a breadcrumb has nowhere honest to link back to.) Delete the `/work/client` case study. Renumber remaining work entries 01–05. Make homepage Experience rows clickable.
 
 ## Routes
 
@@ -25,11 +25,10 @@ Build two new pages under `/experience/[slug]` reusing the existing case-study p
 
 ```
 app/experience/
-├── _experiencePage.module.scss        — shared SCSS for the experience body (tracks _CaseLayout)
 ├── _components/
 │   └── ExperienceLayout/
 │       ├── ExperienceLayout.tsx
-│       └── _ExperienceLayout.module.scss
+│       └── _ExperienceLayout.module.scss   — body wrapper styles (mirrors _CaseLayout.module.scss .body)
 ├── client/
 │   ├── content.mdx                    — freelance frontend MDX
 │   └── page.tsx                       — server component, mirrors app/work/avsb/page.tsx
@@ -78,13 +77,7 @@ export function ExperienceLayout({ frontmatter, children }: Props) {
   const fm = validateExperienceFrontmatter(frontmatter);
   return (
     <>
-      <CaseHero
-        num={fm.num} // "EX1" / "EX2" — see schema notes below
-        breadcrumbTitle={fm.title}
-        breadcrumbRoot={{ label: 'Experience', href: '/experience' }} // see CaseHero change
-        lines={fm.heroLines}
-        summary={fm.summary}
-      />
+      <CaseHero lines={fm.heroLines} summary={fm.summary} />
       <Container>
         <CaseMeta cells={fm.meta} />
       </Container>
@@ -95,7 +88,11 @@ export function ExperienceLayout({ frontmatter, children }: Props) {
         heading={
           <>
             {fm.footerHeading} —<br />
-            <a href="mailto:...">...</a>
+            <a href="mailto:m.main2402@gmail.com">
+              m.main2402
+              <wbr />
+              @gmail.com
+            </a>
           </>
         }
       />
@@ -104,52 +101,51 @@ export function ExperienceLayout({ frontmatter, children }: Props) {
 }
 ```
 
+Imports (omitted from the snippet for brevity): `Container` from `app/_components/Container/Container`, `Footer` from `app/_components/Footer/Footer`, `CaseHero`/`CaseMeta` from `app/work/_components/case/`, schema + styles colocated.
+
 Differences from `CaseLayout`:
 
 - No `NextCase` pager. Experience pages don't chain.
 - No `getNextCase` registry call.
-- Breadcrumb root says "Experience" instead of "Work / num — title". See note below.
+- No breadcrumb. CaseHero is called with only `lines` and `summary` — see CaseHero refactor below.
 
-### `CaseHero` — minimal change to support both layouts
+### `CaseHero` — make the breadcrumb optional
 
-CaseHero currently hardcodes the "Work" breadcrumb link. Refactor:
+Experience pages render no breadcrumb (there's no `/experience` index to link back to). The minimal change is to make `num` and `breadcrumbTitle` both optional, and skip the breadcrumb `<p>` when both are absent. The hardcoded `/work` Link stays — only `/work/<slug>` pages ever render the breadcrumb, so no `breadcrumbRoot` prop is needed.
 
 ```diff
 - type Props = { num: string; breadcrumbTitle: string; lines; summary };
 + type Props = {
-+   num: string;
-+   breadcrumbTitle: string;
-+   /** Defaults to { label: 'Work', href: '/work' } so existing /work/<slug> pages don't change. */
-+   breadcrumbRoot?: { label: string; href: string };
++   /** Both optional — when both are omitted, no breadcrumb is rendered. */
++   num?: string;
++   breadcrumbTitle?: string;
 +   lines: readonly CaseHeroLine[];
 +   summary: string;
 + };
 ```
 
-In the JSX:
+In the JSX, wrap the breadcrumb so it's skipped when there's nothing to show:
 
 ```diff
-- <Link href="/work">Work</Link>
-+ <Link href={root.href}>{root.label}</Link>
+- <p className={styles.breadcrumb}>
+-   <Link href="/work">Work</Link>
+-   <span aria-hidden="true"> / </span>
+-   <span className={styles.breadcrumbCurrent}>
+-     {num} — {breadcrumbTitle}
+-   </span>
+- </p>
++ {breadcrumbTitle && (
++   <p className={styles.breadcrumb}>
++     <Link href="/work">Work</Link>
++     <span aria-hidden="true"> / </span>
++     <span className={styles.breadcrumbCurrent}>
++       {num ? `${num} — ${breadcrumbTitle}` : breadcrumbTitle}
++     </span>
++   </p>
++ )}
 ```
 
-For experience pages, also need to consider: do we still want `num` shown in the breadcrumb? The case-study breadcrumb reads `Work / 04 — Title`. For experience pages, "Experience / Freelance Frontend" reads better without a number. So `CaseHero` needs to also support hiding the num: make `num` part of an optional `breadcrumbNum` prop, or add a new `showNum?: boolean` flag.
-
-**Decision:** make `num` optional. When omitted, the breadcrumb renders just `{root.label} / {breadcrumbTitle}`. ExperienceLayout passes no `num`.
-
-Updated CaseHero signature:
-
-```ts
-type Props = {
-  num?: string;
-  breadcrumbTitle: string;
-  breadcrumbRoot?: { label: string; href: string };
-  lines: readonly CaseHeroLine[];
-  summary: string;
-};
-```
-
-CaseLayout still passes `num={fm.num}`; ExperienceLayout omits it.
+`CaseLayout` calls remain unchanged (`num={fm.num} breadcrumbTitle={fm.title}`). `ExperienceLayout` passes neither. The four existing `/work/<slug>` pages are untouched.
 
 ### Frontmatter type + schema
 
@@ -176,10 +172,15 @@ export type ExperienceFrontmatter = {
 import { z } from 'zod';
 
 const caseHeroLine = z.object({
-  /* same as case-frontmatter-schema */
+  text: z.string().min(1),
+  style: z.enum(['plain', 'accent', 'outline']),
+  trailingAccentDot: z.boolean().optional(),
 });
+
 const caseMetaCell = z.object({
-  /* same */
+  label: z.string().min(1),
+  value: z.string().min(1),
+  accentDot: z.boolean().optional(),
 });
 
 export const experienceFrontmatterSchema = z.object({
@@ -198,7 +199,7 @@ export function validateExperienceFrontmatter(input: unknown) {
 }
 ```
 
-(Light duplication with the case schema; acceptable for two-pager scope, and keeps schemas independent if either evolves.)
+The `caseHeroLine` and `caseMetaCell` shapes are duplicated verbatim from `case-frontmatter-schema.ts` rather than imported. Acceptable for two-pager scope; keeps the experience schema independent if either evolves. No `num` or `next` fields — experience pages don't render a breadcrumb num and don't chain.
 
 ## MDX content
 
@@ -252,20 +253,30 @@ export const frontmatter = {
 </CaseBlock>
 
 <CaseBlock num="03" label="Named projects" heading="A few you can look at">
-  - [Cursimax](/work/cursimax) — Spanish-language e-learning marketplace -
-  [Flatwhite](/work/flatwhite) — Romanian rentals & property-management - Lenoir App — browser-based
-  iPad OS apps - ScalingLab — founder website for Theodore Mollinger - Azzeroco — Italian
-  sustainability brand
+
+- [Cursimax](/work/cursimax) — Spanish-language e-learning marketplace
+- [Flatwhite](/work/flatwhite) — Romanian rentals & property-management
+- Lenoir App — browser-based iPad OS apps
+- ScalingLab — founder website for Theodore Mollinger
+- Azzeroco — Italian sustainability brand
+
 </CaseBlock>
 
 <CaseBlock num="04" label="How I work" heading="The approach">
-  - **Designs to production code** — Figma and XD straight through to built pages - **Mobile-first**
-  — small screens before large - **Accessible by default** — semantic HTML, keyboard nav, contrast
-  checked - **Performance-conscious** — fast first paint, lean dependency lists
+
+- **Designs to production code** — Figma and XD straight through to built pages
+- **Mobile-first** — small screens before large
+- **Accessible by default** — semantic HTML, keyboard nav, contrast checked
+- **Performance-conscious** — fast first paint, lean dependency lists
+
 </CaseBlock>
 
 <CaseBlock num="05" label="Stack" heading="Tools used">
-  - HTML, SCSS - JavaScript, TypeScript - React, Next.js
+
+- HTML, SCSS
+- JavaScript, TypeScript
+- React, Next.js
+
 </CaseBlock>
 ```
 
@@ -305,7 +316,15 @@ I also built [Radius](/work/radius) — Conversion.com's internal insights & exp
 </CaseBlock>
 
 <CaseBlock num="02" label="Platforms" heading="Where the tests run">
-  - Optimizely - Kameleoon - Qubit - AB Tasty - VWO - Adobe Target - Google Optimize
+
+- Optimizely
+- Kameleoon
+- Qubit
+- AB Tasty
+- VWO
+- Adobe Target
+- Google Optimize
+
 </CaseBlock>
 
 <CaseBlock num="03" label="Clients" heading="Brands I've shipped tests for">
@@ -342,7 +361,12 @@ I also built [Radius](/work/radius) — Conversion.com's internal insights & exp
   </CaseBlock>
 
 <CaseBlock num="06" label="Stack" heading="Tools used">
-  - JavaScript, TypeScript - SCSS - Optimizely, Kameleoon, Qubit - Browser DevTools
+
+- JavaScript, TypeScript
+- SCSS
+- Optimizely, Kameleoon, Qubit
+- Browser DevTools
+
 </CaseBlock>
 ```
 
@@ -388,7 +412,7 @@ export type XpItem = {
   },
 ```
 
-`app/_components/Experience/XpRow.tsx` — conditional wrapper:
+`app/_components/Experience/XpRow.tsx` — conditional wrapper. The shape is the same as today; only difference is that the row optionally renders as `<Link>` when `item.href` is set. **Important:** the `<h3 className={styles.role}>` body in the snippet below is collapsed to `...` for brevity — the implementer must preserve the existing `item.roleLines.map(...)` + optional `<br/>` + `item.at` span rendering verbatim from the current file.
 
 ```tsx
 import Link from 'next/link';
@@ -399,7 +423,10 @@ export function XpRow({ item }: { item: XpItem }) {
   const body = (
     <>
       <div className={styles.year}>{item.year}</div>
-      <h3 className={styles.role}>...</h3>
+      <h3 className={styles.role}>
+        {/* existing roleLines.map + <br/> + optional at span — unchanged */}
+        ...
+      </h3>
       <p className={styles.desc}>{item.desc}</p>
       <div className={styles.loc}>{item.loc}</div>
     </>
@@ -426,8 +453,11 @@ export function XpRow({ item }: { item: XpItem }) {
 .rowLink {
   text-decoration: none;
   color: inherit;
-  transition: background 0.18s ease;
   outline: 0;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: background 0.18s ease;
+  }
 
   &:hover {
     background: var(--paper);
@@ -460,14 +490,13 @@ export function XpRow({ item }: { item: XpItem }) {
 + flatwhite: { label: 'Back to · 01', title: 'AvsB', slug: 'avsb' },
 ```
 
-`app/_lib/work-projects.ts` — remove client entry, renumber cursimax + flatwhite:
+`app/_lib/work-projects.ts` — three changes:
 
-```diff
-- { slug: 'cursimax', num: '05', ... order: 5, ... }
-- { slug: 'flatwhite', num: '06', ... order: 6, ... }
-+ { slug: 'cursimax', num: '04', ... order: 4, ... }
-+ { slug: 'flatwhite', num: '05', ... order: 5, ... }
-```
+1. **Delete the entire `client` entry** (currently `num: '04'`, `order: 4`, `slug: 'client'`, `href: '/work/client'`, lines 60–73 of the current file). The whole object block goes.
+2. **Renumber `cursimax`**: `num: '05' → '04'`, `order: 5 → 4`.
+3. **Renumber `flatwhite`**: `num: '06' → '05'`, `order: 6 → 5`.
+
+After the change, the array contains five entries with consecutive `num`/`order` 01–05: avsb, kemon-doctor, radius, cursimax, flatwhite. No other fields (title, summary, tags, year, type, yearStatus, hasCase, href) change on the kept entries.
 
 MDX frontmatter `num`/`next` fields in `cursimax/content.mdx`, `flatwhite/content.mdx`, `radius/content.mdx` updated to match the new chain (cursimax becomes 04, flatwhite becomes 05, radius's `next` now points to cursimax).
 
@@ -475,13 +504,25 @@ The CaseLayout dev-only warning compares frontmatter.next.slug against the regis
 
 ## Sitemap
 
-```diff
-- { url: `${base}/work/client`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-+ { url: `${base}/experience/client`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-+ { url: `${base}/experience/gain-conversion`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-```
+The current sitemap is missing `radius`, `cursimax`, and `flatwhite`. This PR drops `/work/client` and adds both experience routes _plus_ the three missing work slugs — cheap to do at the same time and keeps the sitemap honest.
 
-Also need to add the rest of the work slugs (cursimax, flatwhite, radius) which appear to be missing from the current sitemap — flag as a follow-up to keep this PR focused, or include here. **Decision: include in this PR.** Cheap to add, keeps sitemap honest.
+Final array after this PR (in this order, all `lastModified: now`, `changeFrequency: 'monthly'`):
+
+| URL                                  | Priority |
+| ------------------------------------ | -------- |
+| `${base}/`                           | 1.0      |
+| `${base}/work`                       | 0.9      |
+| `${base}/work/avsb`                  | 0.8      |
+| `${base}/work/kemon-doctor`          | 0.8      |
+| `${base}/work/radius`                | 0.8      |
+| `${base}/work/cursimax`              | 0.8      |
+| `${base}/work/flatwhite`             | 0.8      |
+| `${base}/experience/client`          | 0.8      |
+| `${base}/experience/gain-conversion` | 0.8      |
+| `${base}/about`                      | 0.7      |
+| `${base}/contact`                    | 0.7      |
+
+(The `/work/client` row is removed entirely.)
 
 ## Pages — server component shape
 
@@ -522,14 +563,14 @@ export default function ExperienceClientPage() {
 - Homepage Experience rows: keyboard focus reaches each link; visible focus ring (`outline: 2px solid var(--accent)`). Touch target spans the full row, well above 44×44.
 - `aria-label` on each link includes role + org so screen-reader users hear context, not just `<h3>` text.
 - `<CaseHero>` h1 remains the only h1 per page; `<CaseBlock>` uses `<h2>`; existing case-study patterns carry over.
-- Breadcrumb is an inline `<p>` — same as existing case studies. Decorative `/` separator is `aria-hidden="true"`.
+- Experience pages render no breadcrumb (see CaseHero refactor) — one fewer landmark for screen-reader users, but they're not arriving from a `/experience` index either, so nothing to navigate "back" to.
 - All internal links go through `next/link`; mailto links stay `<a>`.
 
 ## Edge cases
 
 - **MDX validation** — both experience MDX files load through `validateExperienceFrontmatter` at module-load time. Schema parse error throws on build, surfacing typos early.
 - **Old `/work/client` URLs** — any inbound link breaks once the page is deleted. The site has no internal links to it after this PR; external inbound traffic gets a 404. Acceptable — site is pre-launch.
-- **Reduced motion** — Experience rows reuse the existing `Reveal` wrapper which already respects `prefers-reduced-motion`. The new link `transition` on hover is short enough to be non-distracting; still worth wrapping the `transition` in `@media (prefers-reduced-motion: no-preference)`.
+- **Reduced motion** — Experience rows reuse the existing `Reveal` wrapper which already respects `prefers-reduced-motion`. The new `.rowLink` hover transition is wrapped in `@media (prefers-reduced-motion: no-preference)` (see SCSS above), so reduced-motion users get the hover background but no transition.
 - **Case-registry assertion** — CaseLayout's dev-only warning will fire if a frontmatter `next` doesn't match the registry. Both must move together when renumbering.
 
 ## Verification checklist
