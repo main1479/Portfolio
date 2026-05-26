@@ -1,4 +1,5 @@
 import { Container } from '../../../_components/Container/Container';
+import { EndCTA } from '../../../_components/EndCTA/EndCTA';
 import { Footer } from '../../../_components/Footer/Footer';
 import { CaseHero } from '../../../work/_components/case/CaseHero';
 import { CaseMeta } from '../../../work/_components/case/CaseMeta';
@@ -23,6 +24,7 @@ export function ExperienceLayout({ frontmatter, children }: Props) {
       <div className={styles.body}>
         <Container>{children}</Container>
       </div>
+      <EndCTA content={fm.endCta} />
       <Footer
         heading={
           <>

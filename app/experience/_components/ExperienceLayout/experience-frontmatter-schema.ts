@@ -12,6 +12,18 @@ const caseMetaCell = z.object({
   accentDot: z.boolean().optional(),
 });
 
+const endCtaHeadingLine = z.object({
+  text: z.string().min(1),
+  variant: z.enum(['outline']).optional(),
+});
+
+const endCtaContent = z.object({
+  headingLines: z.array(endCtaHeadingLine).min(1).max(3),
+  sub: z.string().min(1),
+  ctaLabel: z.string().min(1),
+  ctaHref: z.string().min(1),
+});
+
 export const experienceFrontmatterSchema = z.object({
   slug: z.enum(['client', 'gain-conversion']),
   title: z.string().min(1),
@@ -20,6 +32,7 @@ export const experienceFrontmatterSchema = z.object({
   heroLines: z.array(caseHeroLine).min(1).max(4),
   summary: z.string().min(1),
   meta: z.array(caseMetaCell).length(4),
+  endCta: endCtaContent,
   footerHeading: z.string().min(1),
 });
 
