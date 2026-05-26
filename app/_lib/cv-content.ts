@@ -13,10 +13,10 @@ export const cvContent = {
     },
   },
   about:
-    'Frontend developer specialising in A/B testing and experimentation. 4.5+ years on Optimizely, Kameleoon, and Qubit, alongside modern frontend with Next.js and TypeScript. Treats AI as a real engineering skill — Claude Code as a daily co-engineer, specs before code, agentic workflows for multi-file work. AvsB (410k lines, solo, in production) is the proof at scale. Open to full-time remote and contract roles.',
+    'Frontend developer specialising in A/B testing and experimentation. 4+ years on Optimizely, Kameleoon, and Qubit, alongside modern frontend with Next.js and TypeScript. Treats AI as a real engineering skill — Claude Code as a daily co-engineer, specs before code, agentic workflows for multi-file work. AvsB (410k lines, solo, in production) is the proof at scale. Open to full-time remote and contract roles.',
   stats: [
     { value: '7+ yrs', label: 'Frontend development' },
-    { value: '4.5+ yrs', label: 'A/B testing & experimentation' },
+    { value: '4+ yrs', label: 'A/B testing & experimentation' },
     { value: '500+', label: 'A/B tests shipped' },
     { value: '9+', label: 'Countries worked with' },
   ],
@@ -27,7 +27,7 @@ export const cvContent = {
       dates: '2022 – Present',
       location: 'Remote · UK',
       bullets: [
-        'Long-running contract — 4.5+ years and ongoing. Production A/B tests in JavaScript and SCSS on enterprise experimentation platforms (Optimizely, Kameleoon, Qubit, AB Tasty, VWO, Adobe Target, Google Optimize).',
+        'Long-running contract — 4+ years and ongoing. Production A/B tests in JavaScript and SCSS on enterprise experimentation platforms (Optimizely, Kameleoon, Qubit, AB Tasty, VWO, Adobe Target, Google Optimize).',
         '500+ experiments shipped across ecommerce, SaaS, publishing, automotive, and non-profit clients — including The Times, G-Star RAW, Motorway, Unity, WaterAid, and Deel.',
         'Built Radius — Conversion.com’s internal insights & experiments platform. Frontend in Next.js + TypeScript + SCSS with GSAP motion and streaming APIs. Live, in daily use by internal teams and client stakeholders.',
       ],
