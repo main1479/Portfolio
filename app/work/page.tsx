@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Button } from '../_components/Button/Button';
 import { Container } from '../_components/Container/Container';
 import { PageIntro } from '../_components/PageIntro/PageIntro';
 import { Reveal } from '../_components/Reveal/Reveal';
@@ -57,10 +58,14 @@ export default function WorkPage() {
               <IndexRow key={project.slug} project={project} />
             ))}
           </ol>
-          <p className={styles.confidentiality}>
-            Client names appear only with written permission. Anything not listed here stays
-            confidential — that&rsquo;s how this work has to work.
-          </p>
+          <Reveal className={styles.indexFoot}>
+            <p className={styles.indexFootText}>
+              Got a brief or a hypothesis you want pressure-tested?
+            </p>
+            <Button href="/contact" variant="accent">
+              Start a conversation
+            </Button>
+          </Reveal>
         </Container>
       </section>
       <Footer

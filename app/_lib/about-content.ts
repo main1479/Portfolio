@@ -43,7 +43,7 @@ export const aboutContent = {
         {
           kind: 'text',
           value:
-            ' across ecommerce and SaaS, working with startups and individuals across the UK, India, Slovakia, Austria, Australia, and Canada.',
+            ' across ecommerce and SaaS — alongside frontend builds for startups and individuals across the UK, India, Slovakia, Austria, Australia, and Canada.',
         },
       ],
       [
@@ -51,7 +51,7 @@ export const aboutContent = {
         { kind: 'strong', value: 'frontend A/B testing developer with Conversion.com' },
         {
           kind: 'text',
-          value: ' for 4.5+ years, building production tests on enterprise platforms. Now ',
+          value: ' for 4+ years, building production tests on enterprise platforms. Now ',
         },
         { kind: 'strong', value: 'actively open to new opportunities' },
         { kind: 'text', value: ', full-time remote or contract.' },

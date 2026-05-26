@@ -4,7 +4,7 @@ export const homeContent = {
   hero: {
     topbarLeft: { name: 'Mainul Islam', role: 'Frontend Developer' },
     topbarRight: { version: 'Portfolio v3', year: '2026', metric: '7 yrs · 9+ countries' },
-    sub: 'I build frontend and run A/B tests that turn traffic into revenue. 4.5+ years on Optimizely, Kameleoon, and Qubit. Modern stack — Next.js, TypeScript, and a Claude-Code-led workflow that actually finishes what it starts.',
+    sub: 'I build frontend and run A/B tests that turn traffic into revenue. 4+ years on Optimizely, Kameleoon, and Qubit. Modern stack — Next.js, TypeScript, and a Claude-Code-led workflow that actually finishes what it starts.',
     statusLine: 'Open to new roles — full-time or contract',
     ctaLabel: 'Get in touch',
     ctaHref: '/contact',
@@ -74,7 +74,7 @@ export const homeContent = {
       { sector: 'Browser tech', nameParts: ['AdBlock'] },
       { sector: 'HR & SaaS', nameParts: ['Deel'] },
     ],
-    foot: '— and many more, listed only where approved.',
+    foot: '— and many, many more.',
   },
   recognition: {
     sectionIndex: '05 / Recognition',
@@ -113,7 +113,7 @@ export const homeContent = {
       {
         year: '2019 – Present',
         roleLines: ['Freelance Frontend', 'Developer'],
-        desc: 'Frontend & experimentation work for startups and individuals across 9+ countries.',
+        desc: 'Frontend work for startups and individuals across 9+ countries.',
         loc: 'Remote · 9+ countries',
       },
     ],
