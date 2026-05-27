@@ -8,9 +8,10 @@ type Props = {
   children: React.ReactNode;
   className?: string;
   upRight?: boolean;
+  cursorLabel?: string;
 };
 
-export function TextLink({ href, external, children, className, upRight }: Props) {
+export function TextLink({ href, external, children, className, upRight, cursorLabel }: Props) {
   const cls = [styles.tlink, className].filter(Boolean).join(' ');
   const isExternal = external || /^(https?:|mailto:)/.test(href);
   const arrow = upRight ? (
@@ -30,6 +31,7 @@ export function TextLink({ href, external, children, className, upRight }: Props
         className={cls}
         target={href.startsWith('mailto:') ? undefined : '_blank'}
         rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+        data-cursor-label={cursorLabel ?? 'Open ↗'}
       >
         {children}
         {arrow}
@@ -38,7 +40,7 @@ export function TextLink({ href, external, children, className, upRight }: Props
   }
 
   return (
-    <Link href={href} className={cls}>
+    <Link href={href} className={cls} data-cursor-label={cursorLabel}>
       {children}
       {arrow}
     </Link>

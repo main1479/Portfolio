@@ -77,6 +77,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 4px 8px;
+
+  @include reduced-motion-safe {
+    transition: opacity 0.3s var(--ease-out);
+  }
 }
 
 .tag {
@@ -109,26 +113,34 @@
   }
 }
 
-.link:hover::before {
+.link:hover::before,
+.link:focus-visible::before {
   opacity: 1;
 }
 
-.link:hover .title {
+.link:hover .title,
+.link:focus-visible .title {
   color: var(--accent);
 
   @include reduced-motion-safe {
-    transform: translateX(10px);
+    transform: translateX(-6px);
   }
 }
 
-.link:hover .arrow {
+.link:hover .arrow,
+.link:focus-visible .arrow {
   background: var(--accent);
   color: var(--accent-ink);
   border-color: var(--accent);
 
   @include reduced-motion-safe {
-    transform: rotate(-45deg);
+    transform: translateX(12px) rotate(-45deg);
   }
+}
+
+.link:hover .tags,
+.link:focus-visible .tags {
+  opacity: 0.5;
 }
 
 .link:focus-visible {

@@ -29,6 +29,7 @@ Format: `- [<area>] <description> — <branch or session ref>`
 - [visual] Template page-enter fade-up and PageIntro title reveal ship green on typecheck + lint + build, but the animations themselves were not visually verified by Claude this session (no browser-driving tool available). Human-eyeball pass needed on every route — `/`, `/about`, `/contact`, `/work`, `/work/avsb`, `/cv` (verify static), `/404` — plus a reduced-motion-on pass. — `feature/page-transitions` session 2026-05-26
 - [assets] OG / twitter images for `/experience/client` and `/experience/gain-conversion` — both pages currently fall back to the root-level `opengraph-image` / `twitter-image`. Add per-page generators following the existing `app/work/<slug>/opengraph-image.tsx` shape once the page copy settles. — `feature/experience-pages` session 2026-05-26
 - [content] `/about` and `/cv` still describe the Conversion.com + freelance tenures inline. Migrate those references to link to `/experience/gain-conversion` and `/experience/client` in a follow-up pass once these pages settle. — `feature/experience-pages` session 2026-05-26
+- [motion] Page-transition curtain (Stage 1 of motion pass) runs on forward link clicks only — browser back/forward (popstate) navigations are not wrapped yet. Spec calls for popstate to curtain too; defer until after visual tuning lands. Add a `popstate` listener in `PageCurtain.tsx` that triggers the curtain with no destination label. — `feature/motion-pass` Stage 1 session 2026-05-27
 
 ## Resolved
 

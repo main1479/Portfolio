@@ -1,0 +1,104 @@
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+// Sheet geometry: 150vh tall, with the arch occupying the top 12% and
+// bottom 12% of the SVG viewBox (= 18vh on the rendered sheet). Cover
+// position translates to -20vh so the arch corners sit 2vh above the
+// viewport top — fixes the previous corner gap.
+.sheet {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 150vh;
+  transform: translateY(150vh);
+  will-change: transform;
+}
+
+.sheetSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+// Bottom layer — paper, leads on enter, trails on exit.
+.sheet1 {
+  z-index: 1;
+}
+.path1 {
+  fill: var(--paper-deep);
+}
+
+// Middle layer — accent navy.
+.sheet2 {
+  z-index: 2;
+}
+.path2 {
+  fill: var(--accent);
+}
+
+// Top layer — brand ink, trails on enter, leads on exit. The user
+// sees ink covering the viewport during the held middle phase.
+.sheet3 {
+  z-index: 3;
+}
+.path3 {
+  fill: var(--fg);
+}
+
+// COVERING — staggered enter: paper first (0ms), accent (+90ms),
+// ink (+180ms). Each layer overlaps the previous; the user sees a
+// brief flash of paper, then accent, then ink locks in.
+.curtain[data-phase='covering'] .sheet {
+  transform: translateY(-20vh);
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.curtain[data-phase='covering'] .sheet1 {
+  transition-delay: 0ms;
+}
+.curtain[data-phase='covering'] .sheet2 {
+  transition-delay: 90ms;
+}
+.curtain[data-phase='covering'] .sheet3 {
+  transition-delay: 180ms;
+}
+
+// COVERED — all three layers parked at cover position, no animation.
+.curtain[data-phase='covered'] .sheet {
+  transform: translateY(-20vh);
+  transition: none;
+}
+
+// LIFTING — staggered exit, reversed: ink first (0ms), accent (+90ms),
+// paper (+180ms). As each layer peels up the bottom arch sweeps
+// through the viewport, briefly revealing the next colour below.
+.curtain[data-phase='lifting'] .sheet {
+  transform: translateY(-150vh);
+  transition: transform 500ms cubic-bezier(0.55, 0, 0.4, 1);
+}
+.curtain[data-phase='lifting'] .sheet1 {
+  transition-delay: 180ms;
+}
+.curtain[data-phase='lifting'] .sheet2 {
+  transition-delay: 90ms;
+}
+.curtain[data-phase='lifting'] .sheet3 {
+  transition-delay: 0ms;
+}
+
+// IDLE — snap reset below viewport for the next click.
+.curtain[data-phase='idle'] .sheet {
+  transform: translateY(150vh);
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .curtain {
+    display: none;
+  }
+}

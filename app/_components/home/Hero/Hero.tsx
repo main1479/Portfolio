@@ -24,13 +24,11 @@ export function Hero({ content }: Props) {
 
       mm.add('(prefers-reduced-motion: no-preference)', () => {
         const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
-        tl.from(`.${styles.d1}`, { yPercent: 110, duration: 1.05 }, 0.15);
-        tl.from(`.${styles.d2}`, { yPercent: 110, duration: 1.05 }, 0.27);
-        tl.from(`.${styles.d3}`, { yPercent: 110, duration: 1.05 }, 0.39);
+        tl.from(`.${styles.wordInner}`, { yPercent: 110, duration: 0.9, stagger: 0.06 }, 0.15);
         if (variant === 'A') {
           tl.from(`.${styles.badge}`, { opacity: 0, scale: 0.92, duration: 0.6 }, 0.7);
         }
-        tl.from(`.${styles.variantToggle}`, { opacity: 0, duration: 0.6 }, 1.0);
+        tl.from(`.${styles.variantToggle}`, { opacity: 0, duration: 0.6 }, 1.1);
       });
     },
     { scope: containerRef, dependencies: [variant] },

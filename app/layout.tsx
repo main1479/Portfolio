@@ -4,6 +4,7 @@ import './_styles/globals.scss';
 import { Nav } from './_components/Nav/Nav';
 import { CustomCursor } from './_components/CustomCursor/CustomCursor';
 import { Loader } from './_components/Loader/Loader';
+import { PageCurtain } from './_components/PageCurtain/PageCurtain';
 import { siteConfig } from './_lib/site-config';
 
 const teko = Teko({
@@ -85,6 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CustomCursor />
         <Nav />
         <main id="main-content">{children}</main>
+        <PageCurtain />
       </body>
     </html>
   );

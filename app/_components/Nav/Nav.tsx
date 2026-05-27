@@ -27,6 +27,15 @@ export function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Close the mobile drawer on any route change — covers link clicks
+  // (in case onClick didn't fire), browser back/forward, and any
+  // programmatic navigation. setState-in-effect is intentional here:
+  // we're reacting to an external change (pathname), not deriving state.
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setOpen(false);
+  }, [pathname]);
+
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -76,7 +85,7 @@ export function Nav() {
       aria-label="Primary"
     >
       <div className={`container ${styles.inner}`}>
-        <Link href="/" className={styles.mark} aria-label="Home">
+        <Link href="/" className={styles.mark} aria-label="Home" data-cursor-label="Home">
           <span>{siteConfig.ownerName.split(' ')[0]}</span>
           <span className={styles.dot} aria-hidden="true" />
         </Link>
@@ -98,6 +107,7 @@ export function Nav() {
                 aria-current={current ? 'page' : undefined}
                 role="menuitem"
                 onClick={onLinkClick}
+                data-cursor-label={link.label}
               >
                 <span className={styles.num}>{link.num}</span>
                 {link.label}
