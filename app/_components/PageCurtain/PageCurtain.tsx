@@ -6,9 +6,9 @@ import styles from './_PageCurtain.module.scss';
 
 type Phase = 'idle' | 'covering' | 'covered' | 'lifting';
 
-const ENTER_MS = 520;
-const HOLD_MS = 560;
-const EXIT_MS = 520;
+const ENTER_MS = 680;
+const HOLD_MS = 240;
+const EXIT_MS = 680;
 
 function isInternalHref(href: string): boolean {
   if (!href) return false;
@@ -33,6 +33,8 @@ function normalisedPath(href: string): string {
     return href;
   }
 }
+
+const ARCH_PATH = 'M 0 12 Q 50 0 100 12 L 100 88 Q 50 100 0 88 Z';
 
 export function PageCurtain() {
   const [phase, setPhase] = useState<Phase>('idle');
@@ -113,14 +115,34 @@ export function PageCurtain() {
 
   return (
     <div aria-hidden="true" className={styles.curtain} data-phase={phase}>
-      <div className={styles.sheet}>
+      <div className={`${styles.sheet} ${styles.sheet1}`}>
         <svg
           className={styles.sheetSvg}
           viewBox="0 0 100 100"
           preserveAspectRatio="none"
           aria-hidden="true"
         >
-          <path className={styles.sheetPath} d="M 0 12 Q 50 0 100 12 L 100 88 Q 50 100 0 88 Z" />
+          <path className={styles.path1} d={ARCH_PATH} />
+        </svg>
+      </div>
+      <div className={`${styles.sheet} ${styles.sheet2}`}>
+        <svg
+          className={styles.sheetSvg}
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path className={styles.path2} d={ARCH_PATH} />
+        </svg>
+      </div>
+      <div className={`${styles.sheet} ${styles.sheet3}`}>
+        <svg
+          className={styles.sheetSvg}
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path className={styles.path3} d={ARCH_PATH} />
         </svg>
       </div>
     </div>
