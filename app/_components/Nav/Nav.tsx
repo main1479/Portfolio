@@ -76,7 +76,7 @@ export function Nav() {
       aria-label="Primary"
     >
       <div className={`container ${styles.inner}`}>
-        <Link href="/" className={styles.mark} aria-label="Home">
+        <Link href="/" className={styles.mark} aria-label="Home" data-cursor-label="Home">
           <span>{siteConfig.ownerName.split(' ')[0]}</span>
           <span className={styles.dot} aria-hidden="true" />
         </Link>
@@ -98,6 +98,7 @@ export function Nav() {
                 aria-current={current ? 'page' : undefined}
                 role="menuitem"
                 onClick={onLinkClick}
+                data-cursor-label={link.label}
               >
                 <span className={styles.num}>{link.num}</span>
                 {link.label}

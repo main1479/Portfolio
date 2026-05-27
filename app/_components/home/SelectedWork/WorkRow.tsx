@@ -6,7 +6,7 @@ import styles from './_SelectedWork.module.scss';
 export function WorkRow({ project }: { project: WorkProject }) {
   const visibleTags = project.tags.slice(0, 3);
   return (
-    <Link href={`/work/${project.slug}`} className={styles.row}>
+    <Link href={`/work/${project.slug}`} className={styles.row} data-cursor-label="Open">
       <span className={styles.num}>{project.num}</span>
       <h3 className={styles.title}>{project.title}</h3>
       <div className={styles.meta}>

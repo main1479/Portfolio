@@ -11,6 +11,7 @@ type CommonProps = {
   children: React.ReactNode;
   arrow?: boolean;
   arrowGlyph?: React.ReactNode;
+  cursorLabel?: string;
 };
 
 type AnchorProps = CommonProps & {
@@ -54,12 +55,13 @@ function inner(children: React.ReactNode, arrow: boolean, arrowGlyph?: React.Rea
 }
 
 export function Button(props: Props) {
-  const { variant = 'default', className, children, arrow = true, arrowGlyph } = props;
+  const { variant = 'default', className, children, arrow = true, arrowGlyph, cursorLabel } = props;
   const cls = classNames(variant, className);
   const body = inner(children, arrow, arrowGlyph);
 
   if ('href' in props && props.href !== undefined) {
     const isExternal = props.external || /^(https?:|mailto:)/.test(props.href);
+    const label = cursorLabel ?? (isExternal ? 'Open ↗' : undefined);
     if (isExternal) {
       return (
         <Magnetic>
@@ -68,6 +70,7 @@ export function Button(props: Props) {
             className={cls}
             target={props.href.startsWith('mailto:') ? undefined : '_blank'}
             rel={props.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+            data-cursor-label={label}
           >
             {body}
           </a>
@@ -76,7 +79,7 @@ export function Button(props: Props) {
     }
     return (
       <Magnetic>
-        <Link href={props.href} className={cls}>
+        <Link href={props.href} className={cls} data-cursor-label={label}>
           {body}
         </Link>
       </Magnetic>
@@ -85,7 +88,12 @@ export function Button(props: Props) {
 
   return (
     <Magnetic>
-      <button type={props.type ?? 'button'} onClick={props.onClick} className={cls}>
+      <button
+        type={props.type ?? 'button'}
+        onClick={props.onClick}
+        className={cls}
+        data-cursor-label={cursorLabel}
+      >
         {body}
       </button>
     </Magnetic>

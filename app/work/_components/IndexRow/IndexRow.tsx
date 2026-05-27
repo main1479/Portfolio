@@ -7,7 +7,12 @@ export function IndexRow({ project }: { project: WorkProject }) {
   const visibleTags = project.tags.slice(0, 3);
   return (
     <li className={styles.row}>
-      <Link href={project.href} className={styles.link} data-cursor="hover">
+      <Link
+        href={project.href}
+        className={styles.link}
+        data-cursor="hover"
+        data-cursor-label="Open"
+      >
         <span className={styles.num}>{project.num}</span>
         <h3 className={styles.title}>{project.title}</h3>
         <span className={styles.meta}>{project.metaShort}</span>
