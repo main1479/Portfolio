@@ -6,67 +6,27 @@
   left: 0;
   width: 10px;
   height: 10px;
-  min-width: 10px;
-  padding: 0;
-  border-radius: 999px;
+  border-radius: 50%;
   background: var(--accent);
   pointer-events: none;
   z-index: 9999;
   opacity: 0;
   transform: translate(-50%, -50%);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  overflow: hidden;
-  border: 0 solid var(--fg);
 
   @include reduced-motion-safe {
     transition:
-      width 0.22s var(--ease-out),
-      height 0.22s var(--ease-out),
-      min-width 0.22s var(--ease-out),
-      padding 0.22s var(--ease-out),
-      background 0.22s var(--ease-out),
-      border-width 0.22s var(--ease-out),
+      width 0.25s var(--ease-out),
+      height 0.25s var(--ease-out),
+      background 0.25s,
       opacity 0.2s;
   }
 }
 
-// Hover over interactive element WITHOUT an explicit label — ring grow.
 .isHover {
   width: 56px;
   height: 56px;
   background: transparent;
-  border-width: 1px;
-}
-
-// Hover over an element with an explicit cursor label — fill + show label.
-.hasLabel {
-  width: auto;
-  height: 56px;
-  min-width: 56px;
-  padding: 0 1.8rem;
-  background: var(--fg);
-  border-width: 0;
-}
-
-.label {
-  font-family: var(--font-body);
-  font-size: 1.4rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: var(--accent-ink);
-  opacity: 0;
-  display: inline-block;
-
-  @include reduced-motion-safe {
-    transition: opacity 0.18s var(--ease-out);
-  }
-}
-
-.hasLabel .label {
-  opacity: 1;
+  border: 1px solid var(--fg);
 }
 
 // Belt-and-braces: hide on touch even if matchMedia gave us a false positive.
