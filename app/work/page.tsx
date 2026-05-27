@@ -54,8 +54,12 @@ export default function WorkPage() {
             />
           </Reveal>
           <ol className={styles.index} role="list">
-            {workProjects.map((project) => (
-              <IndexRow key={project.slug} project={project} />
+            {workProjects.map((project, i) => (
+              <IndexRow
+                key={project.slug}
+                project={project}
+                delay={Math.min(i + 1, 5) as 1 | 2 | 3 | 4 | 5}
+              />
             ))}
           </ol>
           <Reveal className={styles.indexFoot}>
