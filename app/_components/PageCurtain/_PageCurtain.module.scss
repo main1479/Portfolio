@@ -1,0 +1,52 @@
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: var(--fg);
+  color: var(--accent-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--gutter);
+  pointer-events: none;
+  transform: translateY(100%);
+  visibility: hidden;
+  transition:
+    transform 200ms var(--ease-in-out),
+    visibility 0s linear 200ms;
+  will-change: transform;
+}
+
+.isVisible {
+  transform: translateY(0);
+  visibility: visible;
+  transition:
+    transform 200ms var(--ease-in-out),
+    visibility 0s linear 0s;
+}
+
+.message {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  font-size: clamp(3.2rem, 8vw, 6.4rem);
+  line-height: 1;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 180ms ease,
+    transform 220ms var(--ease-out);
+}
+
+.isVisible .message {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 80ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .curtain {
+    display: none;
+  }
+}
