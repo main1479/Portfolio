@@ -3,51 +3,58 @@
   inset: 0;
   z-index: 500;
   pointer-events: none;
+  overflow: hidden;
 }
 
-.layer {
+.sheet {
   position: absolute;
-  inset: 0;
-  transform: translateY(100%);
+  left: 0;
+  top: 0;
+  width: 100%;
+  // Sheet is taller than viewport so the curved top and bottom edges
+  // sit outside the visible area when the middle straight section
+  // covers the screen.
+  height: 132vh;
+  transform: translateY(132vh);
   will-change: transform;
 }
 
-// Bottom of the stack — paper-cream, slides up first on enter,
-// slides off last on exit.
-.layer1 {
-  background: var(--paper-deep);
-  transition: transform 220ms var(--ease-in-out) 160ms;
+.sheetSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-// Middle — accent navy.
-.layer2 {
-  background: var(--accent);
-  transition: transform 220ms var(--ease-in-out) 80ms;
+.sheetPath {
+  fill: var(--fg);
 }
 
-// Top — brand ink, lands last on enter, lifts first on exit
-// (so the cream → navy → ink colour cascade reverses as the
-// curtain peels away).
-.layer3 {
-  background: var(--fg);
-  transition: transform 220ms var(--ease-in-out) 0ms;
+// COVERING — sheet rises from below. Top arch sweeps up across the
+// viewport. Heavy ease-out so the gesture decelerates into the cover
+// position.
+.curtain[data-phase='covering'] .sheet {
+  transform: translateY(-15vh);
+  transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.isVisible .layer {
-  transform: translateY(0);
+// COVERED — held in place while the route swaps underneath.
+.curtain[data-phase='covered'] .sheet {
+  transform: translateY(-15vh);
+  transition: none;
 }
 
-// Enter delays: paper first, accent next, ink last.
-.isVisible .layer1 {
-  transition-delay: 0ms;
+// LIFTING — sheet continues up past the viewport. Bottom arch (convex
+// downward) sweeps up across the viewport on the way out. Slight
+// ease-in so it picks up speed as it leaves.
+.curtain[data-phase='lifting'] .sheet {
+  transform: translateY(-132vh);
+  transition: transform 520ms cubic-bezier(0.55, 0, 0.4, 1);
 }
 
-.isVisible .layer2 {
-  transition-delay: 80ms;
-}
-
-.isVisible .layer3 {
-  transition-delay: 160ms;
+// IDLE — snap reset below viewport for the next click.
+.curtain[data-phase='idle'] .sheet {
+  transform: translateY(132vh);
+  transition: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

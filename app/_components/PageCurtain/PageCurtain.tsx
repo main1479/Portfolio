@@ -4,8 +4,11 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './_PageCurtain.module.scss';
 
-const SLIDE_MS = 380;
-const HOLD_MS = 840;
+type Phase = 'idle' | 'covering' | 'covered' | 'lifting';
+
+const ENTER_MS = 520;
+const HOLD_MS = 560;
+const EXIT_MS = 520;
 
 function isInternalHref(href: string): boolean {
   if (!href) return false;
@@ -32,7 +35,7 @@ function normalisedPath(href: string): string {
 }
 
 export function PageCurtain() {
-  const [visible, setVisible] = useState(false);
+  const [phase, setPhase] = useState<Phase>('idle');
   const router = useRouter();
   const inFlight = useRef(false);
 
@@ -49,26 +52,31 @@ export function PageCurtain() {
       }
 
       inFlight.current = true;
-      setVisible(true);
+      setPhase('covering');
 
       window.setTimeout(() => {
-        const navigate = () => router.push(href);
+        setPhase('covered');
         const doc = document as Document & {
           startViewTransition?: (cb: () => void) => { finished: Promise<void> };
         };
         if (typeof doc.startViewTransition === 'function') {
-          doc.startViewTransition(navigate);
+          doc.startViewTransition(() => router.push(href));
         } else {
-          navigate();
+          router.push(href);
         }
+      }, ENTER_MS);
 
-        window.setTimeout(() => {
-          setVisible(false);
-          window.setTimeout(() => {
-            inFlight.current = false;
-          }, SLIDE_MS);
-        }, HOLD_MS);
-      }, SLIDE_MS);
+      window.setTimeout(() => {
+        setPhase('lifting');
+      }, ENTER_MS + HOLD_MS);
+
+      window.setTimeout(
+        () => {
+          setPhase('idle');
+          inFlight.current = false;
+        },
+        ENTER_MS + HOLD_MS + EXIT_MS,
+      );
     },
     [router],
   );
@@ -99,22 +107,22 @@ export function PageCurtain() {
       trigger(dest);
     };
 
-    // Capture phase so we run before next/link's bubble-phase handler
-    // (which calls preventDefault for client-side routing — that would
-    // otherwise mark the event as handled before we ever saw it).
     document.addEventListener('click', onClick, { capture: true });
     return () => document.removeEventListener('click', onClick, { capture: true });
   }, [trigger]);
 
   return (
-    <div
-      aria-hidden="true"
-      className={`${styles.curtain} ${visible ? styles.isVisible : ''}`}
-      data-state={visible ? 'visible' : 'hidden'}
-    >
-      <div className={`${styles.layer} ${styles.layer1}`} />
-      <div className={`${styles.layer} ${styles.layer2}`} />
-      <div className={`${styles.layer} ${styles.layer3}`} />
+    <div aria-hidden="true" className={styles.curtain} data-phase={phase}>
+      <div className={styles.sheet}>
+        <svg
+          className={styles.sheetSvg}
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path className={styles.sheetPath} d="M 0 12 Q 50 0 100 12 L 100 88 Q 50 100 0 88 Z" />
+        </svg>
+      </div>
     </div>
   );
 }
