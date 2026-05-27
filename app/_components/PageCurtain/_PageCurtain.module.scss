@@ -2,47 +2,52 @@
   position: fixed;
   inset: 0;
   z-index: 500;
-  background: var(--fg);
-  color: var(--accent-ink);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 var(--gutter);
   pointer-events: none;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
   transform: translateY(100%);
-  visibility: hidden;
-  transition:
-    transform 200ms var(--ease-in-out),
-    visibility 0s linear 200ms;
   will-change: transform;
 }
 
-.isVisible {
-  transform: translateY(0);
-  visibility: visible;
-  transition:
-    transform 200ms var(--ease-in-out),
-    visibility 0s linear 0s;
+// Bottom of the stack — paper-cream, slides up first on enter,
+// slides off last on exit.
+.layer1 {
+  background: var(--paper-deep);
+  transition: transform 220ms var(--ease-in-out) 160ms;
 }
 
-.message {
-  font-family: var(--font-display);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  font-size: clamp(3.2rem, 8vw, 6.4rem);
-  line-height: 1;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(12px);
-  transition:
-    opacity 180ms ease,
-    transform 220ms var(--ease-out);
+// Middle — accent navy.
+.layer2 {
+  background: var(--accent);
+  transition: transform 220ms var(--ease-in-out) 80ms;
 }
 
-.isVisible .message {
-  opacity: 1;
+// Top — brand ink, lands last on enter, lifts first on exit
+// (so the cream → navy → ink colour cascade reverses as the
+// curtain peels away).
+.layer3 {
+  background: var(--fg);
+  transition: transform 220ms var(--ease-in-out) 0ms;
+}
+
+.isVisible .layer {
   transform: translateY(0);
+}
+
+// Enter delays: paper first, accent next, ink last.
+.isVisible .layer1 {
+  transition-delay: 0ms;
+}
+
+.isVisible .layer2 {
   transition-delay: 80ms;
+}
+
+.isVisible .layer3 {
+  transition-delay: 160ms;
 }
 
 @media (prefers-reduced-motion: reduce) {

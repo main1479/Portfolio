@@ -2,13 +2,10 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { pickCurtainMessage } from '../../_lib/curtain-messages';
 import styles from './_PageCurtain.module.scss';
 
-const SLIDE_MS = 200;
-const HOLD_MS = 1200;
-
-type CurtainState = { visible: boolean; message: string };
+const SLIDE_MS = 380;
+const HOLD_MS = 840;
 
 function isInternalHref(href: string): boolean {
   if (!href) return false;
@@ -34,23 +31,13 @@ function normalisedPath(href: string): string {
   }
 }
 
-function labelFromAnchor(anchor: HTMLAnchorElement): string | undefined {
-  const attr = anchor.dataset.cursorLabel?.trim();
-  if (attr) return attr;
-  const aria = anchor.getAttribute('aria-label')?.trim();
-  if (aria) return aria;
-  const text = anchor.textContent?.trim();
-  if (!text) return undefined;
-  return text.length > 20 ? `${text.slice(0, 18)}…` : text;
-}
-
 export function PageCurtain() {
-  const [state, setState] = useState<CurtainState>({ visible: false, message: '' });
+  const [visible, setVisible] = useState(false);
   const router = useRouter();
   const inFlight = useRef(false);
 
   const trigger = useCallback(
-    (href: string, label?: string) => {
+    (href: string) => {
       if (inFlight.current) return;
       const reduceMotion =
         typeof window !== 'undefined' &&
@@ -62,8 +49,7 @@ export function PageCurtain() {
       }
 
       inFlight.current = true;
-      const message = pickCurtainMessage(label);
-      setState({ visible: true, message });
+      setVisible(true);
 
       window.setTimeout(() => {
         const navigate = () => router.push(href);
@@ -77,7 +63,7 @@ export function PageCurtain() {
         }
 
         window.setTimeout(() => {
-          setState((s) => ({ ...s, visible: false }));
+          setVisible(false);
           window.setTimeout(() => {
             inFlight.current = false;
           }, SLIDE_MS);
@@ -110,7 +96,7 @@ export function PageCurtain() {
 
       event.preventDefault();
       event.stopPropagation();
-      trigger(dest, labelFromAnchor(anchor));
+      trigger(dest);
     };
 
     // Capture phase so we run before next/link's bubble-phase handler
@@ -123,10 +109,12 @@ export function PageCurtain() {
   return (
     <div
       aria-hidden="true"
-      className={`${styles.curtain} ${state.visible ? styles.isVisible : ''}`}
-      data-state={state.visible ? 'visible' : 'hidden'}
+      className={`${styles.curtain} ${visible ? styles.isVisible : ''}`}
+      data-state={visible ? 'visible' : 'hidden'}
     >
-      <span className={styles.message}>{state.message}</span>
+      <div className={`${styles.layer} ${styles.layer1}`} />
+      <div className={`${styles.layer} ${styles.layer2}`} />
+      <div className={`${styles.layer} ${styles.layer3}`} />
     </div>
   );
 }
