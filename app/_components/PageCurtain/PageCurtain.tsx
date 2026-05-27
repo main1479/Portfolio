@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import { pickCurtainMessage } from '../../_lib/curtain-messages';
 import styles from './_PageCurtain.module.scss';
 
-const COVER_MS = 200;
-const RELEASE_MS = 220;
+const SLIDE_MS = 200;
+const HOLD_MS = 1200;
 
 type CurtainState = { visible: boolean; message: string };
 
@@ -80,23 +80,16 @@ export function PageCurtain() {
           setState((s) => ({ ...s, visible: false }));
           window.setTimeout(() => {
             inFlight.current = false;
-          }, RELEASE_MS);
-        }, RELEASE_MS);
-      }, COVER_MS);
+          }, SLIDE_MS);
+        }, HOLD_MS);
+      }, SLIDE_MS);
     },
     [router],
   );
 
   useEffect(() => {
     const onClick = (event: MouseEvent) => {
-      if (
-        event.defaultPrevented ||
-        event.button !== 0 ||
-        event.metaKey ||
-        event.ctrlKey ||
-        event.shiftKey ||
-        event.altKey
-      ) {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
         return;
       }
 
@@ -116,11 +109,15 @@ export function PageCurtain() {
       if (dest === window.location.pathname) return;
 
       event.preventDefault();
+      event.stopPropagation();
       trigger(dest, labelFromAnchor(anchor));
     };
 
-    document.addEventListener('click', onClick);
-    return () => document.removeEventListener('click', onClick);
+    // Capture phase so we run before next/link's bubble-phase handler
+    // (which calls preventDefault for client-side routing — that would
+    // otherwise mark the event as handled before we ever saw it).
+    document.addEventListener('click', onClick, { capture: true });
+    return () => document.removeEventListener('click', onClick, { capture: true });
   }, [trigger]);
 
   return (
