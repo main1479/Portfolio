@@ -105,7 +105,9 @@ export function PageCurtain() {
       if (dest === window.location.pathname) return;
 
       event.preventDefault();
-      event.stopPropagation();
+      // No stopPropagation — other capture/bubble handlers attached to the
+      // anchor (e.g. Nav's onLinkClick that closes the mobile drawer) still
+      // need to run. next/link's onClick checks defaultPrevented and bails.
       trigger(dest);
     };
 

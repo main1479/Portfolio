@@ -27,6 +27,15 @@ export function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Close the mobile drawer on any route change — covers link clicks
+  // (in case onClick didn't fire), browser back/forward, and any
+  // programmatic navigation. setState-in-effect is intentional here:
+  // we're reacting to an external change (pathname), not deriving state.
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setOpen(false);
+  }, [pathname]);
+
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
