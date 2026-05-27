@@ -1,5 +1,6 @@
 import { Container } from '../../../_components/Container/Container';
 import { Footer } from '../../../_components/Footer/Footer';
+import { Reveal } from '../../../_components/Reveal/Reveal';
 import { CaseHero } from './CaseHero';
 import { CaseMeta } from './CaseMeta';
 import { NextCase } from './NextCase';
@@ -29,13 +30,17 @@ export function CaseLayout({ frontmatter, children }: Props) {
     <>
       <CaseHero num={fm.num} breadcrumbTitle={fm.title} lines={fm.heroLines} summary={fm.summary} />
       <Container>
-        <CaseMeta cells={fm.meta} />
+        <Reveal>
+          <CaseMeta cells={fm.meta} />
+        </Reveal>
       </Container>
       <div className={styles.body}>
         <Container>{children}</Container>
       </div>
       <Container>
-        <NextCase pointer={fm.next} />
+        <Reveal>
+          <NextCase pointer={fm.next} />
+        </Reveal>
       </Container>
       <Footer
         heading={

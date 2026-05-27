@@ -77,15 +77,14 @@
   margin: 0;
 }
 
-// Display spans — overflow:hidden hosts the rise-in animation (the
-// inner spans translateY in from below). Animation runs from Hero.tsx
-// useGSAP. min-width:0 + overflow-wrap allow long words to wrap when
-// the viewport narrows past the clamp floor.
+// Display spans — line itself is overflow:visible so each per-word mask
+// can extend; overflow:hidden lives on .word so each word's inner can
+// translateY in independently. Animation runs from Hero.tsx useGSAP.
 .hero {
   :global(.display-xl) {
     line-height: 0.82;
     margin: 0;
-    overflow: hidden;
+    overflow: visible;
     min-width: 0;
     max-width: 100%;
     overflow-wrap: break-word;
@@ -96,12 +95,18 @@
   min-width: 0;
 }
 
-.d1,
-.d2,
-.d3 {
+.word {
   display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
   max-width: 100%;
   overflow-wrap: break-word;
+  line-height: inherit;
+}
+
+.wordInner {
+  display: inline-block;
+  will-change: transform;
 }
 
 .accent {
