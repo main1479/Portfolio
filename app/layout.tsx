@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { Teko, Josefin_Sans, JetBrains_Mono } from 'next/font/google';
 import './_styles/globals.scss';
 import { Nav } from './_components/Nav/Nav';
@@ -78,6 +79,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${teko.variable} ${josefin.variable} ${mono.variable}`}>
+      {/* A/B testing platform — loads before render to avoid variant flicker */}
+      <Script
+        src="https://cdn.avsb.cloud/snippet.js?id=cmpvfsa5q000t04laj4eordkt"
+        strategy="beforeInteractive"
+      />
       <body>
         <Loader />
         <a href="#main-content" className="skip-link">
@@ -87,6 +93,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main id="main-content">{children}</main>
         <PageCurtain />
+        {/* Google Analytics (gtag) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-F277NCN7RS"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag() {
+  dataLayer.push(arguments);
+}
+gtag('js', new Date());
+gtag('config', 'G-F277NCN7RS');`}
+        </Script>
       </body>
     </html>
   );
