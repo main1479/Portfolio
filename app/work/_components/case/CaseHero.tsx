@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Container } from '../../../_components/Container/Container';
+import { SplitReveal } from '../../../_components/SplitReveal/SplitReveal';
 import type { CaseHeroLine } from '../../../_types/case';
 import styles from './_CaseHero.module.scss';
 
@@ -24,7 +25,7 @@ export function CaseHero({ num, breadcrumbTitle, lines, summary }: Props) {
             </span>
           </p>
         )}
-        <h1 className={styles.title}>
+        <SplitReveal as="h1" type="lines" mode="loader" className={styles.title}>
           {lines.map((line, i) => {
             const classes = [
               styles.line,
@@ -40,7 +41,7 @@ export function CaseHero({ num, breadcrumbTitle, lines, summary }: Props) {
               </span>
             );
           })}
-        </h1>
+        </SplitReveal>
         <p className={styles.summary}>{summary}</p>
       </Container>
     </header>

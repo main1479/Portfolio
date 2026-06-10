@@ -1,4 +1,5 @@
 import { Reveal } from '../Reveal/Reveal';
+import { SplitReveal } from '../SplitReveal/SplitReveal';
 
 type Props = {
   index: string;
@@ -9,9 +10,13 @@ type Props = {
 
 export function SectionHead({ index, title, titleNodes, className }: Props) {
   return (
-    <Reveal as="header" className={['section__head', className].filter(Boolean).join(' ')}>
-      <span className="section__index">{index}</span>
-      <h2 className="section__title">{titleNodes ?? title}</h2>
-    </Reveal>
+    <header className={['section__head', className].filter(Boolean).join(' ')}>
+      <Reveal as="span" className="section__index">
+        {index}
+      </Reveal>
+      <SplitReveal as="h2" type="chars" className="section__title">
+        {titleNodes ?? title}
+      </SplitReveal>
+    </header>
   );
 }
