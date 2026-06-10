@@ -117,6 +117,14 @@ Two stacked spans in an overflow-hidden box; parent `:hover`/`:focus-visible` tr
 
 Each commit pushed; `/ship` gauntlet after 6; code-reviewer before final push.
 
+## Retrospective
+
+- **The "auto-imported mixins" assumption was wrong.** The spec (and CLAUDE.md rule 6) says component modules must not `@use 'mixins'` because `additionalData` injects them — but Turbopack ignores the function-form `additionalData`, so `_RollingText.module.scss` broke the build until an explicit `@use` was added. futureWorks already tracked this (`[build]`, 2026-05-22); the rules docs still need updating.
+- **PageIntro already had a masked title rise** — the spec said "apply SplitReveal" but it was really a replacement; `_PageIntro.module.scss` was deleted, not extended.
+- **StickyPin needed a multi-frame retry**, not the single rAF the spec assumed, to wait for ScrollSmoother creation reliably.
+- **EndCTA scrub drift was dropped** during implementation for visual restraint (logged in futureWorks).
+- Code review added: cleanup hardening in SplitReveal's font-ready path and a null-guard on cursor labels.
+
 ## Known risks
 
 - ScrollSmoother × Next App Router: layout persists so the instance survives navigation, but `refresh()` on pathname change is required or ScrollTriggers measure stale heights.
