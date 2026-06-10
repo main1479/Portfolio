@@ -241,6 +241,46 @@
   transform: scaleX(0);
 }
 
+// --- Stacked mode at phone/tablet widths: title + arrow share the first
+// row, the description and tags take the full width below.
+
+@media (max-width: 900px) {
+  .caption {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 16px;
+    row-gap: 12px;
+    margin-left: 0;
+  }
+
+  .title {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .arrow {
+    grid-column: 2;
+    grid-row: 1;
+    margin-left: 0;
+  }
+
+  .meta {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    max-width: none;
+    padding-top: 0;
+  }
+
+  .media {
+    margin-left: 0;
+  }
+
+  .ghost {
+    font-size: clamp(8rem, 22vw, 14rem);
+  }
+}
+
 // --- Horizontal pinned mode — must mirror HORIZONTAL in WorkGallery.tsx.
 
 @media (min-width: 901px) and (prefers-reduced-motion: no-preference) and (pointer: fine) {
