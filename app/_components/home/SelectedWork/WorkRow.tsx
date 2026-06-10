@@ -4,10 +4,21 @@ import { Arrow } from '../../Arrow/Arrow';
 import type { WorkProject } from '../../../_types/work';
 import styles from './_SelectedWork.module.scss';
 
-export function WorkRow({ project }: { project: WorkProject }) {
+export function WorkRow({
+  project,
+  previewIndex,
+}: {
+  project: WorkProject;
+  previewIndex?: number;
+}) {
   const visibleTags = project.tags.slice(0, 3);
   return (
-    <Link href={`/work/${project.slug}`} className={styles.row} data-cursor-label="Open">
+    <Link
+      href={`/work/${project.slug}`}
+      className={styles.row}
+      data-cursor-label="Open"
+      data-preview-index={previewIndex}
+    >
       <span className={styles.num}>{project.num}</span>
       <span className={styles.media}>
         <Image

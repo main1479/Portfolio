@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { siteConfig } from '../../_lib/site-config';
+import { RollingText } from '../RollingText/RollingText';
 import styles from './_Nav.module.scss';
 
 function isActive(pathname: string, href: string) {
@@ -110,7 +111,7 @@ export function Nav() {
                 data-cursor-label={link.label}
               >
                 <span className={styles.num}>{link.num}</span>
-                {link.label}
+                <RollingText>{link.label}</RollingText>
               </Link>
             );
           })}

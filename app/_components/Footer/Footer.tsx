@@ -1,5 +1,6 @@
 import { siteConfig } from '../../_lib/site-config';
 import { Parallax } from '../Parallax/Parallax';
+import { RollingText } from '../RollingText/RollingText';
 import styles from './_Footer.module.scss';
 
 type Props = {
@@ -33,7 +34,7 @@ export function Footer({ heading, metaLinks = siteConfig.metaLinks }: Props) {
                 target={link.external ? '_blank' : undefined}
                 rel={link.external ? 'noopener noreferrer' : undefined}
               >
-                {link.label}
+                <RollingText>{link.label}</RollingText>
               </a>
             ))}
           </div>

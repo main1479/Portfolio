@@ -23,11 +23,13 @@ function getServerSnapshot() {
 export function CustomCursor() {
   const enabled = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const cursorRef = useRef<HTMLDivElement | null>(null);
+  const labelRef = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
     if (!enabled) return;
     const el = cursorRef.current;
-    if (!el) return;
+    const label = labelRef.current;
+    if (!el || !label) return;
 
     let mx = window.innerWidth / 2;
     let my = window.innerHeight / 2;
@@ -54,11 +56,20 @@ export function CustomCursor() {
     const isInteractive = (target: EventTarget | null) =>
       target instanceof Element && !!target.closest('a, button, [data-cursor="hover"]');
 
+    const labelSource = (target: EventTarget | null) =>
+      target instanceof Element ? target.closest('[data-cursor-label]') : null;
+
     const onOver = (e: MouseEvent) => {
       if (isInteractive(e.target)) el.classList.add(styles.isHover);
+      const source = labelSource(e.target);
+      if (source) {
+        label.textContent = source.getAttribute('data-cursor-label');
+        el.classList.add(styles.isLabel);
+      }
     };
     const onOut = (e: MouseEvent) => {
       if (isInteractive(e.target)) el.classList.remove(styles.isHover);
+      if (labelSource(e.target)) el.classList.remove(styles.isLabel);
     };
 
     window.addEventListener('mousemove', onMove, { passive: true });
@@ -75,5 +86,9 @@ export function CustomCursor() {
   }, [enabled]);
 
   if (!enabled) return null;
-  return <div ref={cursorRef} className={styles.cursor} aria-hidden="true" />;
+  return (
+    <div ref={cursorRef} className={styles.cursor} aria-hidden="true">
+      <span ref={labelRef} className={styles.label} />
+    </div>
+  );
 }
