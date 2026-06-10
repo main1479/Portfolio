@@ -1,4 +1,5 @@
 import { siteConfig } from '../../_lib/site-config';
+import { Parallax } from '../Parallax/Parallax';
 import styles from './_Footer.module.scss';
 
 type Props = {
@@ -37,9 +38,11 @@ export function Footer({ heading, metaLinks = siteConfig.metaLinks }: Props) {
             ))}
           </div>
         </div>
-        <div className={styles.mark} aria-hidden="true">
-          {siteConfig.ownerName.split(' ')[0]}
-        </div>
+        <Parallax yFrom={42} yTo={0} className={styles.markClip}>
+          <div className={styles.mark} aria-hidden="true">
+            {siteConfig.ownerName.split(' ')[0]}
+          </div>
+        </Parallax>
         <div className={styles.bottom}>
           <span>
             © {siteConfig.year} {siteConfig.ownerName}
