@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '../../../_lib/motion';
+import { onLoaderDone } from '../../../_lib/loader-signal';
 import { Container } from '../../Container/Container';
 import { TickRule } from '../../TickRule/TickRule';
 import { Button } from '../../Button/Button';
@@ -23,12 +24,32 @@ export function Hero({ content }: Props) {
       const mm = gsap.matchMedia();
 
       mm.add('(prefers-reduced-motion: no-preference)', () => {
-        const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+        const tl = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } });
         tl.from(`.${styles.wordInner}`, { yPercent: 110, duration: 0.9, stagger: 0.06 }, 0.15);
         if (variant === 'A') {
           tl.from(`.${styles.badge}`, { opacity: 0, scale: 0.92, duration: 0.6 }, 0.7);
         }
         tl.from(`.${styles.variantToggle}`, { opacity: 0, duration: 0.6 }, 1.1);
+        // Headline rises while the loader panel is still clearing — one
+        // continuous move instead of two queued animations.
+        const unsubscribe = onLoaderDone(() => tl.play());
+
+        // Scroll-out: the hero scales away behind the incoming content,
+        // driven by scroll position rather than a one-shot trigger.
+        gsap.to(`.${styles.heroInner}`, {
+          scale: 0.96,
+          opacity: 0.35,
+          yPercent: 8,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
+
+        return () => unsubscribe();
       });
     },
     { scope: containerRef, dependencies: [variant] },
