@@ -3,20 +3,19 @@ import { Container } from './_components/Container/Container';
 import { Section } from './_components/Section/Section';
 import { Reveal } from './_components/Reveal/Reveal';
 import { SectionHead } from './_components/SectionHead/SectionHead';
-import { TextLink } from './_components/TextLink/TextLink';
 import { HomeShell } from './_components/home/HomeShell/HomeShell';
 import { Hero } from './_components/home/Hero/Hero';
 import { Marquee } from './_components/home/Marquee/Marquee';
 import { Stats } from './_components/home/Stats/Stats';
 import { Services } from './_components/home/Services/Services';
-import { SelectedWork } from './_components/home/SelectedWork/SelectedWork';
+import { WorkGallery } from './_components/home/WorkGallery/WorkGallery';
+import { featuredWorkProjects, workProjects } from './_lib/work-projects';
 import { SelectedClients } from './_components/home/SelectedClients/SelectedClients';
 import { Recognition } from './_components/home/Recognition/Recognition';
 import { Experience } from './_components/Experience/Experience';
 import { EndCTA } from './_components/EndCTA/EndCTA';
 import { Footer } from './_components/Footer/Footer';
 import { homeContent } from './_lib/home-content';
-import styles from './_components/home/_homePage.module.scss';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
@@ -65,13 +64,8 @@ export default function Home() {
               }
             />
           </Reveal>
-          <SelectedWork />
-          <Reveal className={styles.selectedWorkFoot}>
-            <TextLink href={homeContent.selectedWork.indexLink.href} upRight>
-              {homeContent.selectedWork.indexLink.label}
-            </TextLink>
-          </Reveal>
         </Container>
+        <WorkGallery projects={featuredWorkProjects} totalCount={workProjects.length} />
       </Section>
 
       <Section>

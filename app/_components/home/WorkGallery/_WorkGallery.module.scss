@@ -1,0 +1,288 @@
+// Explicit @use needed: Turbopack ignores the function-form additionalData
+// in next.config.ts (see futureWorks [build]).
+@use 'mixins' as *;
+
+// Default layout (phones, touch, reduced motion): a vertical stack of big
+// cover cards. The horizontal pinned gallery only exists under the same
+// media condition the component's JS uses.
+
+.gallery {
+  position: relative;
+}
+
+.viewport {
+  position: relative;
+}
+
+.track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(56px, 9vw, 120px);
+  padding: 0 var(--gutter);
+}
+
+.panel {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.panel:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.ghost {
+  position: absolute;
+  top: -0.08em;
+  left: 0;
+  z-index: 0;
+  font-family: var(--font-display);
+  font-size: clamp(9.6rem, 14vw, 22rem);
+  font-weight: 500;
+  line-height: 0.8;
+  letter-spacing: -0.01em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--rule-strong);
+}
+
+.media {
+  position: relative;
+  z-index: 1;
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--paper-deep);
+  margin-top: clamp(36px, 5vw, 72px);
+  margin-left: clamp(28px, 4vw, 80px);
+}
+
+.media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 9, 8, 0.18);
+  opacity: 0;
+
+  @include reduced-motion-safe {
+    transition: opacity 0.45s var(--ease-out);
+  }
+}
+
+.panel:hover .media::after,
+.panel:focus-visible .media::after {
+  opacity: 1;
+}
+
+.img {
+  object-fit: cover;
+  object-position: top center;
+}
+
+.caption {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(16px, 2.5vw, 40px);
+  margin-top: 20px;
+  margin-left: clamp(28px, 4vw, 80px);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(3.6rem, 4.5vw, 6.8rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: 0.002em;
+
+  @include reduced-motion-safe {
+    transition: color 0.3s var(--ease-out);
+  }
+}
+
+.panel:hover .title,
+.panel:focus-visible .title {
+  color: var(--accent);
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 36ch;
+  padding-top: 0.5em;
+}
+
+.summary {
+  font-size: 1.5rem;
+  line-height: 1.45;
+  color: var(--fg-soft);
+}
+
+.tags {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--fg-muted);
+}
+
+.arrow {
+  margin-left: auto;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--rule-strong);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  @include reduced-motion-safe {
+    transition:
+      background 0.4s,
+      color 0.4s,
+      transform 0.4s var(--ease-out),
+      border-color 0.4s;
+  }
+}
+
+.panel:hover .arrow,
+.panel:focus-visible .arrow {
+  @include reduced-motion-safe {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+    transform: rotate(-45deg);
+  }
+}
+
+// --- Closing panel
+
+.endPanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding: clamp(36px, 5vw, 72px) 0;
+}
+
+.endCount {
+  font-family: var(--font-display);
+  font-size: clamp(8rem, 11vw, 16rem);
+  font-weight: 500;
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--fg);
+
+  @include reduced-motion-safe {
+    transition: color 0.45s var(--ease-out);
+  }
+}
+
+.endPanel:hover .endCount,
+.endPanel:focus-visible .endCount {
+  color: var(--accent);
+  -webkit-text-stroke: 1px var(--accent);
+}
+
+.endLabel {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--fg-muted);
+}
+
+.endCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 3.5vw, 5.2rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1;
+
+  .arrow {
+    margin-left: 0;
+  }
+}
+
+// --- Progress readout (horizontal mode only)
+
+.progress {
+  display: none;
+}
+
+.progressCount {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  letter-spacing: 0.14em;
+  color: var(--fg-muted);
+  white-space: nowrap;
+}
+
+.progressTrack {
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background: var(--fg);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+// --- Horizontal pinned mode — must mirror HORIZONTAL in WorkGallery.tsx.
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) and (pointer: fine) {
+  .viewport {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .track {
+    flex-direction: row;
+    align-items: center;
+    width: max-content;
+    gap: clamp(72px, 8vw, 160px);
+    padding: 0 clamp(40px, 6vw, 120px);
+  }
+
+  .panel {
+    width: 62vw;
+    max-width: 1100px;
+    flex-shrink: 0;
+  }
+
+  .media {
+    aspect-ratio: 16 / 9;
+    max-height: 58vh;
+  }
+
+  .endPanel {
+    width: 36vw;
+    padding: 0;
+  }
+
+  .progress {
+    position: absolute;
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: clamp(24px, 4.5vh, 56px);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+}
