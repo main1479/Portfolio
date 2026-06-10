@@ -29,10 +29,16 @@ export function StickyPin({ top = 110, className, children }: Props) {
         '(min-width: 901px) and (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine)',
         () => {
           let st: ScrollTrigger | undefined;
-          // rAF: the smoother is created by a parent effect, which runs after
-          // this child effect in the same commit.
-          const id = requestAnimationFrame(() => {
-            if (!ScrollSmoother.get()) return;
+          let id = 0;
+          let attempts = 0;
+          // The smoother is created by a parent effect that runs after this
+          // child effect in the same commit — poll a few frames rather than
+          // assume exactly one.
+          const tryPin = () => {
+            if (!ScrollSmoother.get()) {
+              if (attempts++ < 5) id = requestAnimationFrame(tryPin);
+              return;
+            }
             const parent = el.parentElement;
             if (!parent || parent.offsetHeight <= el.offsetHeight) return;
             st = ScrollTrigger.create({
@@ -43,7 +49,8 @@ export function StickyPin({ top = 110, className, children }: Props) {
               pin: el,
               pinSpacing: false,
             });
-          });
+          };
+          id = requestAnimationFrame(tryPin);
           return () => {
             cancelAnimationFrame(id);
             st?.kill();

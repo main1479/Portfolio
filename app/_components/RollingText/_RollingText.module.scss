@@ -1,3 +1,6 @@
+// Explicit @use needed: Turbopack ignores the function-form additionalData
+// in next.config.ts, so the "auto-injected" mixins never arrive (every other
+// module in the repo does the same).
 @use 'mixins' as *;
 
 .roll {

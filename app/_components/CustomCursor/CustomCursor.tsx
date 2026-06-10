@@ -63,7 +63,7 @@ export function CustomCursor() {
       if (isInteractive(e.target)) el.classList.add(styles.isHover);
       const source = labelSource(e.target);
       if (source) {
-        label.textContent = source.getAttribute('data-cursor-label');
+        label.textContent = source.getAttribute('data-cursor-label') ?? '';
         el.classList.add(styles.isLabel);
       }
     };

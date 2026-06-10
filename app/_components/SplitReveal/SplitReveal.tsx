@@ -52,7 +52,12 @@ export function SplitReveal({
         gsap.set(el, { autoAlpha: 0 });
 
         document.fonts.ready.then(() => {
-          if (cancelled) return;
+          if (cancelled) {
+            // Context already cleaned up — make sure the pre-split hide
+            // can't outlive it.
+            gsap.set(el, { clearProps: 'visibility,opacity' });
+            return;
+          }
           split = SplitText.create(el, {
             type,
             mask: type,
