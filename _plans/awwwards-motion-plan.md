@@ -1,7 +1,12 @@
 # Awwwards-level motion & interactions — plan
 
 **Date:** 2026-06-11
-**Status:** awaiting approval
+**Status:** approved (user: "use your best judgment — only condition is it should look exceptional. Modern, clean, awwards worthy")
+
+> **Revision 2026-06-11:** added Layer 0 (visual content). Repeated user feedback says the
+> site lacks visual elements — ~30 project screenshots exist in `public/work/` but are
+> invisible until two clicks deep. Visuals are the substrate the motion animates, so they
+> go in first.
 
 ## Why
 
@@ -14,6 +19,21 @@ Right now, almost everything animates **once** (fade in when it enters the scree
 A key unlock: the animation library we already use (GSAP) made its formerly-paid plugins free. So everything below uses **zero new packages**.
 
 ## What's being built
+
+### Layer 0 — Visual content (the substrate)
+
+0a. **Work imagery on the surface.** Every project gets a designated cover image, shown on the
+home page's Selected Work section and the `/work` index. The strongest content on the site
+(real shipped product) becomes visible in the first ten seconds instead of two clicks deep.
+0b. **Browser-framed screenshots.** Case-study images get a minimal browser-chrome frame and
+per-project background tint, so raw captures read as composed artwork instead of flat pastes.
+0c. **Grain + oversized type texture.** A subtle film-grain overlay across the site and
+oversized outlined background words on key sections — cheap, and a large share of the
+"expensive" feel on awarded sites.
+
+Deferred from Layer 0 (logged to futureWorks): A/B variant-comparison visuals and uplift
+charts (needs per-case data design), client logos (needs assets from Mainul), about-page
+candid photos (needs photos).
 
 ### Layer 1 — Foundation (the "feel")
 
