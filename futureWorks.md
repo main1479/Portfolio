@@ -8,6 +8,9 @@ Format: `- [<area>] <description> — <branch or session ref>`
 
 ## Open
 
+- [motion] SmoothScroll's push-vs-popstate detection has one theoretical edge: a hash-only popstate (same pathname) sets the pop flag without re-running the route effect, so the next push would restore instead of reset once. No hash navigation exists on the site today. — `feature/awwwards-motion` nav-fixes session 2026-06-11
+- [perf] The avsb anti-flicker snippet is now parser-blocking in `<head>` (required to prevent variant flicker) — first paint waits on cdn.avsb.cloud. Preconnect added; if the CDN is ever slow, consider a timeout-based opacity fallback in the snippet itself. — `feature/awwwards-motion` nav-fixes session 2026-06-11
+
 - [perf] `/work` mounts the WorkPreview portal with all cover `next/image`s even on touch devices where the preview is `display: none` — images still download. Conditionalize mounting (or shrink `sizes`) if page weight becomes a concern. — `feature/awwwards-motion` signature-wow session 2026-06-11
 - [motion] WorkGallery `.endCount` stroke uses `var(--fg)`, which the ThemeScrub inverts near the footer — invisible-text risk only if the gallery is ever moved adjacent to the page end (it isn't today). — `feature/awwwards-motion` signature-wow session 2026-06-11
 - [visual] Signature-wow pieces (loader ceremony, horizontal gallery scrub feel, WebGL hover distortion intensity, theme inversion timing) ship green on typecheck/lint/build + route smoke tests, but need a human feel-pass on a real trackpad before merge — distortion strength and gallery scrub speed are taste constants that may want tuning. — `feature/awwwards-motion` signature-wow session 2026-06-11
