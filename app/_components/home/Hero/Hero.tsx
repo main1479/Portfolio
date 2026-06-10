@@ -7,6 +7,7 @@ import { onLoaderDone } from '../../../_lib/loader-signal';
 import { Container } from '../../Container/Container';
 import { TickRule } from '../../TickRule/TickRule';
 import { Button } from '../../Button/Button';
+import { ScrambleIn } from '../../ScrambleIn/ScrambleIn';
 import { useHomeState } from '../HomeShell/HomeStateContext';
 import { HeroVariantA } from './HeroVariantA';
 import { HeroVariantB } from './HeroVariantB';
@@ -66,7 +67,9 @@ export function Hero({ content }: Props) {
           <div className={styles.topbarRight}>
             {content.topbarRight.version} · {content.topbarRight.year}
             <br />
-            <strong>{content.topbarRight.metric}</strong>
+            <strong>
+              <ScrambleIn text={content.topbarRight.metric} mode="loader" />
+            </strong>
           </div>
         </div>
 
