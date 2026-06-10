@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { BrowserFrame } from '../../../_components/BrowserFrame/BrowserFrame';
 import styles from './_CaseVisuals.module.scss';
 
 export type CaseVisualSlot = {
@@ -30,16 +31,20 @@ function SlotMedia({
   slot,
   defaultAspect,
   override,
+  framed,
 }: {
   slot: CaseVisualSlot;
   defaultAspect: string;
   override?: React.ReactNode;
+  /** Set when a BrowserFrame supplies the border — drops the slot's own border/radius. */
+  framed?: boolean;
 }) {
   if (override) return <>{override}</>;
   const aspect = slot.aspect ?? defaultAspect;
+  const mediaClass = [styles.slotMedia, framed ? styles.framed : ''].filter(Boolean).join(' ');
   if (slot.src) {
     return (
-      <div className={styles.slotMedia} style={{ aspectRatio: aspect }}>
+      <div className={mediaClass} style={{ aspectRatio: aspect }}>
         <Image
           src={slot.src}
           alt={slot.alt ?? slot.caption}
@@ -60,7 +65,9 @@ export function CaseVisuals({ items, children }: Props) {
     const [slot] = items;
     return (
       <figure className={styles.single}>
-        <SlotMedia slot={slot} defaultAspect={ASPECT.single} override={children} />
+        <BrowserFrame>
+          <SlotMedia slot={slot} defaultAspect={ASPECT.single} override={children} framed />
+        </BrowserFrame>
         <figcaption className={styles.caption}>{slot.caption}</figcaption>
       </figure>
     );
@@ -75,7 +82,9 @@ export function CaseVisuals({ items, children }: Props) {
     return (
       <div className={styles.duo}>
         <figure className={styles.duoPrimary}>
-          <SlotMedia slot={primary} defaultAspect={ASPECT.primary} override={children} />
+          <BrowserFrame>
+            <SlotMedia slot={primary} defaultAspect={ASPECT.primary} override={children} framed />
+          </BrowserFrame>
           <figcaption className={styles.caption}>{primary.caption}</figcaption>
         </figure>
         <figure className={styles.duoSecondary}>

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Arrow } from '../../../_components/Arrow/Arrow';
 import { Reveal } from '../../../_components/Reveal/Reveal';
 import type { WorkProject } from '../../../_types/work';
@@ -22,6 +23,15 @@ export function IndexRow({ project, delay }: Props) {
         data-cursor-label="Open"
       >
         <span className={styles.num}>{project.num}</span>
+        <span className={styles.media}>
+          <Image
+            src={project.cover}
+            alt={project.coverAlt}
+            fill
+            sizes="(max-width: 900px) 92vw, 160px"
+            className={styles.mediaImg}
+          />
+        </span>
         <h3 className={styles.title}>{project.title}</h3>
         <span className={styles.meta}>{project.metaShort}</span>
         <span className={styles.tags}>

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { BrowserFrame } from '../../../_components/BrowserFrame/BrowserFrame';
 import styles from './_CaseVisuals.module.scss';
 
 type Props = {
@@ -12,7 +13,9 @@ type Props = {
 export function CaseImage({ src, alt, width, height, caption }: Props) {
   return (
     <figure className={styles.single}>
-      <Image src={src} alt={alt} width={width} height={height} className={styles.slotImage} />
+      <BrowserFrame>
+        <Image src={src} alt={alt} width={width} height={height} className={styles.slotImage} />
+      </BrowserFrame>
       {caption && <figcaption className={styles.caption}>{caption}</figcaption>}
     </figure>
   );
