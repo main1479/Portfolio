@@ -129,6 +129,13 @@ Applied to: `SectionHead` index label, `PageIntro` label, Footer meta column hea
 
 Each pushed; ship gauntlet + code-reviewer after 5.
 
+## Retrospective
+
+- **The plan's "magnetic buttons + stat count-up" already existed** (`Magnetic` wraps every Button; `Stat` counts up) — caught during spec recon, so the micro-feel layer shrank to scramble effects. Plan was written before checking.
+- **The footer was already a dark slab** (`background: var(--fg)`), so "the lights go down" became _melt the page into the footer's world_ — new fixed `--ink`/`--ink-paper` tokens are the inversion destination, rather than the spec's standalone dark palette. Same end state, cleaner mental model.
+- **Dev-server smoke test hit a stale long-running instance** (Next 16 single-dev-server lock; `/work/avsb` 404'd there). Production `next start` verified all routes 200 — the dev server needs a manual restart to pick up the branch.
+- Code review added: GL shader/program error-path cleanup, a permanent-failure set for broken texture URLs (was an unbounded refetch per hover), ink-token `color-mix` in two shadows/overlays, and a quicker intro-label fade so the decode is visible.
+
 ## Known risks
 
 - Pinned horizontal section is the largest layout change to home since launch; feel must be judged on a real trackpad (scrub: 1 vs true).

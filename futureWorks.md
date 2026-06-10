@@ -8,6 +8,10 @@ Format: `- [<area>] <description> — <branch or session ref>`
 
 ## Open
 
+- [perf] `/work` mounts the WorkPreview portal with all cover `next/image`s even on touch devices where the preview is `display: none` — images still download. Conditionalize mounting (or shrink `sizes`) if page weight becomes a concern. — `feature/awwwards-motion` signature-wow session 2026-06-11
+- [motion] WorkGallery `.endCount` stroke uses `var(--fg)`, which the ThemeScrub inverts near the footer — invisible-text risk only if the gallery is ever moved adjacent to the page end (it isn't today). — `feature/awwwards-motion` signature-wow session 2026-06-11
+- [visual] Signature-wow pieces (loader ceremony, horizontal gallery scrub feel, WebGL hover distortion intensity, theme inversion timing) ship green on typecheck/lint/build + route smoke tests, but need a human feel-pass on a real trackpad before merge — distortion strength and gallery scrub speed are taste constants that may want tuning. — `feature/awwwards-motion` signature-wow session 2026-06-11
+
 - [visuals] A/B variant-comparison visuals + uplift charts for case studies (the experimentation-specific visual content from the awwwards-motion plan, Layer 0) — deferred, needs per-case data design. — `feature/awwwards-motion` session 2026-06-11
 - [assets] Client logos for the home Selected Clients section (currently text-only) — needs logo files from Mainul. — `feature/awwwards-motion` session 2026-06-11
 - [motion] EndCTA heading horizontal scrub drift was specced but deliberately dropped for restraint; revisit if the section feels static after the smooth-scroll pass settles. — `feature/awwwards-motion` session 2026-06-11
