@@ -3,12 +3,14 @@
 .footer {
   padding: clamp(80px, 10vw, 160px) 0 40px;
   position: relative;
-  background: var(--fg);
-  color: var(--bg);
+  // Fixed ink tokens, not --fg/--bg: the page-wide theme scrub animates those
+  // to land exactly here — the footer is the destination, so it can't move.
+  background: var(--ink);
+  color: var(--ink-paper);
 }
 
 .container {
-  color: var(--bg);
+  color: var(--ink-paper);
 }
 
 // Clip box for the parallax-uncovered wordmark — the mark rises into view
@@ -26,7 +28,7 @@
   letter-spacing: -0.02em;
   margin: clamp(40px, 6vw, 80px) 0 0;
   color: transparent;
-  -webkit-text-stroke: 1.5px var(--bg);
+  -webkit-text-stroke: 1.5px var(--ink-paper);
   display: block;
 }
 
@@ -36,7 +38,7 @@
   gap: 60px;
   align-items: end;
   padding-bottom: 80px;
-  border-bottom: 1px solid rgba(245, 240, 236, 0.18);
+  border-bottom: 1px solid color-mix(in srgb, var(--ink-paper) 18%, transparent);
 }
 
 .cta {
@@ -103,7 +105,7 @@
   font-size: 14px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--bg) 60%, transparent);
+  color: color-mix(in srgb, var(--ink-paper) 60%, transparent);
 }
 
 .right {

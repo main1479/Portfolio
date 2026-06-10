@@ -1,6 +1,7 @@
 import { siteConfig } from '../../_lib/site-config';
 import { Parallax } from '../Parallax/Parallax';
 import { RollingText } from '../RollingText/RollingText';
+import { ThemeScrub } from '../ThemeScrub/ThemeScrub';
 import styles from './_Footer.module.scss';
 
 type Props = {
@@ -23,6 +24,7 @@ export function Footer({ heading, metaLinks = siteConfig.metaLinks }: Props) {
 
   return (
     <footer className={styles.footer}>
+      <ThemeScrub />
       <div className={`container ${styles.container}`}>
         <div className={styles.top}>
           <h2 className={styles.cta}>{heading ?? defaultHeading}</h2>
