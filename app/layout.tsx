@@ -80,12 +80,24 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${teko.variable} ${josefin.variable} ${mono.variable}`}>
-      {/* A/B testing platform — loads before render to avoid variant flicker */}
-      <Script
-        src="https://cdn.avsb.cloud/snippet.js?id=cmpvfsa5q000t04laj4eordkt"
-        strategy="beforeInteractive"
-      />
+    // suppressHydrationWarning: the avsb anti-flicker snippet sets an inline
+    // opacity on <html> before React hydrates — a known, intentional mismatch.
+    // Scope is this element's own attributes only, not descendants.
+    <html
+      lang="en"
+      className={`${teko.variable} ${josefin.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <link rel="preconnect" href="https://cdn.avsb.cloud" />
+        {/* A/B testing anti-flicker snippet — intentionally synchronous and
+            parser-blocking: it must execute before first paint or variants
+            flicker. next/script's beforeInteractive can't guarantee that in
+            the App Router (execution is deferred to Next's runtime), so this
+            is a raw script in <head> by design. */}
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script src="https://cdn.avsb.cloud/snippet.js?id=cmpvfsa5q000t04laj4eordkt" />
+      </head>
       <body>
         <Loader />
         <a href="#main-content" className="skip-link">
