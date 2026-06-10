@@ -6,6 +6,7 @@ import { Reveal } from '../_components/Reveal/Reveal';
 import { SectionHead } from '../_components/SectionHead/SectionHead';
 import { Footer } from '../_components/Footer/Footer';
 import { workProjects } from '../_lib/work-projects';
+import { WorkPreview } from '../_components/WorkPreview/WorkPreview';
 import { IndexRow } from './_components/IndexRow/IndexRow';
 import styles from './_workPage.module.scss';
 
@@ -53,15 +54,18 @@ export default function WorkPage() {
               }
             />
           </Reveal>
-          <ol className={styles.index} role="list">
-            {workProjects.map((project, i) => (
-              <IndexRow
-                key={project.slug}
-                project={project}
-                delay={Math.min(i + 1, 5) as 1 | 2 | 3 | 4 | 5}
-              />
-            ))}
-          </ol>
+          <WorkPreview projects={workProjects}>
+            <ol className={styles.index} role="list">
+              {workProjects.map((project, i) => (
+                <IndexRow
+                  key={project.slug}
+                  project={project}
+                  previewIndex={i}
+                  delay={Math.min(i + 1, 5) as 1 | 2 | 3 | 4 | 5}
+                />
+              ))}
+            </ol>
+          </WorkPreview>
           <Reveal className={styles.indexFoot}>
             <p className={styles.indexFootText}>
               Got a brief or a hypothesis you want pressure-tested?
