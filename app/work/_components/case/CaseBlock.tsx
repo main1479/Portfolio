@@ -1,4 +1,5 @@
 import { Reveal } from '../../../_components/Reveal/Reveal';
+import { StickyPin } from '../../../_components/StickyPin/StickyPin';
 import styles from './_CaseBlock.module.scss';
 
 type Props = {
@@ -12,10 +13,10 @@ type Props = {
 export function CaseBlock({ num, label, heading, accentDot = true, children }: Props) {
   return (
     <Reveal as="section" className={styles.block}>
-      <div className={styles.side}>
+      <StickyPin className={styles.side}>
         <span className={styles.num}>{num}</span>
         <span className={styles.label}>{label}</span>
-      </div>
+      </StickyPin>
       <div className={styles.body}>
         <h2 className={styles.heading}>
           {heading}

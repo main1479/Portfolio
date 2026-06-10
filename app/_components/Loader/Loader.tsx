@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '../../_lib/motion';
+import { signalLoaderDone } from '../../_lib/loader-signal';
 import styles from './_Loader.module.scss';
 import { siteConfig } from '@/app/_lib/site-config';
 
@@ -46,6 +47,9 @@ export function Loader() {
             yPercent: -100,
             duration: 0.55,
             ease: 'expo.inOut',
+            // Hero entrance starts the moment the panel begins lifting, so
+            // loader and hero read as one continuous move.
+            onStart: signalLoaderDone,
           },
           '-=0.05',
         );
@@ -59,6 +63,7 @@ export function Loader() {
       });
 
       mm.add('(prefers-reduced-motion: reduce)', () => {
+        signalLoaderDone();
         gsap.set(progressFillRef.current, { scaleX: 1 });
         gsap.delayedCall(0.2, () => {
           gsap.set(containerRef.current, { display: 'none' });

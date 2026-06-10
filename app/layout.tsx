@@ -6,6 +6,7 @@ import { Nav } from './_components/Nav/Nav';
 import { CustomCursor } from './_components/CustomCursor/CustomCursor';
 import { Loader } from './_components/Loader/Loader';
 import { PageCurtain } from './_components/PageCurtain/PageCurtain';
+import { SmoothScroll } from './_components/SmoothScroll/SmoothScroll';
 import { siteConfig } from './_lib/site-config';
 
 const teko = Teko({
@@ -91,7 +92,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <CustomCursor />
         <Nav />
-        <main id="main-content">{children}</main>
+        <SmoothScroll>
+          <main id="main-content">{children}</main>
+        </SmoothScroll>
         <PageCurtain />
         {/* Google Analytics (gtag) */}
         <Script

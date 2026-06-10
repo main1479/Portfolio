@@ -1,6 +1,7 @@
 import { AboutAvatar } from './AboutAvatar';
 import { AboutCard } from './AboutCard';
 import { Reveal } from '../../../_components/Reveal/Reveal';
+import { StickyPin } from '../../../_components/StickyPin/StickyPin';
 import type { AboutContent, BioParagraph } from '../../../_types/about';
 import styles from './_AboutBio.module.scss';
 
@@ -9,12 +10,14 @@ type Props = { content: AboutContent['bio'] };
 export function AboutBio({ content }: Props) {
   return (
     <div className={styles.bio}>
-      <Reveal className={styles.side}>
-        <AboutAvatar tag={content.portraitTag} alt={content.portraitAlt} />
-        {content.cards.map((card, i) => (
-          <AboutCard key={i} card={card} />
-        ))}
-      </Reveal>
+      <StickyPin className={styles.side}>
+        <Reveal className={styles.sideInner}>
+          <AboutAvatar tag={content.portraitTag} alt={content.portraitAlt} />
+          {content.cards.map((card, i) => (
+            <AboutCard key={i} card={card} />
+          ))}
+        </Reveal>
+      </StickyPin>
       <Reveal delay={1} className={styles.body}>
         {content.paragraphs.map((para, i) => (
           <p key={i}>{renderBioSegments(para)}</p>
