@@ -63,7 +63,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(10, 9, 8, 0.18);
+  background: color-mix(in srgb, var(--ink) 18%, transparent);
   opacity: 0;
 
   @include reduced-motion-safe {

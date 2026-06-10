@@ -25,7 +25,8 @@ export function PageIntro({ label, title, titleNodes, sub, className }: Props) {
 
       mm.add('(prefers-reduced-motion: no-preference)', () => {
         const tl = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } });
-        tl.from(labelRef.current, { opacity: 0, y: 8, duration: 0.55 }, 0);
+        // Quick fade so the label is visible for most of its decode.
+        tl.from(labelRef.current, { opacity: 0, y: 8, duration: 0.25 }, 0);
         tl.to(
           labelRef.current,
           { duration: 0.8, scrambleText: { text: label, chars: '01<>/·_', speed: 1 } },

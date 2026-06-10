@@ -4,7 +4,9 @@
   left: 0;
   width: clamp(260px, 24vw, 360px);
   aspect-ratio: 16 / 10;
-  margin-top: -90px; // float above-right of the cursor
+  // Offsets float the card above-right of the pointer so the cursor dot
+  // (~18px) and its label pill (72px) never sit on top of the image.
+  margin-top: -90px;
   margin-left: 36px;
   pointer-events: none;
   z-index: 1200;
@@ -13,7 +15,7 @@
   transform: scale(0.92);
   border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0 24px 60px rgba(10, 9, 8, 0.28);
+  box-shadow: 0 24px 60px color-mix(in srgb, var(--ink) 28%, transparent);
   background: var(--paper-deep);
 
   // The follower is desktop-only decoration; hide outright on touch.

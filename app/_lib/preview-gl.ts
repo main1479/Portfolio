@@ -98,18 +98,31 @@ export function createPreviewGL(
     if (!shader) return null;
     gl.shaderSource(shader, src);
     gl.compileShader(shader);
-    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) return null;
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+      gl.deleteShader(shader);
+      return null;
+    }
     return shader;
   };
 
   const vs = compile(gl.VERTEX_SHADER, VERT);
   const fs = compile(gl.FRAGMENT_SHADER, FRAG);
   const program = gl.createProgram();
-  if (!vs || !fs || !program) return null;
+  if (!vs || !fs || !program) {
+    if (vs) gl.deleteShader(vs);
+    if (fs) gl.deleteShader(fs);
+    if (program) gl.deleteProgram(program);
+    return null;
+  }
   gl.attachShader(program, vs);
   gl.attachShader(program, fs);
   gl.linkProgram(program);
-  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return null;
+  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+    gl.deleteProgram(program);
+    gl.deleteShader(vs);
+    gl.deleteShader(fs);
+    return null;
+  }
   gl.useProgram(program);
 
   const quad = gl.createBuffer();
@@ -148,9 +161,12 @@ export function createPreviewGL(
 
   const textures = new Map<number, TexEntry>();
   const loading = new Set<number>();
+  // Permanently failed URLs — without this a broken cover would re-fetch on
+  // every hover.
+  const failed = new Set<number>();
 
   const loadTexture = (index: number) => {
-    if (textures.has(index) || loading.has(index) || !urls[index]) return;
+    if (textures.has(index) || loading.has(index) || failed.has(index) || !urls[index]) return;
     loading.add(index);
     const img = new Image();
     img.onload = () => {
@@ -169,7 +185,10 @@ export function createPreviewGL(
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
       textures.set(index, { texture, aspect: img.naturalWidth / img.naturalHeight });
     };
-    img.onerror = () => loading.delete(index);
+    img.onerror = () => {
+      loading.delete(index);
+      failed.add(index);
+    };
     img.src = urls[index];
   };
 
