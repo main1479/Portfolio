@@ -152,7 +152,7 @@ export function WorkGallery({ projects, totalCount }: Props) {
             <span className={styles.endCount}>{String(totalCount).padStart(2, '0')}</span>
             <span className={styles.endLabel}>projects, in detail</span>
             <span className={styles.endCta}>
-              All work
+              Work index
               <span className={styles.arrow} aria-hidden="true">
                 <Arrow size={20} strokeWidth={1.6} />
               </span>
