@@ -8,6 +8,8 @@ Format: `- [<area>] <description> — <branch or session ref>`
 
 ## Open
 
+- [motion] During a live window drag the pinned gallery shows stale geometry (blank strip / misaligned track) until ScrollTrigger's debounced refresh fires ~200ms after the last resize event. Inherent to GSAP's resize debounce; self-corrects. Won't fix unless a designer-visible complaint comes in. — `feature/awwwards-motion` resize session 2026-06-11
+
 - [motion] SmoothScroll's push-vs-popstate detection has one theoretical edge: a hash-only popstate (same pathname) sets the pop flag without re-running the route effect, so the next push would restore instead of reset once. No hash navigation exists on the site today. — `feature/awwwards-motion` nav-fixes session 2026-06-11
 - [perf] The avsb anti-flicker snippet is now parser-blocking in `<head>` (required to prevent variant flicker) — first paint waits on cdn.avsb.cloud. Preconnect added; if the CDN is ever slow, consider a timeout-based opacity fallback in the snippet itself. — `feature/awwwards-motion` nav-fixes session 2026-06-11
 
