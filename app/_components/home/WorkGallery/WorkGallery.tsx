@@ -149,8 +149,10 @@ export function WorkGallery({ projects, totalCount }: Props) {
             data-gallery-panel
             data-cursor-label="Index"
           >
-            <span className={styles.endCount}>{String(totalCount).padStart(2, '0')}</span>
-            <span className={styles.endLabel}>projects, in detail</span>
+            <span className={styles.endCount}>
+              +{String(totalCount - projects.length).padStart(2, '0')}
+            </span>
+            <span className={styles.endLabel}>more projects on the index</span>
             <span className={styles.endCta}>
               Work index
               <span className={styles.arrow} aria-hidden="true">
