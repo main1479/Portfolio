@@ -145,7 +145,7 @@ export function ContactForm({ content }: Props) {
             (json as Record<string, unknown>).error === 'CONTACT_NOT_CONFIGURED'
           ) {
             setFormError(
-              "Reach me directly at m.main2402@gmail.com — the form's offline right now.",
+              "The form's offline right now. Reach me directly at m.main2402@gmail.com.",
             );
             setState({ status: 'error', errors: {} });
           } else {

@@ -8,7 +8,7 @@ export function CvDocument({ content }: Props) {
     content;
 
   return (
-    <article className={styles.doc} aria-label="Resume — Mainul Islam">
+    <article className={styles.doc} aria-label="Resume · Mainul Islam">
       <header className={styles.head}>
         <div className={styles.headLeft}>
           <h1 className={styles.name}>{header.name}</h1>
@@ -93,7 +93,7 @@ export function CvDocument({ content }: Props) {
             <div key={p.title} className={styles.entry}>
               <div className={styles.entryHead}>
                 <h3 className={styles.entryTitle}>
-                  {p.title} <span className={styles.entryOrg}>— {p.tagline}</span>
+                  {p.title} <span className={styles.entryOrg}>· {p.tagline}</span>
                 </h3>
                 <p className={styles.entryMeta}>
                   {p.dates}
@@ -128,7 +128,7 @@ export function CvDocument({ content }: Props) {
               <span className={styles.clientName}>{c.name}</span>
               {c.role && (
                 <span className={styles.clientRole}>
-                  <span aria-hidden="true"> — </span>
+                  <span aria-hidden="true"> · </span>
                   {c.role}
                 </span>
               )}
@@ -162,7 +162,7 @@ export function CvDocument({ content }: Props) {
           {awards.map((a) => (
             <li key={a.source}>
               <span className={styles.awardTitle}>{a.title}</span>
-              <span aria-hidden="true"> — </span>
+              <span aria-hidden="true"> · </span>
               {a.href ? <a href={a.href}>{a.source}</a> : <span>{a.source}</span>}
               <span className={styles.awardDate}> ({a.date})</span>
             </li>

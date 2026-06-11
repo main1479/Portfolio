@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 import { siteConfig } from './_lib/site-config';
 
 export const runtime = 'edge';
-export const alt = 'Mainul Islam — Frontend Developer';
+export const alt = 'Mainul Islam · Frontend Developer';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 

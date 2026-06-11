@@ -38,8 +38,8 @@ export const metadata: Metadata = {
     template: `%s · ${siteConfig.ownerName}`,
   },
   description:
-    'Frontend developer open to full-time remote and contract roles. 4+ years running A/B tests across every major experimentation platform — Optimizely, AB Tasty, Kameleoon, VWO, Adobe Target, Qubit. Modern frontend with Next.js and TypeScript. Treats AI as a real engineering skill — Claude Code as a daily co-engineer, with the workflow discipline to actually finish what it starts.',
-  applicationName: 'Mainul Islam — Portfolio',
+    'Frontend developer open to full-time remote and contract roles. 4+ years running A/B tests across every major experimentation platform: Optimizely, AB Tasty, Kameleoon, VWO, Adobe Target, Qubit. Modern frontend with Next.js and TypeScript. Treats AI as a real engineering skill: Claude Code as a daily co-engineer, with the workflow discipline to actually finish what it starts.',
+  applicationName: 'Mainul Islam · Portfolio',
   authors: [{ name: siteConfig.ownerName, url: siteConfig.siteUrl }],
   creator: siteConfig.ownerName,
   publisher: siteConfig.ownerName,
@@ -53,13 +53,13 @@ export const metadata: Metadata = {
     url: siteConfig.siteUrl,
     title: `${siteConfig.ownerName} · ${siteConfig.ownerRole}`,
     description:
-      'Frontend developer open to full-time remote and contract roles. 4+ years running A/B tests across every major experimentation platform — Optimizely, AB Tasty, Kameleoon, VWO, Adobe Target, Qubit. Modern frontend with Next.js and TypeScript. Treats AI as a real engineering skill — Claude Code as a daily co-engineer, with the workflow discipline to actually finish what it starts.',
+      'Frontend developer open to full-time remote and contract roles. 4+ years running A/B tests across every major experimentation platform: Optimizely, AB Tasty, Kameleoon, VWO, Adobe Target, Qubit. Modern frontend with Next.js and TypeScript. Treats AI as a real engineering skill: Claude Code as a daily co-engineer, with the workflow discipline to actually finish what it starts.',
   },
   twitter: {
     card: 'summary_large_image',
     title: `${siteConfig.ownerName} · ${siteConfig.ownerRole}`,
     description:
-      'Frontend developer · open to full-time and contract roles. Ships A/B tests across every major experimentation platform (Optimizely, AB Tasty, Kameleoon, VWO) and modern frontend on Next.js. Treats AI as a real engineering skill — Claude Code as a daily co-engineer.',
+      'Frontend developer · open to full-time and contract roles. Ships A/B tests across every major experimentation platform (Optimizely, AB Tasty, Kameleoon, VWO) and modern frontend on Next.js. Treats AI as a real engineering skill: Claude Code as a daily co-engineer.',
   },
   robots: {
     index: true,

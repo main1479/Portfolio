@@ -11,7 +11,7 @@ type Input = Pick<ContactInput, 'name' | 'email' | 'topic' | 'message'> & {
 export function confirmationEmail(input: Input) {
   const topicLabel = TOPIC_LABELS[input.topic];
   const firstName = input.name.split(/\s+/)[0] || input.name;
-  const subject = `Thanks — I’ll get back to you (your portfolio enquiry)`;
+  const subject = `Thanks, I’ll get back to you (your portfolio enquiry)`;
 
   const text = [
     `Hi ${firstName},`,
@@ -53,7 +53,7 @@ export function confirmationEmail(input: Input) {
     </tr>
     <tr>
       <td style="padding:0 0 28px 0;font-family:${F.body};font-size:16px;line-height:1.55;color:${C.fgSoft};">
-        Hi ${esc(firstName)} —<br><br>
+        Hi ${esc(firstName)},<br><br>
         Thanks for reaching out about <strong style="color:${C.fg};">${esc(topicLabel)}</strong>.
         I usually reply within a day or two.
       </td>

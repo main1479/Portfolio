@@ -27,9 +27,9 @@ export const cvContent = {
       dates: '2022 – Present',
       location: 'Remote · UK',
       bullets: [
-        'Long-running contract — 4+ years and ongoing. Production A/B tests in JavaScript and SCSS across every major experimentation platform — Optimizely, AB Tasty, Kameleoon, VWO, Adobe Target, Qubit.',
-        '500+ experiments shipped across ecommerce, SaaS, publishing, automotive, and non-profit clients — including The Times, G-Star RAW, Motorway, Unity, WaterAid, and Deel.',
-        'Built Radius — Conversion.com’s internal insights & experiments platform. Frontend in Next.js + TypeScript + SCSS with GSAP motion and streaming APIs. Live, in daily use by internal teams and client stakeholders.',
+        'Long-running contract, 4+ years and ongoing. Production A/B tests in JavaScript and SCSS across every major experimentation platform: Optimizely, AB Tasty, Kameleoon, VWO, Adobe Target, Qubit.',
+        '500+ experiments shipped across ecommerce, SaaS, publishing, automotive, and non-profit clients, including The Times, G-Star RAW, Motorway, Unity, WaterAid, and Deel.',
+        'Built Radius, Conversion.com’s internal insights & experiments platform. Frontend in Next.js + TypeScript + SCSS with GSAP motion and streaming APIs. Live, in daily use by internal teams and client stakeholders.',
       ],
     },
     {
@@ -37,8 +37,8 @@ export const cvContent = {
       dates: '2019 – Present',
       location: 'Remote · 9+ countries',
       bullets: [
-        '120+ frontend builds across LMS, e-learning, ecommerce, rentals, and SaaS — for startups and individuals in the UK, India, Slovakia, Austria, Australia, Canada, Romania, Italy, and Mexico.',
-        'Translating Figma / XD designs into production HTML, SCSS, and modern JavaScript / TypeScript / React / Next.js — mobile-first, performance-conscious, accessible.',
+        '120+ frontend builds across LMS, e-learning, ecommerce, rentals, and SaaS, for startups and individuals in the UK, India, Slovakia, Austria, Australia, Canada, Romania, Italy, and Mexico.',
+        'Translating Figma / XD designs into production HTML, SCSS, and modern JavaScript / TypeScript / React / Next.js. Mobile-first, performance-conscious, accessible.',
       ],
     },
   ],
@@ -52,7 +52,7 @@ export const cvContent = {
         '410k lines of TypeScript / SCSS · 250 API routes · 71 Prisma models · 867 test files.',
         'Three statistical engines side-by-side (frequentist, Bayesian, sequential) with variance reduction.',
         'Five Cloudflare Workers for edge ingestion, ClickHouse store, four published SDK packages.',
-        'Claude Code as a daily co-engineer — specs before code, agentic multi-file refactors, schema migrations delegated, critical paths hand-reviewed.',
+        'Claude Code as a daily co-engineer: specs before code, agentic multi-file refactors, schema migrations delegated, critical paths hand-reviewed.',
       ],
       href: 'mainul.info/work/avsb',
     },
@@ -63,7 +63,7 @@ export const cvContent = {
       meta: 'Solo founder & developer · In progress',
       bullets: [
         'Bilingual (Bangla + English) trust layer helping patients find reliable doctors and surface over-prescribing.',
-        'Mobile-first Next.js 16 build with Bangla and English wired in as equal first-class languages — same care on type, layout, and search.',
+        'Mobile-first Next.js 16 build with Bangla and English wired in as equal first-class languages: same care on type, layout, and search.',
         'Server-rendered for fast first paint and shareable doctor profiles; Drizzle ORM for type-safe migrations on Postgres.',
       ],
       href: 'mainul.info/work/kemon-doctor',
