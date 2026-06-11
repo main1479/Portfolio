@@ -13,6 +13,9 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   // True while the in-flight route change came from browser back/forward.
   const isPopRef = useRef(false);
+  // Set by the smoother context; re-collects [data-skew] targets after a
+  // route paints new media.
+  const recollectSkewRef = useRef<() => void>(() => {});
 
   useGSAP(
     () => {
@@ -27,40 +30,45 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
             effects: true,
           });
 
-          // Velocity skew: the page leans with scroll speed and settles
-          // upright when it stops. Lives on <main> — ScrollSmoother owns the
-          // content element's transform, and nav/cursor/portals sit outside
-          // <main> so they stay straight. Skew decays to 0 fast, so it's
-          // upright whenever ScrollTrigger refreshes (pin math unaffected).
-          const main = contentRef.current!.querySelector('main');
-          let skewTrigger: ScrollTrigger | undefined;
-          if (main) {
-            const proxy = { skew: 0 };
-            const skewSetter = gsap.quickSetter(main, 'skewY', 'deg');
-            const clampSkew = gsap.utils.clamp(-2.5, 2.5);
-            gsap.set(main, { transformOrigin: 'right center', force3D: true });
-            skewTrigger = ScrollTrigger.create({
-              onUpdate: (self) => {
-                const skew = clampSkew(self.getVelocity() / -450);
-                // Only take over when the new impulse is stronger than the
-                // current lean — otherwise let the decay finish.
-                if (Math.abs(skew) > Math.abs(proxy.skew)) {
-                  proxy.skew = skew;
-                  gsap.to(proxy, {
-                    skew: 0,
-                    duration: 0.7,
-                    ease: 'power3',
-                    overwrite: true,
-                    onUpdate: () => skewSetter(proxy.skew),
-                  });
-                }
-              },
+          // Velocity skew: media blocks ([data-skew]) lean with scroll speed
+          // and settle upright when it stops. Deliberately NOT the whole
+          // <main> — a per-frame skew on an ancestor of pinned elements
+          // (gallery pin, StickyPin) wobbles what should be holding still.
+          // Targets are re-collected per route via recollectSkewRef.
+          const proxy = { skew: 0 };
+          let skewSetters: ReturnType<typeof gsap.quickSetter>[] = [];
+          const collectSkewTargets = () => {
+            skewSetters = gsap.utils.toArray<Element>('[data-skew]').map((el) => {
+              gsap.set(el, { force3D: true });
+              return gsap.quickSetter(el, 'skewY', 'deg');
             });
-          }
+          };
+          collectSkewTargets();
+          recollectSkewRef.current = collectSkewTargets;
+          const applySkew = () => skewSetters.forEach((set) => set(proxy.skew));
+          const clampSkew = gsap.utils.clamp(-3, 3);
+          const skewTrigger = ScrollTrigger.create({
+            onUpdate: (self) => {
+              const skew = clampSkew(self.getVelocity() / -400);
+              // Only take over when the new impulse is stronger than the
+              // current lean — otherwise let the decay finish.
+              if (Math.abs(skew) > Math.abs(proxy.skew)) {
+                proxy.skew = skew;
+                gsap.to(proxy, {
+                  skew: 0,
+                  duration: 0.7,
+                  ease: 'power3',
+                  overwrite: true,
+                  onUpdate: applySkew,
+                });
+              }
+            },
+          });
 
           return () => {
-            skewTrigger?.kill();
-            if (main) gsap.set(main, { clearProps: 'transform,transformOrigin' });
+            skewTrigger.kill();
+            recollectSkewRef.current = () => {};
+            skewSetters = [];
             smoother.kill();
           };
         },
@@ -108,6 +116,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       smoother.effects('[data-speed], [data-lag]', {
         refresh: false,
       } as ScrollSmoother.EffectsVars & { refresh: boolean });
+      recollectSkewRef.current();
       ScrollTrigger.refresh();
     });
     return () => cancelAnimationFrame(id);

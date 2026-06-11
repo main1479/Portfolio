@@ -139,7 +139,7 @@ export function WorkGallery({ projects, totalCount }: Props) {
               <span className={styles.ghost} aria-hidden="true">
                 {p.num}
               </span>
-              <span className={styles.media}>
+              <span className={styles.media} data-skew>
                 <Image
                   data-gallery-img
                   src={p.cover}
