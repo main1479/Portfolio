@@ -40,6 +40,12 @@ export function WorkGallery({ projects, totalCount }: Props) {
       mm.add(HORIZONTAL, () => {
         const distance = () => track.scrollWidth - viewport.clientWidth;
         const setBar = barRef.current ? gsap.quickSetter(barRef.current, 'scaleX') : null;
+        // distance() is viewport-derived, so a window resize re-maps the same
+        // pixel scroll offset to a different panel after ScrollTrigger's
+        // debounced refresh (px position is preserved, progress is not).
+        // Record progress before the re-measure and put the visitor back on
+        // the panel they were reading once the new geometry lands.
+        let refreshProgress = 0;
 
         const xTween = gsap.to(track, {
           x: () => -distance(),
@@ -52,6 +58,19 @@ export function WorkGallery({ projects, totalCount }: Props) {
             scrub: 1,
             anticipatePin: 1,
             invalidateOnRefresh: true,
+            onRefreshInit: (self) => {
+              refreshProgress = self.progress;
+            },
+            onRefresh: (self) => {
+              // Only mid-pin: progress 0/1 covers initial load, the route-
+              // change refresh (SmoothScroll scrolls to 0 first), and anyone
+              // parked before/after the gallery.
+              if (refreshProgress <= 0 || refreshProgress >= 1) return;
+              const y = self.start + refreshProgress * (self.end - self.start);
+              const smoother = ScrollSmoother.get();
+              if (smoother) smoother.scrollTo(y, false);
+              else window.scrollTo(0, y);
+            },
             onUpdate: (st) => {
               if (counterRef.current) {
                 const idx = Math.min(panelCount, Math.round(st.progress * (panelCount - 1)) + 1);
