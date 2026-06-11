@@ -213,34 +213,6 @@
   }
 }
 
-// --- Progress readout (horizontal mode only)
-
-.progress {
-  display: none;
-}
-
-.progressCount {
-  font-family: var(--font-mono);
-  font-size: 1.1rem;
-  letter-spacing: 0.14em;
-  color: var(--fg-muted);
-  white-space: nowrap;
-}
-
-.progressTrack {
-  flex: 1;
-  height: 1px;
-  background: var(--rule);
-  overflow: hidden;
-}
-
-.progressBar {
-  height: 100%;
-  background: var(--fg);
-  transform-origin: left center;
-  transform: scaleX(0);
-}
-
 // --- Stacked mode at phone/tablet widths: title + arrow share the first
 // row, the description and tags take the full width below.
 
@@ -314,15 +286,5 @@
   .endPanel {
     width: 36vw;
     padding: 0;
-  }
-
-  .progress {
-    position: absolute;
-    left: var(--gutter);
-    right: var(--gutter);
-    bottom: clamp(24px, 4.5vh, 56px);
-    display: flex;
-    align-items: center;
-    gap: 20px;
   }
 }

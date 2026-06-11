@@ -24,10 +24,6 @@ export function WorkGallery({ projects, totalCount }: Props) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const counterRef = useRef<HTMLSpanElement>(null);
-  const barRef = useRef<HTMLDivElement>(null);
-
-  const panelCount = projects.length + 1;
 
   useGSAP(
     () => {
@@ -39,7 +35,6 @@ export function WorkGallery({ projects, totalCount }: Props) {
 
       mm.add(HORIZONTAL, () => {
         const distance = () => track.scrollWidth - viewport.clientWidth;
-        const setBar = barRef.current ? gsap.quickSetter(barRef.current, 'scaleX') : null;
         // distance() is viewport-derived, so a window resize re-maps the same
         // pixel scroll offset to a different panel after ScrollTrigger's
         // debounced refresh (px position is preserved, progress is not).
@@ -70,13 +65,6 @@ export function WorkGallery({ projects, totalCount }: Props) {
               const smoother = ScrollSmoother.get();
               if (smoother) smoother.scrollTo(y, false);
               else window.scrollTo(0, y);
-            },
-            onUpdate: (st) => {
-              if (counterRef.current) {
-                const idx = Math.min(panelCount, Math.round(st.progress * (panelCount - 1)) + 1);
-                counterRef.current.textContent = String(idx).padStart(2, '0');
-              }
-              setBar?.(st.progress);
             },
           },
         });
@@ -179,15 +167,6 @@ export function WorkGallery({ projects, totalCount }: Props) {
               </span>
             </span>
           </Link>
-        </div>
-
-        <div className={styles.progress} aria-hidden="true">
-          <span className={styles.progressCount}>
-            <span ref={counterRef}>01</span> / {String(panelCount).padStart(2, '0')}
-          </span>
-          <div className={styles.progressTrack}>
-            <div ref={barRef} className={styles.progressBar} />
-          </div>
         </div>
       </div>
     </div>
