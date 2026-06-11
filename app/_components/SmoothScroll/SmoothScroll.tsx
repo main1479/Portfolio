@@ -26,7 +26,43 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
             smooth: 1,
             effects: true,
           });
-          return () => smoother.kill();
+
+          // Velocity skew: the page leans with scroll speed and settles
+          // upright when it stops. Lives on <main> — ScrollSmoother owns the
+          // content element's transform, and nav/cursor/portals sit outside
+          // <main> so they stay straight. Skew decays to 0 fast, so it's
+          // upright whenever ScrollTrigger refreshes (pin math unaffected).
+          const main = contentRef.current!.querySelector('main');
+          let skewTrigger: ScrollTrigger | undefined;
+          if (main) {
+            const proxy = { skew: 0 };
+            const skewSetter = gsap.quickSetter(main, 'skewY', 'deg');
+            const clampSkew = gsap.utils.clamp(-2.5, 2.5);
+            gsap.set(main, { transformOrigin: 'right center', force3D: true });
+            skewTrigger = ScrollTrigger.create({
+              onUpdate: (self) => {
+                const skew = clampSkew(self.getVelocity() / -450);
+                // Only take over when the new impulse is stronger than the
+                // current lean — otherwise let the decay finish.
+                if (Math.abs(skew) > Math.abs(proxy.skew)) {
+                  proxy.skew = skew;
+                  gsap.to(proxy, {
+                    skew: 0,
+                    duration: 0.7,
+                    ease: 'power3',
+                    overwrite: true,
+                    onUpdate: () => skewSetter(proxy.skew),
+                  });
+                }
+              },
+            });
+          }
+
+          return () => {
+            skewTrigger?.kill();
+            if (main) gsap.set(main, { clearProps: 'transform,transformOrigin' });
+            smoother.kill();
+          };
         },
       );
     },
