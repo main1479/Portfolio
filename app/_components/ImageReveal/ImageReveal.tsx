@@ -36,7 +36,7 @@ export function ImageReveal({ className, children }: Props) {
   );
 
   return (
-    <div ref={ref} className={[styles.reveal, className].filter(Boolean).join(' ')} data-skew>
+    <div ref={ref} className={[styles.reveal, className].filter(Boolean).join(' ')}>
       <div ref={innerRef} className={styles.inner}>
         {children}
       </div>

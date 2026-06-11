@@ -58,7 +58,7 @@ export default function AboutPage() {
         />
       </Container>
 
-      <Section className={styles.bioSection}>
+      <Section className={styles.bioSection} skew={false}>
         <Container>
           <AboutBio content={aboutContent.bio} />
         </Container>

@@ -42,7 +42,7 @@ export default function WorkPage() {
           sub="A mix of experimentation platforms, products, and client experiment work — spanning startups and individuals across nine-plus countries."
         />
       </Container>
-      <section className={styles.indexSection}>
+      <section className={styles.indexSection} data-skew>
         <Container>
           <Reveal>
             <SectionHead

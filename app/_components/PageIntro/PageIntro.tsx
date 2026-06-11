@@ -46,7 +46,11 @@ export function PageIntro({ label, title, titleNodes, sub, className }: Props) {
   );
 
   return (
-    <header ref={headerRef} className={['page-intro', className].filter(Boolean).join(' ')}>
+    <header
+      ref={headerRef}
+      className={['page-intro', className].filter(Boolean).join(' ')}
+      data-skew
+    >
       <span ref={labelRef} className="page-intro__label">
         {label}
       </span>

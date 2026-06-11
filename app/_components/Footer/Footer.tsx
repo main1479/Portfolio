@@ -26,7 +26,7 @@ export function Footer({ heading, metaLinks = siteConfig.metaLinks }: Props) {
     <footer className={styles.footer}>
       <ThemeScrub />
       <div className={`container ${styles.container}`}>
-        <div className={styles.top}>
+        <div className={styles.top} data-skew>
           <h2 className={styles.cta}>{heading ?? defaultHeading}</h2>
           <div className={styles.meta}>
             {metaLinks.map((link) => (

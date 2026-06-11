@@ -17,7 +17,7 @@ export function CaseBlock({ num, label, heading, accentDot = true, children }: P
         <span className={styles.num}>{num}</span>
         <span className={styles.label}>{label}</span>
       </StickyPin>
-      <div className={styles.body}>
+      <div className={styles.body} data-skew>
         <h2 className={styles.heading}>
           {heading}
           {accentDot && <span className={styles.dot}>.</span>}

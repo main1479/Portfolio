@@ -14,7 +14,7 @@ type Props = {
 
 export function CaseHero({ num, breadcrumbTitle, lines, summary }: Props) {
   return (
-    <header className={styles.hero}>
+    <header className={styles.hero} data-skew>
       <Container>
         {breadcrumbTitle && (
           <p className={styles.breadcrumb}>

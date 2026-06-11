@@ -17,7 +17,7 @@ export function EndCTA({ content }: { content: EndCTAContent }) {
   return (
     <section className={styles.endcta} data-screen-label="End CTA">
       <Container>
-        <div className={styles.inner}>
+        <div className={styles.inner} data-skew>
           <header>
             <SplitReveal as="h2" type="lines" className={styles.heading}>
               {content.headingLines.map((line, i) => (

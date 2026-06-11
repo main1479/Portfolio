@@ -52,7 +52,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      <Section>
+      <Section skew={false}>
         <Container>
           <Reveal>
             <SectionHead

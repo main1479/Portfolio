@@ -3,7 +3,7 @@ import styles from './_CaseMeta.module.scss';
 
 export function CaseMeta({ cells }: { cells: readonly CaseMetaCell[] }) {
   return (
-    <dl className={styles.meta}>
+    <dl className={styles.meta} data-skew>
       {cells.map((cell) => (
         <div key={cell.label} className={styles.cell}>
           <dt className={styles.label}>{cell.label}</dt>

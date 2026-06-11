@@ -26,7 +26,7 @@ export function IndexRow({ project, delay, previewIndex }: Props) {
         data-preview-index={previewIndex}
       >
         <span className={styles.num}>{project.num}</span>
-        <span className={styles.media} data-skew>
+        <span className={styles.media}>
           <Image
             src={project.cover}
             alt={project.coverAlt}
