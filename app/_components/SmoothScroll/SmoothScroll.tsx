@@ -30,12 +30,17 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
             effects: true,
           });
 
-          // Velocity skew: media blocks ([data-skew]) lean with scroll speed
-          // and settle upright when it stops. Deliberately NOT the whole
-          // <main> — a per-frame skew on an ancestor of pinned elements
-          // (gallery pin, StickyPin) wobbles what should be holding still.
-          // Targets are re-collected per route via recollectSkewRef.
-          const proxy = { skew: 0 };
+          // Velocity skew: [data-skew] blocks lean with scroll speed and
+          // settle upright when it stops. Deliberately NOT the whole <main>
+          // — a per-frame skew on an ancestor of pinned elements (gallery
+          // pin, StickyPin) wobbles what should be holding still. Driven by
+          // the SMOOTHED velocity on the ticker, not raw scroll events:
+          // native scroll stops at the page-end clamp while the smoother
+          // glides on for ~1s, and the last sections (Recognition, EndCTA)
+          // arrive during that glide — event-driven skew is already zero by
+          // then. Targets are re-collected per route via recollectSkewRef.
+          let skew = 0;
+          let resting = true;
           let skewSetters: ReturnType<typeof gsap.quickSetter>[] = [];
           const collectSkewTargets = () => {
             skewSetters = gsap.utils.toArray<Element>('[data-skew]').map((el) => {
@@ -45,28 +50,26 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
           };
           collectSkewTargets();
           recollectSkewRef.current = collectSkewTargets;
-          const applySkew = () => skewSetters.forEach((set) => set(proxy.skew));
           const clampSkew = gsap.utils.clamp(-3, 3);
-          const skewTrigger = ScrollTrigger.create({
-            onUpdate: (self) => {
-              const skew = clampSkew(self.getVelocity() / -400);
-              // Only take over when the new impulse is stronger than the
-              // current lean — otherwise let the decay finish.
-              if (Math.abs(skew) > Math.abs(proxy.skew)) {
-                proxy.skew = skew;
-                gsap.to(proxy, {
-                  skew: 0,
-                  duration: 0.7,
-                  ease: 'power3',
-                  overwrite: true,
-                  onUpdate: applySkew,
-                });
+          const onTick = () => {
+            const target = clampSkew(smoother.getVelocity() / -400);
+            skew += (target - skew) * 0.12;
+            if (Math.abs(skew) < 0.005 && target === 0) {
+              // Settle exactly upright once, then idle until the next move.
+              if (!resting) {
+                skew = 0;
+                skewSetters.forEach((set) => set(0));
+                resting = true;
               }
-            },
-          });
+              return;
+            }
+            resting = false;
+            skewSetters.forEach((set) => set(skew));
+          };
+          gsap.ticker.add(onTick);
 
           return () => {
-            skewTrigger.kill();
+            gsap.ticker.remove(onTick);
             recollectSkewRef.current = () => {};
             skewSetters = [];
             smoother.kill();
