@@ -214,6 +214,27 @@
   .isOpen .links {
     transform: translateY(0);
   }
+  // Drawer cascade: links rise in one by one as the panel lands, and snap
+  // back with no delay when it closes.
+  @include reduced-motion-safe {
+    .links .link {
+      opacity: 0;
+      transform: translateY(16px);
+      transition:
+        opacity 0.35s var(--ease-out),
+        transform 0.45s var(--ease-out),
+        color 0.3s;
+    }
+    .isOpen .links .link {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @for $i from 1 through 8 {
+      .isOpen .links .link:nth-child(#{$i}) {
+        transition-delay: #{40 + 55 * $i}ms;
+      }
+    }
+  }
   .link {
     font-family: var(--font-display);
     font-size: 3.4rem;

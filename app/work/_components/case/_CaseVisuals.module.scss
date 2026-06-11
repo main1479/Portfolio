@@ -17,6 +17,12 @@
   background: var(--paper);
 }
 
+// Inside a BrowserFrame the frame owns the border and radius.
+.slotMedia.framed {
+  border: none;
+  border-radius: 0;
+}
+
 .slotImage {
   object-fit: contain;
   transform: scale(1.01);

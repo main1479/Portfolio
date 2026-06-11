@@ -14,6 +14,12 @@ export type WorkProject = {
   type?: 'own' | 'client' | 'agency';
   /** Year + status sentence as shown on the /work index row's year/status column. */
   yearStatus?: string;
+  /** Cover image shown on the home SelectedWork row, the /work index row, and the hover preview. */
+  cover: string;
+  /** Descriptive alt text for the cover image. */
+  coverAlt: string;
+  /** Second shot used by the floating hover preview, so hover adds a view instead of repeating the thumb. Falls back to `cover`. */
+  coverSecondary?: string;
   /** True if the project has its own /work/<slug> case page. False = stub row that links to a shared case page. */
   hasCase: boolean;
   /** Target href for the index row. If hasCase, this is `/work/${slug}`; if stub, the page it falls through to. */

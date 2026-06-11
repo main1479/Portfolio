@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useSyncExternalStore } from 'react';
+import { gsap } from '../../_lib/motion';
 import styles from './_CustomCursor.module.scss';
 
 const QUERY = '(hover: hover) and (pointer: fine)';
@@ -23,11 +24,13 @@ function getServerSnapshot() {
 export function CustomCursor() {
   const enabled = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const cursorRef = useRef<HTMLDivElement | null>(null);
+  const labelRef = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
     if (!enabled) return;
     const el = cursorRef.current;
-    if (!el) return;
+    const label = labelRef.current;
+    if (!el || !label) return;
 
     let mx = window.innerWidth / 2;
     let my = window.innerHeight / 2;
@@ -54,11 +57,32 @@ export function CustomCursor() {
     const isInteractive = (target: EventTarget | null) =>
       target instanceof Element && !!target.closest('a, button, [data-cursor="hover"]');
 
+    const labelSource = (target: EventTarget | null) =>
+      target instanceof Element ? target.closest('[data-cursor-label]') : null;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     const onOver = (e: MouseEvent) => {
       if (isInteractive(e.target)) el.classList.add(styles.isHover);
+      const source = labelSource(e.target);
+      if (source) {
+        const text = source.getAttribute('data-cursor-label') ?? '';
+        if (reduceMotion || text === label.textContent) {
+          label.textContent = text;
+        } else {
+          // Decode the label in rather than hard-swapping it.
+          gsap.to(label, {
+            duration: 0.35,
+            scrambleText: { text, chars: '<>/·_', speed: 1 },
+            overwrite: true,
+          });
+        }
+        el.classList.add(styles.isLabel);
+      }
     };
     const onOut = (e: MouseEvent) => {
       if (isInteractive(e.target)) el.classList.remove(styles.isHover);
+      if (labelSource(e.target)) el.classList.remove(styles.isLabel);
     };
 
     window.addEventListener('mousemove', onMove, { passive: true });
@@ -75,5 +99,9 @@ export function CustomCursor() {
   }, [enabled]);
 
   if (!enabled) return null;
-  return <div ref={cursorRef} className={styles.cursor} aria-hidden="true" />;
+  return (
+    <div ref={cursorRef} className={styles.cursor} aria-hidden="true">
+      <span ref={labelRef} className={styles.label} />
+    </div>
+  );
 }

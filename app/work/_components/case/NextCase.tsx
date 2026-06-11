@@ -6,7 +6,7 @@ import styles from './_NextCase.module.scss';
 
 export function NextCase({ pointer }: { pointer: NextCasePointer }) {
   return (
-    <div className={styles.nextCase}>
+    <div className={styles.nextCase} data-skew>
       <Link href={`/work/${pointer.slug}`} className={styles.link} data-cursor="hover">
         <span className={styles.label}>{pointer.label}</span>
         <span className={styles.title}>{pointer.title}</span>

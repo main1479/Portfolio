@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { BrowserFrame } from '../../../_components/BrowserFrame/BrowserFrame';
+import { ImageReveal } from '../../../_components/ImageReveal/ImageReveal';
 import styles from './_CaseVisuals.module.scss';
 
 export type CaseVisualSlot = {
@@ -30,16 +32,20 @@ function SlotMedia({
   slot,
   defaultAspect,
   override,
+  framed,
 }: {
   slot: CaseVisualSlot;
   defaultAspect: string;
   override?: React.ReactNode;
+  /** Set when a BrowserFrame supplies the border — drops the slot's own border/radius. */
+  framed?: boolean;
 }) {
   if (override) return <>{override}</>;
   const aspect = slot.aspect ?? defaultAspect;
+  const mediaClass = [styles.slotMedia, framed ? styles.framed : ''].filter(Boolean).join(' ');
   if (slot.src) {
     return (
-      <div className={styles.slotMedia} style={{ aspectRatio: aspect }}>
+      <div className={mediaClass} style={{ aspectRatio: aspect }}>
         <Image
           src={slot.src}
           alt={slot.alt ?? slot.caption}
@@ -60,7 +66,11 @@ export function CaseVisuals({ items, children }: Props) {
     const [slot] = items;
     return (
       <figure className={styles.single}>
-        <SlotMedia slot={slot} defaultAspect={ASPECT.single} override={children} />
+        <ImageReveal>
+          <BrowserFrame>
+            <SlotMedia slot={slot} defaultAspect={ASPECT.single} override={children} framed />
+          </BrowserFrame>
+        </ImageReveal>
         <figcaption className={styles.caption}>{slot.caption}</figcaption>
       </figure>
     );
@@ -75,11 +85,17 @@ export function CaseVisuals({ items, children }: Props) {
     return (
       <div className={styles.duo}>
         <figure className={styles.duoPrimary}>
-          <SlotMedia slot={primary} defaultAspect={ASPECT.primary} override={children} />
+          <ImageReveal>
+            <BrowserFrame>
+              <SlotMedia slot={primary} defaultAspect={ASPECT.primary} override={children} framed />
+            </BrowserFrame>
+          </ImageReveal>
           <figcaption className={styles.caption}>{primary.caption}</figcaption>
         </figure>
-        <figure className={styles.duoSecondary}>
-          <SlotMedia slot={secondary} defaultAspect={ASPECT.secondary} />
+        <figure className={styles.duoSecondary} data-lag="0.12">
+          <ImageReveal>
+            <SlotMedia slot={secondary} defaultAspect={ASPECT.secondary} />
+          </ImageReveal>
           <figcaption className={styles.caption}>{secondary.caption}</figcaption>
         </figure>
       </div>
@@ -89,8 +105,10 @@ export function CaseVisuals({ items, children }: Props) {
   return (
     <div className={styles.triple}>
       {items.slice(0, 3).map((slot, i) => (
-        <figure key={i} className={styles.tripleItem}>
-          <SlotMedia slot={slot} defaultAspect={ASPECT.triple} />
+        <figure key={i} className={styles.tripleItem} data-lag={(0.06 * (i + 1)).toFixed(2)}>
+          <ImageReveal>
+            <SlotMedia slot={slot} defaultAspect={ASPECT.triple} />
+          </ImageReveal>
           <figcaption className={styles.caption}>{slot.caption}</figcaption>
         </figure>
       ))}

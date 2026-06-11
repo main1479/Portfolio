@@ -6,6 +6,8 @@ import { Nav } from './_components/Nav/Nav';
 import { CustomCursor } from './_components/CustomCursor/CustomCursor';
 import { Loader } from './_components/Loader/Loader';
 import { PageCurtain } from './_components/PageCurtain/PageCurtain';
+import { SmoothScroll } from './_components/SmoothScroll/SmoothScroll';
+import { GrainOverlay } from './_components/GrainOverlay/GrainOverlay';
 import { siteConfig } from './_lib/site-config';
 
 const teko = Teko({
@@ -78,12 +80,24 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${teko.variable} ${josefin.variable} ${mono.variable}`}>
-      {/* A/B testing platform — loads before render to avoid variant flicker */}
-      <Script
-        src="https://cdn.avsb.cloud/snippet.js?id=cmpvfsa5q000t04laj4eordkt"
-        strategy="beforeInteractive"
-      />
+    // suppressHydrationWarning: the avsb anti-flicker snippet sets an inline
+    // opacity on <html> before React hydrates — a known, intentional mismatch.
+    // Scope is this element's own attributes only, not descendants.
+    <html
+      lang="en"
+      className={`${teko.variable} ${josefin.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <link rel="preconnect" href="https://cdn.avsb.cloud" />
+        {/* A/B testing anti-flicker snippet — intentionally synchronous and
+            parser-blocking: it must execute before first paint or variants
+            flicker. next/script's beforeInteractive can't guarantee that in
+            the App Router (execution is deferred to Next's runtime), so this
+            is a raw script in <head> by design. */}
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script src="https://cdn.avsb.cloud/snippet.js?id=cmpvfsa5q000t04laj4eordkt" />
+      </head>
       <body>
         <Loader />
         <a href="#main-content" className="skip-link">
@@ -91,7 +105,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <CustomCursor />
         <Nav />
-        <main id="main-content">{children}</main>
+        <SmoothScroll>
+          <main id="main-content">{children}</main>
+        </SmoothScroll>
+        <GrainOverlay />
         <PageCurtain />
         {/* Google Analytics (gtag) */}
         <Script

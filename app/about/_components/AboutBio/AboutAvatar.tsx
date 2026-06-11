@@ -3,7 +3,7 @@ import styles from './_AboutBio.module.scss';
 
 export function AboutAvatar({ tag, alt }: { tag: string; alt: string }) {
   return (
-    <div className={styles.avatar}>
+    <div className={styles.avatar} data-skew>
       <Image
         src="/me.jpg"
         alt={alt}

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Arrow } from '../../../_components/Arrow/Arrow';
 import { Reveal } from '../../../_components/Reveal/Reveal';
 import type { WorkProject } from '../../../_types/work';
@@ -9,9 +10,11 @@ type RevealDelay = 1 | 2 | 3 | 4 | 5;
 type Props = {
   project: WorkProject;
   delay?: RevealDelay;
+  /** Index into the floating WorkPreview's cover list. */
+  previewIndex?: number;
 };
 
-export function IndexRow({ project, delay }: Props) {
+export function IndexRow({ project, delay, previewIndex }: Props) {
   const visibleTags = project.tags.slice(0, 3);
   return (
     <Reveal as="li" delay={delay} className={styles.row}>
@@ -20,8 +23,18 @@ export function IndexRow({ project, delay }: Props) {
         className={styles.link}
         data-cursor="hover"
         data-cursor-label="Open"
+        data-preview-index={previewIndex}
       >
         <span className={styles.num}>{project.num}</span>
+        <span className={styles.media}>
+          <Image
+            src={project.cover}
+            alt={project.coverAlt}
+            fill
+            sizes="(max-width: 900px) 92vw, 160px"
+            className={styles.mediaImg}
+          />
+        </span>
         <h3 className={styles.title}>{project.title}</h3>
         <span className={styles.meta}>{project.metaShort}</span>
         <span className={styles.tags}>

@@ -11,6 +11,12 @@
   --accent: #1f3a5f;
   --accent-ink: #ffffff;
 
+  // Fixed ink-world tokens. The footer always lives in these, and the
+  // end-of-page theme scrub inverts the animated tokens above to match them —
+  // these two must not animate or the destination would move.
+  --ink: #0a0908;
+  --ink-paper: #f5f0ec;
+
   // --- Type families
   // next/font sets these as CSS variables on <html> already; the fallback
   // chain here matches the static template's declarations for safety on the

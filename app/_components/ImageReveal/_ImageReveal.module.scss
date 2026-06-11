@@ -1,0 +1,9 @@
+.reveal {
+  // Resting state — GSAP animates from inset(0 0 100% 0) to this, so a JS
+  // failure or reduced motion simply shows the content.
+  clip-path: inset(0% 0% 0% 0%);
+}
+
+.inner {
+  transform-origin: center center;
+}

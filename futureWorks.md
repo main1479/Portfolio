@@ -8,6 +8,18 @@ Format: `- [<area>] <description> — <branch or session ref>`
 
 ## Open
 
+- [motion] During a live window drag the pinned gallery shows stale geometry (blank strip / misaligned track) until ScrollTrigger's debounced refresh fires ~200ms after the last resize event. Inherent to GSAP's resize debounce; self-corrects. Won't fix unless a designer-visible complaint comes in. — `feature/awwwards-motion` resize session 2026-06-11
+
+- [motion] SmoothScroll's push-vs-popstate detection has one theoretical edge: a hash-only popstate (same pathname) sets the pop flag without re-running the route effect, so the next push would restore instead of reset once. No hash navigation exists on the site today. — `feature/awwwards-motion` nav-fixes session 2026-06-11
+- [perf] The avsb anti-flicker snippet is now parser-blocking in `<head>` (required to prevent variant flicker) — first paint waits on cdn.avsb.cloud. Preconnect added; if the CDN is ever slow, consider a timeout-based opacity fallback in the snippet itself. — `feature/awwwards-motion` nav-fixes session 2026-06-11
+
+- [perf] `/work` mounts the WorkPreview portal with all cover `next/image`s even on touch devices where the preview is `display: none` — images still download. Conditionalize mounting (or shrink `sizes`) if page weight becomes a concern. — `feature/awwwards-motion` signature-wow session 2026-06-11
+- [motion] WorkGallery `.endCount` stroke uses `var(--fg)`, which the ThemeScrub inverts near the footer — invisible-text risk only if the gallery is ever moved adjacent to the page end (it isn't today). — `feature/awwwards-motion` signature-wow session 2026-06-11
+- [visual] Signature-wow pieces (loader ceremony, horizontal gallery scrub feel, WebGL hover distortion intensity, theme inversion timing) ship green on typecheck/lint/build + route smoke tests, but need a human feel-pass on a real trackpad before merge — distortion strength and gallery scrub speed are taste constants that may want tuning. — `feature/awwwards-motion` signature-wow session 2026-06-11
+
+- [visuals] A/B variant-comparison visuals + uplift charts for case studies (the experimentation-specific visual content from the awwwards-motion plan, Layer 0) — deferred, needs per-case data design. — `feature/awwwards-motion` session 2026-06-11
+- [assets] Client logos for the home Selected Clients section (currently text-only) — needs logo files from Mainul. — `feature/awwwards-motion` session 2026-06-11
+- [motion] EndCTA heading horizontal scrub drift was specced but deliberately dropped for restraint; revisit if the section feels static after the smooth-scroll pass settles. — `feature/awwwards-motion` session 2026-06-11
 - [tokens] Verify the 320px clamp-down for `.display-xl` and `.page-intro__title` (`clamp(2.6rem, 10vw, 5.2rem)`) on a real first-gen iPhone SE viewport once the hero ships in Phase 4. — `feature/design-tokens` session 2026-05-21
 - [build] `next.config.ts` `sassOptions.additionalData` callback is not being applied to component `*.module.scss` under Next 16.2.6 / Turbopack. Phase 3 worked around it with explicit `@use 'mixins' as *;` per component module (contradicts CLAUDE.md line 152 and `.claude/rules/coding-style.md`). Investigate whether to migrate to `prependData`, switch off Turbopack, or accept the per-file `@use` and update the rules. — `feature/layout-shell` session 2026-05-22
 - [analytics] Hero variant toggle telemetry (masterplan future ideas §849) — not wired this phase. — `feature/home-page` session 2026-05-22

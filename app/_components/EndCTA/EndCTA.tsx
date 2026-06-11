@@ -1,5 +1,6 @@
 import { Container } from '../Container/Container';
 import { Reveal } from '../Reveal/Reveal';
+import { SplitReveal } from '../SplitReveal/SplitReveal';
 import { Button } from '../Button/Button';
 import styles from './_EndCTA.module.scss';
 
@@ -16,9 +17,9 @@ export function EndCTA({ content }: { content: EndCTAContent }) {
   return (
     <section className={styles.endcta} data-screen-label="End CTA">
       <Container>
-        <div className={styles.inner}>
-          <Reveal as="header">
-            <h2 className={styles.heading}>
+        <div className={styles.inner} data-skew>
+          <header>
+            <SplitReveal as="h2" type="lines" className={styles.heading}>
               {content.headingLines.map((line, i) => (
                 <span key={i}>
                   <span className={line.variant === 'outline' ? styles.outline : undefined}>
@@ -27,8 +28,8 @@ export function EndCTA({ content }: { content: EndCTAContent }) {
                   {i < content.headingLines.length - 1 && <br />}
                 </span>
               ))}
-            </h2>
-          </Reveal>
+            </SplitReveal>
+          </header>
           <Reveal className={styles.sub} delay={1}>
             <p>{content.sub}</p>
             <Button href={content.ctaHref} variant="accent">

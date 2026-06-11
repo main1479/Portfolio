@@ -1,0 +1,44 @@
+// Explicit @use needed: Turbopack ignores the function-form additionalData
+// in next.config.ts, so the "auto-injected" mixins never arrive (every other
+// module in the repo does the same).
+@use 'mixins' as *;
+
+.roll {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.line {
+  display: block;
+
+  @include reduced-motion-safe {
+    transition: transform 0.4s var(--ease-out);
+  }
+}
+
+.under {
+  position: absolute;
+  inset: 0;
+  transform: translateY(105%);
+}
+
+// Triggered by the enclosing link/button — any ancestor interactive element.
+:global(a):hover .line,
+:global(a):focus-visible .line,
+:global(button):hover .line,
+:global(button):focus-visible .line {
+  @include reduced-motion-safe {
+    transform: translateY(-105%);
+  }
+}
+
+:global(a):hover .under,
+:global(a):focus-visible .under,
+:global(button):hover .under,
+:global(button):focus-visible .under {
+  @include reduced-motion-safe {
+    transform: translateY(0);
+  }
+}

@@ -10,6 +10,9 @@
 .side {
   position: sticky;
   top: 110px;
+}
+
+.sideInner {
   display: flex;
   flex-direction: column;
   gap: 32px;

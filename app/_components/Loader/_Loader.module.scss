@@ -56,6 +56,42 @@
   transform: scaleX(0);
 }
 
+.status {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  // Reserve the line so scrambling text never shifts the column.
+  min-height: 1.5em;
+}
+
+.stamp {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg);
+  border: 1px solid var(--rule-strong);
+  padding: 10px 18px;
+  min-height: 3.7rem;
+  min-width: 280px;
+  text-align: center;
+  opacity: 0;
+}
+
+.counter {
+  position: absolute;
+  right: clamp(20px, 4vw, 64px);
+  bottom: clamp(16px, 4vh, 48px);
+  font-family: var(--font-display);
+  font-size: clamp(4.8rem, 8vw, 9.6rem);
+  font-weight: 500;
+  line-height: 0.85;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+
 @media (max-width: 640px) {
   .loader {
     gap: 16px;

@@ -3,7 +3,8 @@
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '../../_lib/motion';
-import styles from './_PageIntro.module.scss';
+import { onLoaderDone } from '../../_lib/loader-signal';
+import { SplitReveal } from '../SplitReveal/SplitReveal';
 
 type Props = {
   label: string;
@@ -16,7 +17,6 @@ type Props = {
 export function PageIntro({ label, title, titleNodes, sub, className }: Props) {
   const headerRef = useRef<HTMLElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
-  const titleInnerRef = useRef<HTMLSpanElement>(null);
   const subRef = useRef<HTMLParagraphElement>(null);
 
   useGSAP(
@@ -24,29 +24,39 @@ export function PageIntro({ label, title, titleNodes, sub, className }: Props) {
       const mm = gsap.matchMedia();
 
       mm.add('(prefers-reduced-motion: no-preference)', () => {
-        const tl = gsap.timeline({
-          defaults: { ease: 'expo.out' },
-        });
-        tl.from(labelRef.current, { opacity: 0, y: 8, duration: 0.55 }, 0);
-        tl.from(titleInnerRef.current, { yPercent: 110, duration: 1.0 }, 0.1);
+        const tl = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } });
+        // Quick fade so the label is visible for most of its decode.
+        tl.from(labelRef.current, { opacity: 0, y: 8, duration: 0.25 }, 0);
+        tl.to(
+          labelRef.current,
+          { duration: 0.8, scrambleText: { text: label, chars: '01<>/·_', speed: 1 } },
+          0,
+        );
         if (subRef.current) {
           tl.from(subRef.current, { opacity: 0, y: 8, duration: 0.55 }, 0.5);
         }
+        // Start with the loader lift (immediately after client navigations)
+        // so intro and loader read as one move — same signal the title's
+        // SplitReveal uses.
+        const unsubscribe = onLoaderDone(() => tl.play());
+        return () => unsubscribe();
       });
     },
     { scope: headerRef },
   );
 
   return (
-    <header ref={headerRef} className={['page-intro', className].filter(Boolean).join(' ')}>
+    <header
+      ref={headerRef}
+      className={['page-intro', className].filter(Boolean).join(' ')}
+      data-skew
+    >
       <span ref={labelRef} className="page-intro__label">
         {label}
       </span>
-      <h1 className={`page-intro__title ${styles.titleClip}`}>
-        <span ref={titleInnerRef} className={styles.titleInner}>
-          {titleNodes ?? title}
-        </span>
-      </h1>
+      <SplitReveal as="h1" type="lines" mode="loader" delay={0.1} className="page-intro__title">
+        {titleNodes ?? title}
+      </SplitReveal>
       {sub && (
         <p ref={subRef} className="page-intro__sub">
           {sub}

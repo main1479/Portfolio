@@ -1,0 +1,48 @@
+.frame {
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-deep);
+}
+
+.dots {
+  display: inline-flex;
+  gap: 6px;
+
+  > span {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 1px solid var(--rule-strong);
+  }
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.viewport {
+  // Kill inline-image descender gap so the frame hugs the screenshot.
+  line-height: 0;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
