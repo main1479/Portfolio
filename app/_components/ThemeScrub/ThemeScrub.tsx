@@ -33,7 +33,10 @@ export function ThemeScrub() {
       const mm = gsap.matchMedia();
 
       mm.add('(prefers-reduced-motion: no-preference)', () => {
-        const tween = gsap.to('html', {
+        // Element reference, not the 'html' selector: useGSAP's scope
+        // resolves selector text inside this ref's subtree, so 'html' matches
+        // nothing and the scrub silently no-ops.
+        const tween = gsap.to(document.documentElement, {
           ...DARK_TOKENS,
           ease: 'none',
           scrollTrigger: {
@@ -48,7 +51,9 @@ export function ThemeScrub() {
         return () => {
           tween.scrollTrigger?.kill();
           tween.kill();
-          gsap.set('html', { clearProps: Object.keys(DARK_TOKENS).join(',') });
+          gsap.set(document.documentElement, {
+            clearProps: Object.keys(DARK_TOKENS).join(','),
+          });
         };
       });
     },
