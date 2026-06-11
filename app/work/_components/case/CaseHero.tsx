@@ -21,7 +21,7 @@ export function CaseHero({ num, breadcrumbTitle, lines, summary }: Props) {
             <Link href="/work">Work</Link>
             <span aria-hidden="true"> / </span>
             <span className={styles.breadcrumbCurrent}>
-              {num ? `${num} — ${breadcrumbTitle}` : breadcrumbTitle}
+              {num ? `${num} · ${breadcrumbTitle}` : breadcrumbTitle}
             </span>
           </p>
         )}

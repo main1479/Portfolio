@@ -24,7 +24,7 @@ export default function NotFound() {
               <span className="accent">that.</span>
             </>
           }
-          sub="That URL doesn't lead anywhere on this site. Try the work index — or head back home."
+          sub="That URL doesn't lead anywhere on this site. Try the work index, or head back home."
         />
         <div className={styles.actions}>
           <Button href="/work">Go to work index</Button>

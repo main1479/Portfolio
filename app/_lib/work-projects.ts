@@ -6,7 +6,7 @@ export const workProjects = [
     num: '01',
     title: 'AvsB',
     summary:
-      'A full-stack A/B testing & feature-flag platform — visual editor, statistics engine, edge ingestion, SDKs, built solo.',
+      'A full-stack A/B testing & feature-flag platform: visual editor, statistics engine, edge ingestion, SDKs, built solo.',
     metaShort: 'Full-stack experimentation & feature-flag platform built solo.',
     tags: ['Next.js 16', 'TypeScript', 'ClickHouse', 'Cloudflare Workers', 'Statistics'],
     featured: true,
@@ -43,7 +43,7 @@ export const workProjects = [
     num: '03',
     title: 'Radius',
     summary:
-      'A central insights platform that makes experiments, UXR observations, and research findable across an organisation — built at Conversion.com.',
+      'A central insights platform that makes experiments, UXR observations, and research findable across an organisation. Built at Conversion.com.',
     metaShort: 'Central insights & experiments platform built at Conversion.com.',
     tags: ['Next.js', 'TypeScript', 'SCSS', 'GSAP', 'Streaming APIs'],
     featured: true,

@@ -20,12 +20,12 @@ export const contactSchema = z.object({
     .min(1, 'Enter your email address.')
     .email('Enter a valid email address.')
     .max(160, 'Email is too long.'),
-  topic: z.enum(TOPIC_VALUES, { error: 'Pick a topic — what is this about?' }),
+  topic: z.enum(TOPIC_VALUES, { error: 'Pick a topic so I know what this is about.' }),
   message: z
     .string()
     .trim()
     .min(20, 'Add a short note (at least 20 characters).')
-    .max(4000, 'Message is too long — keep it under 4000 characters.'),
+    .max(4000, 'Message is too long. Keep it under 4000 characters.'),
   company: z.string().max(0, 'Spam check failed.').optional().default(''),
 });
 

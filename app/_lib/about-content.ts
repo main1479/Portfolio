@@ -43,7 +43,7 @@ export const aboutContent = {
         {
           kind: 'text',
           value:
-            ' across ecommerce and SaaS — alongside frontend builds for startups and individuals across the UK, India, Slovakia, Austria, Australia, and Canada.',
+            ' across ecommerce and SaaS, alongside frontend builds for startups and individuals across the UK, India, Slovakia, Austria, Australia, and Canada.',
         },
       ],
       [
@@ -140,7 +140,7 @@ export const aboutContent = {
   personal: {
     headingLines: ['Outside', 'of code.'],
     accentLineIndex: 1,
-    body: "Outside of work I run a YouTube channel for quiet travel videos. I'm drawn to mountains and the sea — anywhere a little further from the screen.",
+    body: "Outside of work I run a YouTube channel for quiet travel videos. I'm drawn to mountains and the sea, anywhere a little further from the screen.",
   },
   resume: {
     headingLines: ['Want the', 'long version?'],

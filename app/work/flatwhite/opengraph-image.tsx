@@ -4,7 +4,7 @@ import type { CaseHeroLine } from '../../_types/case';
 import { frontmatter } from './content.mdx';
 
 export const runtime = 'edge';
-export const alt = `${frontmatter.title} — case study by ${siteConfig.ownerName}`;
+export const alt = `${frontmatter.title} · case study by ${siteConfig.ownerName}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -41,7 +41,7 @@ export default async function CaseOG() {
         }}
       >
         <span style={{ display: 'block', width: 56, height: 2, background: COLOR_ACCENT }} />
-        Case · {frontmatter.num} — {frontmatter.title}
+        Case · {frontmatter.num} · {frontmatter.title}
       </div>
 
       <div

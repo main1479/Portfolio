@@ -4,8 +4,8 @@ export const homeContent = {
   hero: {
     topbarLeft: { name: 'Mainul Islam', role: 'Frontend Developer' },
     topbarRight: { version: 'Portfolio v3', year: '2026', metric: '7 yrs · 9+ countries' },
-    sub: 'I build frontend and run A/B tests that turn traffic into revenue. 4+ years across every major experimentation platform — Optimizely, AB Tasty, Kameleoon, VWO, Adobe Target, Qubit. Modern stack — Next.js, TypeScript, and a Claude-Code-led workflow that actually finishes what it starts.',
-    statusLine: 'Open to new roles — full-time or contract',
+    sub: 'I build frontend and run A/B tests that turn traffic into revenue. 4+ years across every major experimentation platform: Optimizely, AB Tasty, Kameleoon, VWO, Adobe Target, Qubit. Modern stack: Next.js, TypeScript, and a Claude-Code-led workflow that actually finishes what it starts.',
+    statusLine: 'Open to new roles, full-time or contract',
     ctaLabel: 'Get in touch',
     ctaHref: '/contact',
   },
@@ -37,7 +37,7 @@ export const homeContent = {
       {
         num: '01',
         titleLines: ['A/B Testing &', 'Experimentation'],
-        desc: 'Building and shipping conversion experiments — from single-element tests to full checkout-flow redesigns.',
+        desc: 'Building and shipping conversion experiments, from single-element tests to full checkout-flow redesigns.',
         tags: ['Optimizely', 'AB Tasty', 'Kameleoon', 'CRO'],
       },
       {
@@ -49,7 +49,7 @@ export const homeContent = {
       {
         num: '03',
         titleLines: ['Product', 'Building'],
-        desc: 'Designing and building complete products solo — architecture, frontend, and the systems around them.',
+        desc: 'Designing and building complete products solo: architecture, frontend, and the systems around them.',
         tags: ['Architecture', 'PostgreSQL', 'Drizzle'],
       },
     ],
@@ -64,7 +64,7 @@ export const homeContent = {
       {
         kind: 'text',
         value:
-          "Through agency work, a few brands I've shipped tests for — across publishing, retail, automotive, gaming, and non-profit.",
+          "A few of the brands I've shipped tests for through agency work, spanning publishing, retail, automotive, gaming, and non-profit.",
       },
     ],
     items: [
@@ -110,7 +110,7 @@ export const homeContent = {
         year: '2022 – Present',
         roleLines: ['Frontend Developer', '(A/B Testing)'],
         at: '@ Conversion.com',
-        desc: 'Long-running contract — production A/B tests in JS & SCSS on enterprise experimentation platforms. Ongoing.',
+        desc: 'Long-running contract: production A/B tests in JS & SCSS on enterprise experimentation platforms. Ongoing.',
         loc: 'Remote · UK',
         href: '/experience/gain-conversion',
       },
@@ -129,7 +129,7 @@ export const homeContent = {
       { text: 'build something', variant: 'outline' },
       { text: 'measurable.' },
     ],
-    sub: "Open to new roles — full-time, contract, or freelance. If you're hiring or have a project in mind, send me a note.",
+    sub: "Open to new roles: full-time, contract, or freelance. If you're hiring or have a project in mind, send me a note.",
     ctaLabel: 'Start a conversation',
     ctaHref: '/contact',
   },

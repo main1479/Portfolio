@@ -8,11 +8,11 @@ export const contactContent = {
     label: '04 / Contact',
     titleLines: ["Let's work", 'together.'],
     accentLineIndex: 1,
-    sub: 'Open to new frontend roles — full-time remote, contract, or freelance. Send a note or email directly — I usually reply within a day or two.',
+    sub: 'Open to new frontend roles: full-time remote, contract, or freelance. Send a note or email directly. I usually reply within a day or two.',
   },
   aside: {
     heading: 'Direct lines.',
-    body: "If a form isn't your thing — here's how to reach me directly. Best for quick questions, intros, or referrals.",
+    body: "If a form isn't your thing, here's how to reach me directly. Best for quick questions, intros, or referrals.",
     direct: [
       {
         label: 'Email',
