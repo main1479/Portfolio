@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useSyncExternalStore } from 'react';
+import { usePathname } from 'next/navigation';
 import { gsap } from '../../_lib/motion';
 import styles from './_CustomCursor.module.scss';
 
@@ -25,6 +26,19 @@ export function CustomCursor() {
   const enabled = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const cursorRef = useRef<HTMLDivElement | null>(null);
   const labelRef = useRef<HTMLSpanElement | null>(null);
+  const pathname = usePathname();
+
+  // Clicking a link navigates client-side, which removes the hovered element
+  // without ever firing `mouseout` (the pointer never physically moved). The
+  // cursor would otherwise stay stuck in its "Open" label state on the next
+  // page until the visitor moves over something else. Clear it on every route
+  // change; the next mouseover re-applies the right state.
+  useEffect(() => {
+    const el = cursorRef.current;
+    if (!el) return;
+    el.classList.remove(styles.isHover, styles.isLabel);
+    if (labelRef.current) labelRef.current.textContent = '';
+  }, [pathname]);
 
   useEffect(() => {
     if (!enabled) return;

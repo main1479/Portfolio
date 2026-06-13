@@ -32,6 +32,19 @@ export function ThemeScrub() {
       if (!footer) return;
       const mm = gsap.matchMedia();
 
+      // --bg and --fg are exact mirror colours, so scrubbing both at once means
+      // they cross through the SAME mid-grey at 50% progress — every bit of
+      // text on screen loses its contrast for that instant. Anchor the scrub to
+      // the section *above* the footer (the EndCTA on the home page) and finish
+      // the inversion early, while that section is still entering from the
+      // bottom. The grey crossover then lands on a sliver of content at the
+      // screen edge, and the section settles into the high-contrast dark
+      // palette by the time it rises to dominate the viewport.
+      const trigger =
+        footer.previousElementSibling instanceof HTMLElement
+          ? footer.previousElementSibling
+          : footer;
+
       mm.add('(prefers-reduced-motion: no-preference)', () => {
         // Element reference, not the 'html' selector: useGSAP's scope
         // resolves selector text inside this ref's subtree, so 'html' matches
@@ -40,9 +53,9 @@ export function ThemeScrub() {
           ...DARK_TOKENS,
           ease: 'none',
           scrollTrigger: {
-            trigger: footer,
-            start: 'top 92%',
-            end: 'top 30%',
+            trigger,
+            start: 'top bottom',
+            end: 'top 55%',
             scrub: true,
           },
         });
