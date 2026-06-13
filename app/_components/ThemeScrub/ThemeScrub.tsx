@@ -34,15 +34,23 @@ export function ThemeScrub() {
 
       // --bg and --fg are exact mirror colours, so scrubbing both at once means
       // they cross through the SAME mid-grey at 50% progress — every bit of
-      // text on screen loses its contrast for that instant. Anchor the scrub to
-      // the section *above* the footer (the EndCTA on the home page) and finish
-      // the inversion early, while that section is still entering from the
-      // bottom. The grey crossover then lands on a sliver of content at the
-      // screen edge, and the section settles into the high-contrast dark
-      // palette by the time it rises to dominate the viewport.
+      // text on screen loses its contrast for that instant. The goal is to keep
+      // that crossover off any large focal text.
+      //
+      // When the section above the footer is SHORT (the home page End CTA), it
+      // genuinely enters from the bottom — anchor the scrub to it so the
+      // inversion finishes as it rises into view and the crossover lands on a
+      // sliver at the screen edge.
+      //
+      // When that section is TALLER than the viewport (e.g. the /work index),
+      // its top is already on screen at load, so anchoring there would treat
+      // the scrub as complete and snap the page dark immediately. Fall back to
+      // the footer: by the time it enters, the section's big content has
+      // scrolled past and only its small tail is on screen during the crossover.
+      const prev = footer.previousElementSibling;
       const trigger =
-        footer.previousElementSibling instanceof HTMLElement
-          ? footer.previousElementSibling
+        prev instanceof HTMLElement && prev.getBoundingClientRect().height < window.innerHeight
+          ? prev
           : footer;
 
       mm.add('(prefers-reduced-motion: no-preference)', () => {
