@@ -79,6 +79,11 @@
   color: var(--fg-muted);
   text-align: right;
   padding-top: 8px;
+  // Grid items default to min-width:auto, which lets long location strings
+  // ("Remote · 9+ countries") spill past the fixed 140px track. Pin the
+  // minimum to 0 so the text wraps inside its column instead.
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 // Desktop-only tuning — applies above the 900px tablet rule.

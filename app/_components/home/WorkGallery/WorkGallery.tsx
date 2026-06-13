@@ -123,11 +123,12 @@ export function WorkGallery({ projects, totalCount }: Props) {
               className={styles.panel}
               data-gallery-panel
               data-cursor-label="Open"
+              data-skew
             >
               <span className={styles.ghost} aria-hidden="true">
                 {p.num}
               </span>
-              <span className={styles.media} data-skew>
+              <span className={styles.media}>
                 <Image
                   data-gallery-img
                   src={p.cover}

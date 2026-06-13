@@ -20,19 +20,18 @@ export function Hero({ content }: Props) {
   const { variant, setVariant } = useHomeState();
   const containerRef = useRef<HTMLElement>(null);
 
+  // One-time reveals that must NOT be torn down when the visitor flips the
+  // variant: the toggle fades up with the loader lift, and the hero scales
+  // away on scroll. Kept out of the variant-dependent effect below — when the
+  // toggle lived there, every click rebuilt its `from` tween and left it stuck
+  // faint until the next loader signal (which never comes again).
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
 
       mm.add('(prefers-reduced-motion: no-preference)', () => {
         const tl = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } });
-        tl.from(`.${styles.wordInner}`, { yPercent: 110, duration: 0.9, stagger: 0.06 }, 0.15);
-        if (variant === 'A') {
-          tl.from(`.${styles.badge}`, { opacity: 0, scale: 0.92, duration: 0.6 }, 0.7);
-        }
-        tl.from(`.${styles.variantToggle}`, { opacity: 0, duration: 0.6 }, 1.1);
-        // Headline rises while the loader panel is still clearing — one
-        // continuous move instead of two queued animations.
+        tl.from(`.${styles.variantToggle}`, { opacity: 0, duration: 0.6, delay: 0.9 });
         const unsubscribe = onLoaderDone(() => tl.play());
 
         // Scroll-out: the hero scales away behind the incoming content,
@@ -49,6 +48,28 @@ export function Hero({ content }: Props) {
             scrub: true,
           },
         });
+
+        return () => unsubscribe();
+      });
+    },
+    { scope: containerRef },
+  );
+
+  // Headline (and the variant-A badge) rise on the loader lift, and re-play
+  // each time the visitor flips the variant — the swap is the ceremony.
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        const tl = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } });
+        tl.from(`.${styles.wordInner}`, { yPercent: 110, duration: 0.9, stagger: 0.06 }, 0);
+        if (variant === 'A') {
+          tl.from(`.${styles.badge}`, { opacity: 0, scale: 0.92, duration: 0.6 }, 0.55);
+        }
+        // Headline rises while the loader panel is still clearing — one
+        // continuous move instead of two queued animations.
+        const unsubscribe = onLoaderDone(() => tl.play());
 
         return () => unsubscribe();
       });
