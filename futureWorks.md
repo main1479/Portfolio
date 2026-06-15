@@ -8,6 +8,12 @@ Format: `- [<area>] <description> — <branch or session ref>`
 
 ## Open
 
+- [seo] FAQPage schema ships on `/contact`, but Google restricted FAQ rich results to authoritative gov/health domains in 2023 — the markup is valid and harmless but unlikely to render as expandable rich results for this site. Keep; revisit if Google relaxes the policy. — `feature/seo-improvements` session 2026-06-15
+- [seo] `schema-dts` (dev-time-only schema.org types) was declined per the "ask before adding deps" rule; structured-data builders use minimal local types in `app/_types/structured-data.ts`. Reconsider if schema surface grows. — `feature/seo-improvements` session 2026-06-15
+- [seo] Google Search Console verification is wired via `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` (meta-tag fallback) but not yet active — preferred path is GA4-account verification. Manual: create the GSC property, verify, submit `sitemap.xml`. — `feature/seo-improvements` session 2026-06-15
+- [seo] www → apex redirect is currently a 307 (temporary). A 308/301 permanent redirect is marginally better for signal consolidation; flip in Vercel domain settings if the option is available. — `feature/seo-improvements` session 2026-06-15
+- [seo] Per-page OG/Twitter images for case studies + experience pages would strengthen social/rich-result presentation (related to the existing experience-pages OG entry). — `feature/seo-improvements` session 2026-06-15
+
 - [motion] During a live window drag the pinned gallery shows stale geometry (blank strip / misaligned track) until ScrollTrigger's debounced refresh fires ~200ms after the last resize event. Inherent to GSAP's resize debounce; self-corrects. Won't fix unless a designer-visible complaint comes in. — `feature/awwwards-motion` resize session 2026-06-11
 
 - [motion] SmoothScroll's push-vs-popstate detection has one theoretical edge: a hash-only popstate (same pathname) sets the pop flag without re-running the route effect, so the next push would restore instead of reset once. No hash navigation exists on the site today. — `feature/awwwards-motion` nav-fixes session 2026-06-11
