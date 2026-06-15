@@ -13,6 +13,8 @@ import { ResumeCTA } from './_components/ResumeCTA/ResumeCTA';
 import { aboutContent } from '../_lib/about-content';
 import { homeContent } from '../_lib/home-content';
 import { siteConfig } from '../_lib/site-config';
+import { JsonLd } from '../_components/JsonLd/JsonLd';
+import { breadcrumbSchema } from '../_lib/structured-data';
 import styles from './_aboutPage.module.scss';
 
 export const metadata: Metadata = {
@@ -39,6 +41,12 @@ export default function AboutPage() {
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'About', path: '/about' },
+        ])}
+      />
       <Container>
         <PageIntro
           label={aboutContent.pageIntro.label}

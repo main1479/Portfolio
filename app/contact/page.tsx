@@ -11,6 +11,8 @@ import { FAQ } from './_components/FAQ/FAQ';
 import { contactContent } from '../_lib/contact-content';
 import { faqContent } from '../_lib/faq-content';
 import { siteConfig } from '../_lib/site-config';
+import { JsonLd } from '../_components/JsonLd/JsonLd';
+import { breadcrumbSchema, faqSchema } from '../_lib/structured-data';
 import styles from './_contactPage.module.scss';
 
 export const metadata: Metadata = {
@@ -34,6 +36,15 @@ export default function ContactPage() {
 
   return (
     <>
+      <JsonLd
+        data={[
+          breadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Contact', path: '/contact' },
+          ]),
+          faqSchema(),
+        ]}
+      />
       <Container>
         <PageIntro
           label={contactContent.pageIntro.label}

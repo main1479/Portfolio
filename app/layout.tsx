@@ -8,7 +8,9 @@ import { Loader } from './_components/Loader/Loader';
 import { PageCurtain } from './_components/PageCurtain/PageCurtain';
 import { SmoothScroll } from './_components/SmoothScroll/SmoothScroll';
 import { GrainOverlay } from './_components/GrainOverlay/GrainOverlay';
+import { JsonLd } from './_components/JsonLd/JsonLd';
 import { siteConfig } from './_lib/site-config';
+import { personSchema, webSiteSchema } from './_lib/structured-data';
 
 const teko = Teko({
   weight: ['300', '400', '500', '600', '700'],
@@ -71,6 +73,11 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  verification: {
+    // Only emits the <meta> when the env var is set; harmless no-op otherwise.
+    // Preferred verification is via the existing GA4 tag — this is the fallback.
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
   formatDetection: {
     email: false,
     address: false,
@@ -99,6 +106,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script src="https://cdn.avsb.cloud/snippet.js?id=cmpvfsa5q000t04laj4eordkt" />
       </head>
       <body>
+        <JsonLd data={[personSchema(), webSiteSchema()]} />
         <Loader />
         <a href="#main-content" className="skip-link">
           Skip to main content

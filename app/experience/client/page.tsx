@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Content, { frontmatter } from './content.mdx';
 import { ExperienceLayout } from '../_components/ExperienceLayout/ExperienceLayout';
+import { JsonLd } from '../../_components/JsonLd/JsonLd';
+import { breadcrumbSchema } from '../../_lib/structured-data';
 
 export const metadata: Metadata = {
   title: { absolute: frontmatter.pageTitle },
@@ -20,8 +22,16 @@ export const metadata: Metadata = {
 
 export default function ExperienceClientPage() {
   return (
-    <ExperienceLayout frontmatter={frontmatter}>
-      <Content />
-    </ExperienceLayout>
+    <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: frontmatter.title, path: `/experience/${frontmatter.slug}` },
+        ])}
+      />
+      <ExperienceLayout frontmatter={frontmatter}>
+        <Content />
+      </ExperienceLayout>
+    </>
   );
 }

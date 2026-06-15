@@ -19,7 +19,22 @@ import { homeContent } from './_lib/home-content';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
-  openGraph: { url: '/' },
+  keywords: [
+    'A/B testing developer',
+    'experimentation engineer',
+    'conversion rate optimization',
+    'frontend developer',
+    'Optimizely developer',
+    'AB Tasty',
+    'Kameleoon',
+    'VWO',
+    'Next.js developer',
+    'Mainul Islam',
+  ],
+  openGraph: {
+    url: '/',
+    title: 'Mainul Islam · Frontend Developer · Open to full-time & contract',
+  },
 };
 
 export default function Home() {

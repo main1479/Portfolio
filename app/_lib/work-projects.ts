@@ -72,7 +72,7 @@ export const workProjects = [
     yearStatus: '2021 · Live',
     cover: '/work/cursimax/home.png',
     coverSecondary: '/work/cursimax/02-feature.png',
-    coverAlt: 'Cursimax course marketplace home page',
+    coverAlt: 'Cursimax Spanish-language online course marketplace home page',
     hasCase: true,
     href: '/work/cursimax',
   },

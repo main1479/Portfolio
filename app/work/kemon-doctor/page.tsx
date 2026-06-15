@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Content, { frontmatter } from './content.mdx';
 import { CaseLayout } from '../_components/case/CaseLayout';
+import { JsonLd } from '../../_components/JsonLd/JsonLd';
+import { breadcrumbSchema, creativeWorkSchema } from '../../_lib/structured-data';
 
 export const metadata: Metadata = {
   title: { absolute: frontmatter.pageTitle },
@@ -20,8 +22,20 @@ export const metadata: Metadata = {
 
 export default function KemonDoctorCasePage() {
   return (
-    <CaseLayout frontmatter={frontmatter}>
-      <Content />
-    </CaseLayout>
+    <>
+      <JsonLd
+        data={[
+          breadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Work', path: '/work' },
+            { name: frontmatter.title, path: `/work/${frontmatter.slug}` },
+          ]),
+          creativeWorkSchema(frontmatter.slug),
+        ]}
+      />
+      <CaseLayout frontmatter={frontmatter}>
+        <Content />
+      </CaseLayout>
+    </>
   );
 }

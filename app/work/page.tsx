@@ -8,6 +8,8 @@ import { Footer } from '../_components/Footer/Footer';
 import { workProjects } from '../_lib/work-projects';
 import { WorkPreview } from '../_components/WorkPreview/WorkPreview';
 import { IndexRow } from './_components/IndexRow/IndexRow';
+import { JsonLd } from '../_components/JsonLd/JsonLd';
+import { breadcrumbSchema } from '../_lib/structured-data';
 import styles from './_workPage.module.scss';
 
 export const metadata: Metadata = {
@@ -29,6 +31,12 @@ export const metadata: Metadata = {
 export default function WorkPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Work', path: '/work' },
+        ])}
+      />
       <Container>
         <PageIntro
           label="02 / Work Index"
