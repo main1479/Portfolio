@@ -43,7 +43,7 @@ export const aboutContent = {
         {
           kind: 'text',
           value:
-            ' across ecommerce and SaaS, alongside frontend builds for startups and individuals across the UK, India, Slovakia, Austria, Australia, and Canada.',
+            ' across ecommerce and SaaS, alongside frontend builds for startups and individuals across the UK, India, Slovakia, Austria, Australia, Canada, Romania, Italy, and Mexico.',
         },
       ],
       [

@@ -4,8 +4,17 @@ import styles from './_CvDocument.module.scss';
 type Props = { content: CvContent };
 
 export function CvDocument({ content }: Props) {
-  const { header, about, stats, experience, featuredProjects, clientWork, skills, awards } =
-    content;
+  const {
+    header,
+    about,
+    stats,
+    experience,
+    featuredProjects,
+    clientWork,
+    skills,
+    education,
+    awards,
+  } = content;
 
   return (
     <article className={styles.doc} aria-label="Resume · Mainul Islam">
@@ -18,6 +27,10 @@ export function CvDocument({ content }: Props) {
           <li>
             <span className={styles.contactLabel}>Email</span>
             <a href={`mailto:${header.contact.email}`}>{header.contact.email}</a>
+          </li>
+          <li>
+            <span className={styles.contactLabel}>Location</span>
+            <span>{header.contact.location}</span>
           </li>
           <li>
             <span className={styles.contactLabel}>Portfolio</span>
@@ -151,6 +164,25 @@ export function CvDocument({ content }: Props) {
                   </span>
                 ))}
               </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.sectionLabel}>Education</h2>
+        <div className={styles.entries}>
+          {education.map((e) => (
+            <div key={e.degree} className={styles.entry}>
+              <div className={styles.entryHead}>
+                <h3 className={styles.entryTitle}>{e.degree}</h3>
+                <p className={styles.entryMeta}>{e.meta}</p>
+              </div>
+              <ul className={styles.bullets}>
+                {e.bullets.map((b, i) => (
+                  <li key={i}>{b}</li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>

@@ -6,6 +6,7 @@ export const cvContent = {
     role: 'Frontend Developer · A/B Testing & Experimentation',
     contact: {
       email: 'm.main2402@gmail.com',
+      location: 'Remote · Bangladesh',
       portfolio: 'mainul.info',
       github: 'github.com/main1479',
       linkedin: 'linkedin.com/in/main1479',
@@ -15,7 +16,7 @@ export const cvContent = {
   about:
     'Frontend developer specialising in A/B testing and experimentation. 4+ years shipping production tests across every major platform: Optimizely, AB Tasty, Kameleoon, VWO, Adobe Target, and Qubit, alongside modern frontend with Next.js and TypeScript. I treat AI as a real engineering skill: Claude Code as a daily co-engineer, specs before code, agentic workflows for multi-file work. AvsB, a ~410k-line experimentation platform built solo and in production, is the proof at scale. Open to full-time remote and contract roles.',
   stats: [
-    { value: '7+ yrs', label: 'Frontend development' },
+    { value: '6+ yrs', label: 'Frontend development' },
     { value: '4+ yrs', label: 'A/B testing & experimentation' },
     { value: '500+', label: 'A/B tests shipped' },
     { value: '9+', label: 'Countries worked with' },
@@ -133,6 +134,15 @@ export const cvContent = {
         'Slack',
         'JIRA',
         'Asana',
+      ],
+    },
+  ],
+  education: [
+    {
+      degree: 'Self-taught Frontend Engineer',
+      meta: 'Continuous, project-based learning · Since 2019',
+      bullets: [
+        'Focus areas: frontend architecture, TypeScript at scale, A/B testing & experimentation tooling, and AI-assisted engineering workflows.',
       ],
     },
   ],
