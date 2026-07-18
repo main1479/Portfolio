@@ -3,6 +3,7 @@ export type CvHeader = {
   role: string;
   contact: {
     email: string;
+    location: string;
     portfolio: string;
     github: string;
     linkedin: string;
@@ -50,6 +51,12 @@ export type CvAward = {
   href?: string;
 };
 
+export type CvEducation = {
+  degree: string;
+  meta: string;
+  bullets: readonly string[];
+};
+
 export type CvContent = {
   header: CvHeader;
   about: string;
@@ -58,5 +65,6 @@ export type CvContent = {
   featuredProjects: readonly CvProject[];
   clientWork: readonly CvClientLine[];
   skills: readonly CvSkillGroup[];
+  education: readonly CvEducation[];
   awards: readonly CvAward[];
 };

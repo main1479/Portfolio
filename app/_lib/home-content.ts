@@ -3,7 +3,7 @@ import type { HomeContent } from '../_types/home';
 export const homeContent = {
   hero: {
     topbarLeft: { name: 'Mainul Islam', role: 'Frontend Developer' },
-    topbarRight: { version: 'Portfolio v3', year: '2026', metric: '7 yrs · 9+ countries' },
+    topbarRight: { version: 'Portfolio v3', year: '2026', metric: '6 yrs · 9+ countries' },
     sub: 'I build frontend and run A/B tests that turn traffic into revenue. 4+ years across every major experimentation platform: Optimizely, AB Tasty, Kameleoon, VWO, Adobe Target, Qubit. Modern stack: Next.js, TypeScript, and a Claude-Code-led workflow that actually finishes what it starts.',
     statusLine: 'Open to new roles, full-time or contract',
     ctaLabel: 'Get in touch',
@@ -28,7 +28,7 @@ export const homeContent = {
   },
   stats: [
     { value: 500, suffix: '+', label: 'A/B tests & experiments shipped' },
-    { value: 7, label: 'Years building for the web' },
+    { value: 6, label: 'Years building for the web' },
     { value: 9, suffix: '+', label: 'Countries worked with' },
   ],
   services: {
